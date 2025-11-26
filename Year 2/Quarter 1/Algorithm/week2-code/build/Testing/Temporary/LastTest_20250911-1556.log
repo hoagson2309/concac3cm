@@ -1,0 +1,18 @@
+Start testing: Sep 11 18:45 CEST
+----------------------------------------------------------
+2/7 Testing: list_insertions_test
+2/7 Test: list_insertions_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/scripts/test_target.py" "list_insertions" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/list_insertions/tests/list_insertions_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/build/list_insertions
+"list_insertions_test" start time: Sep 11 18:45 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.33 sec
+----------------------------------------------------------
+Test Passed.
+"list_insertions_test" end time: Sep 11 18:45 CEST
+"list_insertions_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 11 18:45 CEST

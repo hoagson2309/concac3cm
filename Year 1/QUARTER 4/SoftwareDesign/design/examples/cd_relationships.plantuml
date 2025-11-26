@@ -1,0 +1,41 @@
+@startuml
+scale 350 height
+
+left to right direction
+
+class "Employee" as EmployeeClass
+class "Company" as CompanyClass
+
+EmployeeClass -- CompanyClass : works in\n<<association>>
+
+class "Mechanic" as MechanicClass
+class "Tools" as ToolsClass
+
+MechanicClass ..> ToolsClass : uses\n<<dependency>>
+
+class "Lecture" as LectureClass
+class "Students" as StudentsClass
+
+LectureClass o-- StudentsClass : has\n<<aggregation>>
+
+class "Order" as OrderClass
+class "Order items" as OrderItemsClass
+
+OrderClass *-- OrderItemsClass : consists of\n<<composition>>
+
+class "Animal" as AnimalClass
+class "Dog" as DogClass
+
+DogClass --|> AnimalClass : is\n<<inheritance>>
+
+class "Fly" as FlyClass
+class "Bird" as BirdClass
+
+BirdClass ..|> FlyClass : can\n<<implements>>
+
+' Trick to order the classes top-down
+EmployeeClass -[hidden]d> LectureClass
+LectureClass -[hidden]d> OrderClass
+OrderClass -[hidden]d> DogClass
+DogClass -[hidden]d> BirdClass
+@enduml

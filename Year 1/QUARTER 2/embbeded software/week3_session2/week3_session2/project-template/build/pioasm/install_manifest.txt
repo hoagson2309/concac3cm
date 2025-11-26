@@ -1,0 +1,5 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm-install/pioasm/pioasm
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm-install/pioasm/pioasmTargets.cmake
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm-install/pioasm/pioasmTargets-release.cmake
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm-install/pioasm/pioasmConfig.cmake
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm-install/pioasm/pioasmConfigVersion.cmake

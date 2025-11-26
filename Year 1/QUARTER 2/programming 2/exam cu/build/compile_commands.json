@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam cu/build",
+  "command": "/usr/bin/cc   -g -o CMakeFiles/exam.dir/exam.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam cu/exam.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam cu/exam.c",
+  "output": "CMakeFiles/exam.dir/exam.c.o"
+}
+]

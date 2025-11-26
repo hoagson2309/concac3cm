@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 7 - Tutorial&colon; Command-line arguments</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-7---tutorial-command-line-arguments">Week 7 - Tutorial: Command-line arguments</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 7/1/2025</p>
+<h2 id="introduction">Introduction</h2>
+<p>Functions are the building blocks of any program, and they can be used to create more complex programs by combining them in various ways.
+Programs, however, can be regarded as functions themselves - they take input, perform some operations, and produce output.
+In all of the previous weeks, this input was provided by the user through the console, and the output was typically printed to the console as well.</p>
+<p>Programs can take arguments, similar to functions.
+These arguments are provided by the user when the program is started, and they can be used to influence the behavior of the program.
+For example, a program that calculates the sum of two numbers could take these two numbers as arguments, so that the user doesn't have to enter them through the console.
+You've already passed arguments to programs whenevery you've run the <code>gcc</code>, <code>cd</code> or <code>ls</code> commands in the terminal.
+In this tutorial, you will learn how to access these arguments in your own programs.</p>
+<h3 id="code-organization">Code organization</h3>
+<p>The code for this tutorial is again organized as follows: the <code>CMakeLists.txt</code> file in the root of the archive is used to build all the programs in the tutorial.
+It builds a separate executable for each activity, and the source code for each activity is in a separate <code>.c</code> file.</p>
+<p>If you did not install <code>CMake</code> and a working compiler on Windows, then make sure to open VS Code from the WSL terminal by typing <code>code .</code> in the directory that contains the main <code>CMakeLists.txt</code> file.
+Use the CMake tab (listed on the left, along with other tabs for &quot;Explorer&quot;, &quot;Extensions&quot;, etc.) in VS Code to configure, build, run and debug the different targets in the project.</p>
+<h2 id="accessing-command-line-arguments">Accessing command-line arguments</h2>
+<p>When a program is started from the command line, the user can provide arguments to the program.
+These arguments are passed by simply typing them after the program name, separated by spaces.
+For example, to run a program called <code>my_program</code> with the arguments <code>arg1</code>, <code>arg2</code>, and <code>arg3</code>, the user would type <code>./my_program arg1 arg2 arg3</code>.</p>
+<p>In C, the arguments are passed to the <code>main</code> function as parameters.
+This does mean that the <code>main</code> function has a different signature than the functions you've seen so far.
+The <code>main</code> function can have two different signatures, depending on whether you want to access the arguments or not.
+The two signatures are:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span>;
+</code></pre>
+<p>The first signature is used when you don't want to access the arguments, the second when you do.</p>
+<p>The <code>argc</code> parameter of the <code>main</code> function, is the <em>number of arguments</em> passed to the program.
+The second parameter, <code>argv</code>, is an array of strings (i.e. <code>char *</code>), where each element is one of the arguments passed to the program.</p>
+<p>One thing to note is that the first element of the <code>argv</code> array is always the name of the program itself.
+This means that if the user runs the program <code>./my_program arg1 arg2 arg3</code>, then <code>argc</code> will be <code>4</code>, and <code>argv</code> will be an array of strings containing <code>./my_program</code>, <code>arg1</code>, <code>arg2</code>, and <code>arg3</code>.</p>
+<h3 id="activity-1---print-command-line-arguments">Activity 1 - Print command-line arguments</h3>
+<p>File <code>activity1.c</code> contains a simple program that accepts no arguments and prints &quot;Hello, world!&quot; to the console.
+Modify the program so that it prints all the arguments passed to the program, one argument per line.</p>
+<p>When you're done, include the contents of the <code>activity1.c</code> file in the code block below.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of the activity1.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span>{
+    <span class="hljs-comment">//loop and print each argument</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; argc; i++){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Argument %d: %s\n&quot;</span>,i ,argv[i]);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="using-positional-arguments">Using positional arguments</h2>
+<p>Programs can take both &quot;mandatory&quot; and &quot;optional&quot; arguments.
+Mandatory arguments are arguments that must be passed to the program, while optional arguments are arguments that can be omitted.
+A common way to pass mandatory arguments to a program is by using <em>positional arguments</em>.
+These are arguments that are passed to the program in a specific order (hence the name &quot;positional argument&quot;, as their position matters).</p>
+<p>You could say that functions in C only accept positional arguments, as the order of the arguments passed to a function must match the order of the parameters in the function definition.</p>
+<h3 id="activity-2---filename-arguments">Activity 2 - Filename arguments</h3>
+<p>The program listed in <code>activity2.c</code> asks the user for a filename, and then prints the contents of the file to the console, with each line prefixed by the line number.
+Modify the program so that the filename is passed as an argument to the program, instead of asking the user for it.</p>
+<p>When you're done, include the contents of the <code>activity2.c</code> file in the code block below.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of the activity2.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">read_string</span><span class="hljs-params">(FILE* file, <span class="hljs-type">char</span> buffer[], <span class="hljs-type">size_t</span> size)</span> {
+    fgets(buffer, size, file);
+    <span class="hljs-type">char</span> *ptr = <span class="hljs-built_in">strrchr</span>(buffer, <span class="hljs-string">&#x27;\n&#x27;</span>);
+    <span class="hljs-keyword">if</span> (ptr != <span class="hljs-literal">NULL</span>) {
+        *ptr = <span class="hljs-string">&#x27;\0&#x27;</span>;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span>{
+    <span class="hljs-comment">//check if filename is provided as a command-line argument</span>
+    <span class="hljs-keyword">if</span>(argc &lt; <span class="hljs-number">2</span>){
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Usage: %s &lt;filename&gt;\n&quot;</span>, argv[<span class="hljs-number">0</span>]);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename = argv[<span class="hljs-number">1</span>];
+
+    FILE* file = fopen(filename, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Could not open file \&quot;%s\&quot;.\n&quot;</span>, filename);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-type">int</span> line_number = <span class="hljs-number">1</span>;
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-keyword">while</span> (fgets(buffer, <span class="hljs-keyword">sizeof</span>(buffer), file) != <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%3d: %s&quot;</span>, line_number, buffer);
+        line_number++;
+    }
+
+    fclose(file);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="using-simple-named-arguments-flags">Using simple named arguments: flags</h2>
+<p>Optional arguments are typically passed as <em>named arguments</em>.
+These are arguments that are passed to the program in the form of <code>--name value</code>, or <code>--name=value</code>.
+Named arguments are more flexible than positional arguments, as they can be passed in any order, and they can be omitted.
+They are also called <em>options</em>.</p>
+<p>Named arguments can often be specified in two ways: a <em>long form</em> and a <em>short form</em>.
+The long form is typically a word or a phrase that describes the option, while the short form is a single character that is used as a shorthand.
+For example, the long form of an option that prints the version of a program could be <code>--version</code>, while the short form could be <code>-v</code>.
+Conventions for the short form of options are that they are prefixed with a single <code>-</code> character, while the long form is prefixed with <code>--</code>.</p>
+<p>Flags are simple options that do not take a value - they are either passed or not, and their presence indicates a certain behavior.
+When using short form flags, they are typically combined into a single argument.
+For example, if a program has two flags, <code>--verbose</code> and <code>--debug</code>, the user could pass them as <code>-vd</code>, instead of <code>-v -d</code>.</p>
+<p>To let your program accept named arguments, you will need to parse the <code>argv</code> array yourself.
+This means that you will need to iterate over the array, and check if an element is a named argument, by checking if it starts with <code>--</code> or <code>-</code>.
+If it is, you will need to extract the value of the argument from the next element in the array.</p>
+<p>Note that the above assumes that positional arguments can never start with a <code>-</code> character, which is of course not always the case.
+To handle these cases (which are rare), a special character (e.g. <code>--</code>) is used to mark the end of the named arguments, so that the remaining arguments are always treated as positional arguments.</p>
+<p>For example, to create a file named <code>-hello</code> with the utility <code>touch</code>, you would type <code>touch -- -hello</code>.
+Not including the <code>--</code> would result in an error, as <code>touch</code> would interpret <code>-hello</code> as an option that it does not recognize.</p>
+<p>To obtain <em>only</em> the positional arguments passed to a program, you can use the following function:</p>
+<pre><code class="language-c"><span class="hljs-type">size_t</span> <span class="hljs-title function_">find_positional_arguments</span><span class="hljs-params">(<span class="hljs-type">char</span> *argv[], <span class="hljs-type">char</span> *positional_arguments[])</span> {
+    <span class="hljs-type">size_t</span> i = <span class="hljs-number">1</span>;       <span class="hljs-comment">// index of the first argument to check</span>
+    <span class="hljs-type">size_t</span> positional_argument_count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (argv[i] != <span class="hljs-literal">NULL</span>) {                   <span class="hljs-comment">// while there is one more argument</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--&quot;</span>) == <span class="hljs-number">0</span>) {
+            <span class="hljs-comment">// remaining arguments are positional arguments</span>
+            <span class="hljs-keyword">while</span> (argv[++i] != <span class="hljs-literal">NULL</span>) { positional_arguments[positional_argument_count++] = argv[i];
+            <span class="hljs-keyword">break</span>;  <span class="hljs-comment">// stop parsing the arguments</span>
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (argv[i][<span class="hljs-number">0</span>] != <span class="hljs-string">&#x27;-&#x27;</span>) {           <span class="hljs-comment">// if the argument does not start with &#x27;-&#x27;, it is a positional argument</span>
+            positional_arguments[positional_argument_count++] = argv[i];
+        }
+        i++;    <span class="hljs-comment">// move to the next argument</span>
+    }
+    <span class="hljs-keyword">return</span> positional_argument_count;
+}
+<span class="hljs-comment">//argv[i][0]</span>
+<span class="hljs-comment">//Refers to the first character of the i-th argument string.</span>
+<span class="hljs-comment">//Example:</span>
+<span class="hljs-comment">//For argv[1] = &quot;-o&quot;, argv[1][0] → &#x27;-&#x27; (the first character).</span>
+<span class="hljs-comment">//For argv[2] = &quot;output.txt&quot;, argv[2][0] → &#x27;o&#x27;.</span>
+</code></pre>
+<p>Note that this function only works in case there are only positional arguments and the only named arguments are flags.
+In case there are also named arguments that take values, you will need to modify the function to handle these cases as well.</p>
+<h3 id="activity-3---printing-number-of-alphabet-characters">Activity 3 - Printing number of alphabet characters</h3>
+<p>The program listed in <code>activity3.c</code> asks the user for a filename, and whether the user wants to print the contents of each line, or print only the number of lowercase or uppercase characters in each line.
+Modify the program so that it does not interact with the user at all, but instead accepts a single positional argument (the name of the file to read), and at most two flags:</p>
+<ul>
+<li><code>--lower</code> (long form) or <code>-l</code> (short form) that, when passed, will cause the program to print the number of lowercase (alphabet) characters in each line.</li>
+<li><code>--upper</code> (long form) or <code>-u</code> (short form) that, when passed, will cause the program to print the number of uppercase (alphabet) characters in each line.</li>
+</ul>
+<p>If either of these flags is passed, the program must not print the contents of the file, but only the number of characters of the specified type in each line.
+The program must accept a combination of both flags (e.g. <code>./activity3 -lu file.txt</code> or <code>./activity3 -ul file.txt</code>), or separate flags (e.g. <code>./activity3 -l -u file.txt</code>).</p>
+<p>Use the <code>find_positional_arguments</code> function given above to extract the positional arguments from the <code>argv</code> array.
+Note that you'll need to allocate memory (use the fact that the size is at most <code>argc - 1</code>) for the positional arguments array, as the function does not know how many positional arguments there are.
+Make sure your program works by running it with the following commands:</p>
+<pre><code class="language-sh">./activity3 -- --test.txt
+./activity3 -u alice.txt
+./activity3 -lu alice.txt
+</code></pre>
+<p>When you're done, include the contents of the <code>activity3.c</code> file in the code block below.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of the activity3.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+
+
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">find_positional_arguments</span><span class="hljs-params">(<span class="hljs-type">char</span> *argv[], <span class="hljs-type">char</span> *positional_arguments[])</span>;
+
+<span class="hljs-comment">/// @brief Reads a string from a file and removes the newline character.</span>
+<span class="hljs-comment">/// @param file The file to read from.</span>
+<span class="hljs-comment">/// @param buffer The buffer to store the string in.</span>
+<span class="hljs-comment">/// @param size The size of the buffer.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">read_string</span><span class="hljs-params">(FILE* file, <span class="hljs-type">char</span> buffer[], <span class="hljs-type">size_t</span> size)</span>;
+
+<span class="hljs-comment">/// @brief Reads a yes or no response from the user.</span>
+<span class="hljs-comment">/// @param prompt The prompt to display to the user.</span>
+<span class="hljs-type">char</span> <span class="hljs-title function_">read_yes_no</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *prompt)</span>;
+
+<span class="hljs-comment">/// @brief Counts the number of uppercase and lowercase characters in a string.</span>
+<span class="hljs-comment">/// @param buffer The string to count the characters in.</span>
+<span class="hljs-comment">/// @param upper A pointer to store the number of uppercase characters.</span>
+<span class="hljs-comment">/// @param lower A pointer to store the number of lowercase characters.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">count_upper_lower</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *buffer, <span class="hljs-type">int</span> *upper, <span class="hljs-type">int</span> *lower)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span> {
+    <span class="hljs-keyword">if</span>(argc &lt; <span class="hljs-number">2</span>){
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Usage: %s [-l|--lower] [-u|--upper] &lt;filename&gt;\n&quot;</span>, argv[<span class="hljs-number">0</span>]);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+    
+    <span class="hljs-comment">//check for flags</span>
+    <span class="hljs-type">bool</span> print_lower = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">bool</span> print_upper = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-comment">//allocate memory for positional arguments</span>
+    <span class="hljs-type">char</span> **positional_argument = <span class="hljs-built_in">malloc</span>((argc - <span class="hljs-number">1</span>) * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span> *)); <span class="hljs-comment">//argc - 1 to avoid wasting memory as argc[0] is always a program name not positional argument</span>
+    <span class="hljs-keyword">if</span>(!positional_argument){                                         <span class="hljs-comment">//Use char **positional_arguments when you need dynamic memory allocation for the array and flexibility in handling its size.</span>
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Memory allocation failed.\n&quot;</span>);               <span class="hljs-comment">//Use char *positional_arguments[] when the size is fixed and known at compile time, or for array declarations in function signatures.</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-comment">//parse the command-line arguments</span>
+    <span class="hljs-type">size_t</span> positional_argument_count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; argc; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;-l&quot;</span>) == <span class="hljs-number">0</span> || <span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--lower&quot;</span>) == <span class="hljs-number">0</span>){ <span class="hljs-comment">// strcmp == 0 means equal, matched</span>
+            print_lower = <span class="hljs-literal">true</span>;
+        }
+            
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;-u&quot;</span>) == <span class="hljs-number">0</span> || <span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--upper&quot;</span>) == <span class="hljs-number">0</span>){
+            print_upper = <span class="hljs-literal">true</span>;
+        }
+
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--&quot;</span>) == <span class="hljs-number">0</span>){
+            positional_argument_count = find_positional_arguments(argv + i, positional_argument);
+            <span class="hljs-keyword">break</span>;
+        }
+
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(argv[i][<span class="hljs-number">0</span>] !=  <span class="hljs-string">&#x27;-&#x27;</span>){ <span class="hljs-comment">// remember &#x27; &#x27; not &quot; &quot; (because  this is a character not a string)</span>
+            positional_argument[positional_argument_count++] = argv[i];
+        }
+    }
+
+    <span class="hljs-comment">//validate positional arguments</span>
+    <span class="hljs-keyword">if</span>(positional_argument_count &lt; <span class="hljs-number">1</span>){
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Usage: %s[-l|--lower] [-u|--upper] &lt;filename&gt;\n&quot;</span>, argv[<span class="hljs-number">0</span>]);
+        <span class="hljs-built_in">free</span>(positional_argument);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename = positional_argument[<span class="hljs-number">0</span>];
+
+    <span class="hljs-comment">//open the file     </span>
+    FILE* file = fopen(filename, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Could not open file \&quot;%s\&quot;.\n&quot;</span>, filename);
+        <span class="hljs-built_in">free</span>(positional_argument);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-type">int</span> line_number = <span class="hljs-number">1</span>;
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-keyword">while</span> (fgets(buffer, <span class="hljs-keyword">sizeof</span>(buffer), file) != <span class="hljs-literal">NULL</span>) {   
+        <span class="hljs-type">int</span> upper = <span class="hljs-number">0</span>, lower = <span class="hljs-number">0</span>;
+        count_upper_lower(buffer, &amp;upper, &amp;lower);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%3d: &quot;</span>, line_number);
+        <span class="hljs-keyword">if</span> (print_lower &amp;&amp; print_upper) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;lowercase: %d, uppercase: %d\n&quot;</span>, lower, upper);
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (print_lower) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;lowercase: %d\n&quot;</span>, lower);
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (print_upper) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;uppercase: %d\n&quot;</span>, upper);
+        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, buffer);
+        line_number++;
+    }
+
+    fclose(file);
+
+    <span class="hljs-built_in">free</span>(positional_argument);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">find_positional_arguments</span><span class="hljs-params">(<span class="hljs-type">char</span> *argv[], <span class="hljs-type">char</span> *positional_arguments[])</span> {
+    <span class="hljs-type">size_t</span> i = <span class="hljs-number">1</span>; <span class="hljs-comment">//index of the first argument to check</span>
+    <span class="hljs-type">size_t</span> positional_arguments_count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(argv[i] != <span class="hljs-literal">NULL</span>){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--&quot;</span>) == <span class="hljs-number">0</span>){ <span class="hljs-comment">//==0 =&gt; matched</span>
+            <span class="hljs-keyword">while</span>(argv[++i] != <span class="hljs-literal">NULL</span>){
+                positional_arguments[positional_arguments_count++] = argv[i];
+            }
+            <span class="hljs-keyword">break</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (argv[i][<span class="hljs-number">0</span>] != <span class="hljs-string">&#x27;-&#x27;</span>){
+            positional_arguments[positional_arguments_count++] = argv[i];
+        }
+        i++;
+    }
+    <span class="hljs-keyword">return</span> positional_arguments_count;
+}
+
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">read_string</span><span class="hljs-params">(FILE* file, <span class="hljs-type">char</span> buffer[], <span class="hljs-type">size_t</span> size)</span> {
+    fgets(buffer, size, file);
+    <span class="hljs-type">char</span> *ptr = <span class="hljs-built_in">strrchr</span>(buffer, <span class="hljs-string">&#x27;\n&#x27;</span>);
+    <span class="hljs-keyword">if</span> (ptr != <span class="hljs-literal">NULL</span>) {
+        *ptr = <span class="hljs-string">&#x27;\0&#x27;</span>;
+    }
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">count_upper_lower</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *buffer, <span class="hljs-type">int</span> *upper, <span class="hljs-type">int</span> *lower)</span> {
+    *upper = <span class="hljs-number">0</span>;
+    *lower = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (; *buffer != <span class="hljs-string">&#x27;\0&#x27;</span>; buffer++) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isupper</span>(*buffer)) {
+            (*upper)++;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">islower</span>(*buffer)) {
+            (*lower)++;
+        }
+    }
+}
+
+</code></pre>
+<h2 id="using-named-arguments-with-values">Using named arguments with values</h2>
+<p>Whereas flags are simple options that are either passed or not, options with values are options that require a value to be passed.
+For example, an option that specifies the number of lines to print, or the filename of a file to read.
+Options with values are typically passed as <code>--name value</code>, or <code>--name=value</code>.</p>
+<p>To let your program accept options with values, you will need to parse the <code>argv</code> array yourself, similar to how you would parse flags.
+The difference is that you will need to extract the value of the option from the same element in the array, instead of the next element.
+In case a space is used to separate the option and the value, the value will be in the &quot;next&quot; element in the <code>argv</code> array.
+This means that you'll need to deal with the case where the value is not present, or where the value is not a valid value for the option.</p>
+<p>To simplify the parsing of options with values</p>
+<p>A typical way to parse options with values is to use a <code>while</code> or <code>for</code> loop to iterate over the <code>argv</code> array, and an <code>if</code> statement to check if an element is a (valid) option.
+For example, suppose that a program accepts two named arguments: <code>--option N</code> that takes an integer value <code>N</code>, and <code>--name S</code> that takes a string value <code>S</code>.
+The following code snippet shows how you could parse these options:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">while</span> (argv[i] != <span class="hljs-literal">NULL</span> &amp;&amp; <span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--&quot;</span>) != <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--option&quot;</span>) == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span> (argv[i + <span class="hljs-number">1</span>] != <span class="hljs-literal">NULL</span>) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sscanf</span>(argv[i + <span class="hljs-number">1</span>], <span class="hljs-string">&quot;%d&quot;</span>, &amp;value) == <span class="hljs-number">1</span>) {
+                <span class="hljs-comment">// Handle the option with value</span>
+                i++;    <span class="hljs-comment">// skip the value</span>
+            }
+            <span class="hljs-keyword">else</span> {
+                <span class="hljs-comment">// Handle the case where the value for --option is not a valid value</span>
+            }
+        }
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// Handle the case where the value for --option is not present</span>
+        }
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--name&quot;</span>) == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span> (argv[i + <span class="hljs-number">1</span>] != <span class="hljs-literal">NULL</span>) {
+            <span class="hljs-type">char</span> *value = argv[i + <span class="hljs-number">1</span>];
+            <span class="hljs-comment">// Handle the option --name with value</span>
+            i++;    <span class="hljs-comment">// skip the value</span>
+        }
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-comment">// Handle the case where the value for --name is not present</span>
+        }
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (argv[i][<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;-&#x27;</span>) {
+        <span class="hljs-comment">// Handle the case where an invalid option is passed</span>
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// Handle the case where the argument is a positional argument</span>
+    }
+    i++;    <span class="hljs-comment">// move to the next argument</span>
+}
+</code></pre>
+<h3 id="activity-4---limiting-the-number-of-characters-per-line">Activity 4 - Limiting the number of characters per line</h3>
+<p>The program listed in <code>activity4.c</code> asks the user for a filename, and then asks the user for the number of characters to print per line.
+The program then prints the contents of the file to the console, restricting the number of characters per line to the number specified by the user.</p>
+<p>Modify the program so that it takes both a positional argument and a named argument: the number of characters to print per line is passed as a named argument to the program, and the filename is passed as a positional argument.
+The long form of the named argument must be <code>--chars N</code>, its short form <code>-c N</code>, and its value (<code>N</code>) must be an integer.
+If the argument is not passed, the program must print every line in full.</p>
+<p>When you're done, include the contents of the <code>activity4.c</code> file in the code block below.</p>
+<p>Make sure that the program works when the argument is passed in any order.
+That is, the following two invocations of the program should both work:</p>
+<pre><code class="language-sh">./activity4 --chars 5 -- --test.txt
+./activity4 alice.txt -c 15
+</code></pre>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of the activity4.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+
+<span class="hljs-comment">/// @brief Reads a string from a file and removes the newline character.</span>
+<span class="hljs-comment">/// @param file The file to read from.</span>
+<span class="hljs-comment">/// @param buffer The buffer to store the string in.</span>
+<span class="hljs-comment">/// @param size The size of the buffer.</span>
+<span class="hljs-comment">/// @return The buffer containing the string read from the file, or NULL if an error occurred.</span>
+<span class="hljs-type">char</span> *<span class="hljs-title function_">read_string</span><span class="hljs-params">(FILE* file, <span class="hljs-type">char</span> buffer[], <span class="hljs-type">size_t</span> size)</span>;
+
+<span class="hljs-comment">/// @brief Reads an integer from the user.</span>
+<span class="hljs-comment">/// @param prompt The prompt to display to the user.</span>
+<span class="hljs-comment">/// @return The integer read from the user.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">read_int</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *prompt)</span>;
+
+
+<span class="hljs-comment">/// @brief Parses command line arguments for the filename and character limit.</span>
+<span class="hljs-comment">/// @param argc The number of arguments.</span>
+<span class="hljs-comment">/// @param argv The array of argument strings.</span>
+<span class="hljs-comment">/// @param chars The number of characters per line.</span>
+<span class="hljs-comment">/// @param filename The filename to be processed.</span>
+<span class="hljs-comment">/// @return 1 if successful, 0 if there was an error.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">parse_arguments</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[], <span class="hljs-type">int</span> *chars, <span class="hljs-type">char</span> *filename)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span> {
+
+    <span class="hljs-type">int</span> chars = <span class="hljs-number">-1</span>; <span class="hljs-comment">//default: unlimited characters per line</span>
+
+    <span class="hljs-type">char</span> filename[<span class="hljs-number">100</span>];
+
+    <span class="hljs-comment">//parse arguments</span>
+    <span class="hljs-keyword">if</span>(!parse_arguments(argc, argv, &amp;chars, filename)){
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    FILE* file = fopen(filename, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Could not open file \&quot;%s\&quot;.\n&quot;</span>, filename);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-keyword">while</span> (read_string(file, buffer, <span class="hljs-keyword">sizeof</span>(buffer)) != <span class="hljs-literal">NULL</span>) { <span class="hljs-comment">//calls the read_string function to read a line from the file into buffer.</span>
+        <span class="hljs-keyword">if</span> (chars &gt; <span class="hljs-number">0</span> &amp;&amp; chars &lt; <span class="hljs-keyword">sizeof</span>(buffer)) buffer[chars] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, buffer);
+    }
+
+    fclose(file);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">char</span> *<span class="hljs-title function_">read_string</span><span class="hljs-params">(FILE* file, <span class="hljs-type">char</span> buffer[], <span class="hljs-type">size_t</span> size)</span> {
+    <span class="hljs-keyword">if</span> (fgets(buffer, size, file) == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    <span class="hljs-type">char</span> *ptr = <span class="hljs-built_in">strrchr</span>(buffer, <span class="hljs-string">&#x27;\n&#x27;</span>);
+    <span class="hljs-keyword">if</span> (ptr != <span class="hljs-literal">NULL</span>) *ptr = <span class="hljs-string">&#x27;\0&#x27;</span>; <span class="hljs-comment">//remove newline character if exists</span>
+    <span class="hljs-keyword">return</span> buffer;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">parse_arguments</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[], <span class="hljs-type">int</span> *chars, <span class="hljs-type">char</span> *filename)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; argc; i++) {
+        <span class="hljs-comment">//check for named arguments (-c or --chars)</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;-c&quot;</span>) == <span class="hljs-number">0</span> || <span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--chars&quot;</span>) == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; argc &amp;&amp; <span class="hljs-built_in">sscanf</span>(argv[i + <span class="hljs-number">1</span>], <span class="hljs-string">&quot;%d&quot;</span>, chars) == <span class="hljs-number">1</span>) { <span class="hljs-comment">//the next argument can be parsed as an integer.(That next argument is a valid integer)</span>
+                i++;  <span class="hljs-comment">//skip the next argument (the number for -c or --chars)</span>
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Error: Please provide an integer after -c or --chars\n&quot;</span>);
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+        } 
+        <span class="hljs-comment">//check for positional argument (filename)</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(argv[i], <span class="hljs-string">&quot;--&quot;</span>) == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (i + <span class="hljs-number">1</span> &lt; argc) {
+                <span class="hljs-comment">//the first argument after &quot;--&quot; is the filename (positional argument)</span>
+                <span class="hljs-built_in">strcpy</span>(filename, argv[i + <span class="hljs-number">1</span>]);
+                i++;  <span class="hljs-comment">//skip the next argument which is the filename</span>
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Error: Missing filename after &#x27;--&#x27;\n&quot;</span>);
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+        } 
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">strcpy</span>(filename, argv[i]);<span class="hljs-comment">//if the current argument (argv[i]) is not -- and has not been parsed as a named argument, it is treated as the filename.</span>
+        }
+    }
+    
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strlen</span>(filename) == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Error: No filename provided.\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</code></pre>
+<h2 id="redirecting-input-and-output">Redirecting input and output</h2>
+<p>A program can read input from the console, and write output to the console.
+However, it can also read input from a file, and write output to a file.
+This is done by <em>redirecting</em> the input and output of the program.</p>
+<p>When a program is started from the command line, the user can redirect the input and output of the program.
+This is done by using the <code>&lt;</code> and <code>&gt;</code> operators.
+For example, to redirect the output of a program called <code>my_program</code> to a file called <code>output.txt</code>, the user would type <code>./my_program &gt; output.txt</code>.
+To redirect the input of a program to a file called <code>input.txt</code>, the user would type <code>./my_program &lt; input.txt</code>.</p>
+<p>Programs can also read input from the output of another program.
+This is done by <em>piping</em> the output of one program to the input of another program.
+This is done by using the <code>|</code> operator.
+For example, to pipe the output of a program called <code>my_program1</code> to the input of a program called <code>my_program2</code>, the user would type <code>./my_program1 | ./my_program2</code>.</p>
+<h3 id="activity-5---shuffling-a-list-of-numbers">Activity 5 - Shuffling a list of numbers</h3>
+<p>The program listed in <code>activity5.c</code> asks the user to enter a list of numbers (ended with a zero), then shuffles the list and prints the result.
+Change the program so that it stops as soon as the end of the <code>stdin</code> file (<code>eof</code>) is reached.
+At this point, the program must shuffle the list of numbers and print the shuffled list to the console, one number per line.</p>
+<p>Run the program <code>./activity5 &lt; numbers.txt &gt; shuffled_numbers.txt</code> to shuffle the numbers in the file <code>numbers.txt</code> and write the shuffled numbers to the file <code>shuffled_numbers.txt</code>.</p>
+<p>When you're done, paste the contents of the <code>shuffled_numbers.txt</code> file in the markdown file.</p>
+<pre><code class="language-txt">// TODO: Include the contents of the shuffled_numbers.txt file here
+7
+29
+23
+12
+5
+2
+18
+20
+8
+-9
+9
+-10
+1
+13
+-4
+15
+-7
+19
+-3
+3
+5
+-1
+19
+2
+11
+-2
+16
+17
+4
+10
+7
+11
+3
+-6
+17
+-5
+13
+-8
+14
+6
+
+</code></pre>
+<h3 id="activity-6---processing-output-from-another-program">Activity 6 - Processing output from another program</h3>
+<p>The program <code>activity6.c</code> asks the user for a filename, then reads all the numbers from the file, and prints them to the console, in tabular form, with 10 numbers per row.</p>
+<p>Modify the program so that it can be used in a pipeline with the <code>activity5</code> program.
+In other words, running <code>./activity5 &lt; numbers.txt | ./activity6</code> should display the numbers after shuffling them.</p>
+<p>When you're done, include the contents of the <code>activity6.c</code> file in the code block below.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of the activity6.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+
+<span class="hljs-comment">/// @brief Reads a string from a file and removes the newline character.</span>
+<span class="hljs-comment">/// @param file The file to read from.</span>
+<span class="hljs-comment">/// @param buffer The buffer to store the string in.</span>
+<span class="hljs-comment">/// @param size The size of the buffer.</span>
+<span class="hljs-comment">/// @return The buffer containing the string read from the file, or NULL if an error occurred.</span>
+<span class="hljs-type">char</span> *<span class="hljs-title function_">read_string</span><span class="hljs-params">(FILE* file, <span class="hljs-type">char</span> buffer[], <span class="hljs-type">size_t</span> size)</span>;
+
+<span class="hljs-comment">/// @brief Reads the next integer from a file, skipping non-numbers</span>
+<span class="hljs-comment">/// @param file The file to read from.</span>
+<span class="hljs-comment">/// @return The integer read from the file.</span>
+<span class="hljs-comment">/// @return true if an integer was read, false if the end of the file was reached.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">read_int</span><span class="hljs-params">(FILE *file, <span class="hljs-type">int</span> *value)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">const</span> <span class="hljs-type">int</span> num_columns = <span class="hljs-number">10</span>;
+
+    <span class="hljs-type">int</span> number;
+    <span class="hljs-type">int</span> column = <span class="hljs-number">0</span>;
+
+    <span class="hljs-comment">//read interger from stdin (no nead for filename)</span>
+    <span class="hljs-keyword">while</span> (read_int(<span class="hljs-built_in">stdin</span>, &amp;number)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%10d&quot;</span>, number); <span class="hljs-comment">//print the number with the width of 10</span>
+        column = (column + <span class="hljs-number">1</span>) % num_columns;
+        <span class="hljs-keyword">if</span> (column == <span class="hljs-number">0</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);  <span class="hljs-comment">//ensure a newline at the end if the last line doesn&#x27;t have 10 numbers</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">char</span> *<span class="hljs-title function_">read_string</span><span class="hljs-params">(FILE* file, <span class="hljs-type">char</span> buffer[], <span class="hljs-type">size_t</span> size)</span> {
+    <span class="hljs-keyword">if</span> (fgets(buffer, size, file) == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    <span class="hljs-type">char</span> *ptr = <span class="hljs-built_in">strrchr</span>(buffer, <span class="hljs-string">&#x27;\n&#x27;</span>);
+    <span class="hljs-keyword">if</span> (ptr != <span class="hljs-literal">NULL</span>) *ptr = <span class="hljs-string">&#x27;\0&#x27;</span>;
+    <span class="hljs-keyword">return</span> buffer;
+}
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">read_int</span><span class="hljs-params">(FILE *file, <span class="hljs-type">int</span> *value)</span> {
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-type">int</span> result = <span class="hljs-built_in">fscanf</span>(file, <span class="hljs-string">&quot;%99s&quot;</span>, buffer);
+    <span class="hljs-keyword">while</span> (result != EOF &amp;&amp; <span class="hljs-built_in">sscanf</span>(buffer, <span class="hljs-string">&quot;%d&quot;</span>, value) == <span class="hljs-number">0</span>) {
+        result = <span class="hljs-built_in">fscanf</span>(file, <span class="hljs-string">&quot;%99s&quot;</span>, buffer);
+    }
+    <span class="hljs-keyword">return</span> result != EOF;
+}
+
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

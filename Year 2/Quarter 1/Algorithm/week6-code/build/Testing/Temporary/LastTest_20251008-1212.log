@@ -1,0 +1,19 @@
+Start testing: Oct 08 15:30 CEST
+----------------------------------------------------------
+2/7 Testing: pathfinding_test
+2/7 Test: pathfinding_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/scripts/test.py" "pathfinding" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/pathfinding/tests/pathfinding_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/pathfinding
+"pathfinding_test" start time: Oct 08 15:30 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.66 sec
+----------------------------------------------------------
+Test Passed.
+"pathfinding_test" end time: Oct 08 15:30 CEST
+"pathfinding_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 08 15:30 CEST

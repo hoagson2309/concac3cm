@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/connectedness",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o CMakeFiles/connectedness.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/connectedness/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/connectedness/main.cpp",
+  "output": "connectedness/CMakeFiles/connectedness.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/pathfinding",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o CMakeFiles/pathfinding.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/pathfinding/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/pathfinding/main.cpp",
+  "output": "pathfinding/CMakeFiles/pathfinding.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/shortest_paths",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o CMakeFiles/shortest_paths.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/shortest_paths/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/shortest_paths/main.cpp",
+  "output": "shortest_paths/CMakeFiles/shortest_paths.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/largest_component",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o CMakeFiles/largest_component.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/largest_component/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/largest_component/main.cpp",
+  "output": "largest_component/CMakeFiles/largest_component.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/ordering_deps",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o CMakeFiles/ordering_deps.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/ordering_deps/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/ordering_deps/main.cpp",
+  "output": "ordering_deps/CMakeFiles/ordering_deps.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/cycle_detection",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o CMakeFiles/cycle_detection.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/cycle_detection/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/cycle_detection/main.cpp",
+  "output": "cycle_detection/CMakeFiles/cycle_detection.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/counting_paths",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o CMakeFiles/counting_paths.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/counting_paths/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/counting_paths/main.cpp",
+  "output": "counting_paths/CMakeFiles/counting_paths.dir/main.cpp.o"
+}
+]

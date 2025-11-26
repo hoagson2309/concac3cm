@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Assignments - Week 4</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="assignments---week-4">Assignments - Week 4</h1>
+<p>You must complete two out of the three assignments, but you are encouraged to complete all three.
+Below you will find, per assignment, instructions on what you need to include in this markdown file.</p>
+<h2 id="assignment-1---mirroring-a-string">Assignment 1 - Mirroring a string</h2>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">/// Creates a new string that is the reverse of the given string.</span>
+<span class="hljs-comment">/// @param string The string to reverse.</span>
+<span class="hljs-comment">/// @return A new string that is the reverse of the given string.</span>
+<span class="hljs-type">char</span> *<span class="hljs-title function_">reverse_string</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> line[<span class="hljs-number">200</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a line of text: &quot;</span>);
+
+    <span class="hljs-comment">// Read a line of text from the user.</span>
+    read_string(line, <span class="hljs-keyword">sizeof</span>(line));
+
+    <span class="hljs-comment">// Obtain a reversed copy of the string.</span>
+    <span class="hljs-type">char</span> *reversed = reverse_string(line);
+
+    <span class="hljs-comment">// Print the original and the reversed string.</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Output: %s %s\n&quot;</span>, line, reversed);
+
+    <span class="hljs-built_in">free</span>(reversed); <span class="hljs-comment">// Free the memory allocated by reverse_string.</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">char</span> *<span class="hljs-title function_">reverse_string</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>)</span> {
+    <span class="hljs-type">size_t</span> length = <span class="hljs-built_in">strlen</span>(<span class="hljs-built_in">string</span>);
+
+    <span class="hljs-comment">//allocating memory for reversed string, including the null terminator</span>
+    <span class="hljs-type">char</span> *reverse = (<span class="hljs-type">char</span>*) <span class="hljs-built_in">malloc</span>(length * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));
+
+    <span class="hljs-keyword">if</span>(reverse == <span class="hljs-literal">NULL</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation failed\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//exit if there&#x27;s allocation failure</span>
+    }
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; length; i++){
+        reverse[i] = <span class="hljs-built_in">string</span>[length - <span class="hljs-number">1</span> - i]; <span class="hljs-comment">//create a new string that is the reverse of the original string</span>
+    }
+
+    reverse[length] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+
+    <span class="hljs-keyword">return</span> reverse;
+}
+</code></pre>
+<h2 id="assignment-2---dynamic-string-building">Assignment 2 - Dynamic string building</h2>
+<p>In this assignment you will work with three files: <code>main.c</code> and <code>concatenate.c</code>.</p>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;concatenate.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> line[<span class="hljs-number">200</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a line of text: &quot;</span>);
+
+    <span class="hljs-comment">// Create a new string_t structure that contains an empty string.</span>
+    <span class="hljs-type">string_t</span> <span class="hljs-built_in">string</span> = new_string(<span class="hljs-string">&quot;&quot;</span>);
+
+    <span class="hljs-comment">// Read a line of text from the user.</span>
+    read_string(line, <span class="hljs-keyword">sizeof</span>(line));
+
+    <span class="hljs-comment">// repeat while the line is not empty</span>
+    <span class="hljs-keyword">while</span> (line[<span class="hljs-number">0</span>] != <span class="hljs-string">&#x27;\0&#x27;</span>) {
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Append the line to the string by calling append_string.</span>
+        append_string(&amp;<span class="hljs-built_in">string</span>, line);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a line of text: &quot;</span>);
+        read_string(line, <span class="hljs-keyword">sizeof</span>(line));
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The concatenated string is: %s\n&quot;</span>, <span class="hljs-built_in">string</span>.data);
+    
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> free the memory used by the string by calling free_string.</span>
+    free_string(&amp;<span class="hljs-built_in">string</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<p>Include the definitions for the functions you wrote in <code>concatenate.c</code> here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the definitions for the functions you wrote in `concatenate.c` here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;concatenate.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Implement the functions listed in concatenate.h.</span>
+
+
+<span class="hljs-type">string_t</span> <span class="hljs-title function_">new_string</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *initial)</span> {
+    <span class="hljs-type">const</span> <span class="hljs-type">size_t</span> len = <span class="hljs-built_in">strlen</span>(initial);
+    <span class="hljs-type">string_t</span> new_string = {
+         .data = (<span class="hljs-type">char</span>*) <span class="hljs-built_in">malloc</span>(len + <span class="hljs-number">1</span>),   <span class="hljs-comment">// allocate memory for the string</span>
+         .length = <span class="hljs-number">0</span> };                     <span class="hljs-comment">// set the length of the string to 0 for now</span>
+
+    <span class="hljs-keyword">if</span> (new_string.data == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> new_string; <span class="hljs-comment">// return the string if the memory allocation fails</span>
+
+    <span class="hljs-comment">// memory allocation successful, copy the string and set the length</span>
+    <span class="hljs-built_in">strcpy</span>(new_string.data, initial);
+    new_string.length = len;
+
+    <span class="hljs-keyword">return</span> new_string;
+}
+
+<span class="hljs-comment">//appends a string to another string</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">append_string</span><span class="hljs-params">(<span class="hljs-type">string_t</span> *<span class="hljs-built_in">string</span>, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *to_append)</span>{
+    <span class="hljs-type">size_t</span> append_length = <span class="hljs-built_in">strlen</span>(to_append);
+    <span class="hljs-type">size_t</span> new_length = <span class="hljs-built_in">string</span>-&gt;length + append_length; <span class="hljs-comment">//add more length</span>
+
+    <span class="hljs-comment">//reallocate memory of string-&gt;data to fit the new concanated string</span>
+    <span class="hljs-type">char</span> *new_data = (<span class="hljs-type">char</span>*) <span class="hljs-built_in">realloc</span>(<span class="hljs-built_in">string</span>-&gt;data, new_length + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">if</span>(new_data == <span class="hljs-literal">NULL</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory reallocation failed&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    }
+    
+    <span class="hljs-built_in">string</span>-&gt;data = new_data; <span class="hljs-comment">//update the pointer to the memory</span>
+    <span class="hljs-built_in">strcat</span>(<span class="hljs-built_in">string</span>-&gt;data, to_append); <span class="hljs-comment">//append the new string</span>
+    <span class="hljs-built_in">string</span>-&gt;length = new_length; <span class="hljs-comment">//update the length</span>
+}
+
+<span class="hljs-comment">//Deallocate the memory used by a string</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">free_string</span><span class="hljs-params">(<span class="hljs-type">string_t</span> *<span class="hljs-built_in">string</span>)</span>{
+    <span class="hljs-built_in">free</span>(<span class="hljs-built_in">string</span>-&gt;data); <span class="hljs-comment">//free the dynamically allocated memory</span>
+    <span class="hljs-built_in">string</span>-&gt;data = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">//set pointer to NULL</span>
+    <span class="hljs-built_in">string</span>-&gt;length = <span class="hljs-number">0</span>; <span class="hljs-comment">//reset the length</span>
+}
+</code></pre>
+<h2 id="assignment-3---string-splitting">Assignment 3 - String splitting</h2>
+<p>In this assignment you will work with three files: <code>main.c</code> and <code>split.c</code>.</p>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+</code></pre>
+<p>Include the contents of your <code>split.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `split.c` file here</span>
+</code></pre>
+
+            
+            
+        </body>
+        </html>

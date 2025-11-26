@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/build",
+  "command": "/usr/bin/gcc -g -o CMakeFiles/fibonacci.dir/fibonacci.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/fibonacci.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/fibonacci.c",
+  "output": "CMakeFiles/fibonacci.dir/fibonacci.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/build",
+  "command": "/usr/bin/gcc -g -o CMakeFiles/fibonacci.dir/functions.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/functions.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/functions.c",
+  "output": "CMakeFiles/fibonacci.dir/functions.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/build",
+  "command": "/usr/bin/gcc -g -o CMakeFiles/primes.dir/primes.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/primes.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/primes.c",
+  "output": "CMakeFiles/primes.dir/primes.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/build",
+  "command": "/usr/bin/gcc -g -o CMakeFiles/primes.dir/functions.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/functions.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity3/functions.c",
+  "output": "CMakeFiles/primes.dir/functions.c.o"
+}
+]

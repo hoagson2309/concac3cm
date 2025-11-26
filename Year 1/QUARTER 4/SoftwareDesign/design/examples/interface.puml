@@ -1,0 +1,31 @@
+@startuml
+
+skinparam nodesep 50
+skinparam dpi 300
+skinparam classAttributeIconSize 0
+hide empty members
+left to right direction
+
+package "MotorControl" {
+
+    enum Status {
+        OK
+        ERROR
+    }
+
+    interface MotorAPI {
+        + initialize( addresses: int[] ): Status
+        + destroy(): Status
+        + getAddress( unit: int ): int
+        + setSpeed( speed: int ): Status
+        + setDirection( direction: int ): Status
+        + rotate( angle: int ): Status
+        + abort(): Status
+    }
+}
+
+
+' This creates a dependency line between the MotorAPI and Status
+MotorAPI -- Status
+
+@enduml

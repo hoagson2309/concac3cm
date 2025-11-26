@@ -1,0 +1,18 @@
+@startuml
+' Define the styles for the System Context diagram.
+skinparam defaultTextAlignment center
+scale 250 height
+' Define the system context.
+storage "\nSupervisory\nController\n" as Core #white;line.dashed;line:darkgrey;
+' Add the terminals
+Rectangle "Shaft Controller" as Shaft
+Rectangle "Cabin Controller" as Cabin
+Rectangle "Floor Controller i" as Floor
+' Add the relationships between the terminals and the system.
+Shaft --> Core : DOOR_CLOSED, DOOR_OPENED,\nARRIVING, ARRIVED,\nEMERGENCE
+Core -up-> Shaft : GoUp(speed), GoDown(speed),\nStop, OpenDoor, CloseDoor
+Cabin --> Core : setfloornumber,\nALARM
+Core --> Cabin : floornumber,\nLightOn, LightOff,\nBrakeActive, BrakeDeactive
+Floor --> Core : UP_i, DOWN_i,\nDETECTED_DESCENT_i,\nDETECTED_ASCENT_i,\nDETECTED_FLOOR_i
+Core --> Floor : LedOn(i), LedOff(i),\nSoundPing(i)
+@enduml

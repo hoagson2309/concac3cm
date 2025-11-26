@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/build",
+  "command": "/usr/bin/gcc -I\"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/fibonacci/../functions\" -g -o fibonacci/CMakeFiles/fibonacci.dir/fibonacci.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/fibonacci/fibonacci.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/fibonacci/fibonacci.c",
+  "output": "fibonacci/CMakeFiles/fibonacci.dir/fibonacci.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/build",
+  "command": "/usr/bin/gcc -I\"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/fibonacci/../functions\" -g -o fibonacci/CMakeFiles/fibonacci.dir/__/functions/functions.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/functions/functions.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/functions/functions.c",
+  "output": "fibonacci/CMakeFiles/fibonacci.dir/__/functions/functions.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/build",
+  "command": "/usr/bin/gcc -I\"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/primes/../functions\" -g -o primes/CMakeFiles/primes.dir/primes.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/primes/primes.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/primes/primes.c",
+  "output": "primes/CMakeFiles/primes.dir/primes.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/build",
+  "command": "/usr/bin/gcc -I\"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/primes/../functions\" -g -o primes/CMakeFiles/primes.dir/__/functions/functions.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/functions/functions.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity4/functions/functions.c",
+  "output": "primes/CMakeFiles/primes.dir/__/functions/functions.c.o"
+}
+]

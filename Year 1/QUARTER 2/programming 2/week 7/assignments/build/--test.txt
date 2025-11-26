@@ -1,0 +1,6 @@
+Hello, world!
+How are you doing today!
+This file has a weird name.
+Its name may cause some problems when passed as a positional argument.
+You see, since the name starts with a hyphen, it may be interpreted as a flag.
+This makes it a good test case for your program.

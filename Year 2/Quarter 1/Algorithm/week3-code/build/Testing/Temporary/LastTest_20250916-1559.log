@@ -1,0 +1,18 @@
+Start testing: Sep 16 18:01 CEST
+----------------------------------------------------------
+2/5 Testing: list_reverse_test
+2/5 Test: list_reverse_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/scripts/test_target.py" "list_reverse" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/list_reverse/tests/list_reverse_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/build/list_reverse
+"list_reverse_test" start time: Sep 16 18:01 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.41 sec
+----------------------------------------------------------
+Test Passed.
+"list_reverse_test" end time: Sep 16 18:01 CEST
+"list_reverse_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 16 18:01 CEST

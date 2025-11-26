@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity3.dir/activity3.c.o -o activity3 

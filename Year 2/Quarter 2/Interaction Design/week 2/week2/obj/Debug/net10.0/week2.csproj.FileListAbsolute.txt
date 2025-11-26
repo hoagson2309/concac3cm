@@ -1,0 +1,14 @@
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\bin\Debug\net10.0\week2.exe
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\bin\Debug\net10.0\week2.deps.json
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\bin\Debug\net10.0\week2.runtimeconfig.json
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\bin\Debug\net10.0\week2.dll
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\bin\Debug\net10.0\week2.pdb
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\week2.GeneratedMSBuildEditorConfig.editorconfig
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\week2.AssemblyInfoInputs.cache
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\week2.AssemblyInfo.cs
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\week2.csproj.CoreCompileInputs.cache
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\week2.dll
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\refint\week2.dll
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\week2.pdb
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\week2.genruntimeconfig.cache
+C:\SAXION\Year 2\Quarter 2\Interaction Design\week 2\week2\obj\Debug\net10.0\ref\week2.dll

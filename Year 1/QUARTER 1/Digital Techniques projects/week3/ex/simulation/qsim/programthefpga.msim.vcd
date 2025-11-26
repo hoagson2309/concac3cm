@@ -1,0 +1,316 @@
+$comment
+	File created using the following command:
+		vcd file programthefpga.msim.vcd -direction
+$end
+$date
+	Sun Sep 22 13:05:28 2024
+$end
+$version
+	ModelSim Version 2020.1
+$end
+$timescale
+	1ps
+$end
+
+$scope module programthefpga_vlg_vec_tst $end
+$var reg 1 ! A $end
+$var reg 1 " B $end
+$var reg 1 # C $end
+$var reg 1 $ D $end
+$var wire 1 % OA $end
+$var wire 1 & OB $end
+$var wire 1 ' OC $end
+$var wire 1 ( OD $end
+$var wire 1 ) OE $end
+$var wire 1 * OF $end
+$var wire 1 + OG $end
+
+$scope module i1 $end
+$var wire 1 , gnd $end
+$var wire 1 - vcc $end
+$var wire 1 . unknown $end
+$var tri1 1 / devclrn $end
+$var tri1 1 0 devpor $end
+$var tri1 1 1 devoe $end
+$var wire 1 2 ~QUARTUS_CREATED_GND~I_combout $end
+$var wire 1 3 ~QUARTUS_CREATED_UNVM~~busy $end
+$var wire 1 4 ~QUARTUS_CREATED_ADC1~~eoc $end
+$var wire 1 5 OB~output_o $end
+$var wire 1 6 OC~output_o $end
+$var wire 1 7 OE~output_o $end
+$var wire 1 8 OD~output_o $end
+$var wire 1 9 OF~output_o $end
+$var wire 1 : OG~output_o $end
+$var wire 1 ; OA~output_o $end
+$var wire 1 < C~input_o $end
+$var wire 1 = D~input_o $end
+$var wire 1 > B~input_o $end
+$var wire 1 ? A~input_o $end
+$var wire 1 @ inst|82~0_combout $end
+$var wire 1 A inst|83~combout $end
+$var wire 1 B inst|85~combout $end
+$var wire 1 C inst|84~0_combout $end
+$var wire 1 D inst|86~0_combout $end
+$var wire 1 E inst|87~combout $end
+$var wire 1 F inst|81~0_combout $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+1!
+0"
+0#
+0$
+1%
+0&
+0'
+1(
+1)
+1*
+1+
+0,
+1-
+x.
+1/
+10
+11
+02
+z3
+z4
+05
+06
+17
+18
+19
+1:
+1;
+0<
+0=
+0>
+1?
+0@
+0A
+1B
+1C
+1D
+1E
+1F
+$end
+#10000
+1"
+1>
+0F
+0E
+0C
+08
+0:
+0;
+0%
+0+
+0(
+#60000
+1#
+1<
+1E
+1C
+18
+1:
+1+
+1(
+#160000
+0!
+0?
+1F
+0E
+0D
+0C
+0B
+1@
+15
+07
+08
+09
+0:
+1;
+1%
+0+
+0*
+0(
+0)
+1&
+#180000
+1$
+1=
+1A
+16
+1'
+#200000
+0"
+0>
+1C
+1B
+0@
+05
+17
+18
+1(
+1)
+0&
+#250000
+1!
+1?
+0F
+0C
+1@
+15
+08
+0;
+0%
+0(
+1&
+#270000
+0#
+0<
+1C
+0A
+0@
+05
+06
+18
+1(
+0'
+0&
+#330000
+1"
+1>
+1F
+1D
+0C
+1@
+15
+08
+19
+1;
+1%
+1*
+0(
+1&
+#460000
+0$
+0=
+0F
+0@
+05
+0;
+0%
+0&
+#510000
+1#
+1<
+1E
+1C
+18
+1:
+1+
+1(
+#570000
+0"
+0>
+0E
+0D
+0C
+1@
+15
+08
+09
+0:
+0+
+0*
+0(
+1&
+#640000
+0!
+0?
+1F
+1C
+0@
+05
+18
+1;
+1%
+1(
+0&
+#650000
+0#
+0<
+0F
+1E
+0C
+0B
+07
+08
+1:
+0;
+0%
+1+
+0(
+0)
+#670000
+1$
+1=
+0E
+0:
+0+
+#750000
+1#
+1<
+1F
+1C
+1B
+1A
+16
+17
+18
+1;
+1%
+1(
+1)
+1'
+#810000
+1!
+1?
+0F
+0C
+1@
+15
+08
+0;
+0%
+0(
+1&
+#840000
+0$
+0=
+0A
+06
+0'
+#900000
+0#
+0<
+1F
+1E
+1D
+1C
+0@
+05
+18
+19
+1:
+1;
+1%
+1+
+1*
+1(
+0&
+#1000000

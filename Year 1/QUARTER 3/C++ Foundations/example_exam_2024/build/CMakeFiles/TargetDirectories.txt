@@ -1,0 +1,8 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/task_1_2/CMakeFiles/task_1_2.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/task_1_2/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/task_1_2/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/task_3/CMakeFiles/task_3.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/task_3/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024/build/task_3/CMakeFiles/rebuild_cache.dir

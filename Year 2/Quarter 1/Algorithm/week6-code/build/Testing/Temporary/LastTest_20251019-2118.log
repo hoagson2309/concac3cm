@@ -1,0 +1,19 @@
+Start testing: Oct 19 23:18 CEST
+----------------------------------------------------------
+7/7 Testing: counting_paths_test
+7/7 Test: counting_paths_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/scripts/test.py" "counting_paths" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/counting_paths/tests/counting_paths_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/counting_paths
+"counting_paths_test" start time: Oct 19 23:18 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.69 sec
+----------------------------------------------------------
+Test Passed.
+"counting_paths_test" end time: Oct 19 23:18 CEST
+"counting_paths_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 19 23:18 CEST

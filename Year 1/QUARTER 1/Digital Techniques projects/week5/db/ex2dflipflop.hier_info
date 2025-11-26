@@ -1,0 +1,10 @@
+|ex2dflipflop
+OUTA <= inst.DB_MAX_OUTPUT_PORT_TYPE
+CLK => inst.CLK
+CLK => inst5.CLK
+CLK => inst6.CLK
+DATA => inst.DATAIN
+OUTB <= inst5.DB_MAX_OUTPUT_PORT_TYPE
+OUTC <= inst6.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,19 @@
+Start testing: Oct 05 19:12 CEST
+----------------------------------------------------------
+3/6 Testing: median_test
+3/6 Test: median_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/scripts/test.py" "median" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/median/tests/median_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/build/median
+"median_test" start time: Oct 05 19:12 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.42 sec
+----------------------------------------------------------
+Test Passed.
+"median_test" end time: Oct 05 19:12 CEST
+"median_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 05 19:12 CEST

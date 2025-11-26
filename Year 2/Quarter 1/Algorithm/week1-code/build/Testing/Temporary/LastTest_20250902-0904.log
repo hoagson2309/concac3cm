@@ -1,0 +1,22 @@
+Start testing: Sep 03 01:12 CEST
+----------------------------------------------------------
+1/8 Testing: first_occurrence_test
+1/8 Test: first_occurrence_test
+Command: "/usr/bin/python3" "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/scripts/test_target.py" "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/build/first_occurrence/first_occurrence" "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/first_occurrence/tests/first_occurrence_cases"
+Directory: /mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/build/first_occurrence
+"first_occurrence_test" start time: Sep 03 01:12 CEST
+Output:
+----------------------------------------------------------
+
+The answer for the following test input is incorrect: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] 1 
+ got 5
+ expected 0
+<end of output>
+Test time =   0.21 sec
+----------------------------------------------------------
+Test Failed.
+"first_occurrence_test" end time: Sep 03 01:12 CEST
+"first_occurrence_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 03 01:12 CEST

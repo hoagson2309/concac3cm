@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/build",
+  "command": "/usr/bin/cc   -g -o CMakeFiles/Activity7.dir/functions.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/functions.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/functions.c",
+  "output": "CMakeFiles/Activity7.dir/functions.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/build",
+  "command": "/usr/bin/cc   -g -o CMakeFiles/Activity7.dir/main.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/main.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/main.c",
+  "output": "CMakeFiles/Activity7.dir/main.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/build",
+  "command": "/usr/bin/cc   -g -o CMakeFiles/Activity7.dir/parser.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/parser.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/parser.c",
+  "output": "CMakeFiles/Activity7.dir/parser.c.o"
+}
+]

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - Tutorial&colon; Working with structures and enumerations</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---tutorial-working-with-structures-and-enumerations">Week 3 - Tutorial: Working with structures and enumerations</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 29/11/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>The C programming language provides only a limited set of built-in data types, such as integers, floating-point numbers, and characters.
+Sometimes this is not enough, and you need to create your own data types.
+This can be done using structures and enumerations.</p>
+<p>Enumerations are the simplest of the two, and they are used to define a set of named (integer) constants.
+This allows you to avoid the use of &quot;magic numbers&quot; in your code.</p>
+<p>Structures are used to group variables of different types together.
+They are used to create more complex data types that can be used to store data in a structured way.
+Where functions allow you to group code together, structures allow you to group data together.
+Structures are an important concept in C programming, and understanding them is crucial before moving to more advanced languages like C++.</p>
+<h2 id="enumerations">Enumerations</h2>
+<p>An enumeration is a user-defined data type that consists of a set of named constants.
+You could use an enumeration, for example, to refer to the days of the week:</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">day</span> {</span>
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY
+};
+</code></pre>
+<p>This would work better than using integers (say 0 through 6) to represent the days of the week, as that would mean you would have to remember which number corresponds to which day.</p>
+<p>The code snippet above does not create any variables, but only defines a new <em>type</em> called <code>enum day</code>.
+After you've defined an enumeration, you can create variables of that type and assign one of the values to it:</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">day</span> <span class="hljs-title">today</span> =</span> TUESDAY;
+</code></pre>
+<p>Here, the variable's name is <code>today</code>, and its type is <code>enum day</code>.</p>
+<p>The values in an enumeration are assigned automatically, starting from 0 by default.
+If you want to assign specific values to the constants, you can do so.
+For example, to assign the values 1 through 12 to the months of the year, you could write:</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">month</span> {</span>
+    JANUARY = <span class="hljs-number">1</span>,
+    FEBRUARY,
+    MARCH,
+    APRIL,
+    MAY,
+    JUNE,
+    JULY,
+    AUGUST,
+    SEPTEMBER,
+    OCTOBER,
+    NOVEMBER,
+    DECEMBER
+};
+</code></pre>
+<p>Note that you only need to specify the value for the first constant, and the rest will be assigned automatically.</p>
+<h3 id="activity-1---using-enums">Activity 1 - Using enums</h3>
+<p>The program in <code>activity1</code> contains the well-known rock-paper-scissors game.
+It uses magic numbers to represent the choices of the player and the computer, which makes the code less readable and harder to maintain.
+Replace all the magic numbers with an enumeration type called <code>choice</code> that has three values: <code>ROCK</code>, <code>PAPER</code>, and <code>SCISSORS</code>.
+The program must not contain any numbers after this change.</p>
+<p>When you're done, compile and run the program to test that it still works correctly.
+If it does and your program contains no magic numbers, paste the contents of the modified <code>main.c</code> file below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified main.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">item_type</span>{</span>
+    ROCK,
+    PAPER,
+    SCISSOR
+};
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">read_choice</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;What is your choice? (&#x27;R&#x27; for Rock, &#x27;P&#x27; for Paper, &#x27;S&#x27; for Scissors): &quot;</span>);
+    <span class="hljs-type">char</span> choice = read_char();
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">strchr</span>(<span class="hljs-string">&quot;RrPpSs&quot;</span>, choice) == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid choice. Please enter &#x27;R&#x27;, &#x27;P&#x27;, or &#x27;S&#x27;: &quot;</span>);
+        choice = read_char();
+    }
+    <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;R&#x27;</span> || choice == <span class="hljs-string">&#x27;r&#x27;</span>) {
+        <span class="hljs-keyword">return</span> ROCK;   <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;P&#x27;</span> || choice == <span class="hljs-string">&#x27;p&#x27;</span>) {
+        <span class="hljs-keyword">return</span> PAPER;   <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> SCISSOR;   <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;** Rock, Paper, Scissors **\n&quot;</span>);
+    <span class="hljs-type">int</span> user_choice = read_choice();
+    <span class="hljs-keyword">if</span> (user_choice == ROCK) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose Rock.\n&quot;</span>);  <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (user_choice == PAPER) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose Paper.\n&quot;</span>);    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose Scissors.\n&quot;</span>);
+
+    <span class="hljs-type">int</span> cpu_choice = random_int(ROCK, SCISSOR);  <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    <span class="hljs-keyword">if</span> (cpu_choice == ROCK) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I chose Rock.\n&quot;</span>); <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cpu_choice == PAPER) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I chose Paper.\n&quot;</span>);   <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I chose Scissors.\n&quot;</span>);
+
+    <span class="hljs-keyword">if</span> (user_choice == cpu_choice) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;It&#x27;s a tie!\n&quot;</span>);
+
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove magic number below</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((user_choice == ROCK &amp;&amp; cpu_choice == SCISSOR) || (user_choice == PAPER &amp;&amp; cpu_choice == ROCK) || (user_choice == SCISSOR &amp;&amp; cpu_choice == PAPER)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You win!\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I win!\n&quot;</span>);
+    }
+}
+
+</code></pre>
+<h2 id="defining-structures">Defining structures</h2>
+<p>A structure is defined using the <code>struct</code> keyword, followed by the name of the structure, and a list of variables inside curly braces.
+Each variable inside the structure is called a member.</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">point</span> {</span>
+    <span class="hljs-type">int</span> x;
+    <span class="hljs-type">int</span> y;
+};
+</code></pre>
+<p>In the example above, we defined a structure called <code>point</code> that has two members: <code>x</code> and <code>y</code>.
+Note that the semicolon <code>;</code> is required at the end of the structure definition!</p>
+<p>Similar to the definition of the <code>enum</code> type in the previous activity, the code snippet above does not create any variables, but defines a new <em>type</em> called <code>struct point</code>.
+This type can be used to create variables of type <code>struct point</code>, in which we can store values for <code>x</code> and <code>y</code>:</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">point</span> <span class="hljs-title">p1</span>;</span>
+p1.x = <span class="hljs-number">10</span>;
+p1.y = <span class="hljs-number">20</span>;
+</code></pre>
+<p>The dot <code>.</code> operator is used to access the members of a structure.</p>
+<h3 id="activity-2---defining-a-structure">Activity 2 - Defining a structure</h3>
+<p>The folder <code>activity2</code> contains a program that asks the user to enter the current date (day, month, and year).
+It uses three variables to store the day, month, and year.</p>
+<p>Define a structure called <code>date</code> that has three members: <code>day</code>, <code>month</code>, and <code>year</code>.
+Remove the three variables <code>day</code>, <code>month</code>, and <code>year</code> and replace them with a single variable of type <code>struct date</code>.
+You must also change the function call to <code>compute_age</code> to pass the three members of the structure instead of the three variables.</p>
+<p>When you're done, compile and run the program to test your changes.
+Paste the contents of the modified <code>main.c</code> file below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified main.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">date</span>{</span>
+    <span class="hljs-type">int</span> day;
+    <span class="hljs-type">int</span> month;
+    <span class="hljs-type">int</span> year;
+};
+
+<span class="hljs-comment">/// @brief Computes the age of a person given their birth year, month, and day.</span>
+<span class="hljs-comment">/// @param birth_date</span>
+<span class="hljs-comment">/// @return the age in years, or -1 if the current date could not be retrieved.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">compute_age</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> date birth_date)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">date</span> <span class="hljs-title">birth_date</span>;</span>
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your birth year: &quot;</span>);
+    birth_date.year = read_int(); <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove this variable &amp; store day in a structure variable</span>
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your birth month: &quot;</span>);
+    birth_date.month = read_int(); <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove this variable &amp; store day in a structure variable</span>
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your birth day: &quot;</span>);
+    birth_date.day = read_int(); <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> remove this variable &amp; store day in a structure variable</span>
+
+    <span class="hljs-comment">// compute age and print it</span>
+    <span class="hljs-type">int</span> age = compute_age(birth_date);
+    <span class="hljs-keyword">if</span> (age == <span class="hljs-number">-1</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Failed to retrieve the current date.\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You are %d years old.\n&quot;</span>, age);
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">compute_age</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> date birth_date)</span> {
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">date</span> <span class="hljs-title">current_date</span>;</span>
+    <span class="hljs-type">int</span> current_date_array[<span class="hljs-number">3</span>];
+    <span class="hljs-keyword">if</span> (get_current_date(current_date_array)) {
+        current_date.year = current_date_array[<span class="hljs-number">0</span>];
+        current_date.month = current_date_array[<span class="hljs-number">1</span>];
+        current_date.day = current_date_array[<span class="hljs-number">2</span>];
+
+        <span class="hljs-type">int</span> age = current_date.year - birth_date.year;
+        <span class="hljs-keyword">if</span> (current_date.month &lt; birth_date.month || (current_date.month == birth_date.month &amp;&amp; current_date.day &lt; birth_date.day)) {
+            age--;
+        }
+
+        <span class="hljs-keyword">return</span> age;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+}
+
+
+</code></pre>
+<h2 id="passing-structures-to-functions">Passing structures to functions</h2>
+<p>Structures, like other variables, can be passed to functions as arguments.
+When passing a structure to a function, it is passed by value - a copy of the structure is made and passed to the function.
+This means that changes made to the structure inside the function do not affect the original structure.
+Also, copying a structure can be expensive if the structure is large.
+Instead, you can pass a pointer to the structure, which is more efficient.</p>
+<p>This means that inside the function, in order to access the members of the structure, you need to use the <code>-&gt;</code> operator instead of the <code>.</code> operator.</p>
+<h3 id="activity-3---passing-a-structure-to-a-function">Activity 3 - Passing a structure to a function</h3>
+<p>The program listed in folder <code>activity3</code> contains a structure called <code>coordinate</code> that has two members: <code>x</code> and <code>y</code>.
+The program asks the user to enter two coordinates and stores them in two variables of type <code>coordinate</code>.
+It then calls the function <code>distance</code> to compute the distance between the two coordinates.</p>
+<p>The function <code>distance</code> is not implemented yet, and simply returns 0.0 for now.
+Implement the function so that it computes the distance between the two coordinates passed to it.
+Use the formula for the Euclidean distance between two points in a two-dimensional plane:</p>
+<pre><code>distance = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+</code></pre>
+<p>Use the <code>sqrtf</code> function from the <code>math.h</code> library to compute the square root of a <code>float</code>.</p>
+<p>When you're done, compile and run the program and verify that it works correctly.
+For example, the distance between the points (0, 0) and (3, 4) should be 5.0.</p>
+<p>If your program works correctly, paste your <code>distance</code> function below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your distance function here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">coordinate</span> {</span>
+    <span class="hljs-type">float</span> x;
+    <span class="hljs-type">float</span> y;
+};
+
+<span class="hljs-comment">/// @brief Computes the distance between two coordinates.</span>
+<span class="hljs-comment">/// @param a Address of the first coordinate.</span>
+<span class="hljs-comment">/// @param b Address of the second coordinate.</span>
+<span class="hljs-comment">/// @return The (Euclidean) distance between the two coordinates.</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">distance</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *a, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *b)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first coordinate:\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; x-coordinate: &quot;</span>);
+    <span class="hljs-type">float</span> x1 = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; y-coordinate: &quot;</span>);
+    <span class="hljs-type">float</span> y1 = read_float();
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second coordinate:\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; x-coordinate: &quot;</span>);
+    <span class="hljs-type">float</span> x2 = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; y-coordinate: &quot;</span>);
+    <span class="hljs-type">float</span> y2 = read_float();
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">coordinate</span> <span class="hljs-title">a</span> =</span> {x1, y1};
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">coordinate</span> <span class="hljs-title">b</span> =</span> {x2, y2};
+
+    <span class="hljs-type">float</span> dist = distance(&amp;a, &amp;b);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The distance between (%.2f, %.2f) and (%.2f, %.2f) is %.2f.\n&quot;</span>, x1, y1, x2, y2, dist);
+}
+
+<span class="hljs-type">float</span> <span class="hljs-title function_">distance</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *a, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *b)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement this function</span>
+    <span class="hljs-type">float</span> distance = <span class="hljs-built_in">sqrt</span>((b-&gt;x - a-&gt;x) * (b-&gt;x - a-&gt;x) + (b-&gt;y - a-&gt;y) * (b-&gt;y - a-&gt;y));
+    <span class="hljs-keyword">return</span> distance;
+}
+</code></pre>
+<h3 id="activity-4---returning-structures-from-functions">Activity 4 - Returning structures from functions</h3>
+<p>The program listed in folder <code>activity4</code> contains the same structure <code>point</code> as in the previous activity.
+A difference with the previous program is that this program uses a function called <code>read_point</code> to read a point from the user.</p>
+<p>Implement the function <code>read_point</code> so that it reads a point from the user and returns it.
+Reuse your <code>distance</code> function of the previous activity to compute the distance between the two points.</p>
+<p>If your program works as expected, paste the contents of the <code>read_point</code> function below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your read_point function here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">coordinate</span> {</span>
+    <span class="hljs-type">float</span> x;
+    <span class="hljs-type">float</span> y;
+};
+
+<span class="hljs-comment">/// @brief Computes the distance between two coordinates.</span>
+<span class="hljs-comment">/// @param a Address of the first coordinate.</span>
+<span class="hljs-comment">/// @param b Address of the second coordinate.</span>
+<span class="hljs-comment">/// @return The (Euclidean) distance between the two coordinates.</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">distance</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *a, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *b)</span>;
+
+<span class="hljs-comment">/// @brief Reads a coordinate   from the user and returns it.</span>
+<span class="hljs-comment">/// @return The coordinate entered by the user.</span>
+<span class="hljs-keyword">struct</span> coordinate <span class="hljs-title function_">read_coordinate</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;    
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first coordinate:\n&quot;</span>);
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">coordinate</span> <span class="hljs-title">a</span> =</span> read_coordinate();
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second coordinate:\n&quot;</span>);
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">coordinate</span> <span class="hljs-title">b</span> =</span> read_coordinate();
+
+    <span class="hljs-type">float</span> dist = distance(&amp;a, &amp;b);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The distance between (%.2f, %.2f) and (%.2f, %.2f) is %.2f.\n&quot;</span>, a.x, a.y, b.x, b.y, dist);
+}
+
+<span class="hljs-type">float</span> <span class="hljs-title function_">distance</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *a, <span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> coordinate *b)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement this function</span>
+    <span class="hljs-type">float</span> distance = <span class="hljs-built_in">sqrt</span>((b-&gt;x - a-&gt;x) * (b-&gt;x - a-&gt;x) + (b-&gt;y - a-&gt;y) * (b-&gt;y - a-&gt;y));
+    <span class="hljs-keyword">return</span> distance;
+}
+
+<span class="hljs-keyword">struct</span> coordinate <span class="hljs-title function_">read_coordinate</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; x-coordinate: &quot;</span>);
+    <span class="hljs-type">float</span> x = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; y-coordinate: &quot;</span>);
+    <span class="hljs-type">float</span> y = read_float();
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">coordinate</span> <span class="hljs-title">result</span> =</span> {x, y};
+    <span class="hljs-keyword">return</span> result;
+}
+
+</code></pre>
+<h2 id="arrays-of-structures">Arrays of structures</h2>
+<p>Just like any other variable, structures can be stored in arrays.
+To create an array of structures, you simply add square brackets <code>[]</code> after the structure variable's name:</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">point</span> <span class="hljs-title">points</span>[10];</span>    <span class="hljs-comment">// an array of 10 points</span>
+</code></pre>
+<p>To access a member of a specific structure in the array, you need to combine the <code>[]</code> operator with the <code>.</code> operator:</p>
+<pre><code class="language-c">points[<span class="hljs-number">0</span>].x = <span class="hljs-number">10</span>;
+points[<span class="hljs-number">0</span>].y = <span class="hljs-number">20</span>;
+</code></pre>
+<h3 id="activity-5---using-arrays-of-structures">Activity 5 - Using arrays of structures</h3>
+<p>The program listed in <code>activity5/main.c</code> contains a structure called <code>colour</code> that has three members, one for each of the primary colours: <code>red</code>, <code>green</code>, and <code>blue</code>.
+The program asks the user to enter CSS colour codes (a six-digit hexadecimal number prefixed with a '#' character) for the three primary colours.
+If the user enters a colour code of '#000000', the program stops asking for more colours.</p>
+<p>Modify the program so that all the colour codes are stored in an array of <code>colour</code> structures.
+Also, modify the program so that it prints all colour codes entered by the user using the <code>print_colour</code> function.</p>
+<p>When you're done, compile and run the program to test your changes.
+If the program works correctly and prints all the colour codes entered by the user, paste the contents of the modified <code>main</code> function below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the main function of the modified main function here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colour</span> {</span>
+    <span class="hljs-type">int</span> red;
+    <span class="hljs-type">int</span> green;
+    <span class="hljs-type">int</span> blue;
+};
+
+<span class="hljs-comment">/// @brief Reads a colour from the user.</span>
+<span class="hljs-comment">/// @return The colour entered by the user.</span>
+<span class="hljs-keyword">struct</span> colour <span class="hljs-title function_">read_colour</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+
+<span class="hljs-comment">/// @brief Checks if a colour is black.</span>
+<span class="hljs-comment">/// @param c The colour to check.</span>
+<span class="hljs-comment">/// @return True if the colour is black, false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_black</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> colour *c)</span>;
+
+<span class="hljs-comment">/// @brief Prints a colour</span>
+<span class="hljs-comment">/// @param c The colour to print.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_colour</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> colour *c)</span>;
+
+<span class="hljs-comment">/// @brief Parses a CSS colour string into its components.</span>
+<span class="hljs-comment">/// @param colour </span>
+<span class="hljs-comment">/// @param x address of the red component</span>
+<span class="hljs-comment">/// @param y address of the green component</span>
+<span class="hljs-comment">/// @param z address of the blue component</span>
+<span class="hljs-comment">/// @return True if the colour was successfully parsed, false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">parse_css_colour</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *colour, <span class="hljs-type">int</span> *x, <span class="hljs-type">int</span> *y, <span class="hljs-type">int</span> *z)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">const</span> <span class="hljs-type">int</span> max_count = <span class="hljs-number">10</span>;
+
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colour</span> <span class="hljs-title">colours</span>[<span class="hljs-title">max_count</span>];</span> <span class="hljs-comment">//initialize an array to store color</span>
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter at most %d colours (#rrggbb in hex), #000000 to stop\n&quot;</span>, max_count);
+
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (count &lt; max_count) {
+        <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colour</span> <span class="hljs-title">c</span> =</span> read_colour();
+        <span class="hljs-keyword">if</span> (is_black(&amp;c)) <span class="hljs-keyword">break</span>;
+        colours[count] = c;
+        count++;
+    }
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print all colours that were entered using print_colour</span>
+    <span class="hljs-comment">//       you&#x27;ll need to store them in an array</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You&#x27;ve entered the following %d colours:\n&quot;</span>, count);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++){
+        print_colour(&amp;colours[i]); <span class="hljs-comment">//print each stored color</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">hex_to_int</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span> {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isdigit</span>(c)) <span class="hljs-keyword">return</span> c - <span class="hljs-string">&#x27;0&#x27;</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">tolower</span>(c) - <span class="hljs-string">&#x27;a&#x27;</span> + <span class="hljs-number">10</span>;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">hex_to_byte</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *hex)</span> {
+    <span class="hljs-keyword">return</span> hex_to_int(hex[<span class="hljs-number">0</span>]) * <span class="hljs-number">16</span> + hex_to_int(hex[<span class="hljs-number">1</span>]);
+}
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">parse_css_colour</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *colour, <span class="hljs-type">int</span> *x, <span class="hljs-type">int</span> *y, <span class="hljs-type">int</span> *z)</span> {
+    <span class="hljs-keyword">if</span> (colour[<span class="hljs-number">0</span>] != <span class="hljs-string">&#x27;#&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strlen</span>(colour + <span class="hljs-number">1</span>) != <span class="hljs-number">6</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">7</span>; i++) <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">isxdigit</span>(colour[i])) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    *x = hex_to_byte(colour + <span class="hljs-number">1</span>);
+    *y = hex_to_byte(colour + <span class="hljs-number">3</span>);
+    *z = hex_to_byte(colour + <span class="hljs-number">5</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-keyword">struct</span> colour <span class="hljs-title function_">read_colour</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a valid colour (e.g., #ff00ff): &quot;</span>);
+    <span class="hljs-type">char</span> colour[<span class="hljs-number">9</span>];
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">colour</span> <span class="hljs-title">result</span> =</span> {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>};
+    read_string(colour, <span class="hljs-keyword">sizeof</span>(colour));
+    <span class="hljs-keyword">if</span> (!parse_css_colour(colour, &amp;result.red, &amp;result.green, &amp;result.blue)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid input!\nEnter a valid colour (e.g., #ff00ff): &quot;</span>);
+        read_string(colour, <span class="hljs-keyword">sizeof</span>(colour));
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_black</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> colour *c)</span> {
+    <span class="hljs-keyword">return</span> c-&gt;red == <span class="hljs-number">0</span> &amp;&amp; c-&gt;green == <span class="hljs-number">0</span> &amp;&amp; c-&gt;blue == <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_colour</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> colour *c)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Colour: #%02x%02x%02x (red: %.1f%%, green: %.1f%%, blue: %.1f%%)\n&quot;</span>, c-&gt;red, c-&gt;green, c-&gt;blue, c-&gt;red / <span class="hljs-number">2.55f</span>, c-&gt;green / <span class="hljs-number">2.55f</span>, c-&gt;blue / <span class="hljs-number">2.55f</span>);
+}
+
+</code></pre>
+<h2 id="nested-structures">Nested structures</h2>
+<p>Structures can contain other structures as members, either directly or indirectly (i.e. a structure can have a member that is itself an array of other structures).
+Such structures are called nested structures.
+For example, we could have a student structure that contains a date of birth structure:</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">date</span> {</span>
+    <span class="hljs-type">int</span> day;
+    <span class="hljs-type">int</span> month;
+    <span class="hljs-type">int</span> year;
+};
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">student</span> {</span>
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span>* name;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">date</span> <span class="hljs-title">birthdate</span>;</span>
+};
+</code></pre>
+<p>To access the members of a nested structure, you use the <code>.</code> operator (or the <code>-&gt;</code> operator) multiple times.
+For example, to access the day of birth of a student, you would write:</p>
+<pre><code class="language-c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">student</span> <span class="hljs-title">s</span>;</span>
+s.birthdate.day = <span class="hljs-number">1</span>;
+</code></pre>
+<h3 id="activity-6---using-nested-structures">Activity 6 - Using nested structures</h3>
+<p>Folder <code>activity6</code> contains a program that uses a structure called <code>card</code> to represents a playing card.
+It has two members: <code>rank</code> and <code>suit</code>.
+It also has a structure called <code>deck</code> that represents a deck of cards and has an array of <code>card</code> structures, as well as a member <code>size</code> that stores the number of cards in the deck (typically 52, but can be less if cards are drawn from the deck).</p>
+<p>The program shuffles a deck of cards, and asks you to draw cards until the deck is empty.
+It (of course...) does not fully work, though: the drawing of the cards and the printing of the drawn cards is not implemented yet.</p>
+<p>Implement the functions <code>print_deck</code> and <code>draw_cards</code> so that the program works as expected.</p>
+<p>In the <code>print_deck</code> function, you should make use of the existing function <code>print_card</code> - it can be used to print a single card, which it takes as a <code>const</code> pointer argument.</p>
+<p>To test your implementation, compile and run the program.
+When you're done, paste the contents of the <code>print_deck</code> and <code>draw_cards</code> functions below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified print_deck function here</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_deck</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">deck_t</span> *deck)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print all cards in the deck using print_card</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; deck-&gt;count; i++){
+        print_card(&amp;deck-&gt;cards[i]);
+    }
+}
+    
+</code></pre>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified draw_cards function here</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">draw_cards</span><span class="hljs-params">(<span class="hljs-type">deck_t</span> *target_deck, <span class="hljs-type">deck_t</span> *source_deck, <span class="hljs-type">size_t</span> count)</span> {
+    <span class="hljs-keyword">if</span> (source_deck-&gt;count &lt; count) {
+        <span class="hljs-comment">// if the source_deck doesn&#x27;t have enough cards, draw all of them</span>
+        count = source_deck-&gt;count;
+    }
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> remove count cards from source_deck and add them to target_deck</span>
+    <span class="hljs-comment">//       make sure to update the count of both decks</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        target_deck-&gt;cards[target_deck-&gt;count] = source_deck-&gt;cards[source_deck-&gt;count - <span class="hljs-number">1</span> - i];
+        target_deck-&gt;count++;
+    }
+
+    <span class="hljs-comment">// Update source_deck count</span>
+    source_deck-&gt;count -= count;
+
+    <span class="hljs-comment">// return the number of cards actually drawn</span>
+    <span class="hljs-keyword">return</span> count;
+}
+</code></pre>
+<h3 id="activity-7---strings-in-structures">Activity 7 - Strings in structures</h3>
+<p>The program listed in <code>activity7</code> contains a structure called <code>person</code> that has two members: <code>name</code> and <code>birthdate</code>.
+The <code>name</code> member is a pointer to a string, which gives some issues.
+Run the program and enter the name(s) of one or two persons to see what these issues are.</p>
+<p>Solve the issues by changing the <code>name</code> member to an array of characters.
+This will require you to make some changes to the program in order to make it work correctly.</p>
+<p>When the program correctly prints the names for the persons that were entered, paste the contents of the modified <code>main.c</code> file below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified main.c file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span>
+    <span class="hljs-type">int</span> day;
+    <span class="hljs-type">int</span> month;
+    <span class="hljs-type">int</span> year;
+} <span class="hljs-type">date_t</span>;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span>
+    <span class="hljs-type">char</span> name[<span class="hljs-number">100</span>];         <span class="hljs-comment">// the person&#x27;s name</span>
+    <span class="hljs-type">date_t</span> birth_date;  <span class="hljs-comment">// the person&#x27;s birth date</span>
+} <span class="hljs-type">person_t</span>;
+
+<span class="hljs-comment">/// @brief Reads a person&#x27;s information from the user.</span>
+<span class="hljs-comment">/// @return The person&#x27;s information. If the name is an empty string, the function returns a person with a NULL name.</span>
+<span class="hljs-type">person_t</span> <span class="hljs-title function_">read_person</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">person_t</span> persons[<span class="hljs-number">10</span>];
+    <span class="hljs-type">const</span> <span class="hljs-type">int</span> max_persons = <span class="hljs-keyword">sizeof</span>(persons) / <span class="hljs-keyword">sizeof</span>(persons[<span class="hljs-number">0</span>]);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter at most %d persons&#x27; information.\n&quot;</span>, max_persons);
+    <span class="hljs-type">int</span> num_persons = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (num_persons &lt; max_persons) {
+        persons[num_persons] = read_person();
+        <span class="hljs-keyword">if</span> (persons[num_persons].name[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;\0&#x27;</span>) {
+            <span class="hljs-keyword">break</span>;
+        }
+
+        num_persons++;
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You&#x27;ve entered the following %d persons:\n&quot;</span>, num_persons);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; num_persons; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Person %d: %s, born on %d/%d/%d\n&quot;</span>, i + <span class="hljs-number">1</span>, persons[i].name, persons[i].birth_date.day, persons[i].birth_date.month, persons[i].birth_date.year);
+    }
+}
+
+<span class="hljs-type">person_t</span> <span class="hljs-title function_">read_person</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">person_t</span> person;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the name of the person (Empty line to abort): &quot;</span>);
+
+    read_string(person.name, <span class="hljs-keyword">sizeof</span>(person.name));
+    <span class="hljs-keyword">if</span> (person.name[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;\0&#x27;</span>) {
+        <span class="hljs-keyword">return</span> (<span class="hljs-type">person_t</span>) { .name = <span class="hljs-string">&quot;&quot;</span>, .birth_date = {<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>} }; <span class="hljs-comment">//Return an empty person</span>
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the birth date of the person:\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; Day: &quot;</span>);
+    person.birth_date.day = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; Month: &quot;</span>);
+    person.birth_date.month = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; Year: &quot;</span>);
+    person.birth_date.year = read_int();
+
+    <span class="hljs-keyword">return</span> person;
+}
+</code></pre>
+<h2 id="sign-offw3e45">Sign offw3e45</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will mark it with 0 points in Brightspace.
+If you receive 0 points, make sure to check the feedback, make the necessary changes, and resubmit the tutorial.
+Do this before the end of week 2.9, as this is the deadline for having submitted all tutorials and assignments.</p>
+
+            
+            
+        </body>
+        </html>

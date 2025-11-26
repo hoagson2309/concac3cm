@@ -1,0 +1,96 @@
+$comment
+	File created using the following command:
+		vcd file andgate.msim.vcd -direction
+$end
+$date
+	Thu Sep 05 16:39:42 2024
+$end
+$version
+	ModelSim Version 2020.1
+$end
+$timescale
+	1ps
+$end
+
+$scope module andgate_vlg_vec_tst $end
+$var reg 1 ! S0 $end
+$var reg 1 " S1 $end
+$var wire 1 # L0 $end
+
+$scope module i1 $end
+$var wire 1 $ gnd $end
+$var wire 1 % vcc $end
+$var wire 1 & unknown $end
+$var tri1 1 ' devclrn $end
+$var tri1 1 ( devpor $end
+$var tri1 1 ) devoe $end
+$var wire 1 * ~QUARTUS_CREATED_GND~I_combout $end
+$var wire 1 + ~QUARTUS_CREATED_UNVM~~busy $end
+$var wire 1 , ~QUARTUS_CREATED_ADC1~~eoc $end
+$var wire 1 - L0~output_o $end
+$var wire 1 . S1~input_o $end
+$var wire 1 / S0~input_o $end
+$var wire 1 0 inst~combout $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0!
+0"
+0#
+0$
+1%
+x&
+1'
+1(
+1)
+0*
+z+
+z,
+0-
+0.
+0/
+00
+$end
+#60000
+1!
+1/
+#160000
+1"
+1.
+10
+1-
+1#
+#280000
+0!
+0/
+00
+0-
+0#
+#400000
+0"
+1!
+1/
+0.
+#560000
+1"
+1.
+10
+1-
+1#
+#640000
+0!
+0/
+00
+0-
+0#
+#820000
+0"
+1!
+1/
+0.
+#900000
+0!
+0/
+#1000000

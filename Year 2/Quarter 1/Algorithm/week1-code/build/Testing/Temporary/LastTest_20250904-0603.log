@@ -1,0 +1,18 @@
+Start testing: Sep 04 15:23 CEST
+----------------------------------------------------------
+7/8 Testing: subtract_sets_test
+7/8 Test: subtract_sets_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week1-code/scripts/test_target.py" "subtract_sets" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week1-code/subtract_sets/tests/subtract_sets_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week1-code/build/subtract_sets
+"subtract_sets_test" start time: Sep 04 15:23 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.16 sec
+----------------------------------------------------------
+Test Passed.
+"subtract_sets_test" end time: Sep 04 15:23 CEST
+"subtract_sets_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 04 15:23 CEST

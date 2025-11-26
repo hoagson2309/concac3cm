@@ -1,0 +1,5 @@
+Hello, world!
+This is a test.
+Encrypting this file twice should produce the original file.
+Only letters must be encrypted, not numbers like 42, or special characters like !@#$%^&*().
+I hope this works!

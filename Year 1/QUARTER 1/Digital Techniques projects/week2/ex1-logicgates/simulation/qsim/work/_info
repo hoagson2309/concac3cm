@@ -1,0 +1,80 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dE:/Digital Techniques projects/week2/simulation/qsim
+vhard_block
+Z1 !s110 1726166839
+!i10b 1
+!s100 RK^QXXm84Q7ORC>R:WEhm2
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IgR^NnB43Ul?76Y;5U;;3Y3
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z4 w1726166837
+Z5 8logicgates.vo
+Z6 Flogicgates.vo
+!i122 0
+L0 356 45
+Z7 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z8 !s108 1726166838.000000
+Z9 !s107 logicgates.vo|
+Z10 !s90 -work|work|logicgates.vo|
+!i113 1
+Z11 o-work work
+Z12 tCvgOpt 0
+vlogicgates
+R1
+!i10b 1
+!s100 hJhek8znBc;l4HF:XaHh[0
+R2
+IWS6ELX[d>O9L5i`2I;nCn3
+R3
+R0
+R4
+R5
+R6
+!i122 0
+L0 32 323
+R7
+r1
+!s85 0
+31
+R8
+R9
+R10
+!i113 1
+R11
+R12
+vlogicgates_vlg_vec_tst
+R1
+!i10b 1
+!s100 H:zi?2BFLnS3>8SXXfi7c0
+R2
+IjFCRUl^8I_b[OAa=VdTPC2
+R3
+R0
+w1726166836
+8Waveform2.vwf.vt
+FWaveform2.vwf.vt
+!i122 1
+L0 30 53
+R7
+r1
+!s85 0
+31
+!s108 1726166839.000000
+!s107 Waveform2.vwf.vt|
+!s90 -work|work|Waveform2.vwf.vt|
+!i113 1
+R11
+R12

@@ -1,0 +1,7 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm/CMakeFiles/pioasm.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm/CMakeFiles/list_install_components.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm/CMakeFiles/install.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm/CMakeFiles/install/local.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/embbeded software/week3_session2/week3_session2/project-template/build/pioasm/CMakeFiles/install/strip.dir

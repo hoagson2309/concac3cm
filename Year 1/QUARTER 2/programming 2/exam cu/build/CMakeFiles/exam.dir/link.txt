@@ -1,0 +1,2 @@
+/usr/bin/ar qc libexam.a CMakeFiles/exam.dir/exam.c.o
+/usr/bin/ranlib libexam.a

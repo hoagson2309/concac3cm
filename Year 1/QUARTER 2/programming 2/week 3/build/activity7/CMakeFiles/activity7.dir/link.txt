@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity7.dir/main.c.o -o activity7  ../functions/libfunctions.a 

@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/build",
+  "command": "/usr/bin/g++ -Dcxx_std_23 -I\"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/libptr/include\" -g -std=gnu++23 -Wall -Wextra -pedantic -Wshadow -o CMakeFiles/assignment_01.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/main.cpp",
+  "output": "/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/build/CMakeFiles/assignment_01.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/build",
+  "command": "/usr/bin/g++ -DENABLE_ASSERTIONS=1 -DENABLE_DEBUG=1 -DENABLE_GRADING=1 -I\"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/tests/include\" -I\"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/tests/../include\" -I\"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/libptr/include\" -g -std=gnu++23 -Wall -Wextra -pedantic -Wshadow -Wconversion -fsanitize=undefined,address -fno-omit-frame-pointer -O0 -o tests/CMakeFiles/tests_unique.dir/test_unique.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/tests/test_unique.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/tests/test_unique.cpp",
+  "output": "/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/build/tests/CMakeFiles/tests_unique.dir/test_unique.cpp.o"
+}
+]

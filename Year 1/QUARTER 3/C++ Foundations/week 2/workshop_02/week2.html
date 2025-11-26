@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 2 - C&plus;&plus;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-2---c">Week 2 - C++</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 10/2/2025</p>
+<h1 id="workshops">WORKSHOPS</h1>
+<pre><code class="language-cpp"><span class="hljs-comment">//DICTIONARY.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> DICTIONARY_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> DICTIONARY_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;array&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">KeyValue</span> {
+    std::string key;
+    std::string value;
+};
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Dictionary</span> {
+    <span class="hljs-type">static</span> <span class="hljs-keyword">constexpr</span> <span class="hljs-type">int</span> capacity_ = <span class="hljs-number">100</span>;
+    std::array&lt;KeyValue, capacity_&gt; pairs_;
+    <span class="hljs-type">int</span> size_ = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; key, <span class="hljs-type">const</span> std::string&amp; value)</span></span>;
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">contains</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; key)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">std::string <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; key)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">std::string <span class="hljs-title">key</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> <span class="hljs-type">const</span></span>;
+};
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// DICTIONARY_H</span></span>
+
+<span class="hljs-comment">//DICTIONARY.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;dictionary.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Dictionary::add</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; key, <span class="hljs-type">const</span> std::string&amp; value)</span> </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">contains</span>(key)) <span class="hljs-keyword">return</span>;
+    <span class="hljs-keyword">if</span> (size_ &lt; capacity_) {
+        pairs_[size_].key = key;
+        pairs_[size_].value = value;
+        ++size_;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Dictionary::contains</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; key)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size_; ++i) {
+        <span class="hljs-keyword">if</span> (pairs_[i].key == key) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-function">std::string <span class="hljs-title">Dictionary::get</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; key)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size_; ++i) {
+        <span class="hljs-keyword">if</span> (pairs_[i].key == key) <span class="hljs-keyword">return</span> pairs_[i].value;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Dictionary::size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> size_;
+}
+
+<span class="hljs-function">std::string <span class="hljs-title">Dictionary::key</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-number">0</span> &amp;&amp; index &lt; size_) {
+        <span class="hljs-keyword">return</span> pairs_[index].key;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
+}
+
+<span class="hljs-comment">//TEXTREDACTOR.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> TEXT_REDACTOR_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> TEXT_REDACTOR_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;dictionary.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">TextRedactor</span> {
+    Dictionary replacements_;
+
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">read_replacements</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; file_name)</span></span>;
+    <span class="hljs-function">std::string <span class="hljs-title">redact_dates</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">std::string <span class="hljs-title">redact_numbers</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">std::string <span class="hljs-title">redact_replacements</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">std::string <span class="hljs-title">redact</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span></span>;
+};
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// TEXT_REDACTOR_H</span></span>
+
+<span class="hljs-comment">//TEXTREDACTOR.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;textredactor.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fstream&gt;</span> <span class="hljs-comment">// provides file input/output functionality (e.g., reading from and writing to files).</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sstream&gt;</span> <span class="hljs-comment">//allows string stream operations, useful for reading and manipulating strings.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cctype&gt;</span> <span class="hljs-comment">//provides functions for character classification (e.g., isdigit to check if a character is a digit).</span></span>
+
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">TextRedactor::read_replacements</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; file_name)</span> </span>{
+    <span class="hljs-function">std::ifstream <span class="hljs-title">file</span><span class="hljs-params">(file_name)</span></span>;
+    <span class="hljs-keyword">if</span> (!file) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+
+    std::string line;
+    <span class="hljs-keyword">while</span> (std::<span class="hljs-built_in">getline</span>(file, line)) {
+        <span class="hljs-type">size_t</span> delimiter_pos = line.<span class="hljs-built_in">find</span>(<span class="hljs-string">&#x27;|&#x27;</span>);
+        <span class="hljs-keyword">if</span> (delimiter_pos != std::string::npos) {
+            std::string original = line.<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, delimiter_pos);
+            std::string replacement = line.<span class="hljs-built_in">substr</span>(delimiter_pos + <span class="hljs-number">1</span>);
+            <span class="hljs-comment">//trim whitespace</span>
+            original.<span class="hljs-built_in">erase</span>(<span class="hljs-number">0</span>, original.<span class="hljs-built_in">find_first_not_of</span>(<span class="hljs-string">&#x27; &#x27;</span>));
+            original.<span class="hljs-built_in">erase</span>(original.<span class="hljs-built_in">find_last_not_of</span>(<span class="hljs-string">&#x27; &#x27;</span>) + <span class="hljs-number">1</span>);
+            replacement.<span class="hljs-built_in">erase</span>(<span class="hljs-number">0</span>, replacement.<span class="hljs-built_in">find_first_not_of</span>(<span class="hljs-string">&#x27; &#x27;</span>));
+            replacement.<span class="hljs-built_in">erase</span>(replacement.<span class="hljs-built_in">find_last_not_of</span>(<span class="hljs-string">&#x27; &#x27;</span>) + <span class="hljs-number">1</span>);
+            replacements_.<span class="hljs-built_in">add</span>(original, replacement);
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-function">std::string <span class="hljs-title">TextRedactor::redact_dates</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-comment">//implement date redaction logic </span>
+    <span class="hljs-keyword">return</span> text;
+}
+
+<span class="hljs-function">std::string <span class="hljs-title">TextRedactor::redact_numbers</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span> </span>{
+    std::string result = text;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">size</span>(); ++i) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isdigit</span>(result[i])) {
+            <span class="hljs-type">size_t</span> start = i;
+            <span class="hljs-keyword">while</span> (i &lt; result.<span class="hljs-built_in">size</span>() &amp;&amp; <span class="hljs-built_in">isdigit</span>(result[i])) ++i;
+            result.<span class="hljs-built_in">replace</span>(start, i - start, <span class="hljs-string">&quot;XXX&quot;</span>);
+            i = start + <span class="hljs-number">2</span>; <span class="hljs-comment">//adjust index after replacement (Since &quot;XXX&quot; is 3 characters long, the new index should be start + 3 - 1 = start + 2 (because the loop increments i at the end of each iteration))</span>
+        }
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+
+<span class="hljs-function">std::string <span class="hljs-title">TextRedactor::redact_replacements</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span> </span>{
+    std::string result = text;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; replacements_.<span class="hljs-built_in">size</span>(); ++i) {
+        std::string key = replacements_.<span class="hljs-built_in">key</span>(i);
+        std::string value = replacements_.<span class="hljs-built_in">get</span>(key);
+        <span class="hljs-type">size_t</span> pos = result.<span class="hljs-built_in">find</span>(key);
+        <span class="hljs-keyword">while</span> (pos != std::string::npos) {
+            result.<span class="hljs-built_in">replace</span>(pos, key.<span class="hljs-built_in">length</span>(), value);
+            pos = result.<span class="hljs-built_in">find</span>(key, pos + value.<span class="hljs-built_in">length</span>()); <span class="hljs-comment">//searches for the next occurrence of key starting from the position immediately after the last replacement (pos + value.length()).</span>
+        }                                                 <span class="hljs-comment">//(EXAMPLE) result = &quot;The kissa and the dog are friends.&quot; =&gt; Find the next occurrence of &quot;cat&quot; starting from 4 + 5 = 9 (length of &quot;kissa&quot; is 5) </span>
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+
+<span class="hljs-function">std::string <span class="hljs-title">TextRedactor::redact</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span> </span>{
+    std::string result = text;
+    result = <span class="hljs-built_in">redact_replacements</span>(result);
+    result = <span class="hljs-built_in">redact_dates</span>(result);
+    result = <span class="hljs-built_in">redact_numbers</span>(result);
+    <span class="hljs-keyword">return</span> result;
+}
+
+<span class="hljs-comment">//MAIN.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iomanip&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fstream&gt;</span> </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sstream&gt;</span> </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;textredactor.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span></span>{
+    <span class="hljs-keyword">if</span> (argc != <span class="hljs-number">3</span>){
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Usage: &quot;</span> &lt;&lt; argv[<span class="hljs-number">0</span>] &lt;&lt; <span class="hljs-string">&quot; &lt;input file&gt; &lt;replacements file&gt;\n&quot;</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    TextRedactor tr;
+    <span class="hljs-keyword">if</span>(!tr.<span class="hljs-built_in">read_replacements</span>(argv[<span class="hljs-number">2</span>])){
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Error reading replacements from &quot;</span> &lt;&lt; argv[<span class="hljs-number">2</span>] &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-function">std::ifstream <span class="hljs-title">input_file</span><span class="hljs-params">(argv[<span class="hljs-number">1</span>])</span></span>;
+    <span class="hljs-keyword">if</span>(!input_file){
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Error opening input file &quot;</span> &lt;&lt; argv[<span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    std::stringstream buffer;
+    buffer &lt;&lt; input_file.<span class="hljs-built_in">rdbuf</span>();
+    std::string redacted_text = tr.<span class="hljs-built_in">redact</span>(buffer.<span class="hljs-built_in">str</span>());
+
+    std::string output_file_name = std::<span class="hljs-built_in">string</span>(argv[<span class="hljs-number">1</span>]) + <span class="hljs-string">&quot;.redacted&quot;</span>;
+    <span class="hljs-function">std::ofstream  <span class="hljs-title">output_file</span><span class="hljs-params">(output_file_name)</span></span>;
+    <span class="hljs-keyword">if</span>(!output_file){
+        std::cerr &lt;&lt; <span class="hljs-string">&quot;Error creating output file &quot;</span> &lt;&lt; output_file_name &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    output_file &lt;&lt; redacted_text;
+    std::cout &lt;&lt; <span class="hljs-string">&quot;Redacted text saved to &quot;</span> &lt;&lt; output_file_name &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+            
+            
+        </body>
+        </html>

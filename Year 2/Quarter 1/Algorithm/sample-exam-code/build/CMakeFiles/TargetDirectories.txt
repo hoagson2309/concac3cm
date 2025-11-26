@@ -1,0 +1,14 @@
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/CMakeFiles/edit_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment1/CMakeFiles/assignment1.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment1/CMakeFiles/edit_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment1/CMakeFiles/rebuild_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment2/CMakeFiles/assignment2.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment2/CMakeFiles/edit_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment2/CMakeFiles/rebuild_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment3/CMakeFiles/assignment3.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment3/CMakeFiles/edit_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment3/CMakeFiles/rebuild_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment4/CMakeFiles/assignment4.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment4/CMakeFiles/edit_cache.dir
+/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment4/CMakeFiles/rebuild_cache.dir

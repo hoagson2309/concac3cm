@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 5 - Tutorial 1&colon; Using arrays</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-5---tutorial-1-using-arrays">Week 5 - Tutorial 1: Using arrays</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 30/09/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>Arrays are a fundamental concept in programming, and are used to store multiple values of the same type in a single variable.
+In this tutorial, you will learn how to use arrays to store values entered by the user, and how to use loops to iterate over the elements in an array.
+You will also learn how to print the contents of an array on a single line, and how to filter the elements in an array based on some condition.</p>
+<h3 id="activity-0---update-the-system">Activity 0 - Update the system</h3>
+<p>Before you start with this tutorial, make sure your system is up-to-date by running the following commands in the terminal:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+</code></pre>
+<h3 id="activity-1---open-the-workspace-of-this-week">Activity 1 - Open the workspace of this week</h3>
+<p>Open the workspace of this weeek by opening the <code>week5.code-workspace</code> file in VS Code.
+In this tutorial, you'll be working in the <code>tutorial1</code> folder.</p>
+<p>Alternatively, you can open the workspace from a WSL terminal by typing the <code>code week5.code-workspace</code> command from the root folder of the workspace.</p>
+<h2 id="storing-values-in-an-array">Storing values in an array</h2>
+<p>The following program asks the user to enter 10 numbers, and stores all these numbers in 10 separate variables.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number1 = read_int();
+    <span class="hljs-type">int</span> number2 = read_int();
+    <span class="hljs-type">int</span> number3 = read_int();
+    <span class="hljs-type">int</span> number4 = read_int();
+    <span class="hljs-type">int</span> number5 = read_int();
+    <span class="hljs-type">int</span> number6 = read_int();
+    <span class="hljs-type">int</span> number7 = read_int();
+    <span class="hljs-type">int</span> number8 = read_int();
+    <span class="hljs-type">int</span> number9 = read_int();
+    <span class="hljs-type">int</span> number10 = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the numbers %d, %d, %d, %d, %d, %d, %d, %d, %d, and %d\n&quot;</span>, number1, number2, number3, number4, number5, number6, number7, number8, number9, number10);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-2---replacing-variables-with-an-array">Activity 2 - Replacing variables with an array</h3>
+<p>Open the file <code>activity2.c</code> that is in the folder for this tutorial, and copy the program listed above into the file.
+Next, modify the program so that the code uses an array that can store 10 integers, instead of 10 separate variables.
+The program should still ask the user to enter 10 numbers, and store these numbers in the array.
+Finally, the program should print out all the numbers (print each number on a separate line) that the user entered, using a loop to iterate over the array.</p>
+<p>Paste the contents of <code>activity2.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number[<span class="hljs-number">10</span>];
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
+        number[i] = read_int();
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the numbers: %d\n&quot;</span>, number[i]);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="using-only-part-of-an-array">Using only part of an array</h2>
+<p>Oftentimes, you may want to use only part of an array, for example, if you have an array of 10 numbers, but only 5 of them have been filled in.
+This could happen if you ask the user to enter a number of values, but the user enters fewer values than you asked for.
+In such cases, you may want to keep track of both the size of the array and <em>how many</em> values have been entered into the array.</p>
+<p>The following program generates random numbers and stores them in an array of size 100, but stops when a number less than 5 is generated, printing out only the numbers that were generated.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for random_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> numbers[<span class="hljs-number">100</span>];   <span class="hljs-comment">// array to store the numbers</span>
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;      <span class="hljs-comment">// how many numbers were stored</span>
+    <span class="hljs-type">int</span> number = random_int(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>);
+
+    <span class="hljs-keyword">while</span> (number &gt;= <span class="hljs-number">5</span> &amp;&amp; count &lt; <span class="hljs-number">100</span>) {
+        numbers[count] = number;
+        count++;
+        number = random_int(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d numbers were generated:\n&quot;</span>, count);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Number %d: %d\n&quot;</span>, i + <span class="hljs-number">1</span>, numbers[i]);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Note that when the loop stops, the <code>count</code> variable contains the number of values that were stored in the array.
+While the loop is running, the <code>count</code> variable is used to keep track of the next index in the array where a value should be stored.
+In fact, the number of values stored in an array is also the index of the next value that should be stored.</p>
+<h3 id="activity-3---storing-values-until-a-user-enters-a-specific-value">Activity 3 - Storing values until a user enters a specific value</h3>
+<p>Open the file <code>activity3.c</code>, and copy the contents of <code>activity2.c</code> into the file.
+Next, modify the program so that it stops asking the user for numbers when the user enters a number that is negative or zero (so that only numbers greater than zero are stored).
+Finally, the program should print out only the numbers that the user entered, using a loop to iterate over the array.</p>
+<p>Example output of the program:</p>
+<pre><code class="language-bash">Enter a number: 5
+Enter a number: 10
+Enter a number: 0
+You entered the following values:
+5
+10
+</code></pre>
+<p>Paste the contents of <code>activity3.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number[<span class="hljs-number">100</span>];
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+    <span class="hljs-type">int</span> numberss = read_int();
+    <span class="hljs-keyword">while</span> (numberss &gt; <span class="hljs-number">0</span>) {
+        number[count] = numberss;
+        count++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+        numberss = read_int();
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++){
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the numbers: %d\n&quot;</span>, number[i]);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="printing-the-contents-of-an-array-on-a-single-line">Printing the contents of an array on a single line</h2>
+<p>When you print the contents of an array, you may want to print all the values on a single line, separated by a comma and a space.
+The tricky part here is that you don't want to print the separator after the last value in the array, or before the first value in the array.
+When using a loop to print the contents of the array, this means that you have to check whether you are printing the first / last value, or any other value in the array.</p>
+<p>There are various ways to do this, but one way is to print the first value before the loop, and then print the separator and the next value for all values except the first one.
+Finally, print the last value after the loop.</p>
+<p>Here is an example code snippet that prints the contents of an array on a single line:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> numbers[<span class="hljs-number">10</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>};
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, numbers[<span class="hljs-number">0</span>]);
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, %d&quot;</span>, numbers[i]);
+}
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+</code></pre>
+<h3 id="activity-4---printing-the-users-input-on-a-single-line">Activity 4 - Printing the user's input on a single line</h3>
+<p>Open the file <code>activity4.c</code>, and copy the contents of <code>activity3.c</code> into the file.
+Next, modify program so that it prints all the numbers that the user entered on a single line, separated by a comma and a space.
+Finally, the program should print a newline character after printing all the numbers.</p>
+<p>Make sure that your program also works correctly if the user did not enter any numbers (i.e., if the user entered a negative number or zero as the first number)!</p>
+<p>Paste the contents of <code>activity4.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number[<span class="hljs-number">100</span>];
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+    <span class="hljs-type">int</span> numberss = read_int();
+    <span class="hljs-keyword">while</span> (numberss &gt; <span class="hljs-number">0</span>) {
+        number[count] = numberss;
+        count++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+        numberss = read_int();
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, number[<span class="hljs-number">0</span>]);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; count; i++){
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, %d&quot;</span>, number[i]);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;.\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<p>When printing all elements of an array on a single line like you did in the previous activity, you use the fact that the first element to be printed is the one at index 0.
+But what if you only want to print some of the elements in the array, for example, only the numbers that are greater than 5?
+In that case you don't know in advance which element will be the first one to be printed, so you need to check whether you are printing the first element in the array or not.
+A common way to do this is to use an <code>if</code> statement to check whether you are printing the first element, and only print the separator if you are not printing the first element, like this:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> numbers[<span class="hljs-number">10</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>};
+<span class="hljs-type">bool</span> printed_first = <span class="hljs-literal">false</span>; <span class="hljs-comment">// whether the first number has been printed</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) {
+    <span class="hljs-keyword">if</span> (numbers[i] &gt; <span class="hljs-number">5</span>) {
+        <span class="hljs-keyword">if</span> (printed_first) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, &quot;</span>);    <span class="hljs-comment">// print separator if not the first number</span>
+        printed_first = <span class="hljs-literal">true</span>;               <span class="hljs-comment">// the first number has been printed</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, numbers[i]);
+    }
+}
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+</code></pre>
+<h3 id="activity-5---filtering-elements">Activity 5 - Filtering elements</h3>
+<p>Open the file <code>activity5.c</code>, and copy the contents of <code>activity4.c</code> into the file.
+Modify the program so that it prints only the numbers that are greater than 5.
+The numbers should still be printed on a single line, separated by a comma and a space, and a newline character should be printed after all the numbers.</p>
+<p>Paste the contents of <code>activity5.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number[<span class="hljs-number">100</span>];
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-type">bool</span> printed_first = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+    <span class="hljs-type">int</span> numberss = read_int();
+    <span class="hljs-keyword">while</span> (numberss &gt; <span class="hljs-number">0</span>) {
+        number[count] = numberss;
+        count++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+        numberss = read_int();
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the following values: &quot;</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        <span class="hljs-keyword">if</span> (number[i] &gt; <span class="hljs-number">5</span>) {
+        <span class="hljs-keyword">if</span> (printed_first) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, &quot;</span>);    <span class="hljs-comment">// print separator if not the first number</span>
+        printed_first = <span class="hljs-literal">true</span>;               <span class="hljs-comment">// the first number has been printed</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, number[i]);
+        }
+    }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;.\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="magic-numbers">Magic numbers</h2>
+<p>A <em>magic number</em> is a number that appears in a program without any explanation of what it represents.
+Magic numbers could refer to all kinds of things, such as the number of elements in an array, the maximum value that a user can enter, or the number of times a loop should run.
+Magic numbers make your code harder to read and understand, and should be avoided.</p>
+<p>In case you need to refer to the size of an array, you should use the <code>sizeof</code> operator to get the size of the array (see the slides of this week).</p>
+<h3 id="activity-6---no-magic-numbers">Activity 6 - No magic numbers</h3>
+<p>Open the file <code>activity6.c</code>, and copy the contents of <code>activity5.c</code> into the file.
+Modify the program so that it uses the <code>sizeof</code> operator to get the size (number of elements) of the array, instead of using a magic number.
+Make sure that the program still works correctly after this change.</p>
+<p>Paste the contents of <code>activity6.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number[<span class="hljs-number">10</span>];
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-type">bool</span> printed_first = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">int</span> numberss;
+    <span class="hljs-type">int</span> Num = <span class="hljs-keyword">sizeof</span>(number) / <span class="hljs-keyword">sizeof</span>(number[<span class="hljs-number">0</span>]);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+    numberss = read_int();
+    <span class="hljs-keyword">while</span> (numberss &gt; <span class="hljs-number">0</span> &amp;&amp; count &lt; Num) {
+        number[count] = numberss;
+        count++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the numbers: &quot;</span>);
+        numberss = read_int();
+    }
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the following values: &quot;</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        <span class="hljs-keyword">if</span> (number[i] &gt; <span class="hljs-number">5</span>) {
+        <span class="hljs-keyword">if</span> (printed_first) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, &quot;</span>);    <span class="hljs-comment">// print separator if not the first number</span>
+        printed_first = <span class="hljs-literal">true</span>;               <span class="hljs-comment">// the first number has been printed</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, number[i]);
+        }
+    }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;.\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

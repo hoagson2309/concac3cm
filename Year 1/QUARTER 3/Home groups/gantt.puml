@@ -1,0 +1,32 @@
+@startgantt
+printscale weekly with calendar date zoom 2
+skinparam dpi 75
+saturday are closed
+sunday are closed
+Project starts the 1st of march 2025
+
+[Project Initiation] as [PI] requires 4 days
+[Research] as [R] requires 14 days and starts at [PI]'s end
+[System Design] as [SD] requires 21 days and starts at [R]'s end
+[Software Development] as [SW] requires 45 days and starts at [SD]'s end
+[Dataset Development] as [DD] requires 42 days and starts at [R]'s end
+[Testing] as [T] requires 35 days and starts at [SW]'s end
+[Testing] starts at [DD]'s end
+[Deployment] as [D] requires 17 days and starts at [T]'s end
+[Documentation] as [DOC] requires 22 days and starts at [SW]'s end
+
+[PI] is colored in LightBlue
+[R] is colored in LightGreen
+[SD] is colored in LightSalmon
+[SW] is colored in Orchid
+[DD] is colored in LightCoral
+[T] is colored in Gold
+[D] is colored in LightSteelBlue
+[DOC] is colored in PaleGreen
+
+[Requirements Finalized] happens at [R]'s end
+[Design Approved] happens at [SD]'s end
+[First Detection] happens at [SW]'s end
+[Testing Complete] happens at [T]'s end
+[Deployed] happens at [D]'s end
+@endgantt

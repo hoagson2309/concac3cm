@@ -1,0 +1,3 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 7/workshops_07/build/CMakeFiles/rational_demo.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 7/workshops_07/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 7/workshops_07/build/CMakeFiles/rebuild_cache.dir

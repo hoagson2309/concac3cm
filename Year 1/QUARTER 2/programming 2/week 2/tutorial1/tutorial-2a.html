@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 2 - Tutorial 1&colon; Make</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-2---tutorial-1-make">Week 2 - Tutorial 1: Make</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 20/11/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>As your programs grow in size and complexity, it becomes increasingly difficult to manage the build process manually. In this tutorial, you will learn how to use Make and CMake to automate the build process for your programs.
+Make is a build automation tool that uses a Makefile to specify how to build a program. CMake is a more modern build automation tool that generates Makefiles or project files for other build tools. Both tools are widely used in industry and are essential for managing large software projects.</p>
+<h3 id="activity-1---using-a-makefile">Activity 1 - Using a Makefile</h3>
+<p>The folder <code>activity1</code> contains a simple C program that prints &quot;Hello, World!&quot; to the console.
+A <code>Makefile</code> that compiles the program and produces an executable called <code>hello</code> is provided.
+The Makefile consists of multiple targets. Each target specifies how to produce a file from other files.
+When running <code>make</code>, the first target in the Makefile is executed.
+In this case, this means that the executable <code>hello</code> is built, which cascades into building the other files as needed.</p>
+<p>Change the program (i.e. <code>main.c</code>) so that it asks the user for their name (using the <code>read_string</code> function from <code>functions.h</code>) and prints &quot;Hello, <name>!&quot; to the console (with <code>&lt;name&gt;</code> replaced by the name entered by the user).</p>
+<p>Update the <code>Makefile</code> so that it correctly builds the modified program.
+This means you'll need to include the <code>functions.c</code> file into the build process.
+You must apply the same steps (compilation, assembly, and linking) to the <code>functions.c</code> file as you did with the <code>main.c</code> file.</p>
+<p>Test whether the <code>Makefile</code> works correctly by running <code>make</code> from the terminal.
+If it correctly creates the <code>hello</code>  program, include the modified Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+
+<span class="hljs-comment"># the program to be built (hello) is composed of main.o and functions.o</span>
+<span class="hljs-section">hello: main.o functions.o</span>
+	@echo <span class="hljs-string">&quot;Linking main.o functions.o into hello&quot;</span>
+	gcc -o hello main.o functions.o
+
+<span class="hljs-comment"># main.o is built from main.s</span>
+<span class="hljs-section">main.o: main.s</span>
+	@echo <span class="hljs-string">&quot;Assembling main.o from main.s&quot;</span>
+	gcc -c main.s
+<span class="hljs-comment"># functions.o is built from functions.s</span>
+<span class="hljs-section">functions.o: functions.s</span>
+	@echo <span class="hljs-string">&quot;Assembling functions.o from functions.s&quot;</span>
+	gcc -c functions.s
+<span class="hljs-comment"># main.c is complied into main.s</span>
+<span class="hljs-section">main.s: main.c</span>
+	@echo <span class="hljs-string">&quot;Compiling main.c into main.s&quot;</span>
+	gcc -S main.c
+<span class="hljs-comment"># functions.c is complied into functions.s</span>
+<span class="hljs-section">functions.s: functions.c</span>
+	@echo <span class="hljs-string">&quot;Compiling functions.c into functions.s&quot;</span>
+	gcc -S functions.c
+
+</code></pre>
+<h3 id="activity-2---writing-a-makefile-from-scratch">Activity 2 - Writing a makefile from scratch</h3>
+<p>The folder <code>calculator</code> contains a simple calculator program that can perform basic arithmetic operations.
+Write a Makefile from scratch that compiles the program and produces an executable called <code>calculator</code>.
+Use the Makefile from the previous activity as a reference.</p>
+<p>When you're done, include the Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> enter contents here so that calculator is built from main.c and functions.c</span>
+<span class="hljs-comment">#       using a separate compilation step from source to object files</span>
+
+<span class="hljs-comment"># the program to be built (calculator) is composed of main.o and functions.o</span>
+<span class="hljs-section">calculator: main.o functions.o </span>
+	@echo <span class="hljs-string">&quot;linking main.o functions.o into calculator&quot;</span>
+	gcc -o calculator main.o functions.o 
+
+<span class="hljs-comment"># main.o is built from main.s</span>
+<span class="hljs-section">main.o: main.s </span>
+	@echo <span class="hljs-string">&quot;Assembling main.o from main.s&quot;</span>
+	gcc -c main.s
+
+<span class="hljs-comment"># functions.o is built from functions.s</span>
+<span class="hljs-section">functions.o: functions.s </span>
+	@echo <span class="hljs-string">&quot;Assembling functions.o from functions.s&quot;</span>
+	gcc -c functions.s
+
+<span class="hljs-comment"># main.c is compiled into main.s</span>
+<span class="hljs-section">main.s: main.c</span>
+	@echo <span class="hljs-string">&quot;Compiling main.c into main.s&quot;</span>
+	gcc -S main.c 
+<span class="hljs-section">functions.s: functions.c</span>
+<span class="hljs-comment"># functions.c is compile into functions.s</span>
+	@echo <span class="hljs-string">&quot;compiling functions.c into functions.s&quot;</span>
+	gcc -S functions.c
+</code></pre>
+<h2 id="variables-in-makefiles">Variables in Makefiles</h2>
+<p>Makefiles can contain variables that can be used to store values that are used multiple times in the Makefile.
+Variables can be defined at the beginning of the Makefile and referenced later in the file.
+This makes it easier to change values in the Makefile without having to search for them throughout the file.</p>
+<p>There are a few predefined variables in Makefiles that are commonly used:</p>
+<ul>
+<li><code>CC</code>: The C compiler to use.</li>
+<li><code>CFLAGS</code>: Flags to pass to the C compiler, for example to enable warnings or optimizations.</li>
+<li><code>CPPFLAGS</code>: Flags to pass to the C preprocessor, for example to define macros.</li>
+<li><code>LDFLAGS</code>: Flags to pass to the linker, for example to link against certain libraries.</li>
+</ul>
+<p>You can redefine these variables or define new variables as needed in the Makefile.
+This is done by using the assignment operator (<code>=</code>) to assign a value to a variable.</p>
+<p>To reference a variable, you use the syntax <code>$(VAR)</code>, where <code>VAR</code> is the name of the variable.</p>
+<h3 id="activity-3---using-variables">Activity 3 - Using variables</h3>
+<p>Modify the Makefile from the previous activity to use <strong>variables</strong> for the compiler and compiler flags, so that you can easily change them in one place.
+Refer to the slides or the theory document for information on how to define and use variables in a Makefile.
+Make sure to use the correct variables for the compiler, compiler flags.
+These are <code>CC</code> for the C compiler, <code>CFLAGS</code> for the compiler flags, and <code>CPPFLAGS</code> for the preprocessor flags.</p>
+<p>When you're done, include the modified Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> enter contents here so that calculator is built from main.c and functions.c</span>
+<span class="hljs-comment">#       using a separate compilation step from source to object files</span>
+
+CC = gcc;
+CFLAGS = -Wall;
+CPPFLAGS = -I; 
+
+<span class="hljs-comment"># the program to be built (calculator) is composed of main.o and functions.o</span>
+<span class="hljs-section">calculator: main.o functions.o </span>
+	@echo <span class="hljs-string">&quot;linking main.o functions.o into calculator&quot;</span>
+	<span class="hljs-variable">$(CC)</span> -o calculator main.o functions.o 
+
+<span class="hljs-comment"># main.o is built from main.s</span>
+<span class="hljs-section">main.o: main.s </span>
+	@echo <span class="hljs-string">&quot;Assembling main.o from main.s&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(CPPFLAGS)</span> -c main.s
+
+<span class="hljs-comment"># functions.o is built from functions.s</span>
+<span class="hljs-section">functions.o: functions.s </span>
+	@echo <span class="hljs-string">&quot;Assembling functions.o from functions.s&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(CPPFLAGS)</span> -c functions.s
+
+<span class="hljs-comment"># main.c is compiled into main.s</span>
+<span class="hljs-section">main.s: main.c</span>
+	@echo <span class="hljs-string">&quot;Compiling main.c into main.s&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(CPPFLAGS)</span> -S main.c 
+<span class="hljs-section">functions.s: functions.c</span>
+<span class="hljs-comment"># functions.c is compile into functions.s</span>
+	@echo <span class="hljs-string">&quot;compiling functions.c into functions.s&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(CPPFLAGS)</span> -S functions.c 
+</code></pre>
+<h2 id="wildcards-and-substitution">Wildcards and substitution</h2>
+<p>To make your Makefiles more flexible and easier to maintain, you can use <strong>wildcards</strong> and <strong>substitution</strong> in the rules.
+Wildcards allow you to match multiple files with a single pattern, while substitution allows you to modify strings in variables.</p>
+<p>There are two kinds of wildcards you can use in a Makefile:</p>
+<ul>
+<li>The <code>*</code> wildcard matches any number of characters.</li>
+<li>The <code>%</code> wildcard matches any single string.</li>
+</ul>
+<p>The first wildcard is typically used to match files in a directory, while the second wildcard is used to match parts of filenames in rules.</p>
+<p>To let Make automatically find all source files in a directory, you can use the <code>wildcard</code> function - note that this is a function, not a wildcard character - in combination with the <code>*</code> wildcard character.
+For example, <code>$(wildcard *.c)</code> will match all <code>.c</code> files in the current directory.</p>
+<p>The <code>%</code> wildcard is used in rules to match parts of filenames.
+Remember that the first line of each rule consists of a target (the file to be built), a colon ('<code>:</code>'), followed by a list of dependencies.
+When using the <code>%</code> wildcard in the target, it will match any string and store it in a variable.
+This variable can then be used in the dependencies, for example to specify the source file that corresponds to the object file.
+For example, the rule <code>%.o: %.c</code> will match any <code>.o</code> file to its corresponding <code>.c</code> file - it thus states that any <code>.o</code> file depends on the corresponding <code>.c</code> file.</p>
+<p>Another powerful feature of Makefiles is <strong>substitution</strong>.
+This allows you to modify strings in variables by replacing parts of the string with other parts.
+Substitution is done using the <code>$(VAR:pattern=replacement)</code> syntax, where <code>VAR</code> is the variable to modify, <code>pattern</code> is the part of the string to replace, and <code>replacement</code> is the string to replace it with.
+For example, <code>$(SRC:.c=.o)</code> will replace the <code>.c</code> extension in all filenames in the <code>SRC</code> variable with <code>.o</code>.</p>
+<h3 id="activity-4---working-with-wildcards">Activity 4 - Working with wildcards</h3>
+<p>The folder <code>reverser</code> contains a simple program that reads a string from the console and prints all words in the string in reverse.
+The folder has a <code>Makefile</code> that does not really do much, except listing all source files that are in the folder.
+The makefile makes use of the <code>wildcard</code> function to do this.</p>
+<p>Modify the Makefile so that it uses <strong>wildcards</strong> (the <code>%</code> symbol) to automatically compile all <code>.c</code> files in the folder to <code>.o</code> files.
+Write a Makefile that uses variables and wildcards (use the <code>%</code> symbol in the rules) to:</p>
+<ul>
+<li>Compile all <code>.c</code> files in the folder to <code>.o</code> files.</li>
+<li>Link all <code>.o</code> files into an executable called <code>program</code>.</li>
+</ul>
+<p>The Makefile should consist of only <strong>two</strong> targets - one for compiling <em>all</em> <code>.c</code> files to <code>.o</code> files, and one for linking all <code>.o</code> files into an executable.</p>
+<p>Make sure that the Makefile works correctly by running <code>make</code> from the terminal.
+Verify that indeed all <code>.c</code> files are compiled to <code>.o</code> files and that these are linked into an executable called <code>program</code>.
+When you're done, include the modified Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+CC = gcc
+CFLAGS = -Wall
+CPPFLAGS = -DDEBUG 
+
+<span class="hljs-comment"># Get all .c files in the current directory</span>
+SOURCES = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> *.c)</span>
+
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> assign all .o files that need to be created to OBJECTS</span>
+<span class="hljs-comment">#       by replacing .c with .o in SOURCES</span>
+OBJECTS = $(SOURCES:.c=.o) 
+
+<span class="hljs-comment"># This rule now simply prints the list of source files</span>
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> the rule should depend on the object files, not on the source files</span>
+<span class="hljs-comment"># Rule to link .o files into an executable (reverser)</span>
+<span class="hljs-section">reverser: <span class="hljs-variable">$(OBJECTS)</span></span>
+	@echo <span class="hljs-variable">$^</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(OBJECTS)</span> -o reverser
+
+<span class="hljs-comment"># Rule to compile .c files to .o files</span>
+<span class="hljs-section">%.o: %.c</span>
+	@echo <span class="hljs-string">&quot;Compiling <span class="hljs-variable">$&lt;</span> into <span class="hljs-variable">$@</span>&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -c <span class="hljs-variable">$(CPPFLAGS)</span> <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span>
+
+</code></pre>
+<h2 id="working-with-build-directories">Working with build directories</h2>
+<p>When working on a project, it is common to separate the source files from the build files. This separation keeps the source directory clean and allows you to build the project in a separate directory.</p>
+<p>The directory structure of a simple project might look like this:</p>
+<pre><code class="language-plaintext">project/
+├── main.c
+├── functions.c
+|── functions.h
+└── build/
+</code></pre>
+<p>Or, for more complex projects, source files can be put into a <code>src</code> directory, which is at the same level as the <code>build</code> directory:</p>
+<pre><code class="language-plaintext">project/
+├── src/
+│   ├── main.c
+│   ├── functions.c
+│   └── functions.h
+└── build/
+</code></pre>
+<p>Directories can be created in a Makefile using the <code>mkdir</code> command, which is the Linux command to create directories.
+To make sure that the command does not fail if the directory already exists, you can use the <code>-p</code> flag.</p>
+<p>When working with build directories, it may be useful to list the directory in a variable, so you can easily refer to it in the Makefile.
+It is also common to generate the targets (i.e. the object files) from the source files, so you do not have to list them manually.
+This can be done using <em>wildcard substitution</em>.</p>
+<p>For example, if you have a list of source files in a variable <code>SRC</code>, you can generate a list of object files in a variable <code>OBJ</code> by replacing the <code>.c</code> extension with <code>.o</code>, or simply appending <code>.o</code> to the filenames.
+If your files are in the <code>src</code> directory, for example, you could put the following lines in your Makefile:</p>
+<pre><code class="language-make">SRC = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> src/*.c)</span>
+OBJ = $(SRC:src/%.c=build/%.o)
+</code></pre>
+<h3 id="activity-5---separating-build-files">Activity 5 - Separating build files</h3>
+<p>Modify the Makefile from the previous activity so that it writes all build files, including the executable, to a <code>build</code> directory.</p>
+<p>Create a Makefile that:</p>
+<ul>
+<li>Builds the <code>build</code> directory if it does not already exists (use the command <code>mkdir -p</code> for this).</li>
+<li>Compiles the source files in the <code>src</code> directory to object files in the <code>build</code> directory.</li>
+<li>Links the object files into an executable called <code>program</code>, which is written to the <code>build</code> directory.</li>
+</ul>
+<p>Make sure that the Makefile works correctly by running <code>make</code> from the terminal.
+Verify that the <code>program</code> executable is created in the <code>build</code> directory.
+When you're done, include the modified Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+CC = gcc
+CFLAGS = -Wall
+CPPFLAGS = -DDEBUG 
+
+<span class="hljs-comment"># Get all .c files in the current directory</span>
+SOURCES = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> src/*.c)</span>
+
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> assign all .o files that need to be created to OBJECTS</span>
+<span class="hljs-comment">#       by replacing .c with .o in SOURCES</span>
+OBJECTS = $(SOURCES:src/%.c=build/%.o) 
+
+<span class="hljs-comment"># This rule now simply prints the list of source files</span>
+<span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> the rule should depend on the object files, not on the source files</span>
+<span class="hljs-comment"># Rule to link .o files into an executable (reverser)</span>
+<span class="hljs-section">reverser: <span class="hljs-variable">$(OBJECTS)</span></span>
+	@echo <span class="hljs-string">&quot;Linking <span class="hljs-variable">$(OBJECTS)</span> into <span class="hljs-variable">$@</span>&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -o build/reverser  <span class="hljs-variable">$(OBJECTS)</span>
+
+<span class="hljs-comment"># Rule to compile .c files to .o files</span>
+<span class="hljs-section">build/%.o: src/%.c</span>
+	@mkdir -p build
+	@echo <span class="hljs-string">&quot;Compiling <span class="hljs-variable">$&lt;</span> into <span class="hljs-variable">$@</span>&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(CPPFLAGS)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span>
+</code></pre>
+<h2 id="passing-arguments-to-the-preprocessor">Passing arguments to the preprocessor</h2>
+<p>The C preprocessor is a tool that runs before the actual compilation process.
+It processes the source code and performs tasks such as including header files, defining macros, and removing comments.
+The preprocessor is controlled by directives that start with a <code>#</code> character, such as <code>#include</code>, <code>#define</code>, and <code>#ifdef</code>.</p>
+<p>The preprocessor can also be used to define macros that can be passed to the compiler.
+A macro is a symbolic name that represents a value or a piece of code.
+When the preprocessor encounters a macro in the source code, it replaces the macro with its value or code before the actual compilation process begins.
+To pass a macro to the compiler, you can use the <code>-D</code> flag followed by the macro name and its value (if you omit the value, the macro is defined as 1).</p>
+<h3 id="activity-6---passing-macros-to-the-compiler">Activity 6 - Passing macros to the compiler</h3>
+<p>The folder <code>activity6</code> contains a simple C program that uses a macro to define the size of an array.
+It relies on the <code>NUM_NUMBERS</code> macro being defined when the program is compiled.
+The file <code>main.c</code>, however, does not define the <code>NUM_NUMBERS</code> macro itself.
+It is up to the Makefile to define the macro and pass it to the compiler.</p>
+<p>Update the Makefile that's in the folder so that it defines the <code>NUM_NUMBERS</code> macro with a value of <code>10</code> and passes it to the compiler when compiling the program.
+This flag should be passed to the compiler using the <code>CPPFLAGS</code> variable.</p>
+<p>When you're done, include the modified Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+CC = gcc
+CFLAGS = -Wall -Wextra -pedantic -std=c99 -Werror
+CPPFLAGS = -DNUM_NUMBERS=10
+
+<span class="hljs-section">numbers: main.o functions.o</span>
+	@echo <span class="hljs-string">&quot;Linking main.o and functions.o into numbers&quot;</span>
+	<span class="hljs-variable">$(CC)</span> -o numbers main.o functions.o
+
+<span class="hljs-comment"># implicit rules (these use CC, CFLAGS, and CPPFLAGS)</span>
+
+<span class="hljs-section">main.o: main.c</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(CPPFLAGS)</span> -c main.c
+
+<span class="hljs-section">functions.o: functions.c</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(CPPFLAGS)</span> -c functions.c
+
+</code></pre>
+<h2 id="the-ncurses-library">The NCurses library</h2>
+<p>The <code>ncurses</code> library is a library for creating text-based user interfaces in a terminal.
+It provides functions for drawing text, windows, and other elements on the screen.
+The library is commonly used in terminal-based games and applications on Unix-like systems.</p>
+<p>Before you can use this library, you need to install it on your system.
+In a WSL terminal, type <code>sudo apt install libncurses-dev</code> to install the library.</p>
+<p>To use a library in your program, you need to have two things: the library itself and the header files that declare the functions provided by the library.
+Installing the library will make the header files available on your system - for example, you can include the <code>ncurses.h</code> header file using <code>#include &lt;ncurses.h&gt;</code>.
+The library itself is a file that contains the compiled functions that your program can use.
+It is usually named <code>lib&lt;name&gt;.a</code> or <code>lib&lt;name&gt;.so</code>, where <code>&lt;name&gt;</code> is the name of the library, and it can typically be found somewhere in <code>/usr/lib</code>.</p>
+<p>To make the library functions available to your program, you need to link your program against the library.
+This is done through the <code>-l</code> flag, followed by the name of the library (without the <code>lib</code> prefix and the file extension).
+So, to link against the <code>ncurses</code> library, you would use the <code>-lncurses</code> flag.
+These flags must be specified in the <em>linker</em> options that are passed to the compiler when linking the program.
+Linker flags (if present) should be placed in the <code>LDFLAGS</code> variable in the Makefile.</p>
+<h3 id="activity-7---using-libraries">Activity 7 - Using libraries</h3>
+<p>The folder <code>minesweeper</code> contains a simple minesweeper game that uses the <code>ncurses</code> library to draw the game board.
+The game is made up of multiple source files, including <code>main.c</code> and <code>game.c</code>.</p>
+<p>Write a makefile that compiles the program and produces an executable called <code>minesweeper</code>.
+The Makefile must:</p>
+<ul>
+<li>Create a <code>build</code> directory if it does not already exist.</li>
+<li>Compile all <code>.c</code> files in the folder to <code>.c.o</code> files in the <code>build</code> directory.</li>
+<li>Link all object files into an executable called <code>minesweeper</code>, which is written to the <code>build</code> directory.</li>
+<li>Link against the <code>ncurses</code> library.</li>
+</ul>
+<p>Test your Makefile by running <code>make</code> from the terminal.
+If it correctly creates the <code>minesweeper</code> program, include the Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+CC = gcc
+CFLAGS = -Wall
+CPPFLAGS = 
+LDFLAGS = -lncurses
+
+BUILDDIR = build
+
+SOURCES = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> src/*.c)</span>
+OBJECTS = $(SOURCES:src/%.c=build/%.o)
+
+<span class="hljs-section">minesweeper: <span class="hljs-variable">$(OBJECTS)</span></span>
+	@echo <span class="hljs-string">&quot;Linking <span class="hljs-variable">$(OBJECTS)</span> into <span class="hljs-variable">$@</span>&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -o build/minesweeper <span class="hljs-variable">$(OBJECTS)</span> <span class="hljs-variable">$(LDFLAGS)</span>
+
+<span class="hljs-section">build/%.o: src/%.c</span>
+	@mkdir -p build
+	@echo <span class="hljs-string">&quot;Compiling <span class="hljs-variable">$&lt;</span> into <span class="hljs-variable">$@</span>&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span>
+</code></pre>
+<h3 id="activity-8---cleaning-up">Activity 8 - Cleaning up</h3>
+<p>Add a <code>clean</code> target to the Makefile of the previous activity. It should remove all object files and the executable produced by the build process from the <code>build</code> directory.
+The rule must not remove the build directory itself, only its contents.</p>
+<p>When you're done, include the modified Makefile in the code block below:</p>
+<pre><code class="language-make"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Paste the Makefile you used here</span>
+CC = gcc
+CFLAGS = -Wall
+CPPFLAGS = 
+LDFLAGS = -lncurses
+
+BUILDDIR = build
+
+SOURCES = <span class="hljs-variable">$(<span class="hljs-built_in">wildcard</span> src/*.c)</span>
+OBJECTS = $(SOURCES:src/%.c=build/%.o)
+
+<span class="hljs-section">minesweeper: <span class="hljs-variable">$(OBJECTS)</span></span>
+	@echo <span class="hljs-string">&quot;Linking <span class="hljs-variable">$(OBJECTS)</span> into <span class="hljs-variable">$@</span>&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -o build/minesweeper <span class="hljs-variable">$(OBJECTS)</span> <span class="hljs-variable">$(LDFLAGS)</span>
+
+<span class="hljs-section">build/%.o: src/%.c</span>
+	@mkdir -p build
+	@echo <span class="hljs-string">&quot;Compiling <span class="hljs-variable">$&lt;</span> into <span class="hljs-variable">$@</span>&quot;</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span>
+
+<span class="hljs-section">clean:</span>
+	@echo <span class="hljs-string">&quot;Cleaning up build directory&quot;</span>
+	@rm -f build/minesweeper
+
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will mark it with 0 points in Brightspace.
+If you receive 0 points, make sure to check the feedback, make the necessary changes, and resubmit the tutorial.
+Do this before the end of week 2.9, as this is the deadline for having submitted all tutorials and assignments.</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

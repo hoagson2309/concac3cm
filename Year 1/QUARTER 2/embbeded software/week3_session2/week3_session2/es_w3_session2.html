@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - Session 2&colon; Advanced Communication</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---session-2-advanced-communication">Week 3 - Session 2: Advanced Communication</h1>
+<blockquote>
+<p><strong>Name:</strong> SON CAO</p>
+<p><strong>Group:</strong> ETI1V.IA</p>
+<p><strong>Date:</strong> 2/12/2024</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>In today's session we will see how the Raspberry Pi Pico can communicate with other devices. We will not focus on the actual communication protocol, but rather see that we can use libraries available on the internet. Later we will also connect two Picos and let them communicate with each other.</p>
+<p>This is the list of needed equipment for this tutorial (everything is included in your kit):</p>
+<ul>
+<li>Raspberry Pi Pico board (with USB cable, headers soldered)</li>
+<li>Breadboard</li>
+<li>Jumper wires</li>
+<li>DHT22 or similar temperature sensor</li>
+<li>1 LED</li>
+</ul>
+<h2 id="activity-1-example-library-usage">Activity 1: Example library usage</h2>
+<p><strong>Description: Use a library example to read data from a sensor</strong></p>
+<p>When building a system you will often not only connect passive sensors like potentiometers or buttons, but also active sensors like temperature sensors, accelerometers, or gyroscopes. These sensors have a digital interface to communicate with the microcontroller and send data. In the datasheet of the sensor you can find which protocol the sensor uses and how to communicate with it. Often this is quite complex, but luckily there are libraries that can help us with this. Manufacturers often provide libraries to communicate with their sensors, but there are also open-source libraries. Especially for hobbyist components like the temperature sensor we will use today, other users have written libraries or driver code that can be used freely. Remember that you should always check the license of the code you use and give credit to the original author, if required. Also never trust the code you find to fully work, other engineers might have used the code in a different way or simply made a mistake.</p>
+<p>To show you how to use a library, we will use the DHT22 temperature sensor. This sensor is a digital sensor that uses a single wire to communicate with the microcontroller. The sensor sends a signal to the microcontroller that contains the temperature and humidity. The sensor is quite easy to use, but the protocol is a bit complex. We will therefore use the library <code>pico_dht</code> by Valentin Milea that is available on GitHub. You can find it <a href="https://github.com/vmilea/pico_dht">here</a>. Note: It is available under the MIT license, so you can use it freely, but you should give credit to the author and include the license in your project. Companies often buy libraries or have them developed by their engineers, but the overall idea is the same.</p>
+<p>The first step after finding a library is to check the documentation, usually starting with the README file. This file should contain information on how to install the library, how to use it, and what functions are available. In the case of the <code>pico_dht</code> library, the README file focuses on running the included example code. This is a good starting point to see if the library works and how to use it. So let's start by running the example code:</p>
+<ul>
+<li>Clone the repository to your computer: <code>git clone https://github.com/vmilea/pico_dht.git</code></li>
+<li>Enter the directory: cd <code>pico_dht</code></li>
+<li>Change <code>DHT_MODEL</code> in <code>dht_example.c</code> if needed (default is DHT22, the one we have in the kit)</li>
+<li>Build the example code: <code>mkdir build, cd build, cmake .., make</code></li>
+<li>Connect the sensor to the Pico:
+<ul>
+<li>Pin 1: Connect the VCC pin of the sensor to 3.3V</li>
+<li>Pin 2: Connect the data pin of the sensor to GPIO 15</li>
+<li>Pin 3: Leave the pin unconnected</li>
+<li>Pin 4: Connect the GND pin of the sensor to GND</li>
+</ul>
+</li>
+<li>Copy dht_example.uf2 to Raspberry Pico</li>
+<li>Open a serial connection and check output</li>
+</ul>
+<h2 id="activity-2-using-a-library-in-your-own-code">Activity 2: Using a library in your own code</h2>
+<p><strong>Description: Use a library to read data from a sensor</strong></p>
+<p>Now that we know that the library is working as expected, we can use it in our own projects. Please start with the project-template or one of your old activities. We will write a simple program that shows the measured temperature on the serial connection (<code>prinf()</code>) and the humidity on an LED (using PWM scaled to humidity percentage).</p>
+<p>Try to figure things out yourself, but if you are stuck, the lab teacher or teaching assistant can help you!</p>
+<p>Here are a few hints:</p>
+<ol>
+<li>
+<p>Make sure to check the example to understand how the library works, as there is no official documentation. That is often the case with hobbyist libraries, so you will need to read the code to understand how to use it. But even in professional projects, documentation is often missing or outdated, so it is a good skill to have.</p>
+</li>
+<li>
+<p>In Programming 2 you already learned that CMake can help you with including libraries. You will need to tell the linker to include the library and the compiler where to find the header files. You can do this by adding the following lines to your <code>CMakeLists.txt</code>:</p>
+</li>
+</ol>
+<ul>
+<li><code>target_link_libraries(your_project_name pico_dht)</code>, this line is already included in our project template, so just add it to the list of libraries, like this: <code>target_link_libraries(${PROJECT} pico_stdlib hardware_pwm hardware_adc pico_rand dht)</code></li>
+<li><code>add_subdirectory(pico_dht/dht)</code> or <code>add_subdirectory(pico_dht)</code> to the <code>CMakeLists.txt</code> so that the compiler knows where to find the header files. Make sure that this line is after <code>pico_sdk_init()</code>, as the library uses the SDK as well.</li>
+</ul>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dht.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pico/stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-type">dht_model_t</span> DHT_MODEL = DHT22;
+<span class="hljs-type">static</span> <span class="hljs-type">const</span> uint DATA_PIN = <span class="hljs-number">15</span>; 
+<span class="hljs-type">static</span> <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">16</span>; <span class="hljs-comment">//gpio pin for led</span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_pwm</span><span class="hljs-params">(uint gpio_pin)</span>{
+    gpio_set_function(gpio_pin, GPIO_FUNC_PWM);
+    uint slice_num = pwm_gpio_to_slice_num(gpio_pin);
+    pwm_set_enabled(slice_num, <span class="hljs-literal">true</span>);
+    pwm_set_wrap(slice_num, <span class="hljs-number">100</span>);
+}
+
+<span class="hljs-type">static</span> <span class="hljs-type">float</span> <span class="hljs-title function_">celsius_to_fahrenheit</span><span class="hljs-params">(<span class="hljs-type">float</span> temperature)</span> {
+    <span class="hljs-keyword">return</span> temperature * (<span class="hljs-number">9.0f</span> / <span class="hljs-number">5</span>) + <span class="hljs-number">32</span>;
+}
+
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all();
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Temperature and humidity monitor&quot;</span>);
+
+    <span class="hljs-comment">//initialize DHT sensor</span>
+    <span class="hljs-type">dht_t</span> dht;
+    dht_init(&amp;dht, DHT_MODEL, pio0, DATA_PIN, <span class="hljs-literal">true</span> <span class="hljs-comment">/* pull-up */</span>);
+
+    <span class="hljs-comment">//initialize PWM for LED</span>
+    setup_pwm(LED_PIN);
+
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){
+        dht_start_measurement(&amp;dht);
+
+        <span class="hljs-type">float</span> humidity;
+        <span class="hljs-type">float</span> temperature_c;
+        <span class="hljs-type">dht_result_t</span> result = dht_finish_measurement_blocking(&amp;dht, &amp;humidity, &amp;temperature_c);
+
+        <span class="hljs-keyword">if</span>(result == DHT_RESULT_OK){
+            <span class="hljs-comment">//print temperature to serial console</span>
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Temperature: %.1f C (%.1f F)\n&quot;</span>, temperature_c, celsius_to_fahrenheit(temperature_c));
+
+            <span class="hljs-comment">//scale LED brightness based on humidity percentage</span>
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Humidity: %.1f%%\n&quot;</span>, humidity);
+            pwm_set_gpio_level(LED_PIN, humidity); <span class="hljs-comment">//adjust led brightness</span>
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( result == DHT_RESULT_TIMEOUT){
+            <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;DHT sensor not responding. Please check your wiring.&quot;</span>);
+        } <span class="hljs-keyword">else</span> {
+            assert(result == DHT_RESULT_BAD_CHECKSUM); <span class="hljs-comment">//Verifies the result indicates a bad checksum and prints an error message.</span>
+            <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Bad checksum&quot;</span>);  
+        }
+        sleep_ms(<span class="hljs-number">2000</span>);
+    } 
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-3-communicating-with-another-pico-through-uart">Activity 3: Communicating with another Pico through UART</h2>
+<p><strong>Description: Send data from one Pico to another</strong></p>
+<p>Of course sometimes you want to communicate between two embedded systems. the easiest way to do this is to use the UART protocol, as it only requires two wires. One wire is used to transmit data (TX) and one is used to receive data (RX). You should also connect the GND of both systems together to have a common reference. In the activities in session 1 you already used the UART protocol to communicate with your computer, through USB. But now we will use the UART pins of the Pico to communicate with another Pico. Therefore team up with another student and connect the two Picos as follows:</p>
+<ul>
+<li>Connect the TX pin of Pico 1 to the RX pin of Pico 2 (e.g. TX on GPIO 0 to RX on GPIO 1)</li>
+<li>Connect the RX pin of Pico 1 to the TX pin of Pico 2 (e.g. RX on GPIO 1 to TX on GPIO 0)</li>
+<li>Connect the GND of both Picos together</li>
+</ul>
+<p><em>Note: This is a great moment to search a partner for your final project, as you will need to work in pairs, as well.</em></p>
+<p>Now let's write two simple program's:</p>
+<ol>
+<li>Pico 1 will send a message every second (e.g. &quot;Hello Pico 2!&quot;) to Pico 2</li>
+<li>Pico 2 will receive the message and print it to standard output (preferably in one string, not character by character)</li>
+</ol>
+<p>Here's a code snippet explaining the necessary function calls, you will need to change the code to repeatedly send a full string. Furthermore you will need to implement the receiving and relaying part on the second Pico.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/uart.h&quot;</span> <span class="hljs-comment">// UART hardware library for Pico</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+
+    <span class="hljs-comment">// Set the GPIO pin to UART</span>
+    gpio_set_function(<span class="hljs-number">12</span>, GPIO_FUNC_UART);
+    gpio_set_function(<span class="hljs-number">13</span>, GPIO_FUNC_UART);
+
+    <span class="hljs-comment">// Initialise UART 0 with a baud rate of 115200</span>
+    uart_init(uart0, <span class="hljs-number">115200</span>);
+
+    <span class="hljs-comment">// Send a character to the UART</span>
+    uart_putc(uart0, <span class="hljs-string">&#x27;H&#x27;</span>);
+
+    <span class="hljs-comment">// Check if a character is available to read</span>
+    <span class="hljs-keyword">if</span> (uart_is_readable(uart0)) {
+        <span class="hljs-comment">// Read a character from the UART</span>
+        <span class="hljs-type">char</span> received = uart_getc(uart0);
+    }
+}
+</code></pre>
+<ol>
+<li>Implement the sending part on Pico 1:</li>
+</ol>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dht.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pico/stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-comment">//IMPLEMENT PICO 1 (SENDER)</span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    <span class="hljs-comment">//set GPIO pin to UART</span>
+    gpio_set_function(<span class="hljs-number">0</span>, GPIO_FUNC_UART);
+    gpio_set_function(<span class="hljs-number">1</span>, GPIO_FUNC_UART);
+
+    <span class="hljs-comment">//initialize UART 0 with a baud rate of 115200</span>
+    uart_init(uart0, <span class="hljs-number">115200</span>);
+
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *message = <span class="hljs-string">&quot;Hello Pico 2!\n&quot;</span>;
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){
+    
+    <span class="hljs-comment">//send a string to the UART</span>
+    uart_puts(uart0, message);  <span class="hljs-comment">//uart_putc if it&#x27;s a character</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Sent: %s&quot;</span>, message);
+    sleep_ms(<span class="hljs-number">1000</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<ol start="2">
+<li>Implement the receiving part on Pico 2:</li>
+</ol>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dht.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pico/stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-comment">// IMPLEMENT PICO 2 (RECEIVER)</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+  stdio_init_all();
+    <span class="hljs-comment">// set GPIO pin to UART</span>
+    gpio_set_function(<span class="hljs-number">1</span>, GPIO_FUNC_UART);
+    gpio_set_function(<span class="hljs-number">0</span>, GPIO_FUNC_UART);
+
+    <span class="hljs-comment">// initialize UART 0 with a baud rate of 115200</span>
+    uart_init(uart0, <span class="hljs-number">115200</span>);
+
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">200</span>];
+    <span class="hljs-type">size_t</span> index = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>){
+        <span class="hljs-keyword">if</span> (uart_is_readable(uart0)){
+            <span class="hljs-comment">// read character from UART</span>
+            <span class="hljs-type">char</span> received = uart_getc(uart0);
+
+            <span class="hljs-comment">// store character in the buffer</span>
+            buffer[index++] = received;
+
+            <span class="hljs-keyword">if</span> (received == <span class="hljs-string">&#x27;\n&#x27;</span>){
+                buffer[index] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Received: %s&quot;</span>, buffer);
+                index = <span class="hljs-number">0</span>;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p><em>Note: If you want to try a different protocol, you can use I2C or SPI. These are more complex, but also more powerful. They both operate with a master-slave architecture. Here you can find a great tutorial using on SPI (chapters 1-4 are relevant for your level): <a href="https://www.circuitstate.com/tutorials/making-two-raspberry-pi-pico-boards-communicate-through-spi-using-c-cpp-sdk/">Circuitstate SPI</a></em></p>
+<h2 id="activity-4-traffic-light-optional-for-6-points-mandatory-for-10-points">Activity 4 Traffic Light: (Optional for 6 points, mandatory for 10 points)</h2>
+<p><strong>Description: Implement pedestrian traffic light</strong></p>
+<p>Now that you have learned how to communicate between two Picos, let's implement a traffic light system. One Pico will control the car light (3 LED) and the other will control the pedestrian light (2 LEDs). The pedestrian light will be controlled by a button. Take the traffic light in front of Saxion as a model:</p>
+<ol>
+<li>The cars will have green light until a pedestrian button is pressed</li>
+<li>Switch to yellow light for cars, after a short time to a red light</li>
+<li>The pedestrian light will turn green for around 10 seconds</li>
+<li>After that the pedestrian light will blink for 3 seconds and then turn red again</li>
+<li>Now the car light will turn green again</li>
+</ol>
+<p><em>Note: The description is quite high-level, so you will need to figure out the details yourself. This should prepare you for the final project, where you will need to design the system yourself.</em></p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dht.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pico/stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-comment">// CAR LIGHT (CONTROLLER) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">set_car_light</span><span class="hljs-params">(<span class="hljs-type">int</span> green, <span class="hljs-type">int</span> yellow, <span class="hljs-type">int</span> red, uint led_pin1, uint led_pin2, uint led_pin3)</span>{
+    gpio_put(led_pin1, green);
+    gpio_put(led_pin2, yellow);
+    gpio_put(led_pin3, red);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_led_pin</span><span class="hljs-params">(uint led_pin)</span>{
+    gpio_init(led_pin);
+    gpio_set_dir(led_pin, GPIO_OUT);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    stdio_init_all();
+
+    <span class="hljs-type">const</span> uint LED_PIN_GREEN = <span class="hljs-number">2</span>;
+    setup_led_pin(LED_PIN_GREEN);
+
+    <span class="hljs-type">const</span> uint LED_PIN_YELLOW = <span class="hljs-number">3</span>;
+    setup_led_pin(LED_PIN_YELLOW);
+
+    <span class="hljs-type">const</span> uint LED_PIN_RED = <span class="hljs-number">4</span>;
+    setup_led_pin(LED_PIN_RED);
+
+    <span class="hljs-comment">// set GPIO pin to UART</span>
+    gpio_set_function(<span class="hljs-number">0</span>, GPIO_FUNC_UART); <span class="hljs-comment">//TX</span>
+    gpio_set_function(<span class="hljs-number">1</span>, GPIO_FUNC_UART); <span class="hljs-comment">//RX</span>
+
+    <span class="hljs-comment">// initialize UART 0 with a baud rate of 115200</span>
+    uart_init(uart0, <span class="hljs-number">115200</span>);
+
+    set_car_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, LED_PIN_GREEN, LED_PIN_YELLOW, LED_PIN_RED);
+    
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>){
+        <span class="hljs-keyword">if</span>(uart_is_readable(uart0)){
+            <span class="hljs-type">char</span> command = uart_getc(uart0);
+
+            <span class="hljs-keyword">if</span>(command == <span class="hljs-string">&#x27;B&#x27;</span>){ <span class="hljs-comment">// button pressed </span>
+            set_car_light(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, LED_PIN_GREEN, LED_PIN_YELLOW, LED_PIN_RED); <span class="hljs-comment">// switch car light to yellow</span>
+            sleep_ms(<span class="hljs-number">2000</span>); <span class="hljs-comment">//2sec</span>
+
+            set_car_light(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, LED_PIN_GREEN, LED_PIN_YELLOW, LED_PIN_RED); <span class="hljs-comment">//switch car light to red</span>
+
+            uart_putc(uart0, <span class="hljs-string">&#x27;G&#x27;</span>); <span class="hljs-comment">//send signal to pedestrian light to make it turn green</span>
+            sleep_ms(<span class="hljs-number">10000</span>); <span class="hljs-comment">//10sec</span>
+
+            uart_putc(uart0, <span class="hljs-string">&#x27;B&#x27;</span>);<span class="hljs-comment">//send signal to pedestrian light to make it turn to blinking stage</span>
+            sleep_ms(<span class="hljs-number">3000</span>); <span class="hljs-comment">//3sec</span>
+
+            uart_putc(uart0, <span class="hljs-string">&#x27;R&#x27;</span>);<span class="hljs-comment">//send signal to pedestrian light to make it turn red</span>
+
+            set_car_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>,  <span class="hljs-number">0</span>, LED_PIN_GREEN, LED_PIN_YELLOW, LED_PIN_RED);<span class="hljs-comment">//switch car light to green again after pedestrian light turned red</span>
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">//PEDESTRIAN LIGHT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">set_pedestrian_light</span><span class="hljs-params">(<span class="hljs-type">int</span> green, <span class="hljs-type">int</span> red, <span class="hljs-type">const</span> uint led_pin1, <span class="hljs-type">const</span> uint led_pin2)</span>{
+    gpio_put(led_pin1, green);
+    gpio_put(led_pin2, red);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_led_pin</span><span class="hljs-params">(uint led_pin)</span>{
+    gpio_init(led_pin);
+    gpio_set_dir(led_pin, GPIO_OUT);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">const</span> uint LED_PIN_GREEN = <span class="hljs-number">6</span>;
+    setup_led_pin(LED_PIN_GREEN);
+
+    <span class="hljs-type">const</span> uint LED_PIN_RED = <span class="hljs-number">7</span>;
+    setup_led_pin(LED_PIN_RED);
+
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">8</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// set GPIO pin to UART</span>
+    gpio_set_function(<span class="hljs-number">1</span>, GPIO_FUNC_UART); <span class="hljs-comment">//TX</span>
+    gpio_set_function(<span class="hljs-number">0</span>, GPIO_FUNC_UART); <span class="hljs-comment">//RX</span>
+
+    <span class="hljs-comment">// initialize UART 0 with a baud rate of 115200</span>
+    uart_init(uart0, <span class="hljs-number">115200</span>);
+
+    <span class="hljs-comment">//start with red light for pedestrians</span>
+    set_pedestrian_light(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, LED_PIN_GREEN, LED_PIN_RED);
+
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){
+        <span class="hljs-keyword">if</span>(gpio_get(PIN_BUTTON)){ <span class="hljs-comment">//check button (pressed or not)</span>
+            uart_putc(uart0, <span class="hljs-string">&#x27;B&#x27;</span>); <span class="hljs-comment">//press the button</span>
+            sleep_ms(<span class="hljs-number">500</span>);
+        }
+
+        <span class="hljs-keyword">if</span>(uart_is_readable(uart0)){
+            <span class="hljs-type">char</span> command = uart_getc(uart0);
+
+            <span class="hljs-keyword">if</span>(command == <span class="hljs-string">&#x27;G&#x27;</span>){ 
+                set_pedestrian_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, LED_PIN_GREEN, LED_PIN_RED); <span class="hljs-comment">//switch pedestrian light to green</span>
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(command == <span class="hljs-string">&#x27;B&#x27;</span>){
+                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++){
+                    set_pedestrian_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, LED_PIN_GREEN, LED_PIN_RED);
+                    sleep_ms(<span class="hljs-number">500</span>);
+                    set_pedestrian_light(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, LED_PIN_GREEN, LED_PIN_RED);
+                    sleep_ms(<span class="hljs-number">500</span>);
+                }
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (command == <span class="hljs-string">&#x27;R&#x27;</span>){
+                set_pedestrian_light(<span class="hljs-number">0</span> , <span class="hljs-number">1</span>, LED_PIN_GREEN, LED_PIN_RED); <span class="hljs-comment">// switch pedestrians light to red</span>
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="questions-to-answer">Questions to answer:</h2>
+<p>Please answer this reflection questions:</p>
+<ol>
+<li>How long did this tutorial take you?</li>
+</ol>
+<ul>
+<li>3 days</li>
+</ul>
+<ol start="2">
+<li>Did you face difficulties?</li>
+</ol>
+<ul>
+<li>yes, for the last activity at first but now i understande</li>
+</ul>
+<ol start="3">
+<li>What would you like to see improved?</li>
+</ol>
+<h2 id="sign-off">Sign-off</h2>
+<p>Please show your code of activity 3 to your lab teacher or teaching assistant.</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

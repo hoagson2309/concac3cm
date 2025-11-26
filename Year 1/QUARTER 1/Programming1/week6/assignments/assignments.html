@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week XX - Assignments</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-xx---assignments">Week XX - Assignments</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 10/10/2024</p>
+<p><strong>NOTE</strong>: if you'd like to have syntax highlighting in your markdown file, install the &quot;Markdown Preview Github Styling&quot; extension in VS Code.</p>
+<h2 id="first-assignment">First assignment</h2>
+<p>The first assignment I completed is assignment 1 - Most frequent alphabet characters.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief Checks if the given string contains only whitespace characters.</span>
+<span class="hljs-comment">/// @param string The string to check.</span>
+<span class="hljs-comment">/// @return True if the string contains only whitespace characters, false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">contains_only_whitespace</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">strlen</span>(<span class="hljs-built_in">string</span>); i++){
+        <span class="hljs-keyword">if</span>(!<span class="hljs-built_in">isspace</span>(<span class="hljs-built_in">string</span>[i])){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-comment">/// @brief Changes all characters in the given string that matches (regardless of their case) the given character to uppercase,</span>
+<span class="hljs-comment">/// and all other characters to lowercase.</span>
+<span class="hljs-comment">/// @param string The string to modify.</span>
+<span class="hljs-comment">/// @param character The character to change to uppercase.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">change_case</span><span class="hljs-params">(<span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[], <span class="hljs-type">char</span> character)</span>{
+    <span class="hljs-type">char</span> target = <span class="hljs-built_in">tolower</span>(character);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; <span class="hljs-built_in">string</span>[i] != <span class="hljs-string">&#x27;\0&#x27;</span>; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">isalpha</span>(<span class="hljs-built_in">string</span>[i])){
+            <span class="hljs-keyword">if</span>(<span class="hljs-built_in">tolower</span>(<span class="hljs-built_in">string</span>[i]) == target){
+                <span class="hljs-built_in">string</span>[i] = <span class="hljs-built_in">toupper</span>(<span class="hljs-built_in">string</span>[i]);
+            }
+            <span class="hljs-keyword">else</span>{
+                <span class="hljs-built_in">string</span>[i] = <span class="hljs-built_in">tolower</span>(<span class="hljs-built_in">string</span>[i]);
+            }
+        }
+    }
+}
+
+<span class="hljs-comment">/// @brief Counts the number of occurrences of each character (regardless of their case) in the given string.</span>
+<span class="hljs-comment">/// @param string The string to count the occurrences in.</span>
+<span class="hljs-comment">/// @param occurrences An array of 26 integers to store the number of occurrences of each alphabet character.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">count_occurrences</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[], <span class="hljs-type">int</span> occurrences[])</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++){
+        occurrences[i] = <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; <span class="hljs-built_in">string</span>[i] != <span class="hljs-string">&#x27;\0&#x27;</span>; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">isalpha</span>(<span class="hljs-built_in">string</span>[i])){
+            <span class="hljs-type">char</span> index = <span class="hljs-built_in">tolower</span>(<span class="hljs-built_in">string</span>[i]) - <span class="hljs-string">&#x27;a&#x27;</span>;
+            occurrences[index]++;
+        }
+    }
+}
+
+<span class="hljs-comment">/// @brief Finds the most frequent character in the given array of occurrences.</span>
+<span class="hljs-comment">/// @param occurrences An array of 26 integers that store the number of occurrences of each alphabet character.</span>
+<span class="hljs-comment">/// @return The most frequent character.</span>
+<span class="hljs-type">char</span> <span class="hljs-title function_">most_frequent_character</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span> occurrences[])</span>{
+    <span class="hljs-type">int</span> maxcount = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> maxindex = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++){
+        <span class="hljs-keyword">if</span>(occurrences[i] &gt; maxcount){
+            maxcount = occurrences[i];
+            maxindex = i;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;a&#x27;</span> + maxindex; <span class="hljs-comment">//convert the index back to its corresponding alphabet character</span>
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> sentence[<span class="hljs-number">300</span>];
+    <span class="hljs-type">size_t</span> size = <span class="hljs-keyword">sizeof</span>(sentence) / <span class="hljs-keyword">sizeof</span>(sentence[<span class="hljs-number">0</span>]);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a sentence (or whitespace to stop): &quot;</span>);
+    read_string(sentence, size);
+
+    <span class="hljs-keyword">while</span>(!contains_only_whitespace(sentence)){
+    
+    <span class="hljs-type">int</span> occurrences[<span class="hljs-number">26</span>];
+    count_occurrences(sentence, occurrences);
+
+    <span class="hljs-type">char</span> mostfrequentchar = most_frequent_character(occurrences);
+    change_case(sentence, mostfrequentchar);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Modified sentence: %s\n&quot;</span>, sentence);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a sentence (or whitespace to stop): &quot;</span>);
+    read_string(sentence, <span class="hljs-number">300</span>);
+    }
+}
+
+
+</code></pre>
+<h2 id="second-assignment">Second assignment</h2>
+<p>The second assignment I completed is assignment 2 - Which sentence has the most vowels?.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief Checks if the given string contains only whitespace characters.</span>
+<span class="hljs-comment">/// @param string The string to check.</span>
+<span class="hljs-comment">/// @return True if the string contains only whitespace characters, false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">contains_only_whitespace</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">strlen</span>(<span class="hljs-built_in">string</span>); i++){
+        <span class="hljs-keyword">if</span>(!<span class="hljs-built_in">isspace</span>(<span class="hljs-built_in">string</span>[i])){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-comment">/// @brief Counts the number of vowels in the given string.</span>
+<span class="hljs-comment">/// @param string The string to count the vowels in.</span>
+<span class="hljs-comment">/// @return The number of vowels in the string.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">count_vowels</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; <span class="hljs-built_in">string</span>[i] != <span class="hljs-string">&#x27;\0&#x27;</span>; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">isalpha</span>(<span class="hljs-built_in">string</span>[i])){
+            <span class="hljs-keyword">if</span>((<span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;a&#x27;</span> || <span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;A&#x27;</span>) || (<span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;e&#x27;</span> || <span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;E&#x27;</span>) || (<span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;i&#x27;</span> || <span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;I&#x27;</span>) || (<span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;o&#x27;</span> || <span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;O&#x27;</span>) || (<span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;u&#x27;</span> ||  <span class="hljs-built_in">string</span>[i] == <span class="hljs-string">&#x27;U&#x27;</span>)){
+                count++;
+            }
+        }
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> sentence[<span class="hljs-number">100</span>][<span class="hljs-number">300</span>];
+    <span class="hljs-type">int</span> num = <span class="hljs-keyword">sizeof</span>(sentence) / <span class="hljs-keyword">sizeof</span>(sentence[<span class="hljs-number">0</span>]);
+    <span class="hljs-type">int</span> max_vowels_count = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> index_of_sentence_with_most_vowels;
+    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a sentence (or whitespace to stop): &quot;</span>);
+    read_string(sentence[i], num);
+
+    <span class="hljs-keyword">while</span>(!contains_only_whitespace(sentence[i])){ 
+        <span class="hljs-type">int</span> vowel_count = count_vowels(sentence[i]);
+        <span class="hljs-keyword">if</span> (vowel_count &gt; max_vowels_count){
+            max_vowels_count = vowel_count;
+            index_of_sentence_with_most_vowels = i;
+        }
+        i++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a sentence (or whitespace to stop): &quot;</span>);
+        read_string(sentence[i], num);
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The sentence with the most vowels is: %s\n&quot;</span>, sentence[index_of_sentence_with_most_vowels]);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Number of vowels: %d\n&quot;</span>, max_vowels_count);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+
+
+</code></pre>
+<h2 id="third-assignment-optional">Third assignment (optional)</h2>
+<p>I've actually made three assignments this week! The third assignment I completed is assignment 3 - Sorting three strings.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief Compares two strings in a case-insensitive way and returns a value less than, equal to, or greater than zero if the first string should come before, is equal to, or should come after the second string</span>
+<span class="hljs-comment">/// when sorting them alphabetically.</span>
+<span class="hljs-comment">/// @param string1 The first string to compare.</span>
+<span class="hljs-comment">/// @param string2 The second string to compare.</span>
+<span class="hljs-comment">/// @return A value less than, equal to, or greater than zero if the first string should come before, is equal to, or should come after the second string in alphabetical order.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">compare_strings</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> string1[], <span class="hljs-type">const</span> <span class="hljs-type">char</span> string2[])</span>{
+    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (string1[i] != <span class="hljs-string">&#x27;\0&#x27;</span> &amp;&amp; string2[i] != <span class="hljs-string">&#x27;\0&#x27;</span>) {
+        <span class="hljs-keyword">if</span> (string1[i] != string2[i]) {
+            <span class="hljs-keyword">return</span> string1[i] - string2[i];
+        }
+        i++;
+    }
+
+    <span class="hljs-keyword">return</span> string1[i] - string2[i];
+}
+
+<span class="hljs-comment">/// @brief Swaps the contents of two strings, assuming that both strings are stored in arrays of the same size.</span>
+<span class="hljs-comment">/// @param string1 The first string to swap.</span>
+<span class="hljs-comment">/// @param string2 The second string to swap.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">swap_strings</span><span class="hljs-params">(<span class="hljs-type">char</span> string1[], <span class="hljs-type">char</span> string2[])</span>{
+    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(string1[i] != <span class="hljs-string">&#x27;\0&#x27;</span> &amp;&amp; string2[i] != <span class="hljs-string">&#x27;\0&#x27;</span>){
+        <span class="hljs-type">char</span> temp = string1[i];
+        string1[i] = string2[i];
+        string2[i] = temp;
+        i++;
+    }
+
+    <span class="hljs-keyword">while</span> (string1[i] != <span class="hljs-string">&#x27;\0&#x27;</span>)
+    {
+        <span class="hljs-type">char</span> temp = string1[i];
+        string1[i] = string2[i];
+        string2[i] = temp;
+        i++;
+    }
+
+    <span class="hljs-keyword">while</span> (string2[i] != <span class="hljs-string">&#x27;\0&#x27;</span>)
+    {
+        <span class="hljs-type">char</span> temp = string1[i];
+        string1[i] = string2[i];
+        string2[i] = temp;
+        i++;
+    }
+    
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> string1[<span class="hljs-number">300</span>];
+    <span class="hljs-type">char</span> string2[<span class="hljs-number">300</span>];
+    <span class="hljs-type">char</span> string3[<span class="hljs-number">300</span>];
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first string: &quot;</span>);
+    read_string(string1, <span class="hljs-number">300</span>);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second string: &quot;</span>);
+    read_string(string2, <span class="hljs-number">300</span>);
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the third string: &quot;</span>);
+    read_string(string3, <span class="hljs-number">300</span>);
+
+    <span class="hljs-type">int</span> compare1 = compare_strings(string1, string2);
+    <span class="hljs-keyword">if</span>(compare1 &gt; <span class="hljs-number">0</span>){
+    swap_strings(string1, string2);
+    }
+
+    <span class="hljs-type">int</span> compare2 = compare_strings(string2, string3);
+    <span class="hljs-keyword">if</span>(compare2 &gt; <span class="hljs-number">0</span>){
+    swap_strings(string2, string3);
+    }
+
+    <span class="hljs-type">int</span> compare3 = compare_strings(string1, string2);
+    <span class="hljs-keyword">if</span>(compare3 &gt; <span class="hljs-number">0</span>){
+    swap_strings(string1, string2);
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The strings in alphabetical order are: \n%s\n%s\n%s\n&quot;</span>, string1, string2, string3);
+
+}
+
+</code></pre>
+
+            
+            
+        </body>
+        </html>

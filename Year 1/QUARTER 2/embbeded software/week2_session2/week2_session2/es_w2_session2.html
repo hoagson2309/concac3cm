@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 2 - Tutorial 2&colon; Analog to Digital Conversion &lpar;ADC&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-2---tutorial-2-analog-to-digital-conversion-adc">Week 2 - Tutorial 2: Analog to Digital Conversion (ADC)</h1>
+<blockquote>
+<p><strong>Name:</strong> SON CAO</p>
+<p><strong>Group:</strong> ETI1V.IA</p>
+<p><strong>Date:</strong> 22/11/2024</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>This session now will focus on reading analog signals. While you learn about the working principle of analog-to-digital conversion, in Electronic Instrumentation, here we will focus on actually using the ADC peripheral of the Raspberry Pi Pico. We will also learn how to map the read values to a physical quantity and to another range to represent the data on digital outputs (LEDs)</p>
+<p>This is the list of needed equipment for this tutorial (everything is included in your kit):</p>
+<ul>
+<li>Raspberry Pi Pico board (with USB cable, headers soldered)</li>
+<li>Breadboard</li>
+<li>Jumper wires</li>
+<li>Resistors</li>
+<li>1 LED</li>
+<li>1 Potentiometer</li>
+<li>2 7-segment displays</li>
+<li>(1 Photoresistor)</li>
+</ul>
+<h2 id="extra-information-missing-code-completion-in-vscode">Extra information: Missing code completion in VSCode</h2>
+<p>VSCode might not find the headers for code completion even with the C/C++ extension installed. To fix this, right click on the not found header (underlined in squiggly red) and click on <code>Edit includePath setting</code>. Add the following path to the <code>includePath</code> array:</p>
+<pre><code class="language-bash"><span class="hljs-comment">#{env: PICO_SDK_ PATH}/**</span>
+</code></pre>
+<h2 id="activity-1-potentiometer-to-led">Activity 1: Potentiometer to LED</h2>
+<p><strong>Description: Read the value of a potentiometer and display it on in binary</strong></p>
+<p>The analog to digital converter (ADC) is a peripheral that allows us to read analog, continuous, signals and convert them to digital, discrete, values. On a 10-bit ADC the range of output values goes from 0 to 1023, where 0 represents the minimum voltage and 1023 the maximum voltage (reference voltage).</p>
+<p>First we will connect a potentiometer to the Pico and read its value. The potentiometer is a variable resistor, that resistance can be changed by turning a knob. The resistor of the potentiometer acts as a voltage divider, so the voltage at the middle pin is proportional to the position of the knob, it goes from 0V to 3.3V (if connect right). Display the value of the potentiometer on an LED with PWM. The LED should be off when the potentiometer is at the minimum value and fully on when the potentiometer is at the maximum value.</p>
+<p>Here is sample code to read the value of the potentiometer:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    adc_init(); <span class="hljs-comment">// Initialize the ADC</span>
+    adc_gpio_init(<span class="hljs-number">26</span>); <span class="hljs-comment">// Initialize the GPIO pin for the ADC</span>
+    adc_select_input(<span class="hljs-number">0</span>); <span class="hljs-comment">// Select the ADC input, channel 0 = pin 26</span>
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        
+        <span class="hljs-type">uint16_t</span> value = adc_read(); <span class="hljs-comment">// Read the value of the ADC</span>
+        
+        <span class="hljs-comment">// Do something with the value</span>
+        sleep_ms(<span class="hljs-number">100</span>);
+    }
+}
+</code></pre>
+<p><em>Hint: Use the aground pin (pin 33) for the potentiometer for a more stable reading.</em></p>
+<blockquote>
+<p>Question: What is the range of values that you can read from your Pico?</p>
+</blockquote>
+<ul>
+<li>When the potentiometer is turned to its minimum, the scaled ADC value is 0, and the LED is off.</li>
+<li>When the potentiometer is turned to its maximum, the scaled ADC value is 1023, and the LED is fully bright.</li>
+</ul>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Initialize ADC for the potentiometer</span>
+    adc_init();
+    adc_gpio_init(<span class="hljs-number">26</span>); <span class="hljs-comment">// Initialize the GPIO pin for the ADC</span>
+    adc_select_input(<span class="hljs-number">0</span>); <span class="hljs-comment">// Select the ADC input, channel 0 = pin 26</span>
+
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">15</span>;
+    gpio_set_function(LED_PIN, GPIO_FUNC_PWM);
+    uint slice_num = pwm_gpio_to_slice_num(LED_PIN);
+    pwm_set_wrap(slice_num, <span class="hljs-number">1023</span>); <span class="hljs-comment">// Match the 10-bit ADC range</span>
+    pwm_set_gpio_level(LED_PIN, <span class="hljs-number">0</span>); <span class="hljs-comment">// Start with the LED off</span>
+    pwm_set_enabled(slice_num, <span class="hljs-literal">true</span>);
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-type">uint16_t</span> value = adc_read(); <span class="hljs-comment">// Read ADC value (range: 0-1023)</span>
+
+        <span class="hljs-comment">// Scale ADC value to PWM duty cycle and update LED brightness</span>
+        pwm_set_gpio_level(LED_PIN, value);
+
+        sleep_ms(<span class="hljs-number">100</span>); 
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-2-speed-controlled-counter">Activity 2: Speed controlled counter</h2>
+<p><strong>Description: Control the speed of a counter with a potentiometer</strong></p>
+<p>Now let's control the speed of a binary counter with the potentiometer. Modify/combine your counter code from last week with the potentiometer reading. Your program should control the speed of the counter have two options (choose one of them):</p>
+<ol>
+<li>The counter should count up depending on the potentiometer value. On the minimum value the counter should stop, at the maximum value the counter should count 100 times a second. In-between the counter should be controlled linearly. (This is the easier option)</li>
+<li>On the minimum value the counter should count backwards 10 times a second, on the maximum value the counter should count forwards 10 times a second. In-between the counter should be controlled linearly. (This is the harder option)</li>
+</ol>
+<blockquote>
+<p>Question: How can you derive the delay time from the potentiometer value? Give a formula.</p>
+</blockquote>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">display_binary_6_LEDs</span><span class="hljs-params">(<span class="hljs-type">int</span> number, <span class="hljs-type">const</span> uint PIN_LED[<span class="hljs-number">6</span>])</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">5</span>; i &gt;= <span class="hljs-number">0</span>; i--){
+        gpio_put(PIN_LED[i], number % <span class="hljs-number">2</span>);
+        number /= <span class="hljs-number">2</span>;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-type">int</span> counter = <span class="hljs-number">640</span>;
+    <span class="hljs-comment">// Initialize ADC for the potentiometer</span>
+    adc_init();
+    adc_gpio_init(<span class="hljs-number">26</span>); <span class="hljs-comment">// Initialize the GPIO pin for the ADC</span>
+    adc_select_input(<span class="hljs-number">0</span>); <span class="hljs-comment">// Select the ADC input, channel 0 = pin 26</span>
+
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    <span class="hljs-type">const</span> uint PIN_LED[<span class="hljs-number">6</span>] = {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">200</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output   </span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">6</span>; i++){
+        gpio_init(PIN_LED[i]);
+        gpio_set_dir(PIN_LED[i], GPIO_OUT);
+    }
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-type">uint16_t</span> value = adc_read(); <span class="hljs-comment">// Read ADC value (range: 0-4095)</span>
+
+        <span class="hljs-keyword">if</span>(value &gt;= <span class="hljs-number">2049</span>){
+            counter++ ;
+            display_binary_6_LEDs(counter % <span class="hljs-number">64</span>, PIN_LED);
+            sleep_ms(<span class="hljs-number">1000</span> - ((value - <span class="hljs-number">2048</span>) * <span class="hljs-number">900</span> / <span class="hljs-number">2047</span>));
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">2048</span>){
+            counter--;
+            display_binary_6_LEDs(counter % <span class="hljs-number">64</span>, PIN_LED);
+            sleep_ms(<span class="hljs-number">100</span> + (value * <span class="hljs-number">900</span> / <span class="hljs-number">2047</span>));
+        }
+    }
+}
+</code></pre>
+<h2 id="activity-3-potentiometer-to-7-segment-display-sign-off">Activity 3: Potentiometer to 7-segment display (sign-off)</h2>
+<p><strong>Description: Display the value of a potentiometer on a 7-segment display</strong></p>
+<p>Reading the actual value of the potentiometer is not very useful, as it is just a number between 0 and 4095. Therefore we need to map this value to a physical quantity. The potentiometer is connected to the ADC, which has a resolution of 12 bits, meaning it can read values from 0 to 4095. The voltage range of the ADC is 0 to 3.3V, so the value of the ADC is proportional to the voltage at the input pin. (volt = value * 3.3 / 4095)</p>
+<p>To show the measured value in a more human-readable way, we will use 7-segment displays. As you know, a 7-segment display is a common way to display numbers, it consists of 7 LEDs arranged in a specific pattern. By turning on and off the LEDs in the right pattern we can display numbers from 0 to 9. As with all LEDs, we need to use a current limiting resistor to avoid burning them.</p>
+<p>To make this activity easier for you we will start by only displaying the value of the potentiometer on one 7-segment display. The potentiometer value goes from 0 to 4095, but we only can to display numbers from 0 to 9. Therefore we need to map the value of the potentiometer to the range 0 to 9. You will need to find the right formula to do this.</p>
+<blockquote>
+<p>Question: What is the formula to map the value of the potentiometer to the range 0 to 9?</p>
+</blockquote>
+<ul>
+<li>Since we want an integer result for the 7-segment display, we can use integer division:</li>
+<li>Mapped value = (Input value * 9) / 4095</li>
+</ul>
+<blockquote>
+<p>Sign-off: Show your code to your lab teacher or teaching assistant.</p>
+</blockquote>
+<p><em>Note: Here is a function to display a number on a common cathode 7-segment display. Test beforehand if your display is of this kind (segment is off when input is 0)</em></p>
+<pre><code class="language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">display_number</span><span class="hljs-params">(uint number, uint leds[])</span> {
+    <span class="hljs-keyword">if</span> (number &gt; <span class="hljs-number">9</span>) <span class="hljs-keyword">return</span>; <span class="hljs-comment">// Only display numbers from 0 to 9</span>
+
+    <span class="hljs-comment">// Define the pattern for each number</span>
+    uint pattern[] = {<span class="hljs-number">0b00111111</span>, <span class="hljs-number">0b00000110</span>, <span class="hljs-number">0b01011011</span>, <span class="hljs-number">0b01001111</span>, <span class="hljs-number">0b01100110</span>, <span class="hljs-number">0b01101101</span>, <span class="hljs-number">0b01111101</span>, <span class="hljs-number">0b00000111</span>, <span class="hljs-number">0b01111111</span>, <span class="hljs-number">0b01101111</span>};
+    <span class="hljs-comment">// Turn on the right LEDs</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">7</span>; i++) {
+        gpio_put(leds[i], pattern[number] &amp; (<span class="hljs-number">1</span> &lt;&lt; i));
+    }
+}
+</code></pre>
+<p>If you are using the 7-segment display with a BCD decoder (remember the Digital module) you can use your 4-bit binary output function from earlier sessions and need less pins.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_led_pin</span><span class="hljs-params">(uint led_pin)</span>{
+    gpio_init(led_pin);
+    gpio_set_dir(led_pin, GPIO_OUT);
+}
+<span class="hljs-type">void</span> <span class="hljs-title function_">display_number</span><span class="hljs-params">(uint number, uint leds[])</span> {
+    <span class="hljs-keyword">if</span> (number &gt; <span class="hljs-number">9</span>) <span class="hljs-keyword">return</span>; <span class="hljs-comment">// Only display numbers from 0 to 9</span>
+
+    <span class="hljs-comment">// Define the pattern for each number</span>
+    uint pattern[] = {<span class="hljs-number">0b00111111</span>, <span class="hljs-number">0b00000110</span>, <span class="hljs-number">0b01011011</span>, <span class="hljs-number">0b01001111</span>, <span class="hljs-number">0b01100110</span>, <span class="hljs-number">0b01101101</span>, <span class="hljs-number">0b01111101</span>, <span class="hljs-number">0b00000111</span>, <span class="hljs-number">0b01111111</span>, <span class="hljs-number">0b01101111</span>};
+    <span class="hljs-comment">// Turn on the right LEDs</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">7</span>; i++) {
+        gpio_put(leds[i], pattern[number] &amp; (<span class="hljs-number">1</span> &lt;&lt; i));
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Initialize ADC for the potentiometer</span>
+    adc_init();
+    adc_gpio_init(<span class="hljs-number">26</span>); <span class="hljs-comment">// Initialize the GPIO pin for the ADC</span>
+    adc_select_input(<span class="hljs-number">0</span>); <span class="hljs-comment">// Select the ADC input, channel 0 = pin 26</span>
+
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    <span class="hljs-type">const</span> uint PIN_LED[<span class="hljs-number">8</span>] = {<span class="hljs-number">13</span>, <span class="hljs-number">12</span>, <span class="hljs-number">18</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">19</span>};   <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED of 7-segmentation (0 to 6 = LED on 7 segmentation, 7 = DP)</span>
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output   </span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++){
+        setup_led_pin(PIN_LED[i]);
+    }
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-type">uint16_t</span> value = adc_read() * <span class="hljs-number">9</span> / <span class="hljs-number">4095</span>; <span class="hljs-comment">//Scale the raw ADC reading (range: 0–4095) to a smaller range (0–9). This makes the potentiometer control a single-digit display, such as a 7-segment LED.</span>
+        display_number(value, PIN_LED);
+        sleep_ms(<span class="hljs-number">100</span>);    
+    }
+}
+</code></pre>
+<blockquote>
+<p>Extra challenge: Display the voltage measured on two 7-segment displays. The first display should show the integer part of the value and the second display should show the decimal part of the value.</p>
+</blockquote>
+<h2 id="activity-4-internal-temperature-sensor-optional">Activity 4: Internal temperature sensor (optional)</h2>
+<p><strong>Description: Read the internal temperature sensor of the Pico</strong></p>
+<p>The Pico has an interesting feature, it has an internal temperature sensor. This sensor is not very accurate, but it can be useful for some applications, mainly to detect if the Pico is overheating. The temperature sensor is directly connected to the ADC and can be read like any other analog signal. Just select the ADC input 4, furthermore the temperature sensor needs to be enabled with <code>adc_set_temp_sensor_enabled(true);</code>. The value of the temperature sensor is not in degrees Celsius, but in a value that needs to be converted to degrees Celsius. The formula to convert the value to degrees Celsius is:</p>
+<pre><code>temperature = 27 - (voltage - 0.706) / 0.001721
+</code></pre>
+<p>Read the value of the internal temperature sensor and display it on two 7-segment display. The value should be updated every second.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_led_pin</span><span class="hljs-params">(uint led_pin)</span>{
+    gpio_init(led_pin);
+    gpio_set_dir(led_pin, GPIO_OUT);
+}
+<span class="hljs-type">void</span> <span class="hljs-title function_">display_number</span><span class="hljs-params">(uint number, uint leds[])</span> {
+    <span class="hljs-keyword">if</span> (number &gt; <span class="hljs-number">9</span>) <span class="hljs-keyword">return</span>; <span class="hljs-comment">// Only display numbers from 0 to 9</span>
+
+    <span class="hljs-comment">// Define the pattern for each number</span>
+    uint pattern[] = {<span class="hljs-number">0b00111111</span>, <span class="hljs-number">0b00000110</span>, <span class="hljs-number">0b01011011</span>, <span class="hljs-number">0b01001111</span>, <span class="hljs-number">0b01100110</span>, <span class="hljs-number">0b01101101</span>, <span class="hljs-number">0b01111101</span>, <span class="hljs-number">0b00000111</span>, <span class="hljs-number">0b01111111</span>, <span class="hljs-number">0b01101111</span>};
+    <span class="hljs-comment">// Turn on the right LEDs</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">7</span>; i++) {
+        gpio_put(leds[i], pattern[number] &amp; (<span class="hljs-number">1</span> &lt;&lt; i));
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Initialize ADC for the potentiometer</span>
+    adc_init();
+    adc_gpio_init(<span class="hljs-number">28</span>); <span class="hljs-comment">// Initialize the GPIO pin for the ADC</span>
+    adc_select_input(<span class="hljs-number">4</span>); <span class="hljs-comment">// Select the ADC input, channel 4 = pin 28</span>
+    adc_set_temp_sensor_enabled(<span class="hljs-literal">true</span>);
+
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    <span class="hljs-type">const</span> uint PIN_LED1[<span class="hljs-number">8</span>] = {<span class="hljs-number">13</span>, <span class="hljs-number">12</span>, <span class="hljs-number">18</span>, <span class="hljs-number">17</span>, <span class="hljs-number">16</span>, <span class="hljs-number">14</span>, <span class="hljs-number">15</span>, <span class="hljs-number">19</span>};    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED1</span>
+    <span class="hljs-type">const</span> uint PIN_LED2[<span class="hljs-number">8</span>] = {}; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED2</span>
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output   </span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++){
+        setup_led_pin(PIN_LED1[i]); <span class="hljs-comment">//displaying the tens</span>
+        setup_led_pin(PIN_LED2[i]); <span class="hljs-comment">//displaying the ones</span>
+    }
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-type">float</span> voltage = adc_read() * <span class="hljs-number">3.3f</span> / <span class="hljs-number">4095.0f</span>;
+        uint temperature = <span class="hljs-number">27</span> - (voltage - <span class="hljs-number">0.706</span>) / <span class="hljs-number">0.001721</span>;
+        display_number(temperature / <span class="hljs-number">10</span>, PIN_LED1);
+        display_number(temperature % <span class="hljs-number">10</span>, PIN_LED2);
+        sleep_ms(<span class="hljs-number">100</span>);    
+    }
+}
+</code></pre>
+<h2 id="questions-to-answer">Questions to answer:</h2>
+<p>Please answer this reflection questions:</p>
+<ol>
+<li>How long did this tutorial take you?</li>
+</ol>
+<ul>
+<li>3 days</li>
+</ul>
+<ol start="3">
+<li>Did you face difficulties?</li>
+</ol>
+<ul>
+<li>yes, a lot</li>
+</ul>
+<ol start="4">
+<li>What would you like to see improved?</li>
+</ol>
+<ul>
+<li>maybe giving some more examples before starting the actual programs</li>
+</ul>
+<h2 id="sign-off">Sign-off</h2>
+<p>Please show your code of activity 3 to your lab teacher or teaching assistant.</p>
+
+            
+            
+        </body>
+        </html>

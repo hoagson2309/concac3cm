@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 6 - Tutorial 2&colon; Arrays of strings</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-6---tutorial-2-arrays-of-strings">Week 6 - Tutorial 2: Arrays of strings</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 09/10/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>Before writing a program, it is important to think about how to structure it.
+A good way to structure a program is to divide it into smaller parts, each of which performs a specific task.
+Each of these smaller parts can then be implemented as a function that has clear input (i.e., parameters) and output (i.e., return value).</p>
+<p>In this tutorial, you will write several functions that perform specific tasks, and then combine these functions to create a larger program.</p>
+<h3 id="activity-0---set-up-a-folder-for-this-tutorial--create-files">Activity 0 - Set up a folder for this tutorial &amp; create files</h3>
+<p>Open the workspace for this week that you downloaded from Brightspace by opening the <code>.code-workspace</code> file in the root of the workspace folder.
+Alternatively, you can open the workspace from a WSL terminal by typing the <code>code week6.code-workspace</code> command in the folder where you extracted the workspace.</p>
+<p>You'll be working in the <code>tutorial2</code> folder for this tutorial.</p>
+<h2 id="copying-strings">Copying strings</h2>
+<p>Strings are arrays of characters, and arrays can't be copied directly in C.
+However, you can copy the contents of one array to another by copying each element individually.
+The following snippet copies the contents of one array to another:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> array1[<span class="hljs-number">5</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+<span class="hljs-type">int</span> array2[<span class="hljs-number">5</span>];
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+    array2[i] = array1[i];
+}
+</code></pre>
+<p>When copying strings, the length of the string is not known in advance - it is determined by the null terminator character <code>\0</code> at the end of the string.
+This means that instead of copying the elements of the array until a certain index, you need to copy the elements until the null terminator is reached.</p>
+<h3 id="activity-1---copying-strings">Activity 1 - Copying strings</h3>
+<p>In <code>tutorial.c</code>, write a function <code>copy_string</code> that copies the contents of one string to another.
+Instead of copying the string to the beginning of the destination string, the function should copy the string to a specific index in the destination string.
+The function should have the following signature (which is already given in <code>tutorial.h</code>):</p>
+<pre><code class="language-c"><span class="hljs-comment">/// @brief Copies the contents of one string to another.</span>
+<span class="hljs-comment">/// @param destination The string to copy to (it is assumed that the destination string is large enough to hold the source string).</span>
+<span class="hljs-comment">/// @param source The string to copy from.</span>
+<span class="hljs-comment">/// @param destination_index The index in the destination string where the copying should start.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">copy_string</span><span class="hljs-params">(<span class="hljs-type">char</span> destination[], <span class="hljs-type">const</span> <span class="hljs-type">char</span> source[], <span class="hljs-type">size_t</span> destination_index)</span>;
+</code></pre>
+<p>Use the program listed in <code>activity1.c</code> to test your function.
+When it runs correctly, include your definition of the <code>copy_string</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">copy_string</span><span class="hljs-params">(<span class="hljs-type">char</span> destination[], <span class="hljs-type">const</span> <span class="hljs-type">char</span> source[], <span class="hljs-type">size_t</span> destination_index)</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">strlen</span>(source); i ++){
+        destination[destination_index + i] = source[i];
+    }    
+}
+</code></pre>
+<h2 id="concatenating-strings">Concatenating strings</h2>
+<p>To concatenate strings, you can copy the contents of one string to the end of another string.
+This involves finding the null terminator character in the destination string, and then copying the source string to the index of the null terminator.</p>
+<h3 id="activity-2---concatenating-strings">Activity 2 - Concatenating strings</h3>
+<p>Add the definition of the function <code>concatenate_strings</code> to <code>tutorial.c</code>.
+The prototype for the function is given in <code>tutorial.h</code>.</p>
+<p>The function must <em>concatenate</em> two strings, using the <code>copy_string</code> function.
+Use the <code>strlen</code> function from the <code>string.h</code> library to find the length of the destination string, and pass this length as the <code>destination_index</code> parameter to the <code>copy_string</code> function.</p>
+<p>Use the program listed in <code>activity2.c</code> to test your function.
+When it runs correctly, include your definition of the <code>concatenate_strings</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">concatenate_strings</span><span class="hljs-params">(<span class="hljs-type">char</span> destination[], <span class="hljs-type">const</span> <span class="hljs-type">char</span> source[])</span>{
+    <span class="hljs-type">size_t</span> length_destination = <span class="hljs-built_in">strlen</span>(destination);
+    copy_string(destination, source, length_destination);
+}
+</code></pre>
+<h2 id="reversing">Reversing</h2>
+<p>To reverse an array, you can swap the first element with the last element, the second element with the second-to-last element, and so on.
+The following function reverses an array of integers that has a known length:</p>
+<pre><code class="language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">reverse_array</span><span class="hljs-params">(<span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">size_t</span> length)</span> {
+    <span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (i &lt; length) {
+        <span class="hljs-comment">// swap the elements at index i and length - 1</span>
+        <span class="hljs-type">int</span> temp = <span class="hljs-built_in">array</span>[i];
+        <span class="hljs-built_in">array</span>[i] = <span class="hljs-built_in">array</span>[length - <span class="hljs-number">1</span>];
+        <span class="hljs-built_in">array</span>[length - <span class="hljs-number">1</span>] = temp;
+
+        i++;        <span class="hljs-comment">// move to the next element</span>
+        length--;   <span class="hljs-comment">// move to the previous element</span>
+    }
+}
+</code></pre>
+<h3 id="activity-3---reversing-strings">Activity 3 - Reversing strings</h3>
+<p>Add the definition for the function <code>reverse_string</code> to <code>tutorial.c</code>.
+The prototype for the function is given in <code>tutorial.h</code>.
+The function must reverse a string by swapping the characters in the string.</p>
+<p>Use the program listed in <code>activity3.c</code> to test your function.
+When it runs correctly, include your definition of the <code>reverse_string</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">reverse_string</span><span class="hljs-params">(<span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-type">size_t</span> length = <span class="hljs-built_in">strlen</span>(<span class="hljs-built_in">string</span>);
+    <span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(i &lt; length){
+        <span class="hljs-type">char</span> temp = <span class="hljs-built_in">string</span>[i];
+        <span class="hljs-built_in">string</span>[i] = <span class="hljs-built_in">string</span>[length - <span class="hljs-number">1</span>];
+        <span class="hljs-built_in">string</span>[length - <span class="hljs-number">1</span>] = temp;
+        i++;
+        length--;
+    }
+}
+</code></pre>
+<h2 id="palindromes">Palindromes</h2>
+<p>A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward.
+A classic programming problem is to check if a string is a palindrome.
+To do this, you can reverse the string and then compare the reversed string to the original string.
+However, it is not necessary to modify the original string to check if it is a palindrome.
+Instead, you can compare the characters of the string from the beginning and the end, moving towards the middle of the string, just like you would when reversing the string, but without swapping the characters.</p>
+<h3 id="activity-4---checking-if-a-string-is-a-palindrome">Activity 4 - Checking if a string is a palindrome</h3>
+<p>In <code>tutorial.c</code>, write a function <code>is_palindrome</code> that checks if a string is a palindrome.
+The function should have the following signature (already included in <code>tutorial.h</code>):</p>
+<p>Use the program listed in <code>activity4.c</code> to test your function - test it with both palindromes and non-palindromes.
+Examples of palindromes are &quot;racecar&quot; and &quot;level&quot;.</p>
+<p>When you have completed the activity, paste the definition of the <code>is_palindrome</code> function into the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_palindrome</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-type">size_t</span> length = <span class="hljs-built_in">strlen</span>(<span class="hljs-built_in">string</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; length; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">string</span>[i] != <span class="hljs-built_in">string</span>[length - <span class="hljs-number">1</span>]){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        length--;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</code></pre>
+<h2 id="arrays-again">Arrays, again</h2>
+<p>The following program reads 5 strings from the user and stores them in 5 different variables:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> string1[<span class="hljs-number">200</span>];
+    <span class="hljs-type">char</span> string2[<span class="hljs-number">200</span>];
+    <span class="hljs-type">char</span> string3[<span class="hljs-number">200</span>];
+    <span class="hljs-type">char</span> string4[<span class="hljs-number">200</span>];
+    <span class="hljs-type">char</span> string5[<span class="hljs-number">200</span>];
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter 5 sentences:\n&quot;</span>);
+    read_string(string1, <span class="hljs-number">200</span>);
+    read_string(string2, <span class="hljs-number">200</span>);
+    read_string(string3, <span class="hljs-number">200</span>);
+    read_string(string4, <span class="hljs-number">200</span>);
+    read_string(string5, <span class="hljs-number">200</span>);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the following 5 sentences: %s\n%s\n%s\n%s\n%s\n&quot;</span>, string1, string2, string3, string4, string5);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-5---storing-multiple-strings-in-an-array">Activity 5 - Storing multiple strings in an array</h3>
+<p>Rewrite the program listed above (and listed in <code>activity5.c</code>) so that the strings are stored in an array of strings instead of in 5 separate variables.
+Use loops to read the strings from the user and to print the strings.</p>
+<p>When you have completed the activity, paste the contents of <code>activity5.c</code> into the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">5</span>][<span class="hljs-number">200</span>];
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++){
+        read_string(<span class="hljs-built_in">string</span>[i], <span class="hljs-number">200</span>);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the following 5 sentences: \n&quot;</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, <span class="hljs-built_in">string</span>[i]);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-6---printing-strings-in-reverse-order">Activity 6 - Printing strings in reverse order</h3>
+<p>In <code>activity6.c</code>, write a program that reads 10 strings from the user and stores them in an array.
+After reading the strings, the program should print the 10 strings in reverse order.
+That is, the last string entered should be printed first, and the first string entered should be printed last.</p>
+<p>When you have completed the activity, paste the contents of <code>activity6.c</code> into the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>  <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">10</span>][<span class="hljs-number">200</span>];
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
+        read_string(<span class="hljs-built_in">string</span>[i], <span class="hljs-number">200</span>);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the following 10 sentences: \n&quot;</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">9</span>; i &gt;= <span class="hljs-number">0</span>; i--){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, <span class="hljs-built_in">string</span>[i]);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

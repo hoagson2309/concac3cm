@@ -1,0 +1,45 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Fand",
+					"strict" : false
+				},
+				{
+					"name" : "For",
+					"strict" : false
+				},
+				{
+					"name" : "Fxor",
+					"strict" : false
+				},
+				{
+					"name" : "Fnot",
+					"strict" : false
+				},
+				{
+					"name" : "Fnand",
+					"strict" : false
+				},
+				{
+					"name" : "Fnor",
+					"strict" : false
+				},
+				{
+					"name" : "Fxnor",
+					"strict" : false
+				},
+				{
+					"name" : "X",
+					"strict" : false
+				},
+				{
+					"name" : "Y",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

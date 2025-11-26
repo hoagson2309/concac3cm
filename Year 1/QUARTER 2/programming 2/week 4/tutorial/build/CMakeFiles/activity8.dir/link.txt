@@ -1,0 +1,1 @@
+/usr/bin/cc -fsanitize=address CMakeFiles/activity8.dir/activity8.c.o CMakeFiles/activity8.dir/functions.c.o -o activity8 

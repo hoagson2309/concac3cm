@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Assignments - Week 6</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="assignments---week-6">Assignments - Week 6</h1>
+<p>You must complete two out of the three assignments, but you are encouraged to complete all three.
+Below you will find, per assignment, instructions on what you need to include in this markdown file.</p>
+<h2 id="assignment-1---generic-reversal">Assignment 1 - Generic reversal</h2>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;utils.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief Reverse an array.</span>
+<span class="hljs-comment">/// @param array The array to reverse.</span>
+<span class="hljs-comment">/// @param count The number of elements in the array.</span>
+<span class="hljs-comment">/// @param size The size of each element in bytes.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">reverse</span><span class="hljs-params">(<span class="hljs-type">void</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">size_t</span> count, <span class="hljs-type">size_t</span> size)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> integers[<span class="hljs-number">10</span>];
+    <span class="hljs-type">float</span> floats[<span class="hljs-number">12</span>];
+    <span class="hljs-type">char</span> characters[<span class="hljs-number">20</span>];
+
+    fill_random(integers, <span class="hljs-keyword">sizeof</span>(integers) / <span class="hljs-keyword">sizeof</span>(integers[<span class="hljs-number">0</span>]), <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>), <span class="hljs-number">0</span>, <span class="hljs-number">255</span>);
+    fill_random(floats, <span class="hljs-keyword">sizeof</span>(floats) / <span class="hljs-keyword">sizeof</span>(floats[<span class="hljs-number">0</span>]), <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>), <span class="hljs-number">0</span>, <span class="hljs-number">255</span>);
+    fill_random(characters, <span class="hljs-keyword">sizeof</span>(characters) / <span class="hljs-keyword">sizeof</span>(characters[<span class="hljs-number">0</span>]), <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>), <span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;z&#x27;</span>);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Original arrays:\n&quot;</span>);
+    print_ints(integers, <span class="hljs-keyword">sizeof</span>(integers) / <span class="hljs-keyword">sizeof</span>(integers[<span class="hljs-number">0</span>]));
+    print_floats(floats, <span class="hljs-keyword">sizeof</span>(floats) / <span class="hljs-keyword">sizeof</span>(floats[<span class="hljs-number">0</span>]));
+    print_chars(characters, <span class="hljs-keyword">sizeof</span>(characters) / <span class="hljs-keyword">sizeof</span>(characters[<span class="hljs-number">0</span>]));
+
+    reverse(integers, <span class="hljs-keyword">sizeof</span>(integers) / <span class="hljs-keyword">sizeof</span>(integers[<span class="hljs-number">0</span>]), <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));
+    reverse(floats, <span class="hljs-keyword">sizeof</span>(floats) / <span class="hljs-keyword">sizeof</span>(floats[<span class="hljs-number">0</span>]), <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>));
+    reverse(characters, <span class="hljs-keyword">sizeof</span>(characters) / <span class="hljs-keyword">sizeof</span>(characters[<span class="hljs-number">0</span>]), <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n\nAfter reversing:\n&quot;</span>);
+    print_ints(integers, <span class="hljs-keyword">sizeof</span>(integers) / <span class="hljs-keyword">sizeof</span>(integers[<span class="hljs-number">0</span>]));
+    print_floats(floats, <span class="hljs-keyword">sizeof</span>(floats) / <span class="hljs-keyword">sizeof</span>(floats[<span class="hljs-number">0</span>]));
+    print_chars(characters, <span class="hljs-keyword">sizeof</span>(characters) / <span class="hljs-keyword">sizeof</span>(characters[<span class="hljs-number">0</span>]));
+}
+
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">reverse</span><span class="hljs-params">(<span class="hljs-type">void</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">size_t</span> count, <span class="hljs-type">size_t</span> size)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement this function!</span>
+    <span class="hljs-type">char</span> *array_ptr = (<span class="hljs-type">char</span> *)<span class="hljs-built_in">array</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; count / <span class="hljs-number">2</span>; i++){
+        <span class="hljs-type">char</span> *front = array_ptr + i * size;
+        <span class="hljs-type">char</span> *back = array_ptr + (count - <span class="hljs-number">1</span> - i) * size;
+
+        <span class="hljs-comment">//swap element front and back</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> j = <span class="hljs-number">0</span>; j &lt; size; j++){
+            <span class="hljs-type">char</span> temp = front[j];
+            front[j] = back[j];
+            back[j] = temp;
+        }
+    }
+}
+
+</code></pre>
+<h2 id="assignment-2---sorting-by-birthday">Assignment 2 - Sorting by birthday</h2>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;persons.h&quot;</span></span>
+
+
+<span class="hljs-comment">/// @brief compare 2 people by their birthday.</span>
+<span class="hljs-comment">/// @param a Pointer to the first person.</span>
+<span class="hljs-comment">/// @param b Pointer to the second person.</span>
+<span class="hljs-comment">/// @return Negative if &#x27;a&#x27; birthday is earlier, positive if &#x27;b&#x27; birthday is earlier, 0 if both are equal.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">compare_birthdays</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span>{
+    <span class="hljs-type">const</span> <span class="hljs-type">person_t</span> *p1 = (<span class="hljs-type">const</span> <span class="hljs-type">person_t</span> *)a;
+    <span class="hljs-type">const</span> <span class="hljs-type">person_t</span> *p2 = (<span class="hljs-type">const</span> <span class="hljs-type">person_t</span> *)b;
+
+    <span class="hljs-comment">//Casting the void * to const person_t * allows you to work with a and b as pointers to person_t objects.</span>
+    <span class="hljs-comment">//const ensures you don&#x27;t accidentally modify the data.</span>
+    <span class="hljs-comment">//This pattern is necessary whenever using a generic function like qsort that works with void *.</span>
+
+    <span class="hljs-comment">//compare years</span>
+    <span class="hljs-keyword">if</span>(p1-&gt;birthdate.year != p2-&gt;birthdate.year){
+        <span class="hljs-keyword">return</span> p1-&gt;birthdate.year - p2-&gt;birthdate.year;
+    }
+
+    <span class="hljs-comment">//compare months</span>
+    <span class="hljs-keyword">if</span>(p1-&gt;birthdate.month != p2-&gt;birthdate.month){
+        <span class="hljs-keyword">return</span> p1-&gt;birthdate.month - p2-&gt;birthdate.month;
+    }
+
+    <span class="hljs-comment">//compare days</span>
+    <span class="hljs-keyword">return</span> p1-&gt;birthdate.day - p2-&gt;birthdate.day;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// Open file</span>
+    FILE *file = fopen(<span class="hljs-string">&quot;calendar.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Could not open file.\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-comment">// Read persons from file</span>
+    <span class="hljs-type">size_t</span> count;   <span class="hljs-comment">// used to store the number of persons read</span>
+    <span class="hljs-type">person_t</span> *persons = read_persons(file, &amp;count);
+    fclose(file);
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Sort persons by age using qsort (you will need to define a comparison function!)</span>
+    qsort(persons, count, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">person_t</span>), compare_birthdays);
+
+    <span class="hljs-comment">// Print persons</span>
+    print_persons(persons, count);
+
+    <span class="hljs-comment">// Free memory</span>
+    free_persons(persons, count);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
+}
+
+</code></pre>
+<h2 id="assignment-3---finding-the-maximum">Assignment 3 - Finding the &quot;maximum&quot;</h2>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+</code></pre>
+
+            
+            
+        </body>
+        </html>

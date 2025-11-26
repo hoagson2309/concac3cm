@@ -1,0 +1,6 @@
+list_reverse_test 4 0.425122
+expression_eval_test 4 0.596942
+quick_sort_test 6 1.41789
+merge_sort_test 4 0.648165
+selection_sort_test 5 39.6384
+---

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Permissions &amp; scripts</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <p>For all the exercises in this week, you'll work with <strong>bash</strong> in a <strong>terminal emulator</strong> in your Linux environment.</p>
+<h2 id="permissions--scripts">Permissions &amp; scripts</h2>
+<p>You will need to paste <strong>all the commands</strong> that you entered in the terminal in this exercise, <strong>including their output</strong>. A placeholder for pasting the commands is provided below.</p>
+<blockquote>
+<p>All the steps must be done in the terminal in a Linux shell. No other tools are allowed.</p>
+</blockquote>
+<ol>
+<li>
+<p>Go to the <code>week1</code> directory in your home directory (you should have created it in the previous exercise).</p>
+</li>
+<li>
+<p>Create a file called <code>hello.sh</code> in the <code>week1</code> directory.</p>
+</li>
+<li>
+<p>Open the file <code>hello.sh</code> in a text editor of your choice (nano, vim, gedit, micro)</p>
+</li>
+<li>
+<p>Type in the following content in this file, <strong>save the changes</strong> and exit the editor:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;You are <span class="hljs-subst">$(whoami)</span> and today is <span class="hljs-subst">$(date)</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;You are using <span class="hljs-subst">$(uname -s)</span> kernel version <span class="hljs-subst">$(uname -r)</span>&quot;</span>
+</code></pre>
+</li>
+<li>
+<p>Run the script <code>hello.sh</code> in the terminal by typing:</p>
+<pre><code class="language-bash">bash hello.sh
+</code></pre>
+<p>What is the output of the script? (Copy-paste the output below in the placeholder.)</p>
+</li>
+<li>
+<p>Try to run the the script directly by typing:</p>
+<pre><code class="language-bash">./hello.sh
+</code></pre>
+<p>What is the output? (Copy-paste the output below in the placeholder.)</p>
+</li>
+<li>
+<p>Change the permissions of the file <code>hello.sh</code> so that it is executable by the owner and the group, but not by others.</p>
+</li>
+<li>
+<p>Use the <code>ls</code> command to display the permissions of the file <code>hello.sh</code>.</p>
+</li>
+<li>
+<p>Run the script <code>hello.sh</code> in the terminal again by typing:</p>
+<pre><code class="language-bash">./hello.sh
+</code></pre>
+<p>What is the output? (Copy-paste the output below in the placeholder.)</p>
+</li>
+</ol>
+<p>My commands and output:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> copy-paste the commands that you entered in the terminal and the output you got, if any</span>
+bash hello.sh
+You are hoagson and today is Thu Feb 20 16:31:42 CET 2025
+You are using Linux kernel version 5.15.167.4-microsoft-standard-WSL2
+
+<span class="hljs-built_in">ls</span>
+<span class="hljs-string">&#x27;SET 01 - LOGBOOK.md&#x27;</span>   hello.sh
+
+./hello.sh 
+You are hoagson and today is Thu Feb 20 16:31:49 CET 2025
+You are using Linux kernel version 5.15.167.4-microsoft-standard-WSL2
+</code></pre>
+<h2 id="environment-variables--other-useful-information">Environment variables &amp; other useful information</h2>
+<p>Create a bash script that prints the following information in this order:</p>
+<ul>
+<li>The current date and time.</li>
+<li>The user that is executing the script.</li>
+<li>The path to the user's home directory.</li>
+<li>The path to the current working directory.</li>
+<li>The terminal type.</li>
+<li>The shell used by the user.</li>
+<li>The contents of the PATH variable.</li>
+<li>The physical memory available in the system.</li>
+<li>The number of CPU cores in the system.</li>
+</ul>
+<p>The following commands will be useful for this exercise: <code>echo</code>, <code>date</code>, <code>whoami</code>, <code>id -un</code>, <code>pwd</code>, <code>free</code>, <code>nproc</code>.
+Also, you'll need to use the following environment variables: <code>HOME</code>, <code>TERM</code>, <code>SHELL</code>, <code>PATH</code>.</p>
+<p>When printing information, make it as clear as possible. For example, if you are printing the current date and time, you can print it like this:</p>
+<pre><code class="language-text">Current date and time: 2021-09-01 10:00:00
+</code></pre>
+<p>Solution:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Current date and time: <span class="hljs-subst">$(date)</span>&quot;</span>
+
+<span class="hljs-comment"># Paste the rest of your solution here</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;User executing the script: <span class="hljs-subst">$(whoami)</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;User&#x27;s home directory: <span class="hljs-variable">$HOME</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Current working directory: <span class="hljs-subst">$(pwd)</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Terminal type: <span class="hljs-variable">$TERM</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;User&#x27;s shell: <span class="hljs-variable">$SHELL</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;PATH variable: <span class="hljs-variable">$PATH</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Physical memory available: <span class="hljs-subst">$(free -h | awk &#x27;/Mem:/ {print $7}&#x27;)</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Number of CPU cores: <span class="hljs-subst">$(nproc)</span>&quot;</span>
+</code></pre>
+<p>My output:
+(Run your script and paste the output below)</p>
+<pre><code class="language-text">Current date and time: Tue Feb 11 13:44:19 CET 2025
+User that is executing the script: hoagson
+The path to the user&#x27;s home directory: /home/hoagson
+Current working directory: /home/hoagson
+Terminal type: xterm-256color
+hoagson@SonCao-Acer:~$ echo &quot;User&#x27;s shell: $SHELL&quot;
+User&#x27;s shell: /bin/bash
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin/:/mnt/c/Program Files/IVI Foundation/VISA/Win64/Bin/:/mnt/c/Program Files (x86)/IVI Foundation/VISA/WinNT/Bin:/mnt/c/Users/hoang/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/hoang/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/intelFPGA_lite/20.1/modelsim_ase/win32aloem:/mnt/c/MinGW/bin:/snap/bin
+Physical memory available: 6.6Gi
+Number of gpu cores: 16
+</code></pre>
+<h2 id="command-line-arguments">Command-line arguments</h2>
+<p>Starting with this exercise, you'll pass arguments to the script. This is done in the usual way, for instance:</p>
+<pre><code class="language-bash">bash script.sh 5 alice
+</code></pre>
+<p>Passes two arguments to the script <code>script.sh</code>. The first argument is <code>5</code> and the second argument is <code>alice</code>.</p>
+<p>To receive those arguments in the script, you use the pre-defined variables <code>$1</code>, <code>$2</code>, <code>$3</code>, etc. For instance, <code>$1</code> will contain the first argument, <code>$2</code> the second, and so on. The number of arguments passed to the script is stored in the variable <code>$#</code>.</p>
+<h3 id="task">Task</h3>
+<p>Create a bash script that receives a number as an argument and prints the following information:</p>
+<ul>
+<li>If the number is even or odd.</li>
+<li>If the number is positive or negative.</li>
+<li>If the argument passed is not a number, print an error message and exit.</li>
+</ul>
+<p>The following built-in bash commands will be useful for this exercise: <code>if</code>, <code>else</code>, <code>fi</code>, <code>test</code>.</p>
+<p>Solution:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment"># get the number passed to the script</span>
+number=<span class="hljs-variable">$1</span>
+
+<span class="hljs-comment"># Paste the rest of your solution here</span>
+<span class="hljs-comment">#check if the number is a number</span>
+<span class="hljs-keyword">if</span> !  [[ <span class="hljs-string">&quot;<span class="hljs-variable">$number</span>&quot;</span> =~ ^-?[0-9]+$ ]]; <span class="hljs-keyword">then</span> 
+<span class="hljs-comment">#!: The negation operator, meaning &quot;if it does NOT match the regex&quot;.</span>
+<span class="hljs-comment">#[[ ... ]]: This is a Bash test expression used for pattern matching.</span>
+<span class="hljs-comment">#^-?: The ^ ensures the match starts at the beginning of the string. The -? means an optional negative sign (- can appear once or not at all).</span>
+<span class="hljs-comment">#[0-9]+: Matches one or more digits (0-9).</span>
+<span class="hljs-comment">#$: Ensures the match goes to the end of the string (so no extra characters).</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: Argument pass is not a number.&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">if</span> (( number % 2 == 0)); <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number <span class="hljs-variable">$number</span> is even.&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number <span class="hljs-variable">$number</span> is odd.&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">if</span> ((number &gt; 0)); <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number <span class="hljs-variable">$number</span> is positive.&quot;</span>
+<span class="hljs-keyword">elif</span> (( number &lt; 0)); <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number <span class="hljs-variable">$number</span> is negative.&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The number <span class="hljs-variable">$number</span> is zero.&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+</code></pre>
+<p>My output when run with the number 5 and with -2:</p>
+<p>(Paste the output of your script below)</p>
+<pre><code class="language-text">The number 5 is odd.
+The number 5 is positive.
+
+The number  is even.
+The number -2 is negative.
+</code></pre>
+<h2 id="counting-strings">Counting strings</h2>
+<p>Create a bash script that receives a string as an argument and prints the following information:</p>
+<ul>
+<li>The number of characters in the string.</li>
+<li>The number of words in the string.</li>
+</ul>
+<p>Again, take care to format the output in a clear way.</p>
+<p>You'll find the following commands useful: <code>echo</code>, <code>wc</code>.</p>
+<p>Solution:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment"># get the string passed to the script</span>
+string=<span class="hljs-variable">$1</span>
+
+<span class="hljs-comment"># Paste the rest of your solution here</span>
+
+<span class="hljs-comment">#check if the argument is provided </span>
+<span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> ];<span class="hljs-keyword">then</span> <span class="hljs-comment"># The -z flag checks if the string that follows is empty or unset (true) if not (false).</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: No string provided&quot;</span>
+    <span class="hljs-built_in">exit</span> 1;
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment">#count the number of characters in the string</span>
+<span class="hljs-comment"># echo -n &quot;$string&quot; prints the string without a trailing newline</span>
+char_count=$(<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> | <span class="hljs-built_in">wc</span> -m) <span class="hljs-comment"># wc -m counts the number of characters in the string</span>
+
+<span class="hljs-comment">#count the number of words in the string    </span>
+word_count=$(<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> | <span class="hljs-built_in">wc</span> -w) <span class="hljs-comment"># wc -w counts the number of words in the string.</span>
+
+<span class="hljs-comment">#print the result</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Input string: &#x27;<span class="hljs-variable">$string</span>&#x27;&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Number of characters: <span class="hljs-variable">$char_count</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Number of words: <span class="hljs-variable">$word_count</span>&quot;</span>
+</code></pre>
+<p>My output when run with the string &quot;Hello, World! I'm doing bash!&quot;:</p>
+<p>(Paste the output of your script below)</p>
+<pre><code class="language-text">./counting.sh &quot;Hello, World! I&#x27;m doing bash!&quot;
+Input string: &#x27;Hello, World! I&#x27;m doing bash!&#x27;
+Number of characters: 29
+Number of words: 5
+</code></pre>
+<h2 id="reading-from-files-and-from-the-internet">Reading from files and from the internet</h2>
+<p>Create a bash script that receives a file name and prints the content of the internet resource located at the URL specified in the file. The URL is the only line in the file.</p>
+<blockquote>
+<p>Do not save the file downloaded from the internet to the disk. Use a pipe to read the content of the file directly from the internet.</p>
+</blockquote>
+<p>You'll find the following commands useful: <code>cat</code>, <code>wget</code>. You might also need to use <code>xargs</code>.</p>
+<p>Solution:</p>
+<p>(Paste your solution here)</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment">#check if a file name is provided as an argument</span>
+<span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> ]; <span class="hljs-keyword">then</span> <span class="hljs-comment"># The -z flag checks if the string that follows is empty or unset.</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: No file name provide.&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment">#Read file name from the first argument</span>
+file_name=<span class="hljs-variable">$1</span>
+
+<span class="hljs-comment">#check if the file exists</span>
+<span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$file_name</span>&quot;</span> ]; <span class="hljs-keyword">then</span> <span class="hljs-comment">#The -f flag checks if the file exists and is a regular file (not a directory or special file) if correct return true, else false.</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: File &#x27;<span class="hljs-variable">$file_name</span>&#x27; does not exist.&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment">#Read the URL from the file (assuming the URL is the only line in the file)</span>
+url=$(<span class="hljs-built_in">cat</span> <span class="hljs-string">&quot;%file_name&quot;</span>) <span class="hljs-comment">#cat &quot;$file_name&quot;: This reads the contents of the file whose name is stored in the variable file_name.</span>
+
+<span class="hljs-comment">#check if the URL is empty</span>
+<span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$url</span>&quot;</span> ]; <span class="hljs-keyword">then</span> <span class="hljs-comment">#-z is a flag that checks if the string that follows is empty (i.e., has zero length).</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: the file &#x27;<span class="hljs-variable">$file_name</span>&#x27; is empty or does not contain a URL.&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+wget -qO- <span class="hljs-string">&quot;<span class="hljs-variable">$url</span>&quot;</span> 
+
+<span class="hljs-comment"># -q: Quiet mode (suppresses unnecessary output from wget).</span>
+<span class="hljs-comment"># -O-: Outputs the content to standard output (instead of saving it to a file).</span>
+</code></pre>
+<p>My output when run with a file named <code>address.in</code>:</p>
+<p>(Paste the output of your script below)</p>
+<pre><code class="language-text">**ALL YOUR BASE ARE BELONG TO US!**
+
+See [Wikipedia](https://en.wikipedia.org/wiki/All_your_base_are_belong_to_us) for more information;).
+</code></pre>
+<h2 id="tabular-data-processing-option-a">Tabular data processing (Option A)</h2>
+<blockquote>
+<p><em>You can choose to either do this exercise or the next one. You don't need to do both. Naturally, you can do both if you want to.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>YOU ABSOLUTELY MUST NO USE <code>AWK</code> FOR THIS EXERCISE.</strong></p>
+</blockquote>
+<p>A text file has the following format:</p>
+<pre><code class="language-text">Name: category1, category2, category3,...categoryN
+Person1: value11, value12, value13,...value1N
+Person2: value21, value22, value23,...value2N
+...
+PersonM: valueM1, valueM2, valueM3,...valueMN
+</code></pre>
+<p>You can see an example of this file in the <code>favs.in</code> file.</p>
+<p>Create a bash script that <em>receives an input file name</em> as an argument and:</p>
+<ol>
+<li>
+<p>Checks if a file name was passed as an argument. If not, asks the user for the file name.</p>
+</li>
+<li>
+<p>Checks if the file exists. If not, print an error message and exit.</p>
+</li>
+<li>
+<p>Processes the file and outputs the following information in this order:</p>
+<pre><code class="language-text">Categories: category1 category2 category3...categoryN
+
+category1: value11 value21 value31...valueM1
+category2: value12 value22 value32...valueM2
+category3: value13 value23 value33...valueM3
+...
+categoryN: value1N value2N value3N...valueMN
+</code></pre>
+</li>
+</ol>
+<p>For the example input file, you can see the expected output in the <code>favs.out</code> file.</p>
+<blockquote>
+<p>You already have almost all the tools to do this exercise. It's mostly <code>cut</code> and <code>tr</code> commands, perhaps <code>sed</code> or <code>grep</code>.</p>
+</blockquote>
+<blockquote>
+<p>Tip: to concatenate strings in bash, you can use the <code>+=</code> operator. For instance, <code>text+=&quot;$fragment&quot;</code> will append the value stored in <code>fragment</code> to the <code>text</code> variable.</p>
+</blockquote>
+<blockquote>
+<p><code>echo -n</code> will print a string without a newline at the end.</p>
+</blockquote>
+<p>Solution:</p>
+<p>(Paste your solution here)</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment"># check if an argument was passed to the script and react accordingly</span>
+<span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Please enter the file name: &quot;</span> file_name <span class="hljs-comment">#ask user for a filename</span>
+<span class="hljs-keyword">else</span>
+    file_name=<span class="hljs-variable">$1</span>
+<span class="hljs-keyword">fi</span>
+
+
+<span class="hljs-comment"># check if the file exists and react accordingly</span>
+<span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$file_name</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: File &#x27;<span class="hljs-variable">$file_name</span>&#x27; does not exist.&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+
+<span class="hljs-comment"># extract and print the categories from the first line of the file</span>
+<span class="hljs-comment"># tip: it is smart to save the categories in a variable, e.g. `categories`</span>
+catagories=$(<span class="hljs-built_in">head</span> -n 1 <span class="hljs-string">&quot;<span class="hljs-variable">$file_name</span>&quot;</span> | <span class="hljs-built_in">cut</span> -d: -f2 | <span class="hljs-built_in">tr</span> -d <span class="hljs-string">&#x27;,&#x27;</span> | <span class="hljs-built_in">tr</span> -s <span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-comment">#The first line of the file is read using head -n 1, the categories are extracted using cut -d: -f2 (splitting by : and taking the second field). Commas are removed using tr -d &#x27;,&#x27;, and extra spaces are trimmed using tr -s &#x27; &#x27;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Categories: <span class="hljs-variable">$categories</span>&quot;</span>
+
+
+
+<span class="hljs-comment"># create a variable to store the current category index</span>
+index=1
+
+
+<span class="hljs-comment"># for each category in the categories variable, do the following:</span>
+<span class="hljs-comment">#   - for each line in the file, starting with the second:</span>
+<span class="hljs-comment">#      * extract the value of the category and either print it or concatenate it to an output variable</span>
+<span class="hljs-comment">#   - print the output variable (if you have it)</span>
+<span class="hljs-comment">#   - increment the index variable</span>
+
+<span class="hljs-comment">#loop through each category</span>
+<span class="hljs-keyword">for</span> category <span class="hljs-keyword">in</span> <span class="hljs-variable">$categories</span>; <span class="hljs-keyword">do</span>
+    <span class="hljs-comment">#Initialize an output variable for the current category</span>
+    output=<span class="hljs-string">&quot;<span class="hljs-variable">$category</span>:&quot;</span>
+
+    <span class="hljs-comment">#loop through each line in the file, starting with the second line</span>
+    <span class="hljs-built_in">tail</span> -n +2 <span class="hljs-string">&quot;<span class="hljs-variable">$file_name</span>&quot;</span> | <span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r line; <span class="hljs-keyword">do</span>
+        <span class="hljs-comment">#extract value for current category</span>
+        value=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span> | <span class="hljs-built_in">cut</span> -d: -2 | <span class="hljs-built_in">cut</span> -d, -f<span class="hljs-variable">$index</span> | <span class="hljs-built_in">tr</span> -d <span class="hljs-string">&#x27; &#x27;</span>)
+        <span class="hljs-comment">#append the value to the output variable</span>
+        output+=<span class="hljs-string">&quot; <span class="hljs-variable">$value</span>&quot;</span>
+    <span class="hljs-keyword">done</span>
+
+    <span class="hljs-comment">#print the output for the current category</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$output</span>&quot;</span>
+
+    <span class="hljs-comment">#increment the index variable</span>
+    index=$((index + <span class="hljs-number">1</span>))
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>The biggest challenge in this exercise is probably to read the file line-by-line starting with the second line only. If you struggle with it, either skip it or ask for help.</p>
+<h3 id="what-do-you-like">What do you like?</h3>
+<blockquote>
+<p><em>You can choose to either do this exercise or the next one. You don't need to do both. Naturally, you can do both if you want to.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>YOU ABSOLUTELY MUST NO USE <code>AWK</code> FOR THIS EXERCISE.</strong></p>
+</blockquote>
+<p>Create a bash script that receives a file name as an argument and asks the user some questions based on the content of the file. The file will have the following structure:</p>
+<pre><code>Color: Red, Green, Blue
+Animal: Dog, Cat, Fish, Spider
+</code></pre>
+<p>Do not assume that there will be only two lines and that the values will be the same as in the example above. The file can have any number of lines and the values can be anything.</p>
+<p>With the file above, the script should first ask the user what is they favorite color and then what is their favorite animal. Like this:</p>
+<pre><code class="language-text">What is your favorite Color?
+1) Red
+2) Green
+3) Blue
+#? 
+1
+What is your favorite Animal?
+1) Dog
+2) Cat
+3) Fish
+4) Spider
+#?
+1
+</code></pre>
+<p>After the user answers both questions, the script should print a message like this:</p>
+<pre><code class="language-text">Your favorite color is Red. Your favorite animal is Dog.
+</code></pre>
+<p>To do this exercise, you'll need to read the file <a href="https://stackoverflow.com/a/10929511">line-by-line, as explained in this SO answer</a>.</p>
+<p>You'll also need to cut and parse the lines to get the name (the part before the <code>:</code>) and the values (the part after the <code>:</code>). You can use the <code>cut</code> with <code>-d</code> and <code>-f</code> options command to do this.</p>
+<p>You can also use the <code>tr</code> command to remove commas, you'll need it to be able to use the <code>select</code> command.</p>
+<p>To get this exercise done, you'll have to combine <code>cut</code> and <code>tr</code> using pipes.</p>
+<blockquote>
+<p>Input to this exercise is in the <code>select.in</code> file.</p>
+</blockquote>
+<p>Sketch of the solution:</p>
+<p>(Paste your finished solution here)</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment"># get the file name passed to the script</span>
+file=<span class="hljs-variable">$1</span>
+
+<span class="hljs-comment">#check if the file exists</span>
+<span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error: File &#x27;<span class="hljs-variable">$file</span>&#x27; does not exist.&quot;</span>
+    exist 1
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># create a variable to store the text to be printed at the end of the script</span>
+text=<span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-comment"># read the file line by line</span>
+<span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r line; <span class="hljs-keyword">do</span> <span class="hljs-comment">#read -r reads the line without interpreting backslashes as escape characters.</span>
+<span class="hljs-comment">#   - extract the category name from the line using `cut`, and save it in the `name` variable</span>
+    name=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span> | <span class="hljs-built_in">cut</span> -d: -f1 | <span class="hljs-built_in">tr</span> -d <span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-comment">#tr -d &#x27; &#x27; removes any spaces around the category name.</span>
+<span class="hljs-comment">#   - extract the values from the line using `cut` and then `tr` to split the values into rows</span>
+    values=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span> | <span class="hljs-built_in">cut</span> -d: -f2 | <span class="hljs-built_in">tr</span> -d <span class="hljs-string">&#x27;,&#x27;</span> | <span class="hljs-built_in">tr</span> -s <span class="hljs-string">&#x27; &#x27;</span>) <span class="hljs-comment">#tr -s &#x27; &#x27; reduces multiple spaces to a single space.</span>
+
+    <span class="hljs-comment">#convert the values into an array</span>
+    IFS=<span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-built_in">read</span> -r -a value_array &lt;&lt;&lt; <span class="hljs-string">&quot;<span class="hljs-variable">$values</span>&quot;</span>
+
+<span class="hljs-comment">#   - ask the user for the favorite value of the category using `select`</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;What is your favorite <span class="hljs-variable">$name</span>?&quot;</span>
+    select value <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${value_array[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span> <span class="hljs-comment">#creates an interactive menu for the user.</span>
+        <span class="hljs-keyword">if</span> [[ -n <span class="hljs-string">&quot;<span class="hljs-variable">$value</span>&quot;</span> ]]; <span class="hljs-keyword">then</span> <span class="hljs-comment">#ensures that the value variable is not empty (i.e., the user selected a valid option from the list).</span>
+
+<span class="hljs-comment">#       * append the answer to the `text` variable, like this: `text=&quot;$text Your favorite $name is $value.&quot;`</span>
+        text=<span class="hljs-string">&quot;<span class="hljs-variable">$text</span> Your favorite <span class="hljs-variable">$name</span> is <span class="hljs-variable">$value</span>.&quot;</span>
+        <span class="hljs-built_in">break</span>
+        <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Invalid selection. Please try again.&quot;</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">done</span>
+<span class="hljs-keyword">done</span> &lt; <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span> <span class="hljs-comment">#This marks the end of the while loop that reads the file line by line.</span>
+<span class="hljs-comment">#print the final message</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$text</span>&quot;</span>
+</code></pre>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

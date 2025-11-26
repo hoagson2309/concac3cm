@@ -1,0 +1,19 @@
+Start testing: Nov 01 20:12 CET
+----------------------------------------------------------
+6/6 Testing: separate_chaining_test
+6/6 Test: separate_chaining_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/scripts/test.py" "separate_chaining" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/separate_chaining/tests/separate_chaining_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/build/separate_chaining
+"separate_chaining_test" start time: Nov 01 20:12 CET
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   1.10 sec
+----------------------------------------------------------
+Test Passed.
+"separate_chaining_test" end time: Nov 01 20:12 CET
+"separate_chaining_test" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Nov 01 20:12 CET

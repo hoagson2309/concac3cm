@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -fsanitize=address -fsanitize=undefined CMakeFiles/satellites.dir/main.cpp.o -o satellites 

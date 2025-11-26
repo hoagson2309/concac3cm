@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 6 - Tutorial 1&colon; Working with strings</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-6---tutorial-1-working-with-strings">Week 6 - Tutorial 1: Working with strings</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 08/10/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>Arrays are a fundamental concept in programming, and are used to store multiple values of the same type in a single variable.
+In this tutorial, you will learn how to use arrays to store values entered by the user, and how to use loops to iterate over the elements in an array.
+You will also learn how to print the contents of an array on a single line, and how to filter the elements in an array based on some condition.</p>
+<h3 id="activity-0---update-the-system">Activity 0 - Update the system</h3>
+<p>Before you start with this tutorial, make sure your system is up-to-date by running the following commands in the terminal:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+</code></pre>
+<h3 id="activity-1---open-the-workspace-for-this-week">Activity 1 - Open the workspace for this week</h3>
+<p>Open the workspace for this week that you downloaded from Brightspace by opening the <code>.code-workspace</code> file in the root of the workspace folder.
+Alternatively, you can open the workspace from a WSL terminal by typing the <code>code week6.code-workspace</code> command in the folder where you extracted the workspace.</p>
+<h2 id="ascii-values">ASCII values</h2>
+<p>Each <code>char</code> in C is represented by an ASCII value, which is a number that represents a character.
+Characters can be printed to the console using the <code>printf</code> function, and the <code>%c</code> format specifier.
+But since characters are represented by numbers, you can also print the ASCII value of a character by using the <code>%d</code> format specifier.</p>
+<h3 id="activity-2---printing-ascii-values">Activity 2 - Printing ASCII values</h3>
+<p>Write a program in <code>activity2.c</code> that uses the <code>isprint</code> function from the <code>ctype.h</code> library to check if a character is printable.
+The program must list the characters from ASCII value 0 to 127, and indicate for each character whether it is printable or not.
+If the character is printable, the program should also print the character itself.
+Use the <code>%3d</code> format specifier to print the ASCII value of each character, and the <code>%c</code> format specifier to print the character itself.</p>
+<p>List the contents of the <code>activity2.c</code> file in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">128</span>; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">isprint</span>(i)){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%3d: %c\n&quot;</span>, i , i);
+        }
+        <span class="hljs-keyword">else</span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%3d: not printable\n&quot;</span>, i);
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="reading-and-printing-strings">Reading and printing strings</h2>
+<p>To print a string in C, you can use the <code>printf</code> function, and use the <code>%s</code> format specifier.
+Since a string is just a sequence (array) of characters, you can also print each character of the string individually by using a loop to iterate over the characters in the string.
+Of course, you need to know when the string ends, which is indicated by the null terminator character <code>\0</code>.</p>
+<h3 id="activity-3---printing-a-string">Activity 3 - Printing a string</h3>
+<p>In file <code>tutorial.c</code>, write a function <code>print_string</code> that prints a string to the console, by writing each character of the string to the console, followed by a newline character.
+The prototype for this is given in <code>tutorial.h</code>.</p>
+<p>The function must not use the <code>printf</code> function to print the string, but should instead print each character individually.
+Also, it must not use the <code>strlen</code> function to determine the length of the string, but should instead iterate over the characters in the string until the null terminator character is reached.</p>
+<p>The file <code>activity3.c</code> contains a <code>main</code> function that you can use to test your function (make sure to include the files <code>tutorial.c</code> and <code>functions.c</code> when building the program).
+When the tests show that the function works correctly, paste your definition of the <code>print_string</code> function into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;tutorial.h&quot;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_string</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">string</span>[i] != <span class="hljs-string">&#x27;\0&#x27;</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\n&quot;</span>, <span class="hljs-built_in">string</span>[i]);
+        i++;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    print_string(<span class="hljs-string">&quot;Hello, world!\nHow are you today?&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h3 id="activity-4---greet-the-user">Activity 4 - Greet the user</h3>
+<p>In <code>activity4.c</code>, write a program that greets the user by name:
+use the <code>read_string</code> function from the <code>functions.h</code> file to read the user's name (make sure to prompt the user for input).
+Next, use the <code>print_string</code> function (from <code>tutorial.h</code>) to greet the user by printing &quot;Hello, &quot;, followed by the name that the user entered, plus an exclamation mark.
+So, if the user entered &quot;Alice&quot;, the program should print &quot;Hello, Alice!&quot;.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;tutorial.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> name [<span class="hljs-number">30</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your name: &quot;</span>);
+    read_string(name, <span class="hljs-number">30</span>);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, %s!\n&quot;</span>, name);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-5---converting-a-string-to-uppercase">Activity 5 - Converting a string to uppercase</h3>
+<p>Add a function <code>to_uppercase</code> to the <code>tutorial.c</code> file.
+The function must convert all (alphabet) characters of a string to uppercase, by traversing the string only once (i.e., you must not use <code>strlen</code>).
+The prototype for the function is given in <code>tutorial.h</code>.</p>
+<p>When writing the function, use the <code>toupper</code> function from the <code>ctype.h</code> library to convert each character in the string to uppercase.
+Test the function by changing the program of activity 4 so that it prints the name that the user entered in uppercase.</p>
+<p>Put your definition of the <code>to_uppercase</code> function into the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;tutorial.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">to_uppercase</span><span class="hljs-params">(<span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">string</span>[i] != <span class="hljs-string">&#x27;\0&#x27;</span>){
+        <span class="hljs-built_in">string</span>[i] = <span class="hljs-built_in">toupper</span>(<span class="hljs-built_in">string</span>[i]);
+        i++;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> name [<span class="hljs-number">30</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your name: &quot;</span>);
+    read_string(name, <span class="hljs-number">30</span>);
+    to_uppercase(name);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, %s!\n&quot;</span>, name);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h3 id="activity-6---finding-the-length-of-a-string">Activity 6 - Finding the length of a string</h3>
+<p>In <code>tutorial.c</code>, write a function <code>string_length</code> that returns the length of a string as a <code>size_t</code> value.
+The function must not use the <code>strlen</code> function, but should instead iterate over the characters in the string until the null terminator character is reached, and keep track of how many characters have been encountered.
+The prototype for the function is given in <code>tutorial.h</code>.</p>
+<p>Use the following program (listed in <code>activity6.c</code>) to test your function:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The length of the string &#x27;Hello, world!&#x27; is %zu (should be 13)\n&quot;</span>, string_length(<span class="hljs-string">&quot;Hello, world!&quot;</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The length of the string &#x27;The quick brown fox jumps over the lazy dog&#x27; is %zu (should be 43)\n&quot;</span>, string_length(<span class="hljs-string">&quot;The quick brown fox jumps over the lazy dog&quot;</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The length of the empty string \&quot;\&quot; is %zu (should be 0)\n&quot;</span>, string_length(<span class="hljs-string">&quot;&quot;</span>));
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">//My answer:</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;tutorial.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">string_length</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-type">size_t</span> length = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">string</span>[length] != <span class="hljs-string">&#x27;\0&#x27;</span>){
+        length++;
+    }
+    <span class="hljs-keyword">return</span> length;
+}
+
+
+
+</code></pre>
+<h3 id="activity-7---printing-a-string-in-reverse">Activity 7 - Printing a string in reverse</h3>
+<p>In <code>tutorial.c</code>, write a function <code>print_string_reverse</code> that prints a string in reverse, by writing each character of the string to the console in reverse order, followed by a newline character.
+The prototype for the function is given in <code>tutorial.h</code>.
+The function should use the <code>string_length</code> function from activity 6 to determine the length of the string, and should then iterate over the characters in the string in reverse order.</p>
+<p>Use the following program (listed in <code>activity7.c</code>) to test your function:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    print_string_reverse(<span class="hljs-string">&quot;Hello, world!&quot;</span>); <span class="hljs-comment">// should print &quot;!dlrow ,olleH&quot;</span>
+    print_string_reverse(<span class="hljs-string">&quot;&quot;</span>);              <span class="hljs-comment">// should print nothing (empty string)</span>
+    print_string_reverse(<span class="hljs-string">&quot;12345&quot;</span>);         <span class="hljs-comment">// should print &quot;54321\n&quot;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">//answer:</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;tutorial.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_string_reverse</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[])</span>{
+    <span class="hljs-type">int</span> length = string_length(<span class="hljs-built_in">string</span>);
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = length; i &gt;= <span class="hljs-number">0</span>; i--){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>, <span class="hljs-built_in">string</span>[i]);
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    print_string_reverse(<span class="hljs-string">&quot;\nHello, world!&quot;</span>);  <span class="hljs-comment">// should print &quot;!dlrow ,olleH\n&quot;</span>
+    print_string_reverse(<span class="hljs-string">&quot;\n&quot;</span>);            <span class="hljs-comment">// should print a newline (empty string)</span>
+    print_string_reverse(<span class="hljs-string">&quot;\n12345&quot;</span>);            <span class="hljs-comment">// should print &quot;54321\n&quot;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

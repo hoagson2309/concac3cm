@@ -1,0 +1,3 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 6/workshops_06/build/CMakeFiles/my_demo.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 6/workshops_06/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 6/workshops_06/build/CMakeFiles/rebuild_cache.dir

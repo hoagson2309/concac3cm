@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 1 - Tutorial&colon; Memory and pointers</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-1---tutorial-memory-and-pointers">Week 1 - Tutorial: Memory and pointers</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 14/11/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>When working with C, understanding how memory is managed is crucial.
+This understanding starts with knowing how variables are stored in memory, and how pointers can be used to access and manipulate memory locations.
+In this tutorial, you will learn how to use pointers store and manipulate memory addresses, and how to use functions that return and take pointers as arguments.</p>
+<h3 id="activity-0---update-the-system">Activity 0 - Update the system</h3>
+<p>Before you start with this tutorial, make sure your system is up-to-date by running the following commands in the terminal:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+</code></pre>
+<h2 id="using-pointers">Using pointers</h2>
+<p>The following very simple program (also listed in <code>activity1.c</code>) declares and initializes an integer variable and prints its value:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> x = <span class="hljs-number">42</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Value of x: %d\n&quot;</span>, x);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-1---printing-memory-addresses">Activity 1 - Printing memory addresses</h3>
+<p>Add a line to the program of <code>activity1.c</code> to print the <em>memory address</em> of the variable <code>x</code>.
+Use the <em>address-of</em> operator <code>&amp;</code> to get the memory address of the variable, and use the <code>%p</code> format specifier to print the memory address.
+Run the program five times, and note the memory address of the variable <code>x</code> in the table below:</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Memory address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0x7ffe73458864</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0x7ffe394fe604</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0x7ffe8e4ea9f4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0x7ffe13590e74</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0x7ffd70ff3f34</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pointer-variables">Pointer variables</h2>
+<p>Pointers are variables that store memory addresses.
+To declare a pointer variable, you use the <code>*</code> operator, which you write after the type of the variable you want to &quot;point to&quot; (i.e., the type of the variable whose memory address you want to store).</p>
+<p>The following code declares a pointer variable and initializes it with the memory address of the variable <code>x</code>:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> x = <span class="hljs-number">42</span>;
+<span class="hljs-type">int</span> *ptr_to_x = &amp;x;
+</code></pre>
+<h3 id="activity-2---using-pointers">Activity 2 - Using pointers</h3>
+<p>The program listed in <code>activity2.c</code> declares (and initializes) several variables: an integer, a float, and a character.
+It then prints the values of these variables.</p>
+<ol>
+<li>Declare three pointer variables (which gives the program a total of six variables), and use them to store the memory addresses of the other three variables. Name these pointer variables <code>p_integer</code>, <code>p_pi</code>, and <code>p_letter</code>.</li>
+<li>Print the memory addresses of the six variables, by printing their  values of the pointer variables.</li>
+<li>Print the values stored in the six variables, by using the correct format specifiers for each variable type.</li>
+</ol>
+<p>When done, run the program and note the memory addresses and values of the six variables in the table below:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Memory address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p_integer</td>
+<td>0x7ffc68ddc840</td>
+<td>42</td>
+</tr>
+<tr>
+<td>p_pi</td>
+<td>0x7ffc68ddc848</td>
+<td>3.14159274</td>
+</tr>
+<tr>
+<td>p_letter</td>
+<td>0x7ffc68ddc850</td>
+<td>'A'</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>0x7ffc68ddc838</td>
+<td>42</td>
+</tr>
+<tr>
+<td>pi</td>
+<td>0x7ffc68ddc83c</td>
+<td>3.14159274</td>
+</tr>
+<tr>
+<td>letter</td>
+<td>0x7ffc68ddc837</td>
+<td>'A'</td>
+</tr>
+</tbody>
+</table>
+<p>List the contents of <code>actvity2.c</code> in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> paste the contents of activity2.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> integer = <span class="hljs-number">42</span>;
+    <span class="hljs-type">int</span> *p_integer = &amp;integer;
+
+    <span class="hljs-type">float</span> pi = <span class="hljs-number">3.14159265359f</span>;
+    <span class="hljs-type">float</span> *p_pi = &amp;pi;
+
+    <span class="hljs-type">char</span> letter = <span class="hljs-string">&#x27;A&#x27;</span>;
+    <span class="hljs-type">char</span> *p_letter = &amp;letter;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Value of integer: %d\n&quot;</span>, integer);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The memory address of the integer: %p\n&quot;</span>, p_integer);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The memory address of the p_integer: %p\n&quot;</span>, &amp;p_integer);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Value of pi: %.8f\n&quot;</span>, pi);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The memory address of the pi: %p\n&quot;</span>, p_pi);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The memory address of the p_pi: %p\n&quot;</span>, &amp;p_pi);
+
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Value of letter: %c\n&quot;</span>, letter);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The memory address of the letter: %p\n&quot;</span>, p_letter);
+   <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The memory address of the p_letter: %p\n&quot;</span>, &amp;p_letter);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="dereferencing-pointers">Dereferencing pointers</h2>
+<p>To access the value stored at a memory address, you can use the <em>dereference</em> (or <em>indirection</em>) operator <code>*</code>. This operator is often called the <em>value-at</em> operator.
+The dereference operator allows you to modify a variable <em>indirectly</em> - that is, by modifying the memory address stored in a pointer variable.</p>
+<p>Dereferencing a pointer is something that is necessary when working with <em>pointer arguments</em> in functions.
+When you pass a pointer to a function, you often want to access the value stored at the memory address the pointer points to.</p>
+<h3 id="activity-3---indirect-modification">Activity 3 - Indirect modification</h3>
+<p>The program listed in <code>activity3.c</code> declares two floating point variables, <code>a</code> and <code>b</code>.
+It then calls a <code>swap_floats</code> function that takes two pointers to floats as arguments.
+The function should swap the values of the two floats, but it does not work as expected.</p>
+<p>Fix the program so that the <code>swap_floats</code> function works correctly.
+You'll need to make correct use of the dereference operator <code>*</code> to access the values stored at the memory addresses pointed to by the pointer parameters of the <code>swap_floats</code> function.</p>
+<p>When done, copy-paste your definition of the <code>swap_floats</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your definition of the swap_floats function here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/// @brief Function to swap two floats </span>
+<span class="hljs-comment">/// @param pa pointer to the first float</span>
+<span class="hljs-comment">/// @param pb pointer to the second float</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">swap_floats</span><span class="hljs-params">(<span class="hljs-type">float</span> *pa, <span class="hljs-type">float</span> *pb)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> this function is not implemented correctly</span>
+    <span class="hljs-type">float</span> temp = *pa;
+    *pa = *pb;
+    *pb = temp;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">float</span> a = <span class="hljs-number">3.14f</span>, b = <span class="hljs-number">2.71f</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Before swap: a = %.4f, b = %.4f\n&quot;</span>, a, b);
+    swap_floats(&amp;a, &amp;b);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;After swap: a = %.4f, b = %.4f\n&quot;</span>, a, b);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="returning-pointers">Returning pointers</h2>
+<p>Functions can return pointers to memory locations.
+When a function returns a pointer, it is important to make sure that the memory location the pointer points to is still valid after the function returns.
+That is, you must never return a pointer to a local variable, because the memory at which the local variable is stored is automatically &quot;deallocated&quot; when the function returns.</p>
+<h3 id="activity-4---returning-pointers">Activity 4 - Returning pointers</h3>
+<p>Write a function <code>ptr_to_max</code> that takes two integer pointers as arguments and returns a pointer to the integer with the highest value (if both have the same value, return a pointer to the first integer).
+The prototype of the function, plus a program that tests the function, is already listed in <code>activity4.c</code>.</p>
+<p>Make sure that your function works correctly by running the program and ensuring that the output is as expected.
+When done, copy-paste your definition of the <code>ptr_to_max</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your definition of the ptr_to_max function here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-comment">/// @brief Returns a pointer to the maximum of two integers</span>
+<span class="hljs-comment">/// @param pa pointer to the first integer</span>
+<span class="hljs-comment">/// @param pb pointer to the second integer</span>
+<span class="hljs-comment">/// @return pointer to the maximum of the two integers</span>
+<span class="hljs-type">int</span> *<span class="hljs-title function_">ptr_to_max</span><span class="hljs-params">(<span class="hljs-type">int</span> *pa, <span class="hljs-type">int</span> *pb)</span>;
+<span class="hljs-type">int</span> *<span class="hljs-title function_">ptr_to_max</span><span class="hljs-params">(<span class="hljs-type">int</span> *pa, <span class="hljs-type">int</span> *pb)</span>{
+    <span class="hljs-keyword">if</span>(*pa &gt;= *pb){
+        <span class="hljs-keyword">return</span> pa;
+    }
+    <span class="hljs-keyword">else</span>{
+        <span class="hljs-keyword">return</span> pb;
+    }
+}
+</code></pre>
+<h2 id="pointer-arithmetic">Pointer arithmetic</h2>
+<p>Arrays are stored in contiguous memory locations.
+That is, all elements are stored one after the other in memory - at consecutive memory addresses.
+This means that if you know at which address the first element of an array is stored, you can compute the memory address of any other element in the array.</p>
+<p>If you were to assume that a pointer contains the address of the first element of an array, then you can use <em>pointer arithmetic</em> to access the other elements of the array.
+Pointer arithmetic is basically adding or subtracting an integer value to a pointer, which results in the pointer pointing to a different memory location:
+When performing pointer arithmetic, we basically assume that we're working with an array of a certain type, and the pointer is pointing to the first element of that array.
+Incrementing the pointer by one will make it point to the next element in the array - this means that the amount by which the memory address is incremented depends on the size of the type of the array elements.</p>
+<p>Because pointers and arrays are closely related in C, the name of an array is actually a pointer to the first element of the array.</p>
+<h3 id="activity-5---pointer-arithmetic">Activity 5 - Pointer arithmetic</h3>
+<p>The following program (listed in <code>activity5.c</code>) prints the memory addresses of the elements of an array of integers:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-type">int</span> arr[] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+    <span class="hljs-type">int</span> i;
+
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Address of arr[%d]: %p\n&quot;</span>, i, &amp;arr[i]);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Modify the program so that it does not use the <code>&amp;</code> operator to get the memory address of the array elements, but instead uses pointer arithmetic.
+Your program must not contain a single use of the <code>&amp;</code> operator.</p>
+<p>When done, run the program and ensure that the output is as expected.
+If it is, copy-paste your modified program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified program here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+    <span class="hljs-type">int</span> i;
+    <span class="hljs-type">int</span> *p = <span class="hljs-built_in">array</span>;
+
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+        <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> the &amp; operator is used to obtain the address</span>
+        <span class="hljs-comment">//        instead, use pointer arithmetic - use of &amp; is not allowed!</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Address of arr[%d]: %p\n&quot;</span>, i, (<span class="hljs-type">void</span>*)p);
+        p++;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="strings-and-pointers">Strings and pointers</h2>
+<p>As you've seen earlier, pointers and arrays are intimately related in C.
+Since strings are just arrays of characters, pointers and strings are just as closely related.
+In fact, string <em>literals</em> in C (anything between double quotes, like <code>&quot;Hello, world!&quot;</code>) are stored in memory (as arrays of characters), and thus have a memory address.
+We can simply obtain this memory address by assigning the string literal to a pointer variable:</p>
+<pre><code class="language-c"><span class="hljs-type">const</span> <span class="hljs-type">char</span> *str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;
+</code></pre>
+<p>Here, <code>const</code> must be used because string literals are read-only - any attempt to modify the contents of a string literal will result in undefined behavior, and will most likely crash your program.</p>
+<h3 id="activity-6---addresses-of-string-literals">Activity 6 - Addresses of string literals</h3>
+<p>In <code>activity6.c</code>, you'll find a program that declares a string literal, as well as an array of characters that is initialized from (the same) string literal:</p>
+<pre><code class="language-c"><span class="hljs-type">const</span> <span class="hljs-type">char</span> *str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;
+<span class="hljs-type">char</span> arr[] = <span class="hljs-string">&quot;Hello, world!&quot;</span>;
+</code></pre>
+<p>Write a function <code>print_string</code> that takes a <code>const char*</code> pointer as an argument, and prints the memory address of the string that starts at that address, as well as the string (i.e., the sequence of characters that ends with a <code>'\0'</code> character) itself.
+Use the function to print the memory address and the string for both the <code>str</code> and <code>arr</code> variables (note that both <code>str</code> and <code>arr</code> are pointers to the first character of the string).</p>
+<p>When done, write the memory addresses of <code>str</code> and <code>arr</code> into the table below, and copy-paste your definition of the <code>print_string</code> function in the code block further below:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Memory address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>str</td>
+<td>0x55d34da02053</td>
+</tr>
+<tr>
+<td>arr</td>
+<td>0x7fffb09dcc5a</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your definition of the print_string function here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/// @brief Prints a string, as well as its address</span>
+<span class="hljs-comment">/// @param str the string to print</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_string</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *str)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> print the address of the first character in the string</span>
+    <span class="hljs-comment">//        and the characters in the string.</span>
+    <span class="hljs-comment">// Example output: &quot;0x7ffeefbff6e0 Hello, world!&quot;</span>
+    
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%p %s\n&quot;</span>, (<span class="hljs-type">void</span>*)str, str);
+    
+}
+
+</code></pre>
+<h2 id="casting-pointers">Casting pointers</h2>
+<p>In C, you can cast types to other types.
+This tells the compiler to interpret the value in a specific way different from the way it would normally interpret it.
+For example, you can cast a pointer to an integer to a pointer to a character, and then access the individual bytes of the integer:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> x = <span class="hljs-number">42</span>;
+<span class="hljs-type">char</span> *ptr = (<span class="hljs-type">char</span>*) &amp;x;
+</code></pre>
+<p>Here, we basically assume that the memory at which the integer <code>x</code> is stored is also the memory at which a character is stored.
+We could thus treat the memory at which <code>x</code> is stored as an array of characters, and access the individual characters that make up the integer <code>x</code>.</p>
+<p>The contents of memory are often displayed as bytes.
+Although C does not have a <code>byte</code> type, the <code>char</code> type has the same size as a byte (8 bits), but a <code>char</code> can hold <em>negative</em> values - it is <code>signed</code>.
+To work with bytes in C, you can use the <code>unsigned char</code> type, which is an 8-bit unsigned integer.</p>
+<p>By using pointers to <code>unsigned char</code>, you can access the individual bytes of a variable.
+For example, you can use a pointer to <code>unsigned char</code> to access the individual bytes of an <code>int</code> variable:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> answer = <span class="hljs-number">42</span>;
+<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>* ptr = (<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>*)&amp;answer;
+<span class="hljs-comment">// print the four bytes of the answer variable, in hexadecimal format (%02x)</span>
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Byte 0: %02x\n&quot;</span>, ptr[<span class="hljs-number">0</span>]);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Byte 1: %02x\n&quot;</span>, ptr[<span class="hljs-number">1</span>]);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Byte 2: %02x\n&quot;</span>, ptr[<span class="hljs-number">2</span>]);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Byte 3: %02x\n&quot;</span>, ptr[<span class="hljs-number">3</span>]);
+</code></pre>
+<p>The code snippet listed above assumes that an <code>int</code> variable takes up four bytes in memory.
+This is true on most systems, but not all.
+Instead, we should use the <code>sizeof</code> operator to determine the size (in bytes) of an <code>int</code> variable, and a loop to go over the bytes - you'll do that in activity 7.</p>
+<h3 id="activity-7---raw-data">Activity 7 - Raw data</h3>
+<p>Write a function <code>print_raw_data</code> that takes a <code>const unsigned char *</code> pointer to a memory location and a size (in bytes), and prints the raw data at that location.
+That is, the function must print exactly <code>size</code> bytes of memory, starting at the memory address pointed to by the pointer.
+The function should print the data in hexadecimal format, with spaces between each byte.</p>
+<p>A prototype of the function is already listed in <code>activity7.c</code>, along with a program that tests the function.</p>
+<p>When done, run the program and ensure that the output is as expected.
+If it is, copy-paste your definition of the <code>print_raw_data</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your definition of the print_raw_data function here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_raw_data</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *data, <span class="hljs-type">size_t</span> size)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> print each byte in the data the raw data in hexadecimal format</span>
+    <span class="hljs-comment">//        Example output: &quot;0x48 0x65 0x6c 0x6c 0x6f 0x2c 0x20 0x77 0x6f 0x72 0x6c 0x64 0x21&quot;</span>
+    <span class="hljs-comment">// Use the printf function with the %02x format specifier to print each byte</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;0x%02x &quot;</span>, *data);
+        data++;
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);  
+}   
+</code></pre>
+<h2 id="obfuscated-text">Obfuscated text</h2>
+<p>Since characters are stored as numbers (bytes) in memory, you can print arrays of integers as if they are strings.
+To do this, you can cast a pointer to an array of integers to a pointer to an array of characters, and then print the characters as a string using the <code>printf</code> function and the <code>%s</code> format specifier:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> arr[] = {<span class="hljs-number">539060552</span>, <span class="hljs-number">2698554</span>};
+<span class="hljs-type">char</span> *ptr = (<span class="hljs-type">char</span>*) arr;
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, ptr);
+</code></pre>
+<p>This code snippet prints the text <code>Hi! :-)</code>, because the integers <code>539060552</code> and <code>2698554</code> are stored in memory as the ASCII values of the characters <code>H</code>, <code>i</code>, <code>!</code>, <code> </code>, <code>:</code>, and <code>)</code>, plus a null terminator (<code>'\0'</code>).
+Note that this code only works as expected if an <code>int</code> is four bytes long, and if the endianness of the system is the same as the endianness of the system that generated the array of integers.</p>
+<h3 id="activity-8---hiding-text">Activity 8 - Hiding text</h3>
+<p>In this final activity, you will need to fill an array of integers with the correct numbers so that it prints a hidden message, just like the code example above does.
+Ask your lab teacher (or TA) for the text that you need to print in this activity.</p>
+<p>To approach this activity, you'll need to reverse the process of the code example above.
+That is, you'll need to start with the text, and convert it to an array of integers, so that you know which numbers to put in the array.</p>
+<p>When done, write the numbers you found on the paper that you got from your lab teacher, and demonstrate that your program prints the requested message.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> change the contents of the array `obfuscated_text` in such a way that the program prints</span>
+    <span class="hljs-comment">//        the exact string that was given to you by your lab teacher.</span>
+
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *target_string = <span class="hljs-string">&quot;Ignorance is bliss&quot;</span>;  <span class="hljs-comment">// change this to the string you were given (on paper)</span>
+    <span class="hljs-comment">// you may want to write some code here to print the string as an array of integers, rather</span>
+    <span class="hljs-type">int</span> *ptr = (<span class="hljs-type">int</span>*)target_string;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, ptr[i]);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-comment">// than guessing the values to put in the array obfuscated_text below</span>
+
+    <span class="hljs-comment">// change the contents of the array</span>
+    <span class="hljs-type">const</span> <span class="hljs-type">int</span> obfuscated_text[] = {<span class="hljs-number">1869506377</span>, <span class="hljs-number">1668178290</span>, <span class="hljs-number">1936269413</span>, <span class="hljs-number">1768710688</span>, <span class="hljs-number">620786547</span>};
+
+
+    <span class="hljs-comment">// don&#x27;t make any changes to the following code</span>
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *p = (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *)&amp;obfuscated_text;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, p);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Given string: %s\n&quot;</span>, target_string);
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strcmp</span>(p, target_string) == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You have successfully completed the task!\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The task is not completed yet.\n&quot;</span>);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

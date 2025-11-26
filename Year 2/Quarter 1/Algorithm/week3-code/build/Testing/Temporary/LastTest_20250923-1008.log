@@ -1,0 +1,22 @@
+Start testing: Sep 23 14:19 CEST
+----------------------------------------------------------
+5/5 Testing: merge_sort_test
+5/5 Test: merge_sort_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/scripts/test_sorting.py" "merge_sort" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/merge_sort/tests/merge_sort_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/build/merge_sort
+"merge_sort_test" start time: Sep 23 14:19 CEST
+Output:
+----------------------------------------------------------
+Comparisons: 5
+Comparisons: 23
+Comparisons: 155
+Comparisons: 354664
+<end of output>
+Test time =   0.62 sec
+----------------------------------------------------------
+Test Passed.
+"merge_sort_test" end time: Sep 23 14:19 CEST
+"merge_sort_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 23 14:19 CEST

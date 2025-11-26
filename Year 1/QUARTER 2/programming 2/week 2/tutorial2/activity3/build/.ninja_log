@@ -1,0 +1,7 @@
+# ninja log v5
+33	142	1732802789445999400	CMakeFiles/fibonacci.dir/functions.c.o	76d81486f562aa68
+32	188	1732802789445999400	CMakeFiles/fibonacci.dir/fibonacci.c.o	fb80d89d91597b0a
+196	412	1732802789696307000	fibonacci	9ecc8768f48fc674
+207	413	1732802789696307000	primes	f135ccf1bfad5d85
+37	174	1732802789445999400	CMakeFiles/primes.dir/functions.c.o	73f5a7285300462e
+35	202	1732802789445999400	CMakeFiles/primes.dir/primes.c.o	ecae5eba1acb446

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week XX - Assignments</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-xx---assignments">Week XX - Assignments</h1>
+<p>Name: ??</p>
+<p>Group: ETI1V.??</p>
+<p>Date: dd/mm/yyyy</p>
+<p><strong>NOTE</strong>: if you'd like to have syntax highlighting in your markdown file, install the &quot;Markdown Preview Github Styling&quot; extension in VS Code.</p>
+<h2 id="first-assignment">First assignment</h2>
+<p>The first assignment I completed is assignment 1 - Guess the number.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span>  <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;I&#x27;m thinking of the number between 1 and 50...\n&quot;</span>);
+    <span class="hljs-type">int</span> x = random_int(<span class="hljs-number">1</span>,<span class="hljs-number">50</span>);
+
+    <span class="hljs-type">int</span> guesses = <span class="hljs-number">5</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You have %d guesses left to find it! &quot;</span>, guesses);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Guess the number: &quot;</span>);
+    <span class="hljs-type">int</span> answer = read_int();
+
+    <span class="hljs-keyword">while</span> (answer != <span class="hljs-number">0</span> &amp;&amp; guesses &gt; <span class="hljs-number">1</span>)
+    {
+        guesses--;
+
+        <span class="hljs-keyword">if</span>(answer &gt; x){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Too high, you have %d guesses left to find it!\n&quot;</span>, guesses);
+        } <span class="hljs-keyword">else</span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Too low, you have %d guesses left to find it!\n&quot;</span>, guesses);
+        }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Guess the number: &quot;</span>);
+        <span class="hljs-type">int</span> answer = read_int();
+    }
+    <span class="hljs-keyword">if</span> (answer == x){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Correct! You needed %d guesses.\n&quot;</span>, <span class="hljs-number">6</span> - guesses);
+    } 
+        <span class="hljs-keyword">else</span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Too low, game over! The number was %d\n&quot;</span>, x);
+        }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    
+}
+</code></pre>
+<h2 id="second-assignment">Second assignment</h2>
+<p>The second assignment I completed is assignment 3 - Rock, paper, scissors.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">int</span> score = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> botscore = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Rock, paper, scissors!\nPlease enter your choice (r, p, s, q): &quot;</span>);
+    <span class="hljs-type">char</span> ans = read_char();
+
+    <span class="hljs-keyword">while</span> (ans != <span class="hljs-string">&#x27;q&#x27;</span>)
+    {
+        <span class="hljs-comment">// YOUR CHOICE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:</span>
+        <span class="hljs-keyword">switch</span> (ans)
+        {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;r&#x27;</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose rock. &quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;p&#x27;</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose paper. &quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;s&#x27;</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose scissors. &quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        }
+
+        <span class="hljs-comment">// BOTCHOICE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:</span>
+        <span class="hljs-type">int</span> botchoice = random_int(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>);
+        <span class="hljs-keyword">switch</span> (botchoice)
+        {
+        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I chose rock. &quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I chose paper. &quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I chose scissors. &quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        }
+
+        <span class="hljs-comment">// COMPARISON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:</span>
+        <span class="hljs-keyword">if</span> (ans == <span class="hljs-string">&#x27;r&#x27;</span> &amp;&amp; botchoice == <span class="hljs-number">3</span> || ans == <span class="hljs-string">&#x27;p&#x27;</span> &amp;&amp; botchoice == <span class="hljs-number">1</span> || ans == <span class="hljs-string">&#x27;s&#x27;</span> &amp;&amp; botchoice == <span class="hljs-number">2</span>)
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You win!\n&quot;</span>);
+            score++;
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Score: You: %d, me: %d\n&quot;</span>, score, botscore);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ans == <span class="hljs-string">&#x27;r&#x27;</span> &amp;&amp; botchoice == <span class="hljs-number">1</span> || ans == <span class="hljs-string">&#x27;p&#x27;</span> &amp;&amp; botchoice == <span class="hljs-number">2</span> || ans == <span class="hljs-string">&#x27;s&#x27;</span> &amp;&amp; botchoice == <span class="hljs-number">3</span>)
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;It&#x27;s draw\n\n&quot;</span>);
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Score: You: %d, me: %d\n&quot;</span>, score, botscore);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I win!\n&quot;</span>);
+            botscore++;
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Score: You: %d, me: %d\n&quot;</span>, score, botscore);
+        }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter your choice (r, p, s, q): &quot;</span>);
+        ans = read_char();
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Choose again!!!\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="third-assignment-optional">Third assignment (optional)</h2>
+<p>I've actually made three assignments this week! The third assignment I completed is assignment ZZZ.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+
+</code></pre>
+
+            
+            
+        </body>
+        </html>

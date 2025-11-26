@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment1",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/include\" -g -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/assignment1.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment1/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment1/main.cpp",
+  "output": "assignment1/CMakeFiles/assignment1.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment2",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/include\" -g -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/assignment2.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment2/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment2/main.cpp",
+  "output": "assignment2/CMakeFiles/assignment2.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment3",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/include\" -g -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/assignment3.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment3/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment3/main.cpp",
+  "output": "assignment3/CMakeFiles/assignment3.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build/assignment4",
+  "command": "/usr/bin/c++  -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/include\" -g -std=c++20 -Wall -Wextra -Wpedantic -o CMakeFiles/assignment4.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment4/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/assignment4/main.cpp",
+  "output": "assignment4/CMakeFiles/assignment4.dir/main.cpp.o"
+}
+]

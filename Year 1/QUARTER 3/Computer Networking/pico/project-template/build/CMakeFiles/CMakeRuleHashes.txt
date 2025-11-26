@@ -1,0 +1,20 @@
+# Hashes of file build rules.
+df6a98b5d6fe2129e20d25c1d099cfc1 pico-sdk/src/rp2040/boot_stage2/CMakeFiles/bs2_default_bin
+df6a98b5d6fe2129e20d25c1d099cfc1 pico-sdk/src/rp2040/boot_stage2/CMakeFiles/bs2_default_padded_checksummed_asm
+e752a9bdd0763f1a82f8006ef26f2e36 pico-sdk/src/rp2040/boot_stage2/CMakeFiles/picotoolBuild-complete
+cc62f43b8901945a0e5812f3356c4f44 pico-sdk/src/rp2040/boot_stage2/bs2_default.bin
+8856bef5f29ea7779de295aacc7c0c2e pico-sdk/src/rp2040/boot_stage2/bs2_default_padded_checksummed.S
+c39d1125d30196ee3890cbacea13847d pico-sdk/src/rp2040/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-configure
+f20aa704d4b9875c9b780cbfbb8adae4 pico-sdk/src/rp2040/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-download
+a86a540c46bfc4ae51916d71bc04f5e4 pico-sdk/src/rp2040/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir
+3186637f37afdd8b96c4a3574be8f762 pico-sdk/src/rp2040/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-patch
+a3866a244481aa5cc7c10ad93be0c5d6 pico-sdk/src/rp2040/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-test
+70dbc34bd50063aed58a63d83bd0a13e pico-sdk/src/rp2040/boot_stage2/picotool/src/picotoolBuild-stamp/picotoolBuild-update
+ee214d4e2d154af7a8d15e6a4e53887a pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h
+e16a21572da469b528a112e13c7b4db1 pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/pioasmBuild-complete
+6b56c61f10eeb377633e0c855a7ca1f1 pico-sdk/src/rp2_common/pico_cyw43_driver/cyw43_bus_pio_spi.pio.h
+6a3e8d50452fdf9747b28435cac1ca25 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp/pioasmBuild-configure
+04fd466a86c69b04f3a5caea75fbc4ff pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp/pioasmBuild-download
+e9f72d08147c8d278c095b6f10a147f5 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp/pioasmBuild-mkdir
+cec32037ec775d2bff61b94b4bfefa1f pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp/pioasmBuild-patch
+ca3b57303fc3c00d2cff2ad8970a7a76 pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/pioasmBuild-stamp/pioasmBuild-update

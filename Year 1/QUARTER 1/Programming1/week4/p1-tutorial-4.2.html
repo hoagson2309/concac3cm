@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 4 - Tutorial 2&colon; Decomposing programs with functions</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-4---tutorial-2-decomposing-programs-with-functions">Week 4 - Tutorial 2: Decomposing programs with functions</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 24/09/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>Before writing a program, it is important to think about how to structure it.
+A good way to structure a program is to divide it into smaller parts, each of which performs a specific task.
+Each of these smaller parts can then be implemented as a function that has clear input (i.e., parameters) and output (i.e., return value).</p>
+<p>In this tutorial, you will write several functions that perform specific tasks, and then combine these functions to create a larger program.</p>
+<h3 id="activity-0---set-up-a-folder-for-this-tutorial">Activity 0 - Set up a folder for this tutorial</h3>
+<p>Create a folder (directory) for this week's tutorial in your preferred location, and copy the files <a href="../code/functions.h"><code>functions.h</code></a> and <a href="../code/functions.c"><code>functions.c</code></a> into this folder.</p>
+<p>It's recommended to have a folder for each week, and within that folder a folder for each tutorial, to keep your work organized.
+Open up the folder in VS code by selecting the folder in the File-&gt;Open menu, or by right-clicking on the folder in your file browser and selecting &quot;Open in VS Code&quot; (if this option is available).</p>
+<p>Alternatively, you can open the folder from a WSL terminal by typing the <code>code .</code> command.</p>
+<h2 id="days-of-your-life">Days of your life</h2>
+<p>The program that you will compose in this tutorial will calculate the number of days you have lived.
+This involves calculating the number of days between your birthdate and today, taking into account leap years.
+You will compose this program step by step by writing functions that perform specific tasks.
+Each function will be tested separately before combining them into the final program.</p>
+<h3 id="determining-leap-years">Determining leap years</h3>
+<p>A leap year is a year that is divisible by 4, except for years that are divisible by 100, unless they are also divisible by 400.
+The following flowchart describes how to determine if a year is a leap year:</p>
+<p><img src="file:///e:\SAXION\Programming1\week4\leapyearflowchart.png" alt="Flowchart for determining leap years"></p>
+<h4 id="activity-1---function-for-determining-leap-years">Activity 1 - Function for determining leap years</h4>
+<p>Create a new file <code>main.c</code> in the folder for this tutorial.
+In this and the next activities, you will write several functions and add them to this file.</p>
+<p>Write a function <code>is_leap_year</code> that takes an integer parameter <code>year</code> and returns a boolean value indicating whether the given year is a leap year.
+The function must implement the flowchart that is pictured above.
+The prototype of the function is given below, as well as some code that tests the function with some example years.:</p>
+<pre><code class="language-c"><span class="hljs-comment">/// Determines if a given year is a leap year.</span>
+<span class="hljs-comment">/// @param year The year to check.</span>
+<span class="hljs-comment">/// @return true if the year is a leap year, false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_leap_year</span><span class="hljs-params">(<span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// Test the function with some example years</span>
+    <span class="hljs-keyword">if</span> (is_leap_year(<span class="hljs-number">2000</span>)) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2000 is a leap year\n&quot;</span>);
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2000 is not a leap year\n&quot;</span>);
+    <span class="hljs-keyword">if</span> (is_leap_year(<span class="hljs-number">2001</span>)) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2001 is a leap year\n&quot;</span>);
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2001 is not a leap year\n&quot;</span>);
+    <span class="hljs-keyword">if</span> (is_leap_year(<span class="hljs-number">1900</span>)) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;1900 is a leap year\n&quot;</span>);
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;1900 is not a leap year\n&quot;</span>);
+    <span class="hljs-keyword">if</span> (is_leap_year(<span class="hljs-number">2004</span>)) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2004 is a leap year\n&quot;</span>);
+    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2004 is not a leap year\n&quot;</span>);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Verify that the function works correctly by running the program and checking the output - it should indicate that 2000 and 2004 are leap years, and 2001 and 1900 are not.</p>
+<h3 id="determining-the-number-of-days-in-a-month">Determining the number of days in a month</h3>
+<p>The number of days in a month depends on the month and the year.
+For the month February, it even depends on the year - February has 29 days in a leap year, and 28 days in a non-leap year.</p>
+<h4 id="activity-2---function-for-determining-the-number-of-days-in-a-month">Activity 2 - Function for determining the number of days in a month</h4>
+<p>Write a function <code>days_in_month</code> (in the <code>main.c</code> file) that takes two integer parameters <code>month</code> and <code>year</code>, and returns the number of days in the given month of the given year.
+The function must use the <code>is_leap_year</code> function that you wrote in the previous activity to determine the number of days in February.</p>
+<p>The prototype of the function is given below, as well as some code that tests the function with some example months and years:</p>
+<pre><code class="language-c"><span class="hljs-comment">/// Determines the number of days in a given month of a given year.</span>
+<span class="hljs-comment">/// @param month The month (1-12) to check.</span>
+<span class="hljs-comment">/// @param year The year to check.</span>
+<span class="hljs-comment">/// @return The number of days in the given month of the given year.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">days_in_month</span><span class="hljs-params">(<span class="hljs-type">int</span> month, <span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// Test the function with some example months and years</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days in month 2 of year 2000\n&quot;</span>, days_in_month(<span class="hljs-number">2</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days in month 2 of year 2001\n&quot;</span>, days_in_month(<span class="hljs-number">2</span>, <span class="hljs-number">2001</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days in month 1 of year 2000\n&quot;</span>, days_in_month(<span class="hljs-number">1</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days in month 12 of year 2000\n&quot;</span>, days_in_month(<span class="hljs-number">12</span>, <span class="hljs-number">2000</span>));
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Verify that the function works correctly by running the program and checking the output - it should indicate that there are 29 days in February 2000, 28 days in February 2001, and 31 days in January and December of 2000.</p>
+<h3 id="calculating-the-day-in-the-year">Calculating the day in the year</h3>
+<p>The day in the year is the number of days that have passed since the beginning of the year.
+For example, January 1st is day 1, January 2nd is day 2, and so on.
+In leap years, February 29th is day 60, since February has 29 days in a leap year.</p>
+<p>To compute the day in the year, you can use a loop that iterates over all months from January to the month before the given month, and adds the number of days in each month to the total.</p>
+<h4 id="activity-3---function-for-calculating-the-day-in-the-year">Activity 3 - Function for calculating the day in the year</h4>
+<p>Write a function <code>day_in_year</code> (again, in the <code>main.c</code> file) that takes three integer parameters <code>day</code>, <code>month</code>, and <code>year</code>, and returns the day in the year for the given date.
+The function must use the <code>days_in_month</code> function that you wrote in the previous activity to determine the number of days in each month.</p>
+<p>The prototype of the function is given below, as well as some code that tests the function with some example dates:</p>
+<pre><code class="language-c"><span class="hljs-comment">/// Calculates the day in the year for a given date.</span>
+<span class="hljs-comment">/// @param day The day of the month (1-31).</span>
+<span class="hljs-comment">/// @param month The month (1-12).</span>
+<span class="hljs-comment">/// @param year The year.</span>
+<span class="hljs-comment">/// @return The day in the year for the given date.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">day_in_year</span><span class="hljs-params">(<span class="hljs-type">int</span> day, <span class="hljs-type">int</span> month, <span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// Test the function with some example dates</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The day in the year for 1-1-2000 is %d (should be 1)\n&quot;</span>, day_in_year(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The day in the year for 29-2-2000 is %d (should be 60)\n&quot;</span>, day_in_year(<span class="hljs-number">29</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The day in the year for 31-12-2000 is %d (should be 366)\n&quot;</span>, day_in_year(<span class="hljs-number">31</span>, <span class="hljs-number">12</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The day in the year for 31-12-1900 is %d (should be 365)\n&quot;</span>, day_in_year(<span class="hljs-number">31</span>, <span class="hljs-number">12</span>, <span class="hljs-number">1900</span>));
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Verify that the function works correctly by running the program and checking the output - it should indicate that January 1st 2000 is day 1, February 29th 2000 is day 60, December 31st 2000 is day 366, and December 31st 1900 is day 365.</p>
+<h4 id="activity-4---function-for-calculating-the-remaining-days-in-the-year">Activity 4 - Function for calculating the remaining days in the year</h4>
+<p>Add another function to the <code>main.c</code> file: write a function <code>remaining_days_in_year</code> that takes three integer parameters <code>day</code>, <code>month</code>, and <code>year</code>, and returns the number of days remaining in the year for the given date (excluding that date).
+This can be calculated by subtracting the day in the year from the total number of days in the year (365 or 366, depending on whether it is a leap year).
+For example, the number of days remaining in the year for December 31st is 0, as there are no days left in the year.
+For January 1 in a leap year, the number of days remaining is 365, as there are 365 days left in the year <em>after</em> January 1st.</p>
+<p>The prototype of the function is given below, as well as some code that tests the function with some example dates:</p>
+<pre><code class="language-c"><span class="hljs-comment">/// Calculates the number of days remaining in the year for a given date.</span>
+<span class="hljs-comment">/// @param day The day of the month (1-31).</span>
+<span class="hljs-comment">/// @param month The month (1-12).</span>
+<span class="hljs-comment">/// @param year The year.</span>
+<span class="hljs-comment">/// @return The number of days remaining in the year for the given date.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">remaining_days_in_year</span><span class="hljs-params">(<span class="hljs-type">int</span> day, <span class="hljs-type">int</span> month, <span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// Test the function with some example dates</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days remaining in the year for 1-1-2000 (should be 365)\n&quot;</span>, remaining_days_in_year(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days remaining in the year for 29-2-2000 (should be 306)\n&quot;</span>, remaining_days_in_year(<span class="hljs-number">29</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days remaining in the year for 31-12-2000 (should be 0)\n&quot;</span>, remaining_days_in_year(<span class="hljs-number">31</span>, <span class="hljs-number">12</span>, <span class="hljs-number">2000</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days remaining in the year for 31-12-1900 (should be 0)\n&quot;</span>, remaining_days_in_year(<span class="hljs-number">31</span>, <span class="hljs-number">12</span>, <span class="hljs-number">1900</span>));
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Verify that the function works correctly by running the program and checking the output.</p>
+<h3 id="computing-the-number-of-days-between-two-dates">Computing the number of days between two dates</h3>
+<p>The final step is to write a function that calculates the number of days between two dates.
+This number can be calculated by summing the number of days in each year between the two dates, and subtracting the day in the year for the first (earliest) date and the remaining days in the year for the second (latest) date.</p>
+<p>For example, the number of days between February 1st 2000 and December 1st 2001 can be calculated as follows:</p>
+<ol>
+<li>Sum the number of days in the years 2000 and 2001 (this will give 366 + 365 = 731 days).</li>
+<li>Subtract the day in the year for February 1st 2000 (day 32) from the total (this will give 731 - 32 = 699 days).</li>
+<li>Subtract the remaining days in the year for December 1st 2001 (30 days) from the result (this will give 699 - 30 = 669 days).</li>
+</ol>
+<h4 id="activity-5---function-for-calculating-the-number-of-days-between-two-dates">Activity 5 - Function for calculating the number of days between two dates</h4>
+<p>Write a function <code>days_between_dates</code> that takes six integer parameters <code>day1</code>, <code>month1</code>, <code>year1</code>, <code>day2</code>, <code>month2</code>, and <code>year2</code>, and returns the number of days between the two dates.
+The function must assume that the first date (given by <code>day1</code>, <code>month1</code> and <code>year1</code>) is earlier than the second date.</p>
+<p>The prototype of the function is given below, as well as some code that tests the function with some example dates:</p>
+<pre><code class="language-c"><span class="hljs-comment">/// Calculates the number of days between two dates.</span>
+<span class="hljs-comment">/// @param day1 The day of the first date (1-31).</span>
+<span class="hljs-comment">/// @param month1 The month of the first date (1-12).</span>
+<span class="hljs-comment">/// @param year1 The year of the first date.</span>
+<span class="hljs-comment">/// @param day2 The day of the second date (1-31).</span>
+<span class="hljs-comment">/// @param month2 The month of the second date (1-12).</span>
+<span class="hljs-comment">/// @param year2 The year of the second date.</span>
+<span class="hljs-comment">/// @return The number of days between the two dates.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">days_between_dates</span><span class="hljs-params">(<span class="hljs-type">int</span> day1, <span class="hljs-type">int</span> month1, <span class="hljs-type">int</span> year1, <span class="hljs-type">int</span> day2, <span class="hljs-type">int</span> month2, <span class="hljs-type">int</span> year2)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// Test the function with some example dates</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days between 1-1-2000 and 1-1-2001 (should be 366)\n&quot;</span>, days_between_dates(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2001</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days between 1-1-2000 and 1-1-2002 (should be 731)\n&quot;</span>, days_between_dates(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2002</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d days between 1-1-2000 and 1-1-2003 (should be 1096)\n&quot;</span>, days_between_dates(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2003</span>));
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Again, verify that the function works correctly by running the program and checking the output.</p>
+<h3 id="putting-it-all-together">Putting it all together</h3>
+<p>Now that you have written all the functions, you can combine them into a single program that calculates which day of your life the current date is.
+The program should prompt the user to enter their birthdate, and then calculate the number of days they have lived.
+To obtain the current date, use the function <code>get_current_date</code> that is provided through the <code>functions.h</code> file.</p>
+<h4 id="activity-6---final-program">Activity 6 - Final program</h4>
+<p>Write a program that calculates which day of your life the current date is.
+The program should use the functions that you have written in the previous activities to calculate the number of days between the birthdate and the current date.
+Part of the program is already listed below (it uses a concept - arrays - that will be introduced in week 5, but don't worry about that for now), put the rest of the program in the space provided:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int, get_current_date</span></span>
+
+<span class="hljs-comment">// Put the functions that you have written here</span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// Get the current date</span>
+    <span class="hljs-type">int</span> current_date[<span class="hljs-number">3</span>];    <span class="hljs-comment">// day, month, year</span>
+    get_current_date(current_date);
+    <span class="hljs-type">int</span> current_year = current_date[<span class="hljs-number">2</span>];     <span class="hljs-comment">// the current year</span>
+    <span class="hljs-type">int</span> current_month = current_date[<span class="hljs-number">1</span>];    <span class="hljs-comment">// the current month</span>
+    <span class="hljs-type">int</span> current_day = current_date[<span class="hljs-number">0</span>];      <span class="hljs-comment">// the current day</span>
+
+    <span class="hljs-comment">// Get the birthdate from the user</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter de day of your birthdate: &quot;</span>);
+    <span class="hljs-type">int</span> day = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the month of your birthdate: &quot;</span>);
+    <span class="hljs-type">int</span> month = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the year of your birthdate: &quot;</span>);
+    <span class="hljs-type">int</span> year = read_int();
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Calculate the number of days between the birthdate and the current date</span>
+    <span class="hljs-type">int</span> days_lived = <span class="hljs-number">42</span>;    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> replace this with the correct calculation</span>
+
+    <span class="hljs-comment">// Print the result</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Today is the %dth day of your life\n&quot;</span>, days_lived);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="splitting-into-header-and-source-files">Splitting into header and source files</h3>
+<p>In the final program, you have written all the functions in the same file as the <code>main</code> function.
+In practice, it is better to split the program into multiple files: a header file (<code>.h</code>) that contains the function prototypes, and a source file (<code>.c</code>) that contains the function implementations.
+This makes the program easier to read and maintain, and allows you to reuse the functions in other programs.</p>
+<h4 id="activity-7---splitting-the-program">Activity 7 - Splitting the program</h4>
+<p>Create two new files called <code>days.h</code> and <code>days.c</code> in the folder for this tutorial.
+Copy the function prototypes from the <code>main</code> file into the <code>days.h</code> file, and the function definitions (except the <code>main</code> function) into the <code>days.c</code> file. Note that you will need to include the <code>stdio.h</code> and <code>functions.h</code> files in the <code>days.c</code> file, just like you include them in the <code>main</code> file.</p>
+<p>Modify the <code>main</code> file to include the <code>days.h</code> file, just like it includes the <code>stdio.h</code> and <code>functions.h</code> files.</p>
+<p>Make sure that the program still compiles and runs correctly after splitting it into multiple files, by running the following commands in the terminal:</p>
+<pre><code class="language-bash">gcc -Wall -o activity7 days.c main.c functions.c
+./activity7
+</code></pre>
+<p>If the program compiles without errors &amp; warnings, and runs successfully, then you've completed this activity.</p>
+<p>List the contents of the <code>days.h</code> file in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include the contents of days.h here</span>
+<span class="hljs-comment">/// Determines if a given year is a leap year.</span>
+<span class="hljs-comment">/// @param year The year to check.</span>
+<span class="hljs-comment">/// @return true if the year is a leap year, false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_leap_year</span><span class="hljs-params">(<span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-comment">/// Determines the number of days in a given month of a given year.</span>
+<span class="hljs-comment">/// @param month The month (1-12) to check.</span>
+<span class="hljs-comment">/// @param year The year to check.</span>
+<span class="hljs-comment">/// @return The number of days in the given month of the given year.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">days_in_month</span><span class="hljs-params">(<span class="hljs-type">int</span> month, <span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-comment">/// Calculates the day in the year for a given date.</span>
+<span class="hljs-comment">/// @param day The day of the month (1-31).</span>
+<span class="hljs-comment">/// @param month The month (1-12).</span>
+<span class="hljs-comment">/// @param year The year.</span>
+<span class="hljs-comment">/// @return The day in the year for the given date.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">day_in_year</span><span class="hljs-params">(<span class="hljs-type">int</span> day, <span class="hljs-type">int</span> month, <span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-comment">/// Calculates the number of days remaining in the year for a given date.</span>
+<span class="hljs-comment">/// @param day The day of the month (1-31).</span>
+<span class="hljs-comment">/// @param month The month (1-12).</span>
+<span class="hljs-comment">/// @param year The year.</span>
+<span class="hljs-comment">/// @return The number of days remaining in the year for the given date.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">remaining_days_in_year</span><span class="hljs-params">(<span class="hljs-type">int</span> day, <span class="hljs-type">int</span> month, <span class="hljs-type">int</span> year)</span>;
+
+<span class="hljs-comment">/// Calculates the number of days between two dates.</span>
+<span class="hljs-comment">/// @param day1 The day of the first date (1-31).</span>
+<span class="hljs-comment">/// @param month1 The month of the first date (1-12).</span>
+<span class="hljs-comment">/// @param year1 The year of the first date.</span>
+<span class="hljs-comment">/// @param day2 The day of the second date (1-31).</span>
+<span class="hljs-comment">/// @param month2 The month of the second date (1-12).</span>
+<span class="hljs-comment">/// @param year2 The year of the second date.</span>
+<span class="hljs-comment">/// @return The number of days between the two dates.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">days_between_dates</span><span class="hljs-params">(<span class="hljs-type">int</span> day1, <span class="hljs-type">int</span> month1, <span class="hljs-type">int</span> year1, <span class="hljs-type">int</span> day2, <span class="hljs-type">int</span> month2, <span class="hljs-type">int</span> year2)</span>;
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Assignments - Week 4</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="assignments---week-4">Assignments - Week 4</h1>
+<p>You must complete two out of the three assignments, but you are encouraged to complete all three.
+Below you will find, per assignment, instructions on what you need to include in this markdown file.</p>
+<h2 id="assignment-1---resistor-values">Assignment 1 - Resistor values</h2>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> define an enum type colour_t</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> {</span>
+    BLACK, 
+    BROWN,
+    RED,
+    ORANGE,
+    YELLOW,
+    GREEN,
+    BLUE,
+    VIOLET,
+    GREY,
+    WHITE,
+    GOLD,
+    SILVER
+} <span class="hljs-type">colour_t</span>;
+
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> define a structure type resistor_t</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>{</span>
+    <span class="hljs-type">colour_t</span> band1;
+    <span class="hljs-type">colour_t</span> band2;
+    <span class="hljs-type">colour_t</span> multiplier;
+} <span class="hljs-type">resistor_t</span>;
+
+<span class="hljs-type">const</span> <span class="hljs-type">char</span> *color_names[] = {<span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;violet&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;gold&quot;</span>, <span class="hljs-string">&quot;silver&quot;</span>};
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> define &amp; implement functions get_value and read_colour</span>
+
+<span class="hljs-comment">/// Checks if a colour is valid for the first two bands.</span>
+<span class="hljs-comment">/// @param colour The colour to check.</span>
+<span class="hljs-comment">/// @return True if the colour is valid, false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_valid_digit_band</span><span class="hljs-params">(<span class="hljs-type">colour_t</span> colour)</span> {
+    <span class="hljs-keyword">return</span> colour &gt;= BLACK &amp;&amp; colour &lt;= WHITE; <span class="hljs-comment">// Valid colours for digit bands</span>
+}
+
+<span class="hljs-comment">/// Returns the value of the resistor, or NaN if the given colour is not a valid colour for the first two bands.</span>
+<span class="hljs-comment">/// @return The value of the given colour.</span>
+<span class="hljs-type">double</span> <span class="hljs-title function_">get_value</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">resistor_t</span> *resistor)</span>;
+<span class="hljs-type">double</span> <span class="hljs-title function_">get_value</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">resistor_t</span> *resistor)</span>{
+    <span class="hljs-keyword">if</span>(!is_valid_digit_band(resistor-&gt;band1) || !is_valid_digit_band(resistor-&gt;band2)){
+        <span class="hljs-keyword">return</span> NAN; <span class="hljs-comment">// return &quot;not a number(NAN) (0.0/0.0)&quot; if invalid</span>
+    }
+
+    <span class="hljs-comment">//compute the base value of the first 2 band </span>
+    <span class="hljs-type">int</span> base_value = (resistor-&gt;band1 * <span class="hljs-number">10</span>) + resistor-&gt;band2; <span class="hljs-comment">//displays 2 numbers next to each other</span>
+
+    <span class="hljs-keyword">if</span> ( resistor-&gt;multiplier == GOLD ){ <span class="hljs-comment">// gold =&gt; x10^-1</span>
+        <span class="hljs-keyword">return</span> base_value * <span class="hljs-number">0.1</span>;
+    }
+    <span class="hljs-keyword">if</span> ( resistor-&gt;multiplier == SILVER ){ <span class="hljs-comment">// silver =&gt; x10^-2</span>
+        <span class="hljs-keyword">return</span> base_value * <span class="hljs-number">0.01</span>;
+    }
+    <span class="hljs-keyword">if</span> ( resistor-&gt;multiplier &gt;= BLACK &amp;&amp; resistor-&gt;multiplier &lt;= WHITE ){
+        <span class="hljs-keyword">return</span> base_value * <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, resistor-&gt;multiplier); <span class="hljs-comment">// x10^n (n depends on each color)</span>
+    }
+    <span class="hljs-keyword">return</span> NAN;
+}
+
+<span class="hljs-comment">/// Reads a colour from the user. Repeat until the user enters a valid colour.</span>
+<span class="hljs-comment">/// @param prompt The prompt to display to the user. (question)</span>
+<span class="hljs-comment">/// @return The colour entered by the user.</span>
+<span class="hljs-type">colour_t</span> <span class="hljs-title function_">read_colour</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *prompt)</span>;
+<span class="hljs-type">colour_t</span> <span class="hljs-title function_">read_colour</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *prompt)</span>{
+    <span class="hljs-type">char</span> input[<span class="hljs-number">20</span>]; <span class="hljs-comment">// separate buffer to hold user input</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, prompt);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%19s&quot;</span>, input); 
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">sizeof</span>(color_names) / <span class="hljs-keyword">sizeof</span>(color_names[<span class="hljs-number">0</span>]); i++){
+            <span class="hljs-keyword">if</span> (equal_strings_ci(input, color_names[i])){
+                <span class="hljs-keyword">return</span> (<span class="hljs-type">colour_t</span>)i; <span class="hljs-comment">//return the matching color</span>
+            }
+        }
+        <span class="hljs-comment">// if no match, prompt again</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid color. Please try again.\n&quot;</span>);
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">resistor_t</span> resistor;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the colors of the resistor: &quot;</span>);
+    
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> ask user to enter three colours, store these in a resistor_t variable</span>
+    resistor.band1 = read_colour(<span class="hljs-string">&quot;Enter the first color band: &quot;</span>);
+    resistor.band2 = read_colour(<span class="hljs-string">&quot;Enter the second color band: &quot;</span>);
+    resistor.multiplier = read_colour(<span class="hljs-string">&quot;Enter the third color band: &quot;</span>);
+    
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> use the function get_value to calculate the value of the</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print the value of the resistor </span>
+    <span class="hljs-type">double</span> value = get_value(&amp;resistor);
+    <span class="hljs-keyword">if</span>(isnan(value)){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid colours were specified\n&quot;</span>);
+    } <span class="hljs-keyword">else</span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The value of the resistor is %.2lf ohms\n&quot;</span>, value);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="assignment-2---colours-and-brightness">Assignment 2 - Colours and brightness</h2>
+<p>In this assignment you will work with three files: <code>main.c</code>, <code>colours.h</code>, and <code>colours.c</code>.</p>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+</code></pre>
+<p>Include the prototypes for the functions you wrote in <code>colours.h</code> here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the prototypes for the functions you wrote in `colours.h` here</span>
+</code></pre>
+<p>Include the definitions for the functions you wrote in <code>colours.c</code> here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the definitions for the functions you wrote in `colours.c` here</span>
+</code></pre>
+<h2 id="assignment-3---grade-administration">Assignment 3 - Grade administration</h2>
+<p>In this assignment you will work with three files: <code>main.c</code>, <code>student.h</code>, and <code>student.c</code>.</p>
+<p>Include the contents of your <code>main.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `main.c` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;student.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">student_t</span> students[<span class="hljs-number">20</span>];
+    <span class="hljs-type">int</span> student_count = <span class="hljs-number">0</span>;
+    <span class="hljs-type">student_t</span> student;
+    
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> read students from the user and store them in the `students` array</span>
+    <span class="hljs-comment">//       stop reading students when the user enters an empty name</span>
+    <span class="hljs-keyword">while</span>(student_count &lt; <span class="hljs-number">20</span>){
+        student = read_student(<span class="hljs-string">&quot;Enter the name of the student: &quot;</span>);
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">strlen</span>(student.name) == <span class="hljs-number">0</span>){
+            <span class="hljs-keyword">break</span>;
+        }
+        students[student_count++] = student;
+    }
+    <span class="hljs-comment">//       Next, print all students with their grade</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\nGrade:\n&quot;</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; student_count; i++){
+        print_student(&amp;students[i]);
+    }
+    <span class="hljs-comment">//       Finally, print the number of students with each grade</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Number of students per grade:\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;insufficient: %d\n&quot;</span>, count_students_with_grade(students, student_count, INSUFFICIENT));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;sufficient: %d\n&quot;</span>, count_students_with_grade(students, student_count, SUFFICIENT));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;good: %d\n&quot;</span>, count_students_with_grade(students, student_count, GOOD));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;outstanding: %d\n&quot;</span>, count_students_with_grade(students, student_count, OUTSTANDING));
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<p>Include the contents of your <code>student.h</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `student.h` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> STUDENT_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> STUDENT_H</span>
+
+<span class="hljs-comment">// A type to represent the result of a student&#x27;s exam</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> {</span> INSUFFICIENT, SUFFICIENT, GOOD, OUTSTANDING } <span class="hljs-type">result_t</span>;
+
+<span class="hljs-comment">// A type to represent a student with a name and a grade</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span>
+    <span class="hljs-type">char</span> name[<span class="hljs-number">100</span>];
+    <span class="hljs-type">result_t</span> grade;
+} <span class="hljs-type">student_t</span>;
+
+<span class="hljs-comment">/// Uses the console to read a student from the user.</span>
+<span class="hljs-comment">/// @param prompt The prompt to display to the user.</span>
+<span class="hljs-comment">/// @return The student entered by the user.</span>
+<span class="hljs-type">student_t</span> <span class="hljs-title function_">read_student</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *prompt)</span>;
+
+<span class="hljs-comment">/// Returns the text representation of a grade.</span>
+<span class="hljs-comment">/// @param grade The grade to convert to text.</span>
+<span class="hljs-comment">/// @return The text representation of the grade.</span>
+<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-title function_">grade_to_text</span><span class="hljs-params">(<span class="hljs-type">result_t</span> grade)</span>;
+
+<span class="hljs-comment">/// Prints a student (name and grade) to the console.</span>
+<span class="hljs-comment">/// The grade is printed in text form as &quot;insufficient&quot;, &quot;sufficient&quot;, &quot;good&quot;, or &quot;outstanding&quot;.</span>
+<span class="hljs-comment">/// @param student The student to print.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_student</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">student_t</span> *student)</span>;
+
+<span class="hljs-comment">/// Counts the number of students that have a certain grade.</span>
+<span class="hljs-comment">/// @param students The array of students.</span>
+<span class="hljs-comment">/// @param count The number of students in the array.</span>
+<span class="hljs-comment">/// @param grade The grade students must have to be included in the count.</span>
+<span class="hljs-comment">/// @return The number of students that have the specified grade.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">count_students_with_grade</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">student_t</span> students[<span class="hljs-type">static</span> <span class="hljs-number">1</span>], <span class="hljs-type">int</span> count, <span class="hljs-type">result_t</span> grade)</span>;
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// STUDENT_H</span></span>
+
+</code></pre>
+<p>Include the contents of your <code>student.c</code> file here:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include the contents of your `student.c` file here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;student.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-title function_">grade_to_text</span><span class="hljs-params">(<span class="hljs-type">result_t</span> grade)</span> {
+    <span class="hljs-keyword">switch</span> (grade) {
+        <span class="hljs-keyword">case</span> INSUFFICIENT:
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Insufficient&quot;</span>;
+        <span class="hljs-keyword">case</span> SUFFICIENT:
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Sufficient&quot;</span>;
+        <span class="hljs-keyword">case</span> GOOD:
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Good&quot;</span>;
+        <span class="hljs-keyword">case</span> OUTSTANDING:
+            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Outstanding&quot;</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Unknown&quot;</span>;
+}
+
+<span class="hljs-type">student_t</span> <span class="hljs-title function_">read_student</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *prompt)</span>{
+    <span class="hljs-type">student_t</span> student;
+    <span class="hljs-type">char</span> grade_char;    
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, prompt);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, student.name) != <span class="hljs-number">1</span> || <span class="hljs-built_in">strlen</span>(student.name) == <span class="hljs-number">0</span>){
+        student.grade = <span class="hljs-number">-1</span>; <span class="hljs-comment">//invalid grade =&gt; stop signal</span>
+        <span class="hljs-keyword">return</span> student;
+    }
+
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the grade for %s (i, s, g, o): &quot;</span>, student.name);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot; %c&quot;</span>, &amp;grade_char);
+
+    <span class="hljs-keyword">switch</span>(<span class="hljs-built_in">tolower</span>(grade_char)){
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;i&#x27;</span>: student.grade = INSUFFICIENT; <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;s&#x27;</span>: student.grade = SUFFICIENT; <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;g&#x27;</span>: student.grade = GOOD; <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;o&#x27;</span>: student.grade = OUTSTANDING; <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid grade entered. Defaulting to &#x27;insufficient&#x27;.\n&quot;</span>);
+            student.grade = INSUFFICIENT;
+        }
+    <span class="hljs-keyword">return</span> student;
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_student</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">student_t</span> *student)</span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s: %s\n&quot;</span>, student-&gt;name, grade_to_text(student-&gt;grade)); <span class="hljs-comment">//to access the members of a structure through a pointer to the structure ( (*p).name or p-&gt;name )</span>
+
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">count_students_with_grade</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">student_t</span> students[<span class="hljs-type">static</span> <span class="hljs-number">1</span>], <span class="hljs-type">int</span> count, <span class="hljs-type">result_t</span> grade)</span>{
+    <span class="hljs-type">int</span> total = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++){
+        <span class="hljs-keyword">if</span>(students[i].grade == grade){
+            total++;
+        }
+    }
+    <span class="hljs-keyword">return</span> total;
+}
+
+
+</code></pre>
+
+            
+            
+        </body>
+        </html>

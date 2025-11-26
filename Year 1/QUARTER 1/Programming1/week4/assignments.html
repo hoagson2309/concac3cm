@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week XX - Assignments</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-xx---assignments">Week XX - Assignments</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 26/09/2024</p>
+<p><strong>NOTE</strong>: if you'd like to have syntax highlighting in your markdown file, install the &quot;Markdown Preview Github Styling&quot; extension in VS Code.</p>
+<h2 id="first-assignment">First assignment</h2>
+<p>The first assignment I completed is assignment CACULATOR.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-comment">//Function to check valid operators.</span>
+<span class="hljs-type">char</span> <span class="hljs-title function_">read_operator</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter an operator (+, -, *, /, ^): &quot;</span>);
+    <span class="hljs-type">char</span> op = read_char();
+    <span class="hljs-keyword">while</span> (op != <span class="hljs-string">&#x27;+&#x27;</span> &amp;&amp; op != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; op != <span class="hljs-string">&#x27;*&#x27;</span> &amp;&amp; op != <span class="hljs-string">&#x27;/&#x27;</span> &amp;&amp; op != <span class="hljs-string">&#x27;^&#x27;</span>){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid operator. Please try again.\n&quot;</span>);
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter an operator (+, -, *, /, ^): &quot;</span>);
+            op = read_char();
+        } 
+    <span class="hljs-keyword">return</span> op;
+}
+<span class="hljs-comment">// CALCULATOR.</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">apply_operator</span><span class="hljs-params">(<span class="hljs-type">float</span> num1, <span class="hljs-type">float</span> num2, <span class="hljs-type">char</span> op)</span>
+{
+    <span class="hljs-type">float</span> res;
+    <span class="hljs-keyword">switch</span> (op)
+    {
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;+&#x27;</span>:
+        res = num1 + num2;
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;-&#x27;</span>:
+        res = num1 - num2;
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;*&#x27;</span>:
+        res = num1 * num2;
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;/&#x27;</span>:
+        <span class="hljs-keyword">if</span> (num2 != <span class="hljs-number">0</span>)
+        {
+            res = num1 / num2;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: Division by zero is not allowed.\n&quot;</span>);
+        }
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;^&#x27;</span>:
+        res = <span class="hljs-built_in">pow</span>(num1, num2);
+        <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Unexpected error in operator application.\n&quot;</span>);
+        <span class="hljs-keyword">break</span>;
+    }
+
+    <span class="hljs-keyword">return</span> res;
+}
+<span class="hljs-comment">// Function to ask the user whether to perform another calculation.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">perform_another_calculation</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+{
+    <span class="hljs-type">bool</span> valid = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-keyword">while</span> (!valid)
+    {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Do you want to perform another calculation? (y/n): &quot;</span>);
+        <span class="hljs-type">char</span> ans = read_char();
+
+        <span class="hljs-keyword">if</span> (ans == <span class="hljs-string">&#x27;y&#x27;</span> || ans == <span class="hljs-string">&#x27;Y&#x27;</span>)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ans == <span class="hljs-string">&#x27;n&#x27;</span> || ans == <span class="hljs-string">&#x27;N&#x27;</span>)
+        {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid input. Please enter &#x27;y&#x27; for yes or &#x27;n&#x27; for no.\n&quot;</span>);
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">float</span> num1, num2, res;
+    <span class="hljs-type">char</span> op;
+    <span class="hljs-type">bool</span> another_calculation = <span class="hljs-literal">true</span>;
+
+    <span class="hljs-keyword">while</span> (another_calculation)
+    {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter a number: &quot;</span>);
+        <span class="hljs-type">float</span> num1 = read_float();
+
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter another number: &quot;</span>);
+        <span class="hljs-type">float</span> num2 = read_float();
+
+        op = read_operator();
+
+        res = apply_operator(num1, num2, op);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.4f %c %.4f = %.4f\n&quot;</span>, num1, op, num2, res);
+
+        another_calculation = perform_another_calculation();
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Bye!\n&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="second-assignment">Second assignment</h2>
+<p>The second assignment I completed is assignment PRETZELS.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-comment">/*let the user enter ther number of pretzels in the pile
+ *@return pretzels the number of pretzels make up the pile
+*/</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">print_pretzels</span><span class="hljs-params">()</span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;How large should the pile of pretzels be (at least 10)?\n&quot;</span>);
+    <span class="hljs-type">int</span> pretzels = read_int();
+    <span class="hljs-keyword">while</span> (pretzels &lt; <span class="hljs-number">10</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The pile of pretzels must be at least 10.\n&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;How large should the pile of pretzels be (at least 10)? \n&quot;</span>);
+        pretzels = read_int();
+    }
+    <span class="hljs-keyword">return</span> pretzels;
+}
+<span class="hljs-comment">/*randomly determine who starts the game and print who starts the game
+ *return playersTurn true if it&#x27;s player&#x27;s turn, false if vice versa
+*/</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">print_playersTurn</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">bool</span> playersTurn = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">if</span> (random_int(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>) == <span class="hljs-number">0</span>) {
+        playersTurn = <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">if</span> (playersTurn) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You start!\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The computer starts!\n&quot;</span>);
+    }
+    <span class="hljs-keyword">return</span> playersTurn;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Welcome to the Pretzel game!\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The player who takes the last pretzel from the pile loses the game.\n&quot;</span>);
+    <span class="hljs-type">int</span> pretzels;
+    pretzels = print_pretzels();
+    <span class="hljs-type">bool</span> playersTurn;
+    playersTurn = print_playersTurn();
+    <span class="hljs-keyword">while</span> (pretzels &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-type">int</span> taken;
+        <span class="hljs-keyword">if</span> (playersTurn) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d pretzels left in the pile.\n&quot;</span>, pretzels);
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;How many pretzels do you want to take? &quot;</span>);
+            taken = read_int();
+            <span class="hljs-keyword">while</span> (taken &lt; <span class="hljs-number">1</span> || taken &gt; <span class="hljs-number">3</span> || taken &gt; pretzels) {
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You can only take 1, 2, or 3 pretzels, and you can&#x27;t take more pretzels than there are in the pile.\n&quot;</span>);
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;How many pretzels do you want to take? &quot;</span>);
+                taken = read_int();
+            }
+        } <span class="hljs-keyword">else</span> {
+            taken = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span> (pretzels % <span class="hljs-number">4</span> == <span class="hljs-number">0</span>) {
+                taken = <span class="hljs-number">3</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pretzels % <span class="hljs-number">4</span> == <span class="hljs-number">3</span>) {
+                taken = <span class="hljs-number">2</span>;
+            }
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The computer takes %d pretzels.\n&quot;</span>, taken);
+        }
+        playersTurn = !playersTurn;
+        pretzels -= taken;
+        }
+        
+    <span class="hljs-keyword">if</span> (playersTurn) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You win!\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The computer wins!\n&quot;</span>);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="third-assignment-optional">Third assignment (optional)</h2>
+<p>I've actually made three assignments this week! The third assignment I completed is assignment ZZZ.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+</code></pre>
+
+            
+            
+        </body>
+        </html>

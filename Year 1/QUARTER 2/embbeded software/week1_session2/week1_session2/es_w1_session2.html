@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 1 - Tutorial 2&colon; Digital Inputs &lpar;buttons&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-1---tutorial-2-digital-inputs-buttons">Week 1 - Tutorial 2: Digital Inputs (buttons)</h1>
+<blockquote>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 14/11/2024</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>Welcome to the second tutorial of the Embedded Software course. In this tutorial, we will learn how to read digital inputs using buttons. We will deal with a common issue of button presses: bouncing. Also, we will practice keeping track of the state in a function with static variables.</p>
+<p>This is the list of the equipment needed for this tutorial:</p>
+<ul>
+<li>RaspberryPi Pico board (with USB cable, headers soldered)</li>
+<li>Breadboard</li>
+<li>Jumper wires</li>
+<li>4 LEDs</li>
+<li>2 Buttons</li>
+<li>Resistors</li>
+</ul>
+<h2 id="activity-0---direct-light">Activity 0 - Direct Light</h2>
+<p><strong>Description: Light an LED with a button press</strong></p>
+<p>We start easy: Connect a button to the Raspberry Pi Pico to one of your GPIO pins (not GP0 or GP1). Connect an LED to another GPIO pin. When the button is pressed the LED should light up. When the button is released the LED should turn off.</p>
+<blockquote>
+<p><strong>TODO:</strong> <em>Question: Why are we not using GP0 or GP1?</em></p>
+<ul>
+<li>We avoid using GP0 and GP1 on the Raspberry Pi Pico because they are typically reserved for serial communication (UART0, TX and RX). Using them for other functions, like a button or LED, can interfere with serial debugging and USB communication, which are essential for programming and monitoring the Pico.</li>
+</ul>
+</blockquote>
+<p><em>Note: We will use internal pull-down resistors during this session, you learn more about pull-up and pull-down registers in Electronic Instrumentation</em></p>
+<p>In the following code snippet, you can see the basic code to read the button and light the LED. Fill in the missing GPIO pin numbers and test your program. When you are done you can continue with the next activity.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-type">const</span> uint PIN_BUTTON = ; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED = ; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output</span>
+    gpio_init(PIN_LED);
+    gpio_set_dir(PIN_LED, GPIO_OUT);
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        gpio_put(PIN_LED, button_state);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-1---fast-blink-slow-blink">Activity 1 - Fast blink slow blink</h2>
+<p><strong>Description: Blink an LED fast or slow with a button press</strong></p>
+<p>Now we will combine the button press with the blinking LED from the last session. When the button is pressed the LED should blink fast (4 times per second). When the button is released the LED should blink slowly (1 time per second). You do not need to implement extra functions for this activity.</p>
+<p><em>Note: Try to use only use two calls to <code>gpio_put</code>.</em></p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED = <span class="hljs-number">15</span>;    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">250</span>;
+    <span class="hljs-type">const</span> uint delay2 = <span class="hljs-number">1000</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output</span>
+    gpio_init(PIN_LED);
+    gpio_set_dir(PIN_LED, GPIO_OUT);
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state == <span class="hljs-number">1</span>)
+        {
+            gpio_put(PIN_LED, <span class="hljs-literal">true</span>);
+            sleep_ms(delay);
+            gpio_put(PIN_LED, <span class="hljs-literal">false</span>);
+            sleep_ms(delay);
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            gpio_put(PIN_LED, <span class="hljs-literal">true</span>);
+            sleep_ms(delay2);
+            gpio_put(PIN_LED, <span class="hljs-literal">false</span>);
+            sleep_ms(delay2);
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-2---light-switch">Activity 2 - Light Switch</h2>
+<p><strong>Description: Toggle an LED on button press</strong></p>
+<p>Until now the button was stateless, it only triggered a direct action. Now we will implement a light switch. When the button is pressed the LED should toggle its state. This means if the LED is on it should turn off and if the LED is off it should turn on. We only want to change the state of the LED when the button is pressed, not when it is released. Furthermore it should not keep changing the state while the button is pressed. For this refer to the lecture part. Again, you can do this directly in the main superloop.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED = <span class="hljs-number">15</span>;    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">50</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output</span>
+    gpio_init(PIN_LED);
+    gpio_set_dir(PIN_LED, GPIO_OUT);
+
+    <span class="hljs-type">bool</span> led_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">bool</span> previous_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state &amp;&amp; !previous_state)
+        {
+            led_state = !led_state;
+            gpio_put(PIN_LED, led_state);
+        }
+        previous_state = button_state; <span class="hljs-comment">//This ensures the toggle happens only once per press (and release)</span>
+       sleep_ms(delay);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-3---counter-sign-off">Activity 3 - Counter (sign-off)</h2>
+<p><strong>Description: Binary count up with a (debounced) button</strong></p>
+<p>Last session you learned how to implement a binary time counter. This week we will instead count buutton presses. We will also implement a debounce mechanism to make sure that the button presses are registered correctly.</p>
+<h3 id="part-1---counting-presses">Part 1 - Counting presses</h3>
+<p>Your goal is to implement a counter that counts up by one every time the button is pressed. The counter should be displayed on 4 LEDs in binary. The counter should be able to count from 0 to 15 and then wrap around to 0 again.</p>
+<p><em>Note: Reuse the binary output function from activity 3 in session 1.</em></p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">display_binary_4_LEDs</span><span class="hljs-params">(<span class="hljs-type">int</span> number, <span class="hljs-type">const</span> uint PIN_LED[<span class="hljs-number">4</span>])</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">3</span>; i &gt;= <span class="hljs-number">0</span>; i--){
+        gpio_put(PIN_LED[i], number % <span class="hljs-number">2</span>);
+        number /= <span class="hljs-number">2</span>;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED[] = {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">200</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output   </span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++){
+        gpio_init(PIN_LED[i]);
+        gpio_set_dir(PIN_LED[i], GPIO_OUT);
+    }
+    
+    <span class="hljs-type">bool</span> previous_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">int</span> counter = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state &amp;&amp; !previous_state)
+        {
+            display_binary_4_LEDs(counter % <span class="hljs-number">16</span>, PIN_LED);
+            counter++;
+        }
+        previous_state = button_state; <span class="hljs-comment">//This ensures the toggle happens only once per press (and release)</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}   
+
+</code></pre>
+<h3 id="part-2---debouncing">Part 2 - Debouncing</h3>
+<p>If you have not implemented a debounce mechanism yet you might notice that button presses are not always registered correctly, some presses might be registered multiple times. To deal with that issues implement a software debounce mechanism, you can use <code>sleep_ms</code> to wait for the button to stabilize. The actual wait time depends on the button you are using, you might need to experiment a bit to find the right value (you can start with 50ms).</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">display_binary_4_LEDs</span><span class="hljs-params">(<span class="hljs-type">int</span> number, <span class="hljs-type">const</span> uint PIN_LED[<span class="hljs-number">4</span>])</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">3</span>; i &gt;= <span class="hljs-number">0</span>; i--){
+        gpio_put(PIN_LED[i], number % <span class="hljs-number">2</span>);
+        number /= <span class="hljs-number">2</span>;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED[] = {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>};    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">200</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output   </span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++){
+        gpio_init(PIN_LED[i]);
+        gpio_set_dir(PIN_LED[i], GPIO_OUT);
+    }
+    
+    <span class="hljs-type">bool</span> previous_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">int</span> counter = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state &amp;&amp; !previous_state)
+        {
+            display_binary_4_LEDs(counter % <span class="hljs-number">16</span>, PIN_LED);
+            counter++;
+        }
+        previous_state = button_state; <span class="hljs-comment">//This ensures the toggle happens only once per press (and release)</span>
+        sleep_ms(delay); <span class="hljs-comment">//debouncing</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}   
+</code></pre>
+<blockquote>
+<p>TODO: As debouncing is an important topic in embedded systems you should show your implementation to a teacher or TA to get a sign-off!</p>
+</blockquote>
+<h2 id="activity-4---light-switch-continued">Activity 4 - Light Switch (continued)</h2>
+<p><strong>Description: Toggle an LED on button press</strong></p>
+<p>The final topic of today is keeping track of state within functions. We will modify the light switch activity, so copy your code to a new project directory and continue from there.</p>
+<h3 id="part-1---passing-state">Part 1 - Passing state</h3>
+<p>Implement the function <code>toggle_led</code> that toggles the state of the LED. The function should be called with the current state of the LED and return the new state of the LED. Call it from your main superloop. For this one time you are allowed to use a magic number for the LED pin.</p>
+<pre><code class="language-c"><span class="hljs-comment">/// Toggle the state of the LED (ON-OFF)</span>
+<span class="hljs-comment">/// @param led_state Current state of the LED</span>
+<span class="hljs-comment">/// @return New state of the LED</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">toggle_led</span><span class="hljs-params">(<span class="hljs-type">bool</span> led_state)</span>;
+</code></pre>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-comment">/// Toggle the state of the LED (ON-OFF)</span>
+<span class="hljs-comment">/// @param led_state Current state of the LED</span>
+<span class="hljs-comment">/// @return New state of the LED</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">toggle_led</span><span class="hljs-params">(<span class="hljs-type">bool</span> led_state)</span>;
+<span class="hljs-type">bool</span> <span class="hljs-title function_">toggle_led</span><span class="hljs-params">(<span class="hljs-type">bool</span> led_state)</span>{
+    <span class="hljs-keyword">return</span> !led_state;
+}
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED = <span class="hljs-number">15</span>;    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">50</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output</span>
+    gpio_init(PIN_LED);
+    gpio_set_dir(PIN_LED, GPIO_OUT);
+
+    <span class="hljs-type">bool</span> led_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">bool</span> previous_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state &amp;&amp; !previous_state)
+        {
+            led_state = toggle_led(led_state);
+            gpio_put(PIN_LED, led_state);
+        }
+        previous_state = button_state; <span class="hljs-comment">//This ensures the toggle happens only once per press (and release)</span>
+       sleep_ms(delay);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="part-2---static-state">Part 2 - Static state</h3>
+<p>Now change your code to keep the state of the LED in a static variable. This means you should not pass the state of the LED to or from the function <code>toggle_led</code> anymore.</p>
+<blockquote>
+<p>Question: What is the advantage of keeping the state of the LED in a static variable instead of passing a global variable?</p>
+</blockquote>
+<pre><code class="language-c"><span class="hljs-comment">/// Toggle the state of the LED (ON-OFF)</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">toggle_led</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+</code></pre>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-comment">/// Toggle the state of the LED (ON-OFF)</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">toggle_led</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">toggle_led</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>{
+    <span class="hljs-type">static</span> <span class="hljs-type">bool</span> led_state = <span class="hljs-literal">false</span>;
+    led_state = !led_state;
+    gpio_put(<span class="hljs-number">15</span>, led_state);
+}
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED = <span class="hljs-number">15</span>;    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">50</span>;
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output</span>
+    gpio_init(PIN_LED);
+    gpio_set_dir(PIN_LED, GPIO_OUT);
+
+    <span class="hljs-type">bool</span> led_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">bool</span> previous_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state &amp;&amp; !previous_state)
+        {
+            toggle_led;
+        }
+        previous_state = button_state; <span class="hljs-comment">//This ensures the toggle happens only once per press (and release)</span>
+       sleep_ms(delay);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<blockquote>
+<p>Extra challenge: Can you move the button functionality into a separate function as well? (+debouncing)
+-yes, why not?</p>
+</blockquote>
+<h2 id="extra-information-easier-upload-optional">Extra Information: Easier upload (optional)</h2>
+<p>If you are tired of dragging and dropping the <code>.uf2</code> file to your Raspberry Pi Pico you can use the following command to upload your program to the board you can use picotool in the terminal. This sets the board into bootloader mode and uploads the program to the board and resets it.</p>
+<pre><code class="language-bash">picotool load -f program_binary.uf2
+</code></pre>
+<p>There is a little catch to this method. The program currently running needs to be stopped via USB and this can only be done if the program currently running called <code>stdio_init_all();</code> in the <code>main()</code> function. So make sure to add this line at the beginning of your <code>main()</code> function in all your programs.</p>
+<h2 id="activity-5---timed-light-switch-optional">Activity 5 - Timed Light Switch (optional)</h2>
+<p><strong>Description: Staircase lightswitch with long on function when long-pressed</strong></p>
+<p>Every week we try to give you at least one activity with a relation to the real world. This week we will implement a timed light switch.</p>
+<p>In apartment buildings, you often find light switches in staircases that turn on the light for a certain amount of time. This is useful when you are going up the stairs and do not want to turn off the light manually. When doing work in the staircases you might want to turn on the light for a longer period of time. This is often done by long-pressing the light switch. You should now implement this behavior with a button and an LED.</p>
+<p>When the button is pressed the LED should turn on for one second and then turn off. When the button is long-pressed (let's say 500ms) the LED should turn on for 15 seconds and then turn off.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>
+{
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>; <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the button</span>
+    <span class="hljs-type">const</span> uint PIN_LED = <span class="hljs-number">15</span>;    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Set the GPIO pin for the LED</span>
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">50</span>;
+    <span class="hljs-type">const</span> uint delay0 = <span class="hljs-number">1000</span>;
+    <span class="hljs-type">const</span> uint delay1 = <span class="hljs-number">500</span>;
+    <span class="hljs-type">const</span> uint delay2 = <span class="hljs-number">15000</span>;
+
+
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output</span>
+    gpio_init(PIN_LED);
+    gpio_set_dir(PIN_LED, GPIO_OUT);
+
+    <span class="hljs-type">bool</span> led_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">bool</span> previous_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)
+    {
+        <span class="hljs-comment">// Read the button state and light the LED</span>
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state &amp;&amp; !previous_state)
+        {
+            <span class="hljs-keyword">if</span>(button_state){ <span class="hljs-comment">//if 1</span>
+                sleep_ms(delay1); <span class="hljs-comment">// delay 500ms</span>
+                <span class="hljs-keyword">if</span>(button_state){ <span class="hljs-comment">// if still 1</span>
+                    gpio_put(PIN_LED, <span class="hljs-literal">true</span>);
+                    sleep_ms(delay2); <span class="hljs-comment">//15s</span>
+                    gpio_put(PIN_LED, <span class="hljs-literal">false</span>);
+                } <span class="hljs-keyword">else</span>{ <span class="hljs-comment">//otherwise</span>
+                    gpio_put(PIN_LED, <span class="hljs-literal">true</span>);
+                    sleep_ms(delay0); <span class="hljs-comment">//1s</span>
+                    gpio_put(PIN_LED, <span class="hljs-literal">false</span>);
+                }
+            }
+        }
+        previous_state = button_state; <span class="hljs-comment">//This ensures the toggle happens only once per press (and release)</span>
+       sleep_ms(delay); <span class="hljs-comment">//debouncing</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="questions-to-answer">Questions to answer:</h2>
+<blockquote>
+<p>Please answer the following reflection questions:</p>
+<ol>
+<li>How long did this tutorial take you?
+8 hours</li>
+<li>Did you face difficulties?
+Yes, i used to face some challenges with light switch and toggle button at first</li>
+<li>What would you like to see improved?</li>
+</ol>
+</blockquote>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,18 @@
+Start testing: Sep 04 01:20 CEST
+----------------------------------------------------------
+3/8 Testing: partition_array_test
+3/8 Test: partition_array_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week1-code/scripts/test_target.py" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week1-code/build/partition_array/partition_array" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week1-code/partition_array/tests/partition_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week1-code/build/partition_array
+"partition_array_test" start time: Sep 04 01:20 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.24 sec
+----------------------------------------------------------
+Test Passed.
+"partition_array_test" end time: Sep 04 01:20 CEST
+"partition_array_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 04 01:20 CEST

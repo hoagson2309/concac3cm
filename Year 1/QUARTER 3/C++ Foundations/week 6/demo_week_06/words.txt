@@ -1,0 +1,18 @@
+boat, a vehicle that can be used to transport goods and people across the water. Comes with a captain or not.
+tree, a plant that grows in the ground. Trees have a trunk, branches, and leaves. Some loose leaves periodically.
+tulip, a plant that grows from a bulb and has large, brightly colored flowers. Tulips are a national sport in the Netherlands.
+umbrella, a device that is used to protect people from the rain. It is made of a long, curved handle and a canopy of fabric. The fabric is hopefully waterproof.
+rock, a hard, solid mineral material. Rocks are found in the ground and are used for building things. Rocks are also used in landscaping. Or for throwing.
+rocket, a vehicle that is used to travel into space. Rockets are also used in tennis, but those do not travel into space.
+mouse, a small mammal with a long tail or a plastic device with a cable. The animal is a rodent and the device is used to control a computer.
+mug, a cup with a handle that is used for drinking hot beverages. Must be cleaned periodically to avoid mold.
+headphones, a device that produces sound for the ears and is used to protect the wearer from interacting with other people in social situations.
+helicopter, a vehicle that can fly in the air by spinning blades. Also a style of parenting that's frowned upon.
+mud, a mixture of dirt and water. Children love it, parents, especially of the helicopter variety, do not.
+mushroom, a fungus that grows in the ground. Mushrooms are used in cooking and can be poisonous. Do not eat wild mushrooms.
+pencil, an analog input device used in conjunction with paper. Requires periodical maintenance with a sharpener.
+pencil sharpener, a device used to sharpen pencils. See [pencil].
+apple, a fruit that grows on a tree. Commonly found in supermarkets and lunch boxes.
+brick, a block of hard material used in building. Clay bricks are for building homes, plastic ones are for playing with.
+butterfly, an insect with large, colorful wings. Butterflies also occur in the stomach when one is nervous.
+cactus, a plant that grows in the desert. Cacti have sharp spines and store water in their stems. Do not touch.

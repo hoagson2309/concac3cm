@@ -1,0 +1,30 @@
+#include <stdio.h>      // for printf
+#include "functions.h"  // for read_int
+
+int main(void) {
+    int number[10];
+    int count = 0;
+    bool printed_first = false;
+    int numberss;
+    int Num = sizeof(number) / sizeof(number[0]);
+
+    printf("Enter the numbers: ");
+    numberss = read_int();
+    while (numberss > 0 && count <= Num) {
+        number[count] = numberss;
+        count++;
+        printf("Enter the numbers: ");
+        numberss = read_int();
+    }
+    
+    printf("You entered the following values: ");
+    for(int i = 0; i < count; i++) {
+        if (number[i] > 5) {
+        if (printed_first) printf(", ");    // print separator if not the first number
+        printed_first = true;               // the first number has been printed
+        printf("%d", number[i]);
+        }
+    }
+        printf(".\n");
+    return 0;
+}

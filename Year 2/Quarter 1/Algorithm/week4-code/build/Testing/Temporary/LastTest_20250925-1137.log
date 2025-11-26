@@ -1,0 +1,19 @@
+Start testing: Sep 25 19:24 CEST
+----------------------------------------------------------
+2/10 Testing: array_to_bst_test
+2/10 Test: array_to_bst_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/scripts/test.py" "array_to_bst" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/array_to_bst/tests/array_to_bst_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/build/array_to_bst
+"array_to_bst_test" start time: Sep 25 19:24 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.53 sec
+----------------------------------------------------------
+Test Passed.
+"array_to_bst_test" end time: Sep 25 19:24 CEST
+"array_to_bst_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 25 19:24 CEST

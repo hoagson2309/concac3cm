@@ -1,0 +1,3 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 4/workshop_04/build/CMakeFiles/wc_clone.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 4/workshop_04/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 4/workshop_04/build/CMakeFiles/rebuild_cache.dir

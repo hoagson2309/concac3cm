@@ -1,0 +1,23 @@
+|logicgates
+Fand <= inst.DB_MAX_OUTPUT_PORT_TYPE
+X => inst.IN0
+X => inst2.IN1
+X => inst3.IN0
+X => inst4.IN0
+X => inst5.IN1
+X => inst6.IN1
+X => inst7.IN0
+Y => inst.IN1
+Y => inst2.IN0
+Y => inst3.IN1
+Y => inst5.IN0
+Y => inst6.IN0
+Y => inst7.IN1
+For <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+Fxor <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+Fnot <= inst4.DB_MAX_OUTPUT_PORT_TYPE
+Fnand <= inst5.DB_MAX_OUTPUT_PORT_TYPE
+Fnor <= inst6.DB_MAX_OUTPUT_PORT_TYPE
+Fxnor <= inst7.DB_MAX_OUTPUT_PORT_TYPE
+
+

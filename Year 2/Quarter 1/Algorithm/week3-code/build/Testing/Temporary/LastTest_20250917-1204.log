@@ -1,0 +1,18 @@
+Start testing: Sep 17 17:20 CEST
+----------------------------------------------------------
+3/5 Testing: expression_eval_test
+3/5 Test: expression_eval_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/scripts/test_target.py" "expression_eval" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/expression_eval/tests/expression_eval_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/build/expression_eval
+"expression_eval_test" start time: Sep 17 17:20 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.64 sec
+----------------------------------------------------------
+Test Passed.
+"expression_eval_test" end time: Sep 17 17:20 CEST
+"expression_eval_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 17 17:20 CEST

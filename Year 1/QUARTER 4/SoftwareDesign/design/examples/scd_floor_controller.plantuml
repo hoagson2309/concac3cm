@@ -1,0 +1,29 @@
+@startuml
+' Define the styles for the System Context diagram.
+skinparam defaultTextAlignment center
+scale 250 height
+' Define the system context.
+storage "\nFloor\nController i\n" as Core #white;line.dashed;line:darkgrey;
+' Add the terminals
+Rectangle "Up Button" as UpButton
+Rectangle "Down Button" as DownButton
+Rectangle "Buzzer" as Buzzer
+Rectangle "Detector\nCabin Descent i" as DetectorCabinDescent
+Rectangle "Detector\nCabin Ascent i" as DetectorCabinAscent
+Rectangle "Detector\nCabin Floor i" as DetectorCabinFloor
+Rectangle "Supervisory Controller" as Subsystem
+' Add the relationships between the terminals and the system.
+UpButton --> Core : PRESSED,\nRELEASED
+DownButton --> Core : PRESSED,\nRELEASED
+Core --> Buzzer : ON, OFF
+Core -left-> Subsystem : UP_i, DOWN_i,\nDETECTED_DESCENT_i,\nDETECTED_ASCENT_i,\nDETECTED_FLOOR_i
+Subsystem -right-> Core : LedOn(i), LedOff(i),\nSoundPing(i)
+
+'Trick to keep some entities together
+DetectorCabinDescent -[hidden]-> DetectorCabinAscent
+DetectorCabinAscent -[hidden]-> DetectorCabinFloor
+
+DetectorCabinDescent --> Core : DETECTED
+DetectorCabinAscent --> Core : DETECTED
+DetectorCabinFloor --> Core : DETECTED
+@enduml

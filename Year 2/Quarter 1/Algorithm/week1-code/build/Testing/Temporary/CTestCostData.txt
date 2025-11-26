@@ -1,0 +1,9 @@
+sorted_array_test_insert 4 0.261742
+first_occurrence_test 6 0.329468
+intersect_sets_test 3 0.311087
+partition_array_test 6 0.300724
+sorted_array_test_contains 4 0.261036
+sorted_array_test_remove 6 0.224586
+subtract_sets_inplace_test 3 0.331267
+subtract_sets_test 4 0.279034
+---

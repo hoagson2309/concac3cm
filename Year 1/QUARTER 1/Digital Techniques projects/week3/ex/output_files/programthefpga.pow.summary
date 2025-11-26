@@ -1,0 +1,12 @@
+Power Analyzer Status : Successful - Wed Sep 25 09:18:47 2024
+Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Revision Name : programthefpga
+Top-level Entity Name : programthefpga
+Family : MAX 10
+Device : 10M08SAE144C8GES
+Power Models : Final
+Total Thermal Power Dissipation : 116.31 mW
+Core Dynamic Thermal Power Dissipation : 0.00 mW
+Core Static Thermal Power Dissipation : 110.61 mW
+I/O Thermal Power Dissipation : 5.71 mW
+Power Estimation Confidence : Low: user provided insufficient toggle rate data

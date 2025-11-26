@@ -1,0 +1,17 @@
+@startuml
+' Define the styles for the System Context diagram.
+skinparam defaultTextAlignment center
+scale 250 height
+' Define the system context.
+storage "\nShaft\nController\n" as Core #white;line.dashed;line:darkgrey;
+' Add the terminals
+Rectangle "Motor" as Motor
+Rectangle "Door" as Door
+Rectangle "Supervisory Controller" as Subsystem
+' Add the relationships between the terminals and the system.
+Core --> Motor : Ascend(speed),\nDescend(speed),\nStop, Brake
+Core -up-> Door : Open,\nClose
+Door -down-> Core : OPENED,\nCLOSED
+Core -left-> Subsystem : GoUp(speed), GoDown(speed),\nStop, OpenDoor, CloseDoor
+Subsystem -right-> Core : DOOR_CLOSED, DOOR_OPENED,\nARRIVING, ARRIVED,\nEMERGENCE
+@enduml

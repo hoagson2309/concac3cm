@@ -1,0 +1,22 @@
+Start testing: Oct 26 23:30 CET
+----------------------------------------------------------
+4/6 Testing: satellites_test
+4/6 Test: satellites_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/scripts/test.py" "satellites" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/4.satellites/tests/satellites_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build/4.satellites
+"satellites_test" start time: Oct 26 23:30 CET
+Output:
+----------------------------------------------------------
+None
+The answer for the following test input (line 3) is incorrect: [(0,0,0),(1,2,3),(8,5,2),(2,3,0),(5,5,5)] 
+ got 16.55
+ expected 22.71
+<end of output>
+Test time =   0.47 sec
+----------------------------------------------------------
+Test Failed.
+"satellites_test" end time: Oct 26 23:30 CET
+"satellites_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 26 23:30 CET

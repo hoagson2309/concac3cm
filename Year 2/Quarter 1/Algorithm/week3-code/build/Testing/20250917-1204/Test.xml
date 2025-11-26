@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-c++"
+	BuildStamp="20250917-1204-Experimental"
+	Name="SonCao-Acer"
+	Generator="ctest-3.28.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="13.3.0"
+	OSName="Linux"
+	Hostname="SonCao-Acer"
+	OSRelease="6.6.87.2-microsoft-standard-WSL2"
+	OSVersion="#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="104"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="2048"
+	TotalPhysicalMemory="7604"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1796.57"
+	>
+	<Testing>
+		<StartDateTime>Sep 17 17:20 CEST</StartDateTime>
+		<StartTestTime>1758122437</StartTestTime>
+		<TestList>
+			<Test>./expression_eval/expression_eval_test</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>expression_eval_test</Name>
+			<Path>./expression_eval</Path>
+			<FullName>./expression_eval/expression_eval_test</FullName>
+			<FullCommandLine>/usr/bin/python3 "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/scripts/test_target.py" "expression_eval" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/expression_eval/tests/expression_eval_test_cases"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.636388</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/scripts/test_target.py" "expression_eval" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week3-code/expression_eval/tests/expression_eval_test_cases"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value></Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Sep 17 17:20 CEST</EndDateTime>
+		<EndTestTime>1758122438</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

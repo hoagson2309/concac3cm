@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 2 - Session 1&colon; Time and Pulse Width Modulation &lpar;PWM&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-2---session-1-time-and-pulse-width-modulation-pwm">Week 2 - Session 1: Time and Pulse Width Modulation (PWM)</h1>
+<blockquote>
+<p><strong>Name:</strong> SON CAO</p>
+<p><strong>Group:</strong> ETI1V.IA</p>
+<p><strong>Date:</strong> 20/11/2024</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>In this tutorial, we will see how time influences the behavior of a system. We will also learn about Pulse Width Modulation (PWM) and how to use it to control the brightness of an LED.</p>
+<p>This is the list of needed equipment for this tutorial (everything is included in your kit):</p>
+<ul>
+<li>Raspberry Pi Pico board (with USB cable, headers soldered)</li>
+<li>Breadboard</li>
+<li>Jumper wires</li>
+<li>Resistors</li>
+<li>1 LED</li>
+</ul>
+<p>While your computer has a clock that keeps track of absolute time, often embedded systems do not. This means that the Pico does not know what time it is. However, we can use the Pico to keep track of relative time, for this the microcontroller has built-in timers that count the number of clock cycles that have passed. We can use these timers to keep track of time passing, or to generate signals with specific properties.</p>
+<h2 id="activity-1-blink-without-sleep">Activity 1: Blink without sleep</h2>
+<p><strong>Description: Blink an LED without using the sleep function</strong></p>
+<p>You might have already noticed that the <code>sleep_ms()</code> function is not the best way to control time in an embedded system. It is blocking, which means that the program stops until the time is up. This is usually not a problem for small delays, but it can be a problem for longer delays, as you are not able to do anything else during that time. We will now rewrite the blinking LED program without using the <code>sleep_ms()</code> function. Take the blinking LED program (template project) and try to reimplement it using the elapsed time since the startup.</p>
+<blockquote>
+<p>Question: Why is the blinking rate of our LED not exactly 1 Hz, when using the <code>sleep_ms(1000)</code> function?</p>
+</blockquote>
+<p>You will need to function:  <code>time_us_32 (void)</code> - This function returns the time in microseconds since the Pico started. (<em>Note: This wraps around every 71 minutes, so be careful when using it for long periods of time.</em>)</p>
+<p><em>Hint: Calculate when the LED should change state and check if this point in time has passed.</em></p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Set up the LED pin 15 / physical pin 20</span>
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">15</span>;
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    <span class="hljs-comment">// Never-ending superloop</span>
+    uint previous_time = <span class="hljs-number">0</span>;
+    uint current_time;
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">1000</span>;
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-comment">//check if the time is elapsed</span>
+        current_time = to_ms_since_boot(time_us_32());
+        <span class="hljs-keyword">if</span>(current_time - previous_time &gt;= delay){
+            gpio_put(LED_PIN, !gpio_get(LED_PIN));
+            previous_time = current_time;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-2-blink-and-direct-light">Activity 2: Blink and direct light</h2>
+<p><strong>Description: Combinate the blinking LED with direct light activity</strong></p>
+<p>Now connect a button and a second LED to the Pico. Change your code so that the first LED blinks as before, but when the button is pressed the second LED should light up. When the button is released the second LED should turn off (see activity 0 of last session).</p>
+<blockquote>
+<p>Question: Would this be possible with the <code>sleep_ms</code> function? Why?</p>
+</blockquote>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">set_up_led</span><span class="hljs-params">(uint LED_PIN)</span>{
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Set up the LED pin 15 / physical pin 20</span>
+    <span class="hljs-comment">// Set the GPIO pin for the LED as output</span>
+    <span class="hljs-type">const</span> uint LED_PIN1= <span class="hljs-number">15</span>;
+    set_up_led(LED_PIN1);
+    <span class="hljs-type">const</span> uint LED_PIN2= <span class="hljs-number">13</span>;
+    set_up_led(LED_PIN2);
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>;
+    
+    <span class="hljs-comment">// Set the GPIO pin for the button as input</span>
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Never-ending superloop</span>
+    uint previous_time = <span class="hljs-number">0</span>;
+    uint current_time;
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-comment">//check if the time is elapsed</span>
+        current_time = to_ms_since_boot(time_us_32());
+        <span class="hljs-keyword">if</span>(current_time - previous_time &gt;= delay){
+            gpio_put(LED_PIN2, !gpio_get(LED_PIN2));
+            previous_time = current_time;
+        }
+
+        <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+        <span class="hljs-keyword">if</span> (button_state == <span class="hljs-number">1</span>)
+        {
+            gpio_put(LED_PIN1, <span class="hljs-literal">true</span>);
+        } <span class="hljs-keyword">else</span>{
+            gpio_put(LED_PIN1, <span class="hljs-literal">false</span>);
+        }
+        current_time = to_ms_since_boot(time_us_32());
+        <span class="hljs-keyword">if</span>(current_time - previous_time &gt;= delay){
+            gpio_put(LED_PIN1, !gpio_get(LED_PIN1));
+            previous_time = current_time;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-3-manual-pwm-control----pwm-peripheral">Activity 3: Manual PWM control --&gt; PWM peripheral</h2>
+<p><strong>Description: Control the brightness of an LED with a loop</strong></p>
+<p>In this sessions introduction you heard an explaination of PWM. Now we will try to control the brightness of an LED by changing the duty cycle of a square wave. First we, will do this manually by changing the state of the LED in a loop. Later we will use the PWM peripheral of the Pico to do this automatically.</p>
+<h3 id="part-1-manual-pwm">Part 1: Manual PWM</h3>
+<p>To better understand PWM we will first implement a manual PWM control for a 50% duty cycle. Start with the template project again. Now experiment with the sleep time of the LED. Start out with a sleep time of 1000 microseconds and keep decreasing the sleep time until you can't see the LED blinking anymore.</p>
+<blockquote>
+<p>Question: What is the shortest sleep time you can use and still see the LED blinking?
+20ms</p>
+</blockquote>
+<p>Afterwards add a second LED that is always on. Include your final code below.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Set up the LED pin 15 / physical pin 20</span>
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">13</span>;
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    <span class="hljs-comment">// Never-ending superloop</span>
+    uint previous_time = <span class="hljs-number">0</span>;
+    uint current_time;
+    <span class="hljs-type">const</span> uint delay = <span class="hljs-number">5</span>;
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-comment">//check if the time is elapsed</span>
+        current_time = to_ms_since_boot(time_us_32());
+        <span class="hljs-keyword">if</span>(current_time - previous_time &gt;= delay){
+            gpio_put(LED_PIN, !gpio_get(LED_PIN));
+            previous_time = current_time;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<blockquote>
+<p>Can you see the difference in brightness between the two LEDs?</p>
+</blockquote>
+<ul>
+<li>yes, the LED_PIN = 15 is likely to be brighter than the LED_PIN = 13</li>
+</ul>
+<h3 id="part-2-pwm-peripheral">Part 2: PWM peripheral</h3>
+<p>Now we will use the PWM peripheral of the Pico to control the brightness of the LED. The PWM peripheral generates a square wave with a specific duty cycle. The duty cycle is the percentage of time the signal is high. To use the PWM peripheral we need to configure it first. We will use the <code>pwm_set_gpio_level</code> function to set the duty cycle of the PWM signal. Here is the code to get you started, copy it to your project and check if it is working.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span> <span class="hljs-comment">// Hardware PWM library</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Set up the LED pin 15 / physical pin 20</span>
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">15</span>;
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    <span class="hljs-type">const</span> uint SLEEP = <span class="hljs-number">100</span>;
+
+    <span class="hljs-comment">// Tell GPIO_PIN it is allocated to the PWM</span>
+    gpio_set_function(LED_PIN, GPIO_FUNC_PWM);
+    <span class="hljs-comment">// Get the slice number for the GPIO_PIN</span>
+    uint slice_num = pwm_gpio_to_slice_num(LED_PIN);
+    
+    <span class="hljs-comment">// Set period of 4 cycles (0 to 3 inclusive)</span>
+    pwm_set_wrap(slice_num, <span class="hljs-number">3</span>);
+    <span class="hljs-comment">// Set level to high for 1 slice (2/4 = 50% duty cycle)</span>
+    pwm_set_gpio_level(LED_PIN, <span class="hljs-number">2</span>);
+    <span class="hljs-comment">// Set the PWM running     </span>
+    pwm_set_enabled(slice_num, <span class="hljs-literal">true</span>);
+
+    <span class="hljs-comment">// Never-ending superloop</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        sleep_ms(SLEEP);
+    }
+}
+</code></pre>
+<blockquote>
+<p>Question: Do you see a difference in brightness compared to the manual PWM control?</p>
+</blockquote>
+<ul>
+<li>Yes, it seems much dimmer</li>
+</ul>
+<h3 id="part-3-pwm-peripheral-cont">Part 3: PWM peripheral (cont.)</h3>
+<p>Finally take the code and experiment with the duty cycle. Try to set the duty cycle to 0%, 25%, 50%, 75% and 100%.</p>
+<blockquote>
+<p>Question: What happens if you set the duty cycle to 0% or 100%?</p>
+</blockquote>
+<ul>
+<li>at 0% it didn't bright up, at 100% it light almost the same as normally light</li>
+</ul>
+<blockquote>
+<p>Question: Can you think of another device that might use PWM to control its behavior?</p>
+</blockquote>
+<ul>
+<li>LED Brightness Control</li>
+</ul>
+<h2 id="activity-4-pwm---slowly-changing-brightness-sign-off">Activity 4: PWM - Slowly changing brightness (sign-off)</h2>
+<p><strong>Description: Slowly change the brightness of an LED</strong></p>
+<p>The concept of PWM is even more powerful when we can change the duty cycle of the square wave during a running program. We will now implement a program that slowly changes the brightness of an LED. The LED should start at 0% brightness and slowly increase to 100% brightness over 2 seconds. After reaching 100% brightness the LED should slowly decrease to 0% brightness over 5 seconds. The LED should then start increasing in brightness again.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span> <span class="hljs-comment">// Hardware PWM library</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// Set up the LED pin 15 / physical pin 20</span>
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">15</span>;
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    <span class="hljs-type">const</span> uint SLEEP = <span class="hljs-number">100</span>;
+
+    <span class="hljs-comment">// Tell GPIO_PIN it is allocated to the PWM</span>
+    gpio_set_function(LED_PIN, GPIO_FUNC_PWM);
+    <span class="hljs-comment">// Get the slice number for the GPIO_PIN</span>
+    uint slice_num = pwm_gpio_to_slice_num(LED_PIN);
+    
+    <span class="hljs-comment">// Set period of 100 cycles (0 to 99 inclusive)</span>
+    pwm_set_wrap(slice_num, <span class="hljs-number">99</span>);
+    <span class="hljs-comment">// Set level to high for 1 slice (0% duty cycle)</span>
+    pwm_set_gpio_level(LED_PIN, <span class="hljs-number">0</span>);
+    <span class="hljs-comment">// Set the PWM running     </span>
+    pwm_set_enabled(slice_num, <span class="hljs-literal">true</span>);
+
+    <span class="hljs-comment">// Never-ending superloop</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">100</span>; i++)
+       {
+        pwm_set_gpio_level(LED_PIN, i);
+        sleep_ms(<span class="hljs-number">2000</span>/<span class="hljs-number">100</span>);
+       }
+       <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">100</span>; i &gt;= <span class="hljs-number">0</span>; i--){
+        pwm_set_gpio_level(LED_PIN, i);
+        sleep_ms(<span class="hljs-number">5000</span>/<span class="hljs-number">100</span>);
+       }
+        
+        sleep_ms(SLEEP);
+    }
+}
+</code></pre>
+<blockquote>
+<p>Sign-off: Show your code to your lab teacher or teaching assistant.</p>
+</blockquote>
+<h2 id="activity-5-pwm-rgb-control-optional">Activity 5: PWM RGB Control. (optional)</h2>
+<p><strong>Description: Control the Color of an RGB LED</strong></p>
+<p>If you are done with the previous activities, you can try to control the color of an RGB LED. You can get one by asking your lab teacher. The RGB LED has four pins, one for each color (Red, Green, Blue) and one for the common cathode, look online to know which is which. You can control the color of the LED by changing the brightness of each color hue.</p>
+<p><em>Note: Don't forget to add a resistor to each color pin to limit the current (470 Ohm should be fine).</em></p>
+<p>We will implement a mood light, that slowly changes the color of the RGB LED. The LED should change it's color to a random color every 10 seconds, but the transition should be smooth over 2 seconds.</p>
+<p><em>Hint: You can use the <code>pico_rand()</code> function to get a random number.</em></p>
+<blockquote>
+<p>Question: Why would the &quot;normal&quot; <code>rand()</code> workflow we used in Programming 1 not work well on the Pico? Hint: We call <code>srand(current time)</code> to seed the random number generator.</p>
+</blockquote>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span>  <span class="hljs-comment">// Standard library for Pico</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span> <span class="hljs-comment">// Hardware PWM library</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware_random.h&quot;</span>    <span class="hljs-comment">// Random number generator</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">set_up_led</span><span class="hljs-params">(<span class="hljs-type">const</span> uint LED_PIN)</span>{
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">const</span> uint RED = <span class="hljs-number">13</span>;
+    set_up_led(RED);
+    <span class="hljs-type">const</span> uint GREEN = <span class="hljs-number">14</span>;
+    set_up_led(GREEN);
+    <span class="hljs-type">const</span> uint BLUE = <span class="hljs-number">15</span>;
+    set_up_led(BLUE);
+
+    <span class="hljs-type">const</span> uint SLEEP = <span class="hljs-number">500</span>;
+
+    gpio_set_function(RED, GPIO_FUNC_PWM);
+    gpio_set_function(GREEN, GPIO_FUNC_PWM);
+    gpio_set_function(BLUE, GPIO_FUNC_PWM);
+
+    uint R_slice_num = pwm_gpio_to_slice_num(RED);
+    uint G_slice_num = pwm_gpio_to_slice_num(GREEN);
+    uint B_slice_num = pwm_gpio_to_slice_num(BLUE);
+
+    pwm_set_wrap(R_slice_num, <span class="hljs-number">254</span>);
+    pwm_set_wrap(G_slice_num, <span class="hljs-number">254</span>);
+    pwm_set_wrap(B_slice_num, <span class="hljs-number">254</span>);
+
+    pwm_set_enabled(R_slice_num, <span class="hljs-literal">true</span>);
+    pwm_set_enabled(G_slice_num, <span class="hljs-literal">true</span>);
+    pwm_set_enabled(B_slice_num, <span class="hljs-literal">true</span>);
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>){
+        pwm_set_gpio_level(RED, pico_rand() % <span class="hljs-number">255</span>);
+        pwm_set_gpio_level(GREEN, pico_rand() % <span class="hljs-number">255</span>);
+        pwm_set_gpio_level(BLUE, pico_rand() % <span class="hljs-number">255</span>);
+
+        sleep_ms(SLEEP);
+    }
+}
+</code></pre>
+<h2 id="questions-to-answer">Questions to answer:</h2>
+<p>Please answer this reflection questions:</p>
+<ol>
+<li>How long did this tutorial take you?</li>
+</ol>
+<ul>
+<li>8 hours</li>
+</ul>
+<ol start="2">
+<li>Did you face difficulties?</li>
+</ol>
+<ul>
+<li>Yes, at the beginning i didn't know what to do but then I finally figured it out</li>
+</ul>
+<ol start="3">
+<li>What would you like to see improved?</li>
+</ol>
+<ul>
+<li>The last activity</li>
+</ul>
+<h2 id="sign-off">Sign-off</h2>
+<p>Please show your code of activity 4 to your lab teacher or teaching assistant.</p>
+
+            
+            
+        </body>
+        </html>

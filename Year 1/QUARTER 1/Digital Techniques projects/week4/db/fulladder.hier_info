@@ -1,0 +1,72 @@
+|Block1
+OB <= 7447:inst.OB
+A2 => fulladder:inst2.A
+B2 => fulladder:inst2.B
+A1 => fulladder:inst1.A
+B1 => fulladder:inst1.B
+Ci => fulladder:inst1.Ci
+A3 => fulladder:inst3.A
+B3 => fulladder:inst3.B
+OC <= 7447:inst.OC
+OE <= 7447:inst.OE
+OD <= 7447:inst.OD
+OF <= 7447:inst.OF
+OG <= 7447:inst.OG
+OA <= 7447:inst.OA
+
+
+|Block1|7447:inst
+OG <= 87.DB_MAX_OUTPUT_PORT_TYPE
+C => 25.IN0
+LTN => 25.IN1
+LTN => 27.IN1
+LTN => 29.IN1
+LTN => 13.IN5
+LTN => 38.IN3
+BIN => 37.IN0
+B => 27.IN0
+D => 14.IN0
+A => 29.IN0
+RBIN => 15.IN0
+OF <= 86.DB_MAX_OUTPUT_PORT_TYPE
+OE <= 85.DB_MAX_OUTPUT_PORT_TYPE
+RBON <= 13.DB_MAX_OUTPUT_PORT_TYPE
+OD <= 84.DB_MAX_OUTPUT_PORT_TYPE
+OC <= 83.DB_MAX_OUTPUT_PORT_TYPE
+OB <= 82.DB_MAX_OUTPUT_PORT_TYPE
+OA <= 81.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Block1|fulladder:inst2
+S <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+A => inst.IN0
+A => inst4.IN0
+B => inst.IN1
+B => inst4.IN1
+Ci => inst2.IN1
+Ci => inst3.IN0
+Co <= inst5.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Block1|fulladder:inst1
+S <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+A => inst.IN0
+A => inst4.IN0
+B => inst.IN1
+B => inst4.IN1
+Ci => inst2.IN1
+Ci => inst3.IN0
+Co <= inst5.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Block1|fulladder:inst3
+S <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+A => inst.IN0
+A => inst4.IN0
+B => inst.IN1
+B => inst4.IN1
+Ci => inst2.IN1
+Ci => inst3.IN0
+Co <= inst5.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,7 @@
+cycle_detection_test 3 0.673906
+topsort_test 4 0.978382
+firedepartment_test 5 0.933185
+satellites_test 0 0
+spanningtree_test 6 1.86287
+shortestpaths_test 0 0
+---

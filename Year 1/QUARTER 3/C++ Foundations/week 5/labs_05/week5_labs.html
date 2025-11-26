@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - C&plus;&plus;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---c">Week 3 - C++</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 12/3/2025</p>
+<h1 id="labs">LABS</h1>
+<pre><code class="language-cpp"><span class="hljs-comment">//WORD_COUNTER.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> INCLUDED_WORD_COUNTER_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> INCLUDED_WORD_COUNTER_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;array&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+
+<span class="hljs-keyword">namespace</span> counts
+{
+
+    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Entry</span>
+    {
+        std::string word;
+        std::<span class="hljs-type">size_t</span> count;
+    };
+
+
+
+    <span class="hljs-keyword">class</span> <span class="hljs-title class_">WordCounter</span>
+    {
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-built_in">WordCounter</span>();  <span class="hljs-comment">//constructor</span>
+        <span class="hljs-comment">// TODO 2: add the destructor declaration here</span>
+        ~<span class="hljs-built_in">WordCounter</span>(); <span class="hljs-comment">//destructor (Add destructor for RAII)</span>
+
+        <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">increment</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span></span>;
+        <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">decrement</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span></span>;
+        <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span> <span class="hljs-type">const</span></span>;
+
+        <span class="hljs-function">Entry * <span class="hljs-title">begin</span><span class="hljs-params">()</span></span>;
+        <span class="hljs-function"><span class="hljs-type">const</span> Entry * <span class="hljs-title">begin</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+
+        <span class="hljs-function">Entry * <span class="hljs-title">end</span><span class="hljs-params">()</span></span>;
+        <span class="hljs-function"><span class="hljs-type">const</span> Entry * <span class="hljs-title">end</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+        
+        <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+        
+    <span class="hljs-keyword">private</span>:
+        <span class="hljs-comment">// TODO 6: uncomment the following declaration and implement it in word_counter.cpp</span>
+
+<span class="hljs-comment">/*
+        /// @brief Resizes the dynamic entries_ array to the specified minimum capacity if needed
+        /// @param minimum_capacity the minimum capacity of the dynamic entries_ array
+        /// @return true if the capacity was increased, false if it was already sufficient
+        
+*/</span>
+        <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ensure_capacity</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> minimum_capacity)</span></span>; <span class="hljs-comment">//uncomment and implement</span>
+
+        <span class="hljs-type">static</span> <span class="hljs-type">const</span> std::<span class="hljs-type">size_t</span> INITIAL_CAPACITY = <span class="hljs-number">128</span>;
+
+        <span class="hljs-function">Entry* <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span></span>;
+        <span class="hljs-function"><span class="hljs-type">const</span> Entry* <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span> <span class="hljs-type">const</span></span>;
+
+        <span class="hljs-comment">// TODO 1: replace `std::array` with a dynamic array of `Entry` objects (still called `entries_`)</span>
+        
+        <span class="hljs-comment">// std::array&lt;Entry, INITIAL_CAPACITY&gt; entries_; (remove and replace this)</span>
+        Entry * entries_; <span class="hljs-comment">//DYNAMIC ARRAY</span>
+
+        std::<span class="hljs-type">size_t</span> count_;
+        std::<span class="hljs-type">size_t</span> capacity_{INITIAL_CAPACITY};
+    };
+}
+
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// INCLUDED_WORD_COUNTER_H</span></span>
+
+<span class="hljs-comment">//WORD_COUNTER.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;word_counter.h&quot;</span></span>
+
+
+<span class="hljs-keyword">namespace</span> counts
+{
+    WordCounter::<span class="hljs-built_in">WordCounter</span>():
+        entries_{ <span class="hljs-keyword">new</span> Entry[INITIAL_CAPACITY] }, <span class="hljs-comment">// TODO 4: once you replace `std::array` with a dynamic array, initialize entries_ properly</span>
+        count_{ <span class="hljs-number">0</span> },
+        capacity_{ INITIAL_CAPACITY }
+    {}
+
+    <span class="hljs-comment">// TODO 5: implement the destructor</span>
+    WordCounter::~<span class="hljs-built_in">WordCounter</span>(){
+        <span class="hljs-keyword">delete</span>[] entries_; <span class="hljs-comment">//release the dynamically allocated array to prevent leaks</span>
+    }
+
+    <span class="hljs-comment">// TODO 7: implement ensure_capacity function</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">WordCounter::ensure_capacity</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> minimum_capacity)</span></span>{
+        <span class="hljs-keyword">if</span>(minimum_capacity &lt;= capacity_){ <span class="hljs-comment">// checks whether the current capacity of the array is already sufficient to meet the requested minimum_capacity</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">//no resizing needed</span>
+        }
+
+        <span class="hljs-comment">//resize the array</span>
+        std::<span class="hljs-type">size_t</span> new_capacity = capacity_;
+        <span class="hljs-keyword">while</span>(new_capacity &lt; minimum_capacity){
+            new_capacity *= <span class="hljs-number">2</span>; <span class="hljs-comment">//double the size of capacity</span>
+        }
+
+        Entry* new_entries = <span class="hljs-keyword">new</span> Entry[new_capacity]; <span class="hljs-comment">//allocate new array</span>
+        <span class="hljs-comment">//std::copy(start_source, end_source, start_destination);</span>
+        <span class="hljs-comment">//It copies all elements in the range [start_source, end_source) to the destination, starting at start_destination.</span>
+        std::<span class="hljs-built_in">copy</span>(entries_, entries_ + count_, new_entries); <span class="hljs-comment">//copy the existing entries</span>
+
+        <span class="hljs-keyword">delete</span>[] entries_;  <span class="hljs-comment">//free old array to avoid memory leak</span>
+        entries_ = new_entries; <span class="hljs-comment">//point to the new array</span>
+        capacity_ = new_capacity; <span class="hljs-comment">//update capacity </span>
+
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-comment">//increment fuction</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">WordCounter::increment</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span>
+    </span>{
+        <span class="hljs-comment">// if word already in counter, increment its count</span>
+        
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">auto</span> entry = <span class="hljs-built_in">find</span>(word); entry) <span class="hljs-comment">// Entry* entry = find(word); // Declare and initialize entry</span>
+        {                                    <span class="hljs-comment">//if (entry) { // Check if entry is not nullptr</span>
+            ++entry-&gt;count; <span class="hljs-comment">//increment count if  word exists</span>
+        }
+        <span class="hljs-keyword">else</span>
+        {
+            <span class="hljs-keyword">if</span> (count_ &gt;= capacity_)
+            {
+                <span class="hljs-comment">// TODO 8: implement ensure_capacity function and call it here</span>
+                <span class="hljs-comment">// instead of returning</span>
+                <span class="hljs-built_in">ensure_capacity</span>(capacity_ + <span class="hljs-number">1</span>); <span class="hljs-comment">//ensure there&#x27;s enough space </span>
+            }                                   <span class="hljs-comment">//ensures the entries_ array has enough space to add one more element. If the array is full (count_ == capacity_),</span>
+            <span class="hljs-comment">// entries_[count_].word = word;</span>
+            <span class="hljs-comment">// entries_[count_].count = 1;</span>
+            <span class="hljs-comment">// ++count_;</span>
+            entries_[count_++] = { word, <span class="hljs-number">1</span> };   
+        }
+    }
+
+    <span class="hljs-comment">//begin function (non-const)</span>
+    <span class="hljs-function">Entry* <span class="hljs-title">WordCounter::begin</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-comment">// TODO 3a: once you have removed `std::array` from the class, change to: </span>
+        <span class="hljs-comment">// return entries_;</span>
+
+        <span class="hljs-keyword">return</span> entries_; <span class="hljs-comment">//return the start of the dynamic array</span>
+    }
+
+    <span class="hljs-comment">//begin function (const)</span>
+    <span class="hljs-function"><span class="hljs-type">const</span> Entry* <span class="hljs-title">WordCounter::begin</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-comment">// TODO 3b: once you have removed `std::array` from the class, change to: </span>
+        <span class="hljs-comment">// return entries_;</span>
+
+        <span class="hljs-keyword">return</span> entries_; <span class="hljs-comment">//return the start of the dynamic array</span>
+    } 
+
+    <span class="hljs-comment">//decrement function</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">WordCounter::decrement</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span></span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">auto</span> entry = <span class="hljs-built_in">find</span>(word); entry) <span class="hljs-comment">// Entry* entry = find(word); // Declare and initialize entry</span>
+        {                                   <span class="hljs-comment">//if (entry) { // Check if entry is not nullptr</span>
+            <span class="hljs-keyword">if</span> (entry-&gt;count &gt; <span class="hljs-number">1</span>)
+            {
+                --entry-&gt;count; <span class="hljs-comment">//decrement count if word exists and count &gt; 1</span>
+            }
+        }
+    }
+
+    <span class="hljs-comment">//get function</span>
+    <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">WordCounter::get</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">auto</span> entry = <span class="hljs-built_in">find</span>(word); entry)
+        {
+            <span class="hljs-keyword">return</span> entry-&gt;count; <span class="hljs-comment">//return count if word exists</span>
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">//word not found</span>
+    }
+
+    <span class="hljs-comment">//end function (non-const)</span>
+    <span class="hljs-function">Entry* <span class="hljs-title">WordCounter::end</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> entries_ + count_; <span class="hljs-comment">//return the end of the dynamic array (entries is a pointer point to the very first index of the array)</span>
+    }
+
+    <span class="hljs-comment">//end function (const)</span>
+    <span class="hljs-function"><span class="hljs-type">const</span> Entry* <span class="hljs-title">WordCounter::end</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> entries_ + count_; <span class="hljs-comment">//return the end of the dynamic array(entries is a pointer point to the very first index of the array)</span>
+    }
+    
+    <span class="hljs-comment">//size function</span>
+    <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">WordCounter::size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> count_; <span class="hljs-comment">//return the number of entries</span>
+    }
+    
+    <span class="hljs-comment">//find function (non-const)</span>
+    <span class="hljs-function">Entry* <span class="hljs-title">WordCounter::find</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span>
+    </span>{
+        <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; count_; ++i)
+        {
+            <span class="hljs-keyword">if</span> (entries_[i].word == word)
+            {
+                <span class="hljs-keyword">return</span> &amp;entries_[i]; <span class="hljs-comment">//return the pointer to the entry if found</span>
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;  <span class="hljs-comment">//word not found</span>
+    }
+    <span class="hljs-comment">//find function (const)</span>
+    <span class="hljs-function"><span class="hljs-type">const</span> Entry* <span class="hljs-title">WordCounter::find</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; word)</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; count_; ++i)
+        {
+            <span class="hljs-keyword">if</span> (entries_[i].word == word)
+            {
+                <span class="hljs-keyword">return</span> &amp;entries_[i];<span class="hljs-comment">// Return pointer to the entry if found</span>
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<span class="hljs-comment">//word not found</span>
+    }
+}
+</code></pre>
+
+            
+            
+        </body>
+        </html>

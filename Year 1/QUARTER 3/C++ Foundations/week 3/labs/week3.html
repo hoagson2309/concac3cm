@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - C&plus;&plus;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---c">Week 3 - C++</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 26/2/2025</p>
+<h1 id="labs">LABS</h1>
+<pre><code class="language-cpp"><span class="hljs-comment">//COMPLEX.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> COMPLEX_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COMPLEX_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span>
+
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Complex</span>{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-comment">//Constructor</span>
+    <span class="hljs-built_in">Complex</span>(<span class="hljs-type">double</span> real = <span class="hljs-number">0.0</span>, <span class="hljs-type">double</span> imag = <span class="hljs-number">0.0</span>);
+    <span class="hljs-built_in">Complex</span>(<span class="hljs-type">const</span> std::string&amp; str);
+
+    <span class="hljs-comment">//accessors</span>
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">real</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>; <span class="hljs-comment">//Provide read-only access to the private data members real_ and imag_</span>
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">imag</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>; 
+
+    <span class="hljs-comment">//arithmetic operation</span>
+    <span class="hljs-function">Complex <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">Complex <span class="hljs-title">sub</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">Complex <span class="hljs-title">mul</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">Complex <span class="hljs-title">div</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>;
+
+    <span class="hljs-comment">//modulus and argument</span>
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">modulus</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">argument</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-comment">//Store the real and imaginary parts of the complex number.</span>
+    <span class="hljs-type">double</span> real_;<span class="hljs-comment">//real part</span>
+    <span class="hljs-type">double</span> imag_;<span class="hljs-comment">//imaginary part</span>
+
+    <span class="hljs-comment">//helper function to remove spaces from a string</span>
+    <span class="hljs-function">std::string <span class="hljs-title">removeSpaces</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; str)</span> <span class="hljs-type">const</span></span>;
+};
+
+<span class="hljs-keyword">inline</span> std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; out, <span class="hljs-type">const</span> Complex&amp; c){
+    <span class="hljs-keyword">return</span> out &lt;&lt; c.<span class="hljs-built_in">real</span>() &lt;&lt; (c.<span class="hljs-built_in">imag</span>() &lt; <span class="hljs-number">0.0</span> ? <span class="hljs-string">&quot;-&quot;</span> : <span class="hljs-string">&quot;+&quot;</span>) &lt;&lt; std::<span class="hljs-built_in">abs</span>(c.<span class="hljs-built_in">imag</span>()) &lt;&lt; <span class="hljs-string">&quot;i&quot;</span>;
+}
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">//COMPLEX_H</span></span>
+
+<span class="hljs-comment">//COMPLEX.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;complex.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sstream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cctype&gt;</span> <span class="hljs-comment">//for functions like std::isspace to check for whitespace characters.</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span> <span class="hljs-comment">//provides standard exception classes like std::invalid_argument</span></span>
+
+<span class="hljs-comment">//constructor implementation</span>
+Complex::<span class="hljs-built_in">Complex</span>(<span class="hljs-type">double</span> real, <span class="hljs-type">double</span> imag) : real_{real}, imag_{imag} {} <span class="hljs-comment">//initializes a Complex object with the given real and imaginary parts.</span>
+<span class="hljs-comment">// ex: Complex c{3.0, 4.0}; //creates a complex number 3 + 4i</span>
+
+<span class="hljs-function">std::string <span class="hljs-title">Complex::removeSpaces</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; str)</span> <span class="hljs-type">const</span></span>{
+    std::string result;
+    <span class="hljs-comment">//// Iterate over each character in the string</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> ch : str) {
+        <span class="hljs-keyword">if</span> (!::<span class="hljs-built_in">isspace</span>(ch)) { <span class="hljs-comment">// if the character is not a space</span>
+            result += ch;      <span class="hljs-comment">// add it to the result</span>
+        }
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+
+Complex::<span class="hljs-built_in">Complex</span>(<span class="hljs-type">const</span> std::string&amp; str){
+    <span class="hljs-comment">//remove all spaces from string</span>
+    std::string s = <span class="hljs-built_in">removeSpaces</span>(str);
+
+    <span class="hljs-comment">//initialize real and imaginary parts to 0</span>
+    real_ = <span class="hljs-number">0.0</span>;
+    imag_ = <span class="hljs-number">0.0</span>;
+
+    <span class="hljs-comment">//find the position of &#x27;i&#x27;(imaginary unit)</span>
+    <span class="hljs-type">size_t</span> iPos = s.<span class="hljs-built_in">find</span>(<span class="hljs-string">&#x27;i&#x27;</span>);
+
+    <span class="hljs-comment">//if &#x27;i&#x27; is found, extract the imaginary part</span>
+    <span class="hljs-keyword">if</span> ( iPos != std::string::npos ){
+        <span class="hljs-comment">//extract the substring b4 &#x27;i&#x27; as the imaginary part</span>
+        std::string imagStr = s.<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, iPos);
+
+        <span class="hljs-comment">//handle the case like &quot;+i&quot; or &quot;-i&quot;(imaginary part is &quot;+1&quot; or &quot;-1&quot;)</span>
+        <span class="hljs-keyword">if</span> ( imagStr.<span class="hljs-built_in">empty</span>() || imagStr == <span class="hljs-string">&quot;+&quot;</span>){
+            imag_ = <span class="hljs-number">1.0</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( imagStr == <span class="hljs-string">&quot;-&quot;</span>){
+            imag_ = <span class="hljs-number">-1.0</span>;
+        } <span class="hljs-keyword">else</span> {
+            imag_ = std::<span class="hljs-built_in">stod</span>(imagStr);  <span class="hljs-comment">//convert string to double</span>
+        }
+
+        <span class="hljs-comment">//remove the imaginary part from the string to extract the real part</span>
+        s.<span class="hljs-built_in">erase</span>(<span class="hljs-number">0</span>, iPos + <span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-keyword">if</span>( !s.<span class="hljs-built_in">empty</span>() ){
+        real_ = std::<span class="hljs-built_in">stod</span>(s); <span class="hljs-comment">//convert string to double    </span>
+    }
+}
+
+<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Complex::real</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">return</span> real_;
+}
+
+<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Complex::imag</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">return</span> imag_;
+}
+
+<span class="hljs-function">Complex <span class="hljs-title">Complex::add</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">return</span> Complex{real_ + other.real_, imag_ + other.imag_};
+}
+
+<span class="hljs-function">Complex <span class="hljs-title">Complex::sub</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">return</span> Complex{real_ - other.real_, imag_ - other.imag_};
+}
+
+<span class="hljs-function">Complex <span class="hljs-title">Complex::mul</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">return</span> Complex{real_ * other.real_ - imag_ * other.imag_, real_ * other.imag_ + imag_ * other.real_};
+}
+
+<span class="hljs-function">Complex <span class="hljs-title">Complex::div</span><span class="hljs-params">(<span class="hljs-type">const</span> Complex&amp; other)</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-type">double</span> denominator = other.real_ * other.real_ + other.imag_ * other.imag_;
+    <span class="hljs-keyword">if</span>(denominator == <span class="hljs-number">0</span>){
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Division by zero&quot;</span>);
+    }
+    <span class="hljs-keyword">return</span> Complex{(real_ * other.real_ + imag_ * other.imag_) / denominator, (imag_ * other.real_ - real_ * other.imag_) / denominator};
+}
+
+<span class="hljs-comment">//modulus and argument implementation</span>
+<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Complex::modulus</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">sqrt</span>(real_ * real_ + imag_ * imag_); 
+}
+
+<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Complex::argument</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">atan2</span>(imag_, real_);    
+}
+
+
+
+<span class="hljs-comment">// Example: &quot;3 + 4i&quot;</span>
+<span class="hljs-comment">// Remove spaces: &quot;3+4i&quot;</span>
+<span class="hljs-comment">// Find &#x27;i&#x27;: iPos = 3</span>
+<span class="hljs-comment">// Extract imaginary part: imagStr = &quot;3+4&quot;</span>
+<span class="hljs-comment">// Handle imaginary part: imag_ = 4.0</span>
+<span class="hljs-comment">// Remove imaginary part: s = &quot;&quot;</span>
+<span class="hljs-comment">// Extract real part: real_ = 3.0</span>
+<span class="hljs-comment">// Result: real_ = 3.0, imag_ = 4.0</span>
+
+<span class="hljs-comment">//MAIN.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;complex.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-comment">//text constructors</span>
+    Complex a{<span class="hljs-number">1.0</span>, <span class="hljs-number">2.0</span>};
+    Complex b{<span class="hljs-number">3.0</span>, <span class="hljs-number">4.0</span>};
+    Complex c{<span class="hljs-string">&quot;3 + 4i&quot;</span>};
+    Complex d{<span class="hljs-string">&quot;-i&quot;</span>};
+    Complex e{<span class="hljs-string">&quot;5&quot;</span>};
+    Complex f{<span class="hljs-string">&quot;3 +4.2i&quot;</span>};
+    Complex g{<span class="hljs-string">&quot;3-4.2i&quot;</span>};
+    Complex h{<span class="hljs-string">&quot;-4.2i&quot;</span>};
+    Complex j{<span class="hljs-string">&quot;-i&quot;</span>};
+
+    <span class="hljs-comment">//test arithmetic operations</span>
+    <span class="hljs-keyword">auto</span> sum = a.<span class="hljs-built_in">add</span>(b);
+    <span class="hljs-keyword">auto</span> diff = a.<span class="hljs-built_in">sub</span>(b);
+    <span class="hljs-keyword">auto</span> prod = a.<span class="hljs-built_in">mul</span>(b);
+    <span class="hljs-keyword">auto</span> quot = a.<span class="hljs-built_in">div</span>(b);
+
+    <span class="hljs-comment">//test modulus and argument</span>
+    <span class="hljs-type">double</span> mod = a.<span class="hljs-built_in">modulus</span>();
+    <span class="hljs-type">double</span> arg = a.<span class="hljs-built_in">argument</span>();
+
+    <span class="hljs-comment">//test output </span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;a: &quot;</span> &lt;&lt; a &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 1+2i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;b: &quot;</span> &lt;&lt; b &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 3+4i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;c: &quot;</span> &lt;&lt; c &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 3+4i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;d: &quot;</span> &lt;&lt; d &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 0-1i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;e: &quot;</span> &lt;&lt; e &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 5+0i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;f: &quot;</span> &lt;&lt; f &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 3+4.2i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;g: &quot;</span> &lt;&lt; g &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 3-4.2i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;h: &quot;</span> &lt;&lt; h &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 0-4.2i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;j: &quot;</span> &lt;&lt; j &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// 0-1i</span>
+    
+    std::cout &lt;&lt; <span class="hljs-string">&quot;sum: &quot;</span> &lt;&lt; sum &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;    <span class="hljs-comment">// 4+6i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;diff: &quot;</span> &lt;&lt; diff &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;  <span class="hljs-comment">// -2-2i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;prod: &quot;</span> &lt;&lt; prod &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;  <span class="hljs-comment">// -5+10i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;quot: &quot;</span> &lt;&lt; quot &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;  <span class="hljs-comment">// 0.44+0.08i</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;mod: &quot;</span> &lt;&lt; mod &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;    <span class="hljs-comment">// 2.23607</span>
+    std::cout &lt;&lt; <span class="hljs-string">&quot;arg: &quot;</span> &lt;&lt; arg &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;    <span class="hljs-comment">// 1.10715</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+            
+            
+        </body>
+        </html>

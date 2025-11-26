@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/partition_array.dir/main.cpp.o -o partition_array 

@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/Activity7.dir/functions.c.o CMakeFiles/Activity7.dir/main.c.o CMakeFiles/Activity7.dir/parser.c.o -o Activity7 

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week XX - Assignments</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-xx---assignments">Week XX - Assignments</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 6/10/2024</p>
+<p><strong>NOTE</strong>: if you'd like to have syntax highlighting in your markdown file, install the &quot;Markdown Preview Github Styling&quot; extension in VS Code.</p>
+<h2 id="first-assignment">First assignment</h2>
+<p>The first assignment I completed is assignment 1 - Dice sums .
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">roll_dice</span><span class="hljs-params">(<span class="hljs-type">int</span> result[], <span class="hljs-type">int</span> num_roll)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; num_roll; i++) {
+        <span class="hljs-type">int</span> dice1 = random_int(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>);
+        <span class="hljs-type">int</span> dice2 = random_int(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>);
+        <span class="hljs-type">int</span> sum = dice1 + dice2;
+        result[sum - <span class="hljs-number">2</span>]++; <span class="hljs-comment">//increment count for the sum (2-12) ex: sum=2=[0], sum=3=[1], sum=4=[2],...</span>
+    }
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_results</span><span class="hljs-params">(<span class="hljs-type">int</span> result[], <span class="hljs-type">int</span> num_roll)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Results after %d rolls:\n&quot;</span>, num_roll);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">11</span>; i++) {
+        <span class="hljs-type">int</span> outcome = i + <span class="hljs-number">2</span>; <span class="hljs-comment">//adjust each element to the sum (2-12)</span>
+        <span class="hljs-type">int</span> count = result[i];
+        <span class="hljs-type">float</span> percentage = (count / (<span class="hljs-type">float</span>)num_roll) * <span class="hljs-number">100</span>; <span class="hljs-comment">//calculate percentage</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2d: %6d (%.1f%%)\n&quot;</span>, outcome, count, percentage); 
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> result[<span class="hljs-number">11</span>] = {<span class="hljs-number">0</span>}; 
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;How many times should the dice be rolled?: &quot;</span>);
+    <span class="hljs-type">int</span> num_roll = read_int();
+    <span class="hljs-keyword">if</span> (num_roll &lt;= <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid input. Please enter a positive integer.\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    roll_dice(result, num_roll); 
+    print_results(result, num_roll);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="second-assignment">Second assignment</h2>
+<p>The second assignment I completed is assignment 2 - Mean removal.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief Fill an array with random floating point numbers between -10 and 10.</span>
+<span class="hljs-comment">/// @param array The array to fill.</span>
+<span class="hljs-comment">/// @param size The size of the array.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">fill_array</span><span class="hljs-params">(<span class="hljs-type">float</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">int</span> size)</span>{
+    <span class="hljs-type">float</span> a = size;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;size; i++){
+        <span class="hljs-built_in">array</span>[i] = random_float(-a,a);
+    }
+}
+
+<span class="hljs-comment">/// @brief Print an array of floating point numbers, comma-separated.</span>
+<span class="hljs-comment">/// @param array The array to print.</span>
+<span class="hljs-comment">/// @param size The size of the array.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_array</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">float</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">int</span> size)</span>{
+    <span class="hljs-type">bool</span> printed_first = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;size; i++){
+        <span class="hljs-keyword">if</span>(printed_first) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, &quot;</span>);
+        printed_first = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.2f&quot;</span>, <span class="hljs-built_in">array</span>[i]);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;.\n&quot;</span>);
+}
+
+<span class="hljs-comment">/// @brief Compute the mean of an array of floating point numbers.</span>
+<span class="hljs-comment">/// @param array The array to compute the mean of.</span>
+<span class="hljs-comment">/// @param size The size of the array.</span>
+<span class="hljs-comment">/// @return The mean of the array.</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">mean</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">float</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">int</span> size)</span>{
+    <span class="hljs-type">float</span> total = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;size; i++){
+        total += <span class="hljs-built_in">array</span>[i];
+    }
+    <span class="hljs-type">float</span> mean = total / size;
+    <span class="hljs-keyword">return</span> mean;
+}
+
+<span class="hljs-comment">/// @brief Remove the mean from an array of floating point numbers.</span>
+<span class="hljs-comment">/// @param array The array to remove the mean from.</span>
+<span class="hljs-comment">/// @param size The size of the array.</span>
+<span class="hljs-comment">/// @param mean The mean to remove.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">remove_mean</span><span class="hljs-params">(<span class="hljs-type">float</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">int</span> size, <span class="hljs-type">float</span> mean)</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;size; i++){
+        <span class="hljs-built_in">array</span>[i] -= mean;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Give the size: &quot;</span>);
+    <span class="hljs-type">int</span> size = read_int();
+    <span class="hljs-type">float</span> <span class="hljs-built_in">array</span>[size];
+    <span class="hljs-type">float</span> Mean = <span class="hljs-number">0.00f</span>;
+
+    fill_array(<span class="hljs-built_in">array</span>, size);
+    Mean = mean(<span class="hljs-built_in">array</span>, size);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Before: &quot;</span>);
+    print_array(<span class="hljs-built_in">array</span>, size);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Mean: &quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.2f&quot;</span>, Mean);
+
+    remove_mean(<span class="hljs-built_in">array</span>, size, Mean);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\nAfter: &quot;</span>);
+    print_array(<span class="hljs-built_in">array</span>, size);
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="third-assignment-optional">Third assignment (optional)</h2>
+<p>I've actually made three assignments this week! The third assignment I completed is assignment ZZZ.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+</code></pre>
+
+            
+            
+        </body>
+        </html>

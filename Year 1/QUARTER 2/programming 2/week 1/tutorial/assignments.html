@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week XX - Assignments</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-xx---assignments">Week XX - Assignments</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 17/11/2024</p>
+<p><strong>NOTE</strong>: if you'd like to have syntax highlighting in your markdown file, install the &quot;Markdown Preview Github Styling&quot; extension in VS Code.</p>
+<h2 id="first-assignment">First assignment</h2>
+<p>The first assignment I completed is assignment XXX.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-comment">/// Replaces all the occurrences of the given string in the given text with the given replacement character.</span>
+<span class="hljs-comment">/// Each string is replaced by a number of replacement characters equal to the length of the string.</span>
+<span class="hljs-comment">/// The function does not print anything to the console.</span>
+<span class="hljs-comment">/// @param text The text to search.</span>
+<span class="hljs-comment">/// @param string The string to search for.</span>
+<span class="hljs-comment">/// @param replacement The character to replace the string with.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">censor</span><span class="hljs-params">(<span class="hljs-type">char</span> *text, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>, <span class="hljs-type">char</span> replacement)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">censor</span><span class="hljs-params">(<span class="hljs-type">char</span> *text, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>, <span class="hljs-type">char</span> replacement)</span>{
+    <span class="hljs-type">int</span> size = <span class="hljs-built_in">strlen</span>(<span class="hljs-built_in">string</span>);
+    <span class="hljs-type">char</span> *occurences = <span class="hljs-built_in">strstr</span>(text, <span class="hljs-built_in">string</span>);
+    <span class="hljs-keyword">while</span>(occurences != <span class="hljs-literal">NULL</span>){
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){
+            *(occurences + i) = replacement;
+        }
+        occurences = <span class="hljs-built_in">strstr</span>(text, <span class="hljs-built_in">string</span>);
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">char</span> text[<span class="hljs-number">300</span>];
+    <span class="hljs-type">char</span> <span class="hljs-built_in">string</span>[<span class="hljs-number">300</span>];
+    <span class="hljs-type">char</span> replacement = <span class="hljs-string">&#x27;*&#x27;</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter a line of text: &quot;</span>);
+    read_string(text, <span class="hljs-number">300</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please enter a string to search for: &quot;</span>);
+    read_string(<span class="hljs-built_in">string</span>, <span class="hljs-number">300</span>);
+    censor((<span class="hljs-type">void</span>*)text, (<span class="hljs-type">void</span>*)<span class="hljs-built_in">string</span>, replacement);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s &quot;</span>, text);
+}
+
+<span class="hljs-comment">///int *(array+1) == &amp;array[1]</span>
+</code></pre>
+<h2 id="second-assignment">Second assignment</h2>
+<p>The second assignment I completed is assignment YYY.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief Prints the array to the console, values comma-separated and on a single line</span>
+<span class="hljs-comment">/// @param array The array to print.</span>
+<span class="hljs-comment">/// @param length The length of the array.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_array</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">size_t</span> length)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_array</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">size_t</span> length)</span>{
+    <span class="hljs-type">bool</span> first = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; length; i++){
+        <span class="hljs-keyword">if</span>(first)  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, &quot;</span>);
+        first = <span class="hljs-literal">true</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, <span class="hljs-built_in">array</span>[i]);
+    }
+}
+
+<span class="hljs-comment">/// @brief Swaps the values of the two integers pointed to by `a` and `b`.</span>
+<span class="hljs-comment">/// @param a The memory address of the first integer.</span>
+<span class="hljs-comment">/// @param b The memory address of the second integer.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span> * a, <span class="hljs-type">int</span> * b)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span> * a, <span class="hljs-type">int</span> * b)</span>{
+    <span class="hljs-type">int</span> temp = *a;
+        *a = *b;
+        *b = temp;
+}
+
+<span class="hljs-comment">/// @brief Returns the address of the smallest number in the array.</span>
+<span class="hljs-comment">/// @param array The array to search.</span>
+<span class="hljs-comment">/// @param length The length of the array.</span>
+<span class="hljs-comment">/// @return The address of the smallest number in the array, or NULL if the array is empty.</span>
+<span class="hljs-type">int</span>* <span class="hljs-title function_">min_ptr</span><span class="hljs-params">(<span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">size_t</span> length)</span>;
+<span class="hljs-type">int</span>* <span class="hljs-title function_">min_ptr</span><span class="hljs-params">(<span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">size_t</span> length)</span>{
+    <span class="hljs-type">int</span> min = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; length; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">array</span>[i] &lt; <span class="hljs-built_in">array</span>[min]){
+            min = i;
+        }
+    }
+    <span class="hljs-keyword">return</span> &amp;<span class="hljs-built_in">array</span>[min];
+}
+
+<span class="hljs-comment">/// @brief Returns the address of the largest number in the array.</span>
+<span class="hljs-comment">/// @param array The array to search.</span>
+<span class="hljs-comment">/// @param length The length of the array.</span>
+<span class="hljs-comment">/// @return The address of the largest number in the array, or NULL if the array is empty.</span>
+<span class="hljs-type">int</span>* <span class="hljs-title function_">max_ptr</span><span class="hljs-params">(<span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">size_t</span> length)</span>;
+<span class="hljs-type">int</span>* <span class="hljs-title function_">max_ptr</span><span class="hljs-params">(<span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[], <span class="hljs-type">size_t</span> length)</span>{
+      <span class="hljs-type">int</span> max = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; length; i++){
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">array</span>[i] &gt; <span class="hljs-built_in">array</span>[max]){
+            max = i;
+        }
+    }
+    <span class="hljs-keyword">return</span> &amp;<span class="hljs-built_in">array</span>[max];
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    <span class="hljs-type">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">10</span>];
+    <span class="hljs-type">size_t</span> size = <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">array</span>) / <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">array</span>[<span class="hljs-number">0</span>]);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The array is: &quot;</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){
+        <span class="hljs-built_in">array</span>[i] = random_int(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>);
+        }
+    print_array(<span class="hljs-built_in">array</span>, size);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;.\n&quot;</span>);
+
+    <span class="hljs-type">int</span> *min = min_ptr(<span class="hljs-built_in">array</span>, size);
+    <span class="hljs-type">int</span> *max = max_ptr(<span class="hljs-built_in">array</span>, size);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The smallest number is %d, and the largest number is %d.\n&quot;</span>, *min, *max);
+
+    swap(min, max);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;After swapping, the array is: &quot;</span>);
+    print_array(<span class="hljs-built_in">array</span>, size);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;.\n&quot;</span>);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+
+
+</code></pre>
+<h2 id="third-assignment-optional">Third assignment (optional)</h2>
+<p>I've actually made three assignments this week! The third assignment I completed is assignment ZZZ.
+This is the code I wrote:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Write your code here</span>
+</code></pre>
+
+            
+            
+        </body>
+        </html>

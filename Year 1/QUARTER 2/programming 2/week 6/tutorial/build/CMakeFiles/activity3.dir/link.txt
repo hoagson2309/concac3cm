@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity3.dir/activity3.c.o CMakeFiles/activity3.dir/functions.c.o -o activity3 

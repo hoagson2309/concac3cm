@@ -1,0 +1,19 @@
+Start testing: Oct 23 16:18 CEST
+----------------------------------------------------------
+5/6 Testing: spanningtree_test
+5/6 Test: spanningtree_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/scripts/test.py" "spanningtree" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/5.spanningtree/tests/spanningtree_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build/5.spanningtree
+"spanningtree_test" start time: Oct 23 16:18 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   2.24 sec
+----------------------------------------------------------
+Test Passed.
+"spanningtree_test" end time: Oct 23 16:18 CEST
+"spanningtree_test" time elapsed: 00:00:02
+----------------------------------------------------------
+
+End testing: Oct 23 16:18 CEST

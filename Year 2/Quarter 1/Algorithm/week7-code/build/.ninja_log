@@ -1,0 +1,13 @@
+# ninja log v5
+265	6580	1762305753225082100	5.spanningtree/CMakeFiles/spanningtree.dir/main.cpp.o	2c6554deef21a236
+6607	8258	1762305754872907600	5.spanningtree/spanningtree	2e456a76e800f52
+3389	4210	1762305597885359800	4.satellites/satellites	7eb4695553b40d74
+144	5417	1762296709038192500	2.firedepartment/CMakeFiles/firedepartment.dir/main.cpp.o	e9d6519de33caf05
+158	1860	1762296705535465800	6.shortestpaths/CMakeFiles/shortestpaths.dir/main.cpp.o	e11fb7254c43ae99
+141	4893	1762296708526199800	1.topsort/CMakeFiles/topsort.dir/main.cpp.o	dc2f1327a0474ce4
+3881	4938	1762296708586584000	3.cycles/cycle_detection	20081010af02a90b
+1877	2408	1762296706082655900	6.shortestpaths/shortestpaths	47393d5adda1d0d7
+263	3363	1762305597065274300	4.satellites/CMakeFiles/satellites.dir/main.cpp.o	7f5ceeb17e915388
+4912	6092	1762296709729694800	1.topsort/topsort	39ccaba933a80048
+148	3866	1762296707511078900	3.cycles/CMakeFiles/cycle_detection.dir/main.cpp.o	726420c68c3ab49e
+5435	6629	1762296710261250100	2.firedepartment/firedepartment	ad41369d73e6058f

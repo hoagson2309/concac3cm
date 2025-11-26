@@ -1,0 +1,19 @@
+Start testing: Oct 05 19:33 CEST
+----------------------------------------------------------
+10/10 Testing: tree_isect_test
+10/10 Test: tree_isect_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/scripts/test.py" "tree_isect" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/tree_isect/tests/tree_isect_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/build/tree_isect
+"tree_isect_test" start time: Oct 05 19:33 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.66 sec
+----------------------------------------------------------
+Test Passed.
+"tree_isect_test" end time: Oct 05 19:33 CEST
+"tree_isect_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 05 19:33 CEST

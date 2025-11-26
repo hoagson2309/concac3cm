@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/task_1_2.dir/task_1_2.cpp.o CMakeFiles/task_1_2.dir/Options.cpp.o CMakeFiles/task_1_2.dir/NumberFinder.cpp.o -o task_1_2 

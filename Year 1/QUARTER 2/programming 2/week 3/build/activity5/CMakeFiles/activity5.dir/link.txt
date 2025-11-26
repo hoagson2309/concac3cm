@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity5.dir/main.c.o -o activity5  ../functions/libfunctions.a 

@@ -1,0 +1,3 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam cu/build/CMakeFiles/exam.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam cu/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam cu/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,22 @@
+Start testing: Sep 17 16:34 CEST
+----------------------------------------------------------
+5/7 Testing: unsafe_buffer_test
+5/7 Test: unsafe_buffer_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/scripts/test_target.py" "unsafe_buffer" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/unsafe_buffer/tests/unsafe_buffer_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/build/unsafe_buffer
+"unsafe_buffer_test" start time: Sep 17 16:34 CEST
+Output:
+----------------------------------------------------------
+
+The answer for the following test input is incorrect: 5 abc*def*ghi*jk*** 
+ got abeghi
+ expected abhijk
+<end of output>
+Test time =   0.27 sec
+----------------------------------------------------------
+Test Failed.
+"unsafe_buffer_test" end time: Sep 17 16:34 CEST
+"unsafe_buffer_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 17 16:34 CEST

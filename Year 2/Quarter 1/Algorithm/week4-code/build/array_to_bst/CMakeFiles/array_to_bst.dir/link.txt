@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -fsanitize=address -fsanitize=undefined CMakeFiles/array_to_bst.dir/main.cpp.o -o array_to_bst 

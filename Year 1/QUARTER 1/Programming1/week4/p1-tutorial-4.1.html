@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 4 - Tutorial 1&colon; Writing functions</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-4---tutorial-1-writing-functions">Week 4 - Tutorial 1: Writing functions</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 24/09/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>When writing programs, you'll often need to use the same code in multiple places.
+Rather than copying the same code over and over, you can put the code in a <em>function</em>, and call the function whenever you need to use the code.
+This makes your code easier to read and maintain.</p>
+<p>In this tutorial, you will learn how to write functions in C, and how to use them in your programs.</p>
+<h3 id="activity-0---update-the-system">Activity 0 - Update the system</h3>
+<p>Before you start with this tutorial, make sure your system is up-to-date by running the following commands in the terminal:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+</code></pre>
+<h3 id="activity-1---set-up-a-folder-for-this-tutorial">Activity 1 - Set up a folder for this tutorial</h3>
+<p>Create a folder (directory) for this week's tutorial in your preferred location, and copy the files <a href="../code/functions.h"><code>functions.h</code></a> and <a href="../code/functions.c"><code>functions.c</code></a> into this folder.</p>
+<p>It's recommended to have a folder for each week, and within that folder a folder for each tutorial, to keep your work organized.
+Open up the folder in VS code by selecting the folder in the File-&gt;Open menu, or by right-clicking on the folder in your file browser and selecting &quot;Open in VS Code&quot; (if this option is available).</p>
+<p>Alternatively, you can open the folder from a WSL terminal by typing the <code>code .</code> command.</p>
+<h2 id="writing-a-function-that-returns-a-value">Writing a function that returns a value</h2>
+<p>The following program asks the user to enter a number between 1 and 10 (including both 1 and 10), and stores the number in the <code>number</code> variable.
+If the user does not enter a number between 1 and 10, the program will repeatedly ask the user for input until the user enters a valid number.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number between 1 and 10: &quot;</span>);
+    <span class="hljs-type">int</span> number = read_int();
+
+    <span class="hljs-keyword">while</span> (number &lt; <span class="hljs-number">1</span> || number &gt; <span class="hljs-number">10</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The number must be between 1 and 10, try again!\n&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number between 1 and 10: &quot;</span>);
+        number = read_int();
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-2---writing-a-function">Activity 2 - Writing a function</h3>
+<p>Create a new file called <code>activity2.c</code> in the folder for this tutorial, and copy the program listed above into the file.
+Next, modify the program so that the code that checks if the number is between 1 and 10 is put into a function called <code>read_number</code>, so that the <code>main</code> function looks like this:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number = read_number();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Make sure to describe what the function <code>read_number</code> does in a comment above the function definition.
+Use the <code>@brief</code> tag to describe what the function does, and the <code>@return</code> tag to describe what it returns.</p>
+<p>Paste the contents of <code>activity2.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-comment">/* @brief Prompts the user to enter a number between 1 and 10, and keeps asking until a valid number is provided.
+ * 
+ * @return The valid number entered by the user, between 1 and 10.
+ */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>     </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">read_number</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number between 1 and 10: &quot;</span>);
+    <span class="hljs-type">int</span> number = read_int();
+    <span class="hljs-keyword">while</span> (number &lt; <span class="hljs-number">1</span> || number &gt; <span class="hljs-number">10</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The number must be between 1 and 10, try again!\n&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number between 1 and 10: &quot;</span>);
+        number = read_int();
+    }
+    <span class="hljs-keyword">return</span> number;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number = read_number();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="passing-arguments-to-a-function">Passing arguments to a function</h2>
+<p>The <code>read_number</code> function is not very generic, since it only reads numbers between 1 and 10.
+What if we would like to read numbers between 1 and 100, or between 10 and 20 instead?
+In order to be able to reuse the same function for this, we must add two parameters to the function, which allow us to pass the minimum and maximum values as arguments.</p>
+<h3 id="activity-3---adding-parameters">Activity 3 - Adding parameters</h3>
+<p>Create a new file <code>activity3.c</code> in the folder for this tutorial, and copy the contents of <code>activity2.c</code> into the file.
+Next, modify the <code>read_number</code> function so that it has two parameters: <code>min</code> and <code>max</code>, which specify the minimum and maximum values that the number must be between.
+Update the description of the function so that it has <code>@param</code> tags for the <code>min</code> and <code>max</code> parameters, which describe what the parameters are used for.</p>
+<p>Use the following <code>main</code> function to test your <code>read_number</code> function:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number = read_number(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    number = read_number(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    number = read_number(<span class="hljs-number">-42</span>, <span class="hljs-number">42</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Paste the contents of <code>activity3.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-comment">/* Asks the user to enter a number between a given minimum and maximum range.
+ * @param min The minimum value that the user can enter.
+ * @param max The maximum value that the user can enter.
+ * @return The number entered by the user, which is guaranteed to be between min and max.
+ */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>     </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">read_number</span><span class="hljs-params">(<span class="hljs-type">int</span> min, <span class="hljs-type">int</span> max)</span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the number between %d and %d: &quot;</span>, min, max);
+    <span class="hljs-type">int</span> number = read_int();
+    <span class="hljs-keyword">while</span>(number &lt; min || number &gt; max){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please try again!\n&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the number between %d and %d: &quot;</span>, min, max);
+        number = read_int();
+    }
+    <span class="hljs-keyword">return</span> number;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> number = read_number(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    number = read_number(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    number = read_number(<span class="hljs-number">-42</span>, <span class="hljs-number">42</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, number);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-4---using-a-function-result-in-an-expression">Activity 4 - Using a function result in an expression</h3>
+<p>Create a new file <code>activity4.c</code> in the folder for this tutorial, and copy the contents of <code>activity3.c</code> into the file.
+Next, modify the <code>main</code> function of the file so that it does not store the results of the <code>read_number</code> function calls in a variable, but instead uses the result directly in the <code>printf</code> function.</p>
+<p>Paste the contents of <code>activity4.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>     </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">read_number</span><span class="hljs-params">(<span class="hljs-type">int</span> min, <span class="hljs-type">int</span> max)</span>{
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the number between %d and %d: &quot;</span>, min, max);
+    <span class="hljs-type">int</span> number = read_int();
+    <span class="hljs-keyword">while</span>(number &lt; min || number &gt; max){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please try again!\n&quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the number between %d and %d: &quot;</span>, min, max);
+        number = read_int();
+    }
+    <span class="hljs-keyword">return</span> number;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, read_number(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, read_number(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, read_number(<span class="hljs-number">-42</span>, <span class="hljs-number">42</span>));
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-5---moving-the-function-to-a-separate-file">Activity 5 - Moving the function to a separate file</h3>
+<p>Create a new file <code>activity5.c</code> in the folder for this tutorial, and copy the contents of <code>activity4.c</code> into the file.
+In the new file, make sure that the function <code>read_number</code> is split into a <em>prototype</em> and a <em>definition</em>.
+The prototype must have some comments above it that describe what the function does, and the parameters that it takes (you've done this in activities 2 and 3).</p>
+<p>Next, move the prototype from the <code>activity5.c</code> file into the file <code>functions.h</code>, and the definition into a new file <code>functions.c</code>.
+Your <code>main.c</code> file should now contain only the <code>main</code> function, plus two <code>#include</code> directives for <code>stdio.h</code> and the <code>functions.h</code> file.</p>
+<p>Ensure that the program compiles and runs correctly after moving the function to a separate file, by running the following commands in the terminal:</p>
+<pre><code class="language-bash">gcc -Wall -o activity5 activity5.c functions.c
+./activity5
+</code></pre>
+<p>If the program compiles without errors &amp; warnings, and runs successfully, then you've completed this activity.</p>
+<p>Paste the contents of <code>activity5.c</code> into the code block:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>     </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, read_number(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, read_number(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>));
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the number %d\n&quot;</span>, read_number(<span class="hljs-number">-42</span>, <span class="hljs-number">42</span>));
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

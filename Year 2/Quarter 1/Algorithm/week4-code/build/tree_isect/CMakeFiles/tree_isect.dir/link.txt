@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -fsanitize=address -fsanitize=undefined CMakeFiles/tree_isect.dir/main.cpp.o -o tree_isect  ../libnodeptr.a 

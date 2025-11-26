@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/pathfinding.dir/main.cpp.o"
+  "CMakeFiles/pathfinding.dir/main.cpp.o.d"
+  "pathfinding"
+  "pathfinding.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/pathfinding.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

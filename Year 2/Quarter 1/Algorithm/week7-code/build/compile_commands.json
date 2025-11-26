@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build",
+  "command": "/usr/bin/g++ -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o 1.topsort/CMakeFiles/topsort.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/1.topsort/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/1.topsort/main.cpp",
+  "output": "1.topsort/CMakeFiles/topsort.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build",
+  "command": "/usr/bin/g++ -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o 2.firedepartment/CMakeFiles/firedepartment.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/2.firedepartment/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/2.firedepartment/main.cpp",
+  "output": "2.firedepartment/CMakeFiles/firedepartment.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build",
+  "command": "/usr/bin/g++ -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o 3.cycles/CMakeFiles/cycle_detection.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/3.cycles/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/3.cycles/main.cpp",
+  "output": "3.cycles/CMakeFiles/cycle_detection.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build",
+  "command": "/usr/bin/g++ -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o 4.satellites/CMakeFiles/satellites.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/4.satellites/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/4.satellites/main.cpp",
+  "output": "4.satellites/CMakeFiles/satellites.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build",
+  "command": "/usr/bin/g++ -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o 5.spanningtree/CMakeFiles/spanningtree.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/5.spanningtree/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/5.spanningtree/main.cpp",
+  "output": "5.spanningtree/CMakeFiles/spanningtree.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build",
+  "command": "/usr/bin/g++ -I\"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/include\" -g -std=c++20 -Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined -o 6.shortestpaths/CMakeFiles/shortestpaths.dir/main.cpp.o -c \"/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/6.shortestpaths/main.cpp\"",
+  "file": "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/6.shortestpaths/main.cpp",
+  "output": "6.shortestpaths/CMakeFiles/shortestpaths.dir/main.cpp.o"
+}
+]

@@ -1,0 +1,3 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/build/CMakeFiles/Activity7.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity7/build/CMakeFiles/rebuild_cache.dir

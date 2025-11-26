@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/build/cmake_install.cmake",
+		"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/build/libptr/cmake_install.cmake",
+		"/mnt/c/SAXION/Year 2/Quarter 2/Advanced Programming Concept/assignment_01/build/tests/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

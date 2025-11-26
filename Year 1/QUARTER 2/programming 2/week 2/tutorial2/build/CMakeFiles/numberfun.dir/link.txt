@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/numberfun.dir/numberfun.c.o CMakeFiles/numberfun.dir/main.c.o CMakeFiles/numberfun.dir/functions.c.o -o numberfun 

@@ -1,0 +1,39 @@
+# do andgate.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:39:41 on Sep 05,2024
+# vlog -work work andgate.vo 
+# -- Compiling module andgate
+# -- Compiling module hard_block
+# 
+# Top level modules:
+# 	andgate
+# End time: 16:39:41 on Sep 05,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 16:39:41 on Sep 05,2024
+# vlog -work work Waveform1.vwf.vt 
+# -- Compiling module andgate_vlg_vec_tst
+# 
+# Top level modules:
+# 	andgate_vlg_vec_tst
+# End time: 16:39:41 on Sep 05,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -c -t 1ps -L fiftyfivenm_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.andgate_vlg_vec_tst 
+# Start time: 16:39:41 on Sep 05,2024
+# Loading work.andgate_vlg_vec_tst
+# Loading work.andgate
+# Loading work.hard_block
+# Loading fiftyfivenm_ver.fiftyfivenm_lcell_comb
+# Loading fiftyfivenm_ver.fiftyfivenm_io_obuf
+# Loading fiftyfivenm_ver.fiftyfivenm_io_ibuf
+# Loading fiftyfivenm_ver.fiftyfivenm_unvm
+# Loading fiftyfivenm_ver.fiftyfivenm_adcblock
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for '\~QUARTUS_CREATED_ADC1~ '.  Expected 8, found 7.
+#    Time: 0 ps  Iteration: 0  Instance: /andgate_vlg_vec_tst/i1/\~QUARTUS_CREATED_ADC1~  File: andgate.vo Line: 180
+# ** Warning: (vsim-3722) andgate.vo(180): [TFMPC] - Missing connection for port 'clk_dft'.
+# after#26
+# ** Note: $finish    : Waveform1.vwf.vt(47)
+#    Time: 1 us  Iteration: 0  Instance: /andgate_vlg_vec_tst
+# End time: 16:39:42 on Sep 05,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 2

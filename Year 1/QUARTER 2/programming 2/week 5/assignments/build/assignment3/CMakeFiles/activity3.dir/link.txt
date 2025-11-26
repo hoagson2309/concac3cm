@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity3.dir/main.c.o -o activity3  ../functions/libfunctions.a -fsanitize=address 

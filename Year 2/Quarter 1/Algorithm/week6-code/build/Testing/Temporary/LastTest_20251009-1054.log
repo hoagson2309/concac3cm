@@ -1,0 +1,19 @@
+Start testing: Oct 09 18:49 CEST
+----------------------------------------------------------
+4/7 Testing: largest_component_test
+4/7 Test: largest_component_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/scripts/test.py" "largest_component" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/largest_component/tests/largest_component_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week6-code/build/largest_component
+"largest_component_test" start time: Oct 09 18:49 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.43 sec
+----------------------------------------------------------
+Test Passed.
+"largest_component_test" end time: Oct 09 18:49 CEST
+"largest_component_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 09 18:49 CEST

@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 5/workshops_05/build",
+  "command": "/usr/bin/c++    -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/OutputFileExample.dir/main.cpp.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 5/workshops_05/main.cpp\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 5/workshops_05/main.cpp",
+  "output": "CMakeFiles/OutputFileExample.dir/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 5/workshops_05/build",
+  "command": "/usr/bin/c++    -Wall -Wextra -g -std=gnu++17 -o CMakeFiles/OutputFileExample.dir/OutputFile.cpp.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 5/workshops_05/OutputFile.cpp\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/week 5/workshops_05/OutputFile.cpp",
+  "output": "CMakeFiles/OutputFileExample.dir/OutputFile.cpp.o"
+}
+]

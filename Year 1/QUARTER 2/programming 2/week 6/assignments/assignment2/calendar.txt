@@ -1,0 +1,26 @@
+Alice Johnson,15-04-1985
+Bob Smith,23-07-2000
+Charlie Brown,03-09-1995
+Diana Prince,19-11-1990
+Edward Stark,05-01-1970
+Fiona Gray,29-06-2015
+George Daniels,12-12-1980
+Hannah Baker,09-03-2010
+Ian Turner,25-10-1975
+Jane Doe,14-02-2005
+Kevin Parker,07-08-1998
+Laura Hill,21-05-1965
+Michael Jordan,17-01-1988
+Nina West,30-06-2012
+Oscar Wilde,10-12-1978
+Penelope Cruz,11-04-1994
+Quentin Blake,03-03-1977
+Rachel Green,08-09-2007
+Samuel Jackson,02-02-1992
+Tina Fey,26-11-1983
+Ursula K. Le Guin,20-07-1960
+Violet Brown,01-01-2001
+Walter White,06-06-1999
+Xavier Lee,24-09-1982
+Yara Shahidi,18-08-1976
+Zoe Saldana,13-05-2011

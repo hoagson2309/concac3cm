@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 2 - C&plus;&plus;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-2---c">Week 2 - C++</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 10/2/2025</p>
+<h1 id="labs">LABS</h1>
+<pre><code class="language-cpp"><span class="hljs-comment">//DEPOSIT.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> DEPOSIT_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> DEPOSIT_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iomanip&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Deposit</span>{
+    std::string currency;
+    <span class="hljs-type">double</span> amount;
+};
+
+<span class="hljs-keyword">inline</span> std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; out, Deposit <span class="hljs-type">const</span>&amp; dep)
+{
+  <span class="hljs-keyword">return</span> out &lt;&lt; dep.currency &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; std::fixed &lt;&lt; std::<span class="hljs-built_in">setprecision</span>(<span class="hljs-number">2</span>) &lt;&lt; dep.amount;
+}
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> </span>
+<span class="hljs-comment">//MONEY_DATABASE.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> MONEY_DATABASE_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MONEY_DATABASE_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;array&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;deposit.h&quot;</span></span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">MoneyDatabase</span>{
+    std::array&lt;Deposit, 100&gt; deposits_; <span class="hljs-comment">//std::array&lt;std::string, 42&gt; my_numbers{}; - Deposit deposits_[100]; (C - style) </span>
+    <span class="hljs-type">int</span> size_ = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(Deposit deposit)</span></span>;
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">Deposit <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">total_of</span><span class="hljs-params">(std::string currency_code)</span> <span class="hljs-type">const</span></span>;
+};
+
+<span class="hljs-keyword">inline</span> std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; out, MoneyDatabase <span class="hljs-type">const</span>&amp; db) <span class="hljs-comment">//function making it faster to print to the output</span>
+{
+  out &lt;&lt; <span class="hljs-string">&quot;Database with size &quot;</span> &lt;&lt; db.size_ &lt;&lt; <span class="hljs-string">&quot; and capacity &quot;</span> &lt;&lt; db.deposits_.<span class="hljs-built_in">size</span>() &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+  out &lt;&lt; <span class="hljs-string">&quot;Deposits are:\n[\n&quot;</span>;
+  <span class="hljs-keyword">auto</span> comma = <span class="hljs-string">&quot;  &quot;</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i{<span class="hljs-number">0</span>}; i &lt; db.size_; ++i)
+  {
+    out &lt;&lt; comma &lt;&lt; db.deposits_[i];
+    comma = <span class="hljs-string">&quot;,\n  &quot;</span>;
+  }
+
+  <span class="hljs-keyword">return</span> out &lt;&lt; <span class="hljs-string">&quot;\n]&quot;</span>;
+}
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
+<span class="hljs-comment">//MONEYDATABASE.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;money_database.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">MoneyDatabase::add</span><span class="hljs-params">(Deposit deposit)</span></span>{
+    <span class="hljs-keyword">if</span>(size_ &lt; deposits_.<span class="hljs-built_in">size</span>() &amp;&amp; deposit.currency.<span class="hljs-built_in">size</span>() == <span class="hljs-number">3</span> &amp;&amp; deposit.amount &gt;= <span class="hljs-number">0</span>){
+        deposits_[size_] = deposit;
+        size_++;
+    }
+}
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">MoneyDatabase::size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> size_;
+}
+
+<span class="hljs-function">Deposit <span class="hljs-title">MoneyDatabase::get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">if</span>(index &gt;= <span class="hljs-number">0</span> &amp;&amp; index &lt; size_){
+        <span class="hljs-keyword">return</span> deposits_[index];
+    }
+    <span class="hljs-keyword">return</span> Deposit{<span class="hljs-string">&quot;INV&quot;</span>, <span class="hljs-number">0</span>};
+}
+
+<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">MoneyDatabase::total_of</span><span class="hljs-params">(std::string currency_code)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-type">double</span> total = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size_; i++){
+        <span class="hljs-keyword">if</span>(deposits_[i].currency == currency_code){
+            total += deposits_[i].amount;
+        }
+    }
+    <span class="hljs-keyword">return</span> total;
+}
+<span class="hljs-comment">//MAIN.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;money_database.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    MoneyDatabase db{};
+
+    std::cout &lt;&lt; <span class="hljs-string">&quot;Enter a currency code, followed by an amount of money. Enter \&quot;quit\&quot; to stop.\n&quot;</span>;
+    
+    <span class="hljs-keyword">auto</span> should_quit = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-keyword">while</span>(!should_quit){
+        std::string currency{};
+        <span class="hljs-type">double</span> amount{};
+
+        std::cin &gt;&gt; currency;
+        <span class="hljs-keyword">if</span>(currency == <span class="hljs-string">&quot;quit&quot;</span>){
+            should_quit = <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (currency.<span class="hljs-built_in">size</span>() == <span class="hljs-number">3</span>){
+            std::cin &gt;&gt; amount;
+            db.<span class="hljs-built_in">add</span>(Deposit{currency, amount});
+        }
+    }
+
+    std::cout &lt;&lt; <span class="hljs-string">&quot;The database contains &quot;</span> &lt;&lt; db.<span class="hljs-built_in">size</span>() &lt;&lt; <span class="hljs-string">&quot; entries.\n&quot;</span>;
+    std::cout &lt;&lt; <span class="hljs-string">&quot;The total amount of money in euros is &quot;</span> &lt;&lt; db.<span class="hljs-built_in">total_of</span>(<span class="hljs-string">&quot;EUR&quot;</span>) &lt;&lt; <span class="hljs-string">&quot;.\n&quot;</span>;
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+            
+            
+        </body>
+        </html>

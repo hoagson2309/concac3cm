@@ -1,0 +1,51 @@
+@startwbs
+skinparam monochrome true
+skinparam shadowing false
+* Project: Caterpillar Detection System
+** Project Initiation
+*** Stakeholder requirements analysis
+*** Project charter development
+*** Team formation
+** Research
+*** Caterpillar thermal signature analysis
+*** Existing solutions review
+*** Sensor technology evaluation
+*** Dataset requirements analysis
+** System Design
+*** Architecture design
+*** Camera system configuration
+*** Flight pattern optimization
+*** Thermal-visible registration
+** Software Development
+*** Core Components
+**** DJI SDK integration
+**** ROS2 bridge
+**** CUDA acceleration
+*** Detection Algorithm
+**** YOLOv8 customization
+**** TensorRT engine
+**** Multi-spectrum fusion
+*** Data Processing Pipeline
+**** Pre-processing
+**** Real-time inference
+**** Post-processing
+** Dataset Development
+*** Data collection
+*** Image acquisition
+*** Labeling
+*** Augmentation
+** Testing & Validation
+*** Unit testing
+*** Integration testing
+*** Field testing
+*** Performance validation
+** Deployment
+*** Edge deployment
+*** Model updates
+*** Flight control
+** Documentation
+*** Technical docs
+*** User manuals
+*** API docs
+*** Maintenance guides
+@endwbs

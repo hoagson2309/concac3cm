@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity4.dir/activity4.c.o -o activity4 

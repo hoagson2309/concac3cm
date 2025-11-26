@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity5.dir/activity5.c.o CMakeFiles/activity5.dir/functions.c.o CMakeFiles/activity5.dir/stringfun.c.o -o activity5 

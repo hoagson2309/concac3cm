@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/sorted_arrays.dir/main.cpp.o -o sorted_arrays 

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 2 - Tutorial 1&colon; Variables and data types</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-2---tutorial-1-variables-and-data-types">Week 2 - Tutorial 1: Variables and data types</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 23/09/2005</p>
+<h2 id="introduction">Introduction</h2>
+<h3 id="activity-0---update-the-system">Activity 0 - Update the system</h3>
+<p>Before you start with this tutorial, make sure your system is up-to-date by running the following commands in the terminal:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+</code></pre>
+<h2 id="data-types">Data types</h2>
+<p>In C, you can work with different kinds of data, such as numbers and text.
+This data is stored in <em>variables</em>, which are named memory locations that can store a value.
+To use a variable in C, you first need to declare it by specifying its <em>data type</em> and name, and possibly assign a value to it, like this:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> number = <span class="hljs-number">42</span>;
+<span class="hljs-type">float</span> pi = <span class="hljs-number">3.14159f</span>;
+<span class="hljs-type">char</span> letter = <span class="hljs-string">&#x27;A&#x27;</span>;
+</code></pre>
+<h2 id="integers-and-floats">Integers and floats</h2>
+<p>Integers are whole numbers, like 1, 2, 3, and so on.
+In C, you can declare integer variables using the <code>int</code> data type.
+Floats are numbers with a decimal point, like 1.0, 2.0, 3.0, and so on.
+They are declared using the <code>float</code> data type.</p>
+<p>When you perform arithmetic operations on integers, the result is also an integer.
+This means that if you divide two integers, the result will be an integer, and the decimal part will be truncated.</p>
+<h3 id="activity-1---fix-the-program">Activity 1 - Fix the program</h3>
+<p>The program listed below should compute the average of three integers entered by the user, but it does not work properly.
+Fix the program so that it calculates the average correctly, without changing the types of the variables <code>a</code>, <code>b</code>, and <code>c</code>.
+List your updated program in the markdown file, and explain what you changed to make it work.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first number: &quot;</span>);
+    <span class="hljs-type">int</span> a = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second number: &quot;</span>);
+    <span class="hljs-type">int</span> b = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the third number: &quot;</span>);
+    <span class="hljs-type">int</span> c = read_int();
+    <span class="hljs-type">int</span> average = (a + b + c) / <span class="hljs-number">3</span>;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The average of %d, %d, and %d is %d\n&quot;</span>, a, b, c, average);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">//MY ANSWER!!!!:</span>
+<span class="hljs-comment">//I basically just change int to float so that it can calculate in the more accurate way.</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first number: &quot;</span>);
+    <span class="hljs-type">float</span> a = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second number: &quot;</span>);
+    <span class="hljs-type">float</span> b = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the third number: &quot;</span>);
+    <span class="hljs-type">float</span> c = read_float();
+    <span class="hljs-type">float</span> average = (a + b + c) / <span class="hljs-number">3</span>;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The average of %f, %f, and %f is %f\n&quot;</span>, a, b, c, average);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="variables">Variables</h2>
+<p>Data is stored in memory.
+Rather than referring to this data through some kind of number that indicates where in memory this data is located, we use <em>variables</em>.
+Variables have names that we can use to refer to the data they store.
+In C, variable names must start with a letter or an underscore, and can contain letters, digits, and underscores.
+It is important to choose meaningful names for your variables, so that your code is easier to understand.</p>
+<h3 id="activity-2---variable-names">Activity 2 - Variable names</h3>
+<p>The variables in the following program have names that are not very descriptive. Change the names of the variables to make the program easier to understand.
+Hint: use the <code>F2</code> key in Visual Studio Code to rename variables.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_float</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// NOTE the following formulas:</span>
+    <span class="hljs-comment">//  Diameter of circle = 2 * radius</span>
+    <span class="hljs-comment">//  Area of circle = pi * radius * radius</span>
+    <span class="hljs-comment">//  Circumference of circle = diameter * pi</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of first circle: &quot;</span>);
+    <span class="hljs-type">float</span> a = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of second circle: &quot;</span>);
+    <span class="hljs-type">float</span> b = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of third circle: &quot;</span>);
+    <span class="hljs-type">float</span> c = read_float();
+    <span class="hljs-type">const</span> <span class="hljs-type">float</span> d = <span class="hljs-number">3.14159f</span>;
+    <span class="hljs-type">float</span> e = a * a * d;
+    <span class="hljs-type">float</span> f = <span class="hljs-number">2</span> * a;
+    <span class="hljs-type">float</span> g = d * f;
+    <span class="hljs-type">float</span> h = b * b * d;
+    <span class="hljs-type">float</span> i = <span class="hljs-number">2</span> * b;
+    <span class="hljs-type">float</span> j = d * i;
+    <span class="hljs-type">float</span> k = c * c * d;
+    <span class="hljs-type">float</span> l = <span class="hljs-number">2</span> * c;
+    <span class="hljs-type">float</span> m = d * l;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;First circle: radius = %.2f, diameter = %.2f, &quot;</span>, a, f);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, g, e);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Second circle: radius = %.2f, diameter = %.2f, &quot;</span>, b, i);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, j, h);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Third circle: radius = %.2f, diameter = %.2f, &quot;</span>, c, l);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, m, k);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">//MY ANSWER!!!!!!!: </span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>     <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_float</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// NOTE the following formulas:</span>
+    <span class="hljs-comment">//  Diameter of circle = 2 * radius</span>
+    <span class="hljs-comment">//  Area of circle = pi * radius * radius</span>
+    <span class="hljs-comment">//  Circumference of circle = diameter * pi</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of first circle: &quot;</span>);
+    <span class="hljs-type">float</span> radius1 = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of second circle: &quot;</span>);
+    <span class="hljs-type">float</span> radius2 = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of third circle: &quot;</span>);
+    <span class="hljs-type">float</span> radius3 = read_float();
+
+    <span class="hljs-type">const</span> <span class="hljs-type">float</span> pi = <span class="hljs-number">3.14159f</span>;
+    
+    <span class="hljs-comment">// First circle calculations</span>
+    <span class="hljs-type">float</span> area1 = pi * radius1 * radius1;
+    <span class="hljs-type">float</span> diameter1 = <span class="hljs-number">2</span> * radius1;
+    <span class="hljs-type">float</span> circumference1 = pi * diameter1;
+
+    <span class="hljs-comment">// Second circle calculations</span>
+    <span class="hljs-type">float</span> area2 = pi * radius2 * radius2;
+    <span class="hljs-type">float</span> diameter2 = <span class="hljs-number">2</span> * radius2;
+    <span class="hljs-type">float</span> circumference2 = pi * diameter2;
+
+    <span class="hljs-comment">// Third circle calculations</span>
+    <span class="hljs-type">float</span> area3 = pi * radius3 * radius3;
+    <span class="hljs-type">float</span> diameter3 = <span class="hljs-number">2</span> * radius3;
+    <span class="hljs-type">float</span> circumference3 = pi * diameter3;
+
+    <span class="hljs-comment">// Output for first circle</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;First circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius1, diameter1);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, circumference1, area1);
+
+    <span class="hljs-comment">// Output for second circle</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Second circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius2, diameter2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, circumference2, area2);
+
+    <span class="hljs-comment">// Output for third circle</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Third circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius3, diameter3);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, circumference3, area3);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+} 
+</code></pre>
+<h2 id="reusing-variables">Reusing variables</h2>
+<p>Variables can be reused to store different values at different times.
+This can help you write more concise programs, and reduce the number of variables you need to keep track of.
+To reuse a variable, you simply assign a new value to it, like this:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> number = <span class="hljs-number">42</span>;
+number = <span class="hljs-number">24</span>;
+</code></pre>
+<h3 id="activity-3---use-expressions-instead-of-variables">Activity 3 - Use expressions instead of variables</h3>
+<p>Modify the program of the previous activity so that it uses expressions to calculate the diameter, circumference, and area of the circles, instead of using variables to store the intermediate results.
+This should decrease the number of variables in your program from thirteen down to four: one <em>constant</em> variable for the value of pi, and three variables to store the radii of the three circles.</p>
+<p>List your updated program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// Your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_float</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// NOTE the following formulas:</span>
+    <span class="hljs-comment">//  Diameter of circle = 2 * radius</span>
+    <span class="hljs-comment">//  Area of circle = pi * radius * radius</span>
+    <span class="hljs-comment">//  Circumference of circle = diameter * pi</span>
+
+    <span class="hljs-comment">// Reading the radii of three circles</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of first circle: &quot;</span>);
+    <span class="hljs-type">float</span> radius1 = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of second circle: &quot;</span>);
+    <span class="hljs-type">float</span> radius2 = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of third circle: &quot;</span>);
+    <span class="hljs-type">float</span> radius3 = read_float();
+
+    <span class="hljs-type">const</span> <span class="hljs-type">float</span> pi = <span class="hljs-number">3.14159f</span>;
+
+    <span class="hljs-comment">// Output for first circle, calculating on the fly</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;First circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius1, <span class="hljs-number">2</span> * radius1);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, <span class="hljs-number">2</span> * pi * radius1, pi * radius1 * radius1);
+
+    <span class="hljs-comment">// Output for second circle, calculating on the fly</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Second circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius2, <span class="hljs-number">2</span> * radius2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, <span class="hljs-number">2</span> * pi * radius2, pi * radius2 * radius2);
+
+    <span class="hljs-comment">// Output for third circle, calculating on the fly</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Third circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius3, <span class="hljs-number">2</span> * radius3);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, <span class="hljs-number">2</span> * pi * radius3, pi * radius3 * radius3);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-4---minimize-variable-usage">Activity 4 - Minimize variable usage</h3>
+<p>Modify the program of the previous activity so that it uses only <strong>two</strong> variables, by reusing / updating the variable that stores the radius of the circle.
+Note that this involves reordering the calculations so that the value of the radius is updated before it is used in the next calculation.
+Run the program to verify that it still works correctly.</p>
+<p>List your updated program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// Your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_float</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// NOTE the following formulas:</span>
+    <span class="hljs-comment">//  Diameter of circle = 2 * radius</span>
+    <span class="hljs-comment">//  Area of circle = pi * radius * radius</span>
+    <span class="hljs-comment">//  Circumference of circle = diameter * pi</span>
+
+    <span class="hljs-comment">// Reusing one variable for the radius</span>
+    <span class="hljs-type">float</span> radius;
+    <span class="hljs-type">const</span> <span class="hljs-type">float</span> pi = <span class="hljs-number">3.14159f</span>;
+
+    <span class="hljs-comment">// Reading and calculating for the first circle</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of first circle: &quot;</span>);
+    radius = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;First circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius, <span class="hljs-number">2</span> * radius);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, <span class="hljs-number">2</span> * pi * radius, pi * radius * radius);
+
+    <span class="hljs-comment">// Reading and calculating for the second circle</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of second circle: &quot;</span>);
+    radius = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Second circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius, <span class="hljs-number">2</span> * radius);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, <span class="hljs-number">2</span> * pi * radius, pi * radius * radius);
+
+    <span class="hljs-comment">// Reading and calculating for the third circle</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter radius of third circle: &quot;</span>);
+    radius = read_float();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Third circle: radius = %.2f, diameter = %.2f, &quot;</span>, radius, <span class="hljs-number">2</span> * radius);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;circumference = %.2f, area = %.2f\n&quot;</span>, <span class="hljs-number">2</span> * pi * radius, pi * radius * radius);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="swapping-variables">Swapping variables</h2>
+<p>Swapping two variables means exchanging their values.
+For example, if <code>a</code> is 1 and <code>b</code> is 2, then after swapping <code>a</code> should be 2 and <code>b</code> should be 1.
+Swapping is a very common operation in programming, and is often used in sorting algorithms and other algorithms that manipulate data.</p>
+<h3 id="activity-5---swapping-two-variables">Activity 5 - Swapping two variables</h3>
+<p>Modify the program listed below so that it swaps the values of the variables <code>a</code> and <code>b</code> before it prints them.
+This involves using a third variable to temporarily store the value of one of the variables, so that it can be reassigned to the other variable.
+Run the program to verify that it works correctly.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first number: &quot;</span>);
+    <span class="hljs-type">int</span> a = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second number: &quot;</span>);
+    <span class="hljs-type">int</span> b = read_int();
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a = %d, b = %d\n&quot;</span>, a, b);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Swapping...\n&quot;</span>);
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Swap the values of a and b here</span>
+    <span class="hljs-type">int</span> temp;
+    temp = a;
+    a = b;
+    b = temp;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a = %d, b = %d\n&quot;</span>, a, b);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-6---swapping-three-variables">Activity 6 - Swapping three variables</h3>
+<p>Modify the program you've written in the previous activity so that it &quot;rotates&quot; the values of three variables <code>a</code>, <code>b</code>, and <code>c</code> before it prints them.
+Below is an example of what the program should print to the console when run:</p>
+<pre><code class="language-verbatim">Enter the first number: 1
+Enter the second number: 2
+Enter the third number: 3
+a = 1, b = 2, c = 3
+Swapping...
+a = 3, b = 1, c = 2
+</code></pre>
+<p>List your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// Your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first number: &quot;</span>);
+    <span class="hljs-type">int</span> a = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second number: &quot;</span>);
+    <span class="hljs-type">int</span> b = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the third number: &quot;</span>);
+    <span class="hljs-type">int</span> c = read_int();
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a = %d, b = %d, c = %d\n&quot;</span>, a, b, c);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Swapping...\n&quot;</span>);
+    <span class="hljs-comment">// Swapping the values of three numbers</span>
+    <span class="hljs-type">int</span> temp = a;
+    a = b;
+    b = c;
+    c = temp;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a = %d, b = %d, c = %d\n&quot;</span>, a, b, c);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="using-the-compiler-to-detect-possible-problems-with-your-program">Using the compiler to detect possible problems with your program</h2>
+<p>The compiler is a very powerful tool that can help you find problems in your program before you run it.
+In case your program has errors, like missing semicolons or undeclared variables, the compiler will not be able to build an executable file, and report the errors it found.</p>
+<p>Sometimes, your code does not have errors, but the compiler can still generate <strong>warnings</strong>.
+It is important to pay attention to these warnings, as they can indicate potential problems in your code that may lead to unexpected behavior when you run your program.</p>
+<h3 id="activity-7---compiler-warnings">Activity 7 - Compiler warnings</h3>
+<p>Compile the program below with warnings enabled (use the <code>-Wall</code> flag), and list the warnings that the compiler generates.
+Explain what each warning means, and how you can fix it.</p>
+<p>Copy the command you used to compile the program, and the warnings that were generated, into the markdown file.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the first number: &quot;</span>);
+    <span class="hljs-type">int</span> a = read_int();
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the second number: &quot;</span>);
+    <span class="hljs-type">int</span> b = read_int();
+    <span class="hljs-type">float</span> sum = (a + b) * <span class="hljs-number">0.5</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The sum of %f and %d is %d\n&quot;</span>, a, b, a + b);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Command used to compile the program: <strong>TODO</strong> - gcc -Wall -o program ttr1w2.c functions.c</p>
+<p>The following warnings were generated: <strong>TODO</strong> -
+ttr1w2.c: In function ‘main’:
+ttr1w2.c:10:25: warning: format ‘%f’ expects argument of type ‘double’, but argument 2 has type ‘int’ [-Wformat=]
+10 |     printf(&quot;The sum of %f and %d is %d\n&quot;, a, b, a + b);
+|                        ~^                  ~
+|                         |                  |
+|                         double             int
+|                        %d
+ttr1w2.c:9:11: warning: unused variable ‘sum’ [-Wunused-variable]
+9 |     float sum = (a + b) * 0.5;
+|           ^~~</p>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to demonstrate the following things:</p>
+<ul>
+<li>You can declare variables of type <code>int</code> and <code>float</code> and assign values to them.</li>
+<li>You can reassign values to variables using the assignment operator <code>=</code>.</li>
+<li>You can compile your program with warnings enabled.</li>
+<li>You have answered all questions in the markdown file, and have submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Once you've successfully demonstrated the items listed above, your lab teacher will mark the tutorial as completed.
+You'll need to sign off this tutorial before you can continue with the next tutorial.</p>
+
+            
+            
+        </body>
+        </html>

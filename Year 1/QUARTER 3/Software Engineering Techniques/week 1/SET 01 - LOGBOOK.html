@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Environment</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <p>For all the exercises in this week, you'll work with <strong>bash</strong> in a <strong>terminal emulator</strong> in your Linux environment.</p>
+<h2 id="environment">Environment</h2>
+<p>Print the values of the following environment variables:</p>
+<ul>
+<li><code>$HOME</code></li>
+<li><code>$USER</code></li>
+<li><code>$SHELL</code></li>
+<li><code>$PATH</code></li>
+<li><code>$TERM</code></li>
+</ul>
+<p>Copy and paste below the commands that you used to get the values of the environment variables and their output.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> Print the values of the environment variables</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$HOME</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$USER</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$SHELL</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$TERM</span>
+</code></pre>
+<h2 id="directories-and-files-commands">Directories and files, commands</h2>
+<p>You've already seen some commands to manipulate and inspect files and directories. Here are a few more: <code>touch</code>, <code>mv</code>, <code>tree</code>. Read the manual pages for these commands and answer the following questions:</p>
+<ol>
+<li>What does the command <code>touch</code> do?</li>
+</ol>
+<p>A: The touch command is used to create an empty file or update the timestamp of an existing file</p>
+<ol>
+<li>Create a new empty file: touch filename.txt</li>
+<li>update the timestamp of an existing file: touch existing_file.txt</li>
+<li>create multiple files at once: touch file1.txt file2.txt file3.txt</li>
+<li>set a specific timestamp: touch -t 202401011200 filename.txt</li>
+</ol>
+<p>2: How can you use <code>touch</code> to create a new file named <strong>hello.txt</strong>?</p>
+<p>A: touch hello.txt</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to create a new file hello.txt</span>
+<span class="hljs-built_in">touch</span> hello.txt
+</code></pre>
+<ol start="3">
+<li>What does the command <code>mv</code> do?</li>
+</ol>
+<p>A: The mv (move) command is used to rename or move files and directories in Linux.</p>
+<ol>
+<li>
+<p>Rename a file: mv oldname.txt newname.txt</p>
+</li>
+<li>
+<p>Move a file to another directory: mv file.txt /path/to/destination/</p>
+</li>
+<li>
+<p>Move multiple files to a directory: mv file1.txt file2.txt /path/to/destination/</p>
+</li>
+<li>
+<p>Rename a directory: mv old_directory new_directory</p>
+</li>
+<li>
+<p>Force move without confirmation: mv -f file.txt /path/to/destination/</p>
+</li>
+<li>
+<p>Interactive mode (asks before overwriting): mv -i file.txt /path/to/destination/</p>
+</li>
+<li>
+<p>How can you use <code>mv</code> to rename a file <strong>old-name.txt</strong> to <strong>NewName.doc</strong>?</p>
+</li>
+</ol>
+<p>A:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you can use to rename a file</span>
+<span class="hljs-built_in">mv</span> old-name.txt NewName.doc
+</code></pre>
+<ol start="5">
+<li>How can you use <code>mv</code> to move the directory <code>~/from</code>, including all its contents to the location <code>/mnt/usb-stick/</code>?</li>
+</ol>
+<p>A:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you can use to move the directory</span>
+<span class="hljs-built_in">mv</span> ~/from /mnt/usb-stick/
+</code></pre>
+<ol start="6">
+<li>What does the command <code>tree</code> do?</li>
+</ol>
+<p>A: The tree command displays the directory structure in a hierarchical format, making it easy to visualize files and subdirectories</p>
+<ol>
+<li>
+<p>Basic usage: tree (This prints the current directory’s structure, showing files and directories in a tree-like format)</p>
+</li>
+<li>
+<p>Display hidden files: tree -a (This includes hidden files (those starting with .))</p>
+</li>
+<li>
+<p>Display only directories: tree -d (This lists only directories, excluding files)</p>
+</li>
+<li>
+<p>Show file sizes: tree -h (This displays file sizes in a human-readable format (e.g., KB, MB))</p>
+</li>
+<li>
+<p>Export output to a file: tree &gt; directory_structure.txt (This saves the directory structure to a file);</p>
+</li>
+<li>
+<p>How can you use <code>tree</code> to display the contents of the directory <code>~/Documents</code>, limiting the depth of the tree to 2 levels?</p>
+</li>
+</ol>
+<p>A:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to display the contents of the directory</span>
+tree ~/Documents -L 2
+</code></pre>
+<ol start="8">
+<li>What does the command <code>file</code> do?</li>
+</ol>
+<p>A: The file command determines and displays the type of a file based on its contents, rather than just its extension</p>
+<ol>
+<li>
+<p>Basic usage: file filename (file document.pdf) =&gt; Output: document.pdf: PDF document, version 1.7</p>
+</li>
+<li>
+<p>Check multiple files: file file1.txt file2.jpg (This will show the type of each file)</p>
+</li>
+<li>
+<p>Check a directory: file directory_name(It will indicate that it's a directory)</p>
+</li>
+<li>
+<p>Force MIME type output: file --mime-type filename (Ex output: filename: text/plain)</p>
+</li>
+<li>
+<p>Identify a symbolic link’s target: file -L symlink (This follows a symlink and tells what the actual file is.)</p>
+</li>
+<li>
+<p>Use the <code>file</code> command on the file <code>~/.bashrc</code>. What is the output?</p>
+</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to display the file type</span>
+~$ file ~/.bashrc
+/home/hoagson/.bashrc: ASCII text
+</code></pre>
+<ol start="10">
+<li>What does the command <code>stat</code> do?</li>
+</ol>
+<p>A: The stat command displays detailed information about a file or directory, including its size, permissions, timestamps, and more.</p>
+<ol>
+<li>
+<p>Basic usage: stat filename (stat document.txt)</p>
+</li>
+<li>
+<p>Check a directory: stat my_directory/</p>
+</li>
+<li>
+<p>Display only specific details: stat --format=&quot;%s %y&quot; filename (This outputs just the size and last modification time.)</p>
+</li>
+<li>
+<p>Use the <code>stat</code> command on the file <code>~/.bashrc</code>. What is the output?</p>
+</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used</span>
+~$ <span class="hljs-built_in">stat</span> ~/.bashrc
+File: /home/hoagson/.bashrc
+Size: 3882            Blocks: 8          IO Block: 4096   regular file
+Device: 8,32    Inode: 1227        Links: 1
+Access: (0644/-rw-r--r--)  Uid: ( 1000/ hoagson)   Gid: ( 1000/ hoagson)
+Access: 2025-02-08 20:57:21.396610772 +0100
+Modify: 2024-11-13 15:56:22.866763960 +0100
+Change: 2024-11-13 15:56:22.866763960 +0100
+Birth: 2024-10-07 23:37:54.284896248 +0200
+</code></pre>
+<h2 id="directories-and-files-in-practice">Directories and files in practice</h2>
+<p>You will need to paste <strong>all the commands</strong> that you entered in the terminal in this exercise, <strong>including their output</strong>. A placeholder for pasting the commands is provided below.</p>
+<blockquote>
+<p>All the steps must be done in the terminal in a Linux shell. No other tools are allowed. <strong>You must stay all the time in your home directory in the terminal, do not <code>cd</code> to other directories.</strong></p>
+</blockquote>
+<ol>
+<li>Go to your home directory.</li>
+<li>Create a sub-directory in your home called <code>week1</code>.</li>
+<li>Create two sub-directories in <code>week1</code>: <code>src</code> and <code>include</code>.</li>
+<li>Create a file called <code>lib.c</code> in the <code>src</code> directory.</li>
+<li>Create a file called <code>lib.h</code> in the <code>week1</code> directory.</li>
+<li>Move the file <code>lib.h</code> to the <code>include</code> directory.</li>
+<li>Rename the file <code>lib.c</code> to <code>lib.cpp</code>.</li>
+<li>Display the whole contents of the <code>week1</code> directory using the <code>tree</code> command.</li>
+<li>Use the <code>file</code> command to display the type of the file <code>lib.h</code>.</li>
+<li>Remove the whole <code>week1</code> directory, including all its contents.</li>
+<li>List the contents of your home directory to verify that the <code>week1</code> directory was removed.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> copy-paste the commands that you entered in the terminal and the output you got, if any</span>
+<span class="hljs-built_in">mkdir</span> week1
+<span class="hljs-built_in">mkdir</span> week1/src week1/include
+<span class="hljs-built_in">touch</span> week1/src/lib.c
+<span class="hljs-built_in">touch</span> week1/lib.h
+<span class="hljs-built_in">mv</span> week1/lib.h week1/include
+<span class="hljs-built_in">mv</span> week1/src/lib.c week1/src/lib.cpp
+
+tree week1
+week1
+├── include
+│   └── lib.h
+└── src
+    └── lib.cpp
+
+file week1/include/lib.h
+week1/include/lib.h: empty
+
+<span class="hljs-built_in">rm</span> -r week1
+
+<span class="hljs-built_in">ls</span>
+PROJECT  hello.txt  pico
+
+</code></pre>
+<h2 id="grep">grep</h2>
+<ol start="0">
+<li>What does the command grep do?</li>
+</ol>
+<ul>
+<li>The grep command in Linux is used to search for a specific pattern in a file or output. It prints the lines that match the given pattern. The name grep stands for &quot;Global Regular Expression Print.</li>
+</ul>
+<p>&quot;A&quot;. Basic Usage: grep &quot;pattern&quot; filename (This searches for &quot;pattern&quot; in filename and prints matching lines). Example:</p>
+<ol>
+<li>Search for a word in a file: grep &quot;error&quot; log.txt (Displays all lines containing &quot;error&quot; in log.txt)</li>
+<li>Search in multiple files: grep &quot;TODO&quot; *.c
+(Finds &quot;TODO&quot; in all .c files in the directory)</li>
+<li>Case-insensitive search (-i option): grep -i &quot;hello&quot; file.txt (Matches &quot;hello&quot;, &quot;Hello&quot;, or &quot;HELLO&quot;)</li>
+<li>Search recursively in directories (-r option): grep -r &quot;function&quot; my_project/ (Searches for &quot;function&quot; in all files inside my_project/)</li>
+<li>Show line numbers (-n option): grep -n &quot;main&quot; program.c (Prints matching lines with line numbers)</li>
+<li>Invert match (-v option): grep -v &quot;DEBUG&quot; logs.txt ( Shows lines that do not contain &quot;DEBUG&quot;).</li>
+</ol>
+<p>&quot;B&quot;. Using grep with Pipes (|): grep is often used with pipes to filter command output: ls -l | grep &quot;.txt&quot; (Lists only .txt files from the ls -l output)</p>
+<p>In this exercise, you'll use the <code>grep</code> command to search for patterns in the file <code>~/.bashrc</code>. The <code>~/.bashrc</code> file is a configuration file for the <code>bash</code> shell and it is present in the home directory of the user. (If you don't have a <code>~/.bashrc</code> file because you are using <code>zsh</code>, you can use the file <code>~/.zshrc</code> instead.)</p>
+<ol>
+<li>Use the <code>grep</code> command to search for the word <code>alias</code> in the file <code>~/.bashrc</code>. How many lines contain the word <code>alias</code>?</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to search for the word `alias` in the file `~/.bashrc` and the output</span>
+grep <span class="hljs-string">&quot;alias&quot;</span> ~/.bashrc (grep -c <span class="hljs-string">&quot;alias&quot;</span> ~/.bashrc (the -c option counts the number of matching lines instead of displaying them))
+ouput: 16
+//=&gt; there are 16 <span class="hljs-built_in">alias</span>
+</code></pre>
+<ol start="2">
+<li>Use the <code>grep</code> command to search for the comment lines in the file <code>~/.bashrc</code>. Comment lines always start with the <code>#</code> character. How many comment lines are there in the file <code>~/.bashrc</code>?</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to search for the comment lines in the file `~/.bashrc` and the output</span>
+grep <span class="hljs-string">&quot;^#&quot;</span> ~/.bashrc
+output: 34
+// =&gt; there are 34 lines that begin with <span class="hljs-string">&quot;#&quot;</span>
+</code></pre>
+<ol start="3">
+<li>Use the <code>grep</code> command to search for the lines that contain the word <code>if</code> in the file <code>~/.bashrc</code>. <strong>Be careful not to include the lines that contain the word <code>elif</code> or similar.</strong>. Print only the first 5 lines that contain the word <code>if</code>. You might need to use the pipe operator <code>|</code> to combine commands.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to search for the lines that contain the word `if` in the file `~/.bashrc` and the output</span>
+grep -w <span class="hljs-string">&quot;if&quot;</span> ~/.bashrc | <span class="hljs-built_in">head</span> -n 5
+output: <span class="hljs-comment"># check the window size after each command and, if necessary,</span>
+        <span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">${debian_chroot:-}</span>&quot;</span> ] &amp;&amp; [ -r /etc/debian_chroot ]; <span class="hljs-keyword">then</span>
+        <span class="hljs-comment"># uncomment for a colored prompt, if the terminal has the capability; turned</span>
+        <span class="hljs-keyword">if</span> [ -n <span class="hljs-string">&quot;<span class="hljs-variable">$force_color_prompt</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+        <span class="hljs-keyword">if</span> [ -x /usr/bin/tput ] &amp;&amp; tput setaf 1 &gt;&amp;/dev/null; <span class="hljs-keyword">then</span>
+
+// -w ensures that only whole words are matched, avoiding partial matches like <span class="hljs-keyword">elif</span>
+// The <span class="hljs-built_in">head</span> -n 5 <span class="hljs-built_in">command</span> takes only the first 5 lines from the grep output.
+</code></pre>
+<h2 id="pipes">Pipes</h2>
+<p>In this exercise you'll use the <code>wget</code> command, which is used to download files from the web. Because you'll be piping the output of it to another command, you'll need to use the <code>-qO-</code> option to write the contents of downloaded files to the standard output, instead of saving them to disk. Like this:</p>
+<ul>
+<li>-q (quiet mode) hides unnecessary messages.</li>
+<li>-O- outputs the downloaded content to the terminal instead of saving it.</li>
+</ul>
+<pre><code class="language-bash">wget -qO- http://example.com
+</code></pre>
+<ol>
+<li>Use the <code>wget</code> command to download the file <code>https://www.gutenberg.org/cache/epub/11/pg11.txt</code> and pipe the output to <code>wc</code> to count the number of words and lines in the text. What is the number of words and of lines in the text? Use the manual or help of <code>wc</code> to see how to count words.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to count the number of words in the text</span>
+<span class="hljs-comment"># and the output</span>
+wget -qO- https://www.gutenberg.org/cache/epub/11/pg11.txt | <span class="hljs-built_in">wc</span> -lw
+output: 3757  29564
+- <span class="hljs-built_in">wc</span> -l to count the number of the lines
+- <span class="hljs-built_in">wc</span> -w  counts the number of words
+</code></pre>
+<ol start="2">
+<li>Use the <code>wget</code> command to download the file <code>https://www.gutenberg.org/cache/epub/11/pg11.txt</code> and pipe the output to <code>grep</code> to find all the lines that <strong>begin with the word</strong> &quot;Alice&quot;. How many lines begin with the word &quot;Alice&quot;?</li>
+</ol>
+<p>Tip: Use the manual or help of <code>grep</code> to see how to to count lines that match a pattern. You may also need to search how to match the beginning of a line.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to find all the lines that contain the word &quot;Alice&quot;</span>
+<span class="hljs-comment"># and the output</span>
+wget -qO- https://www.gutenberg.org/cache/epub/11/pg11.txt | grep -c <span class="hljs-string">&quot;^Alice&quot;</span> 
+output: 64
+- grep <span class="hljs-string">&quot;^Alice&quot;</span>: Searches <span class="hljs-keyword">for</span> lines that begin with <span class="hljs-string">&quot;Alice&quot;</span> (^ denotes the start of a line).
+- -c: Counts the number of matching lines instead of displaying them.
+</code></pre>
+<ol start="3">
+<li>Use the <code>wget</code> command to download the file <code>https://www.gutenberg.org/cache/epub/11/pg11.txt``. Use the pipe and the </code>grep<code>and</code>wc` commands to count how many times the word &quot;Rabbit&quot; appears in the text. What is the number of times the word &quot;Rabbit&quot; appears in the text?</li>
+</ol>
+<p>Tip: You are counting the occurrences of the word &quot;Rabbit&quot; in the text, not the number of lines that contain the word &quot;Rabbit&quot;. You'll need to find out how to combine the <code>grep</code> and <code>wc</code> commands to do it. <code>grep</code> has an option to output only the matching part of the lines, which you can use to count the occurrences.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to count the number of times the word &quot;Rabbit&quot; appears in the text</span>
+<span class="hljs-comment"># and the output</span>
+wget -qO- https://www.gutenberg.org/cache/epub/11/pg11.txt | grep -o <span class="hljs-string">&quot;Rabbit&quot;</span> | <span class="hljs-built_in">wc</span> -l
+output: 47
+//=&gt; there are 47 <span class="hljs-built_in">times</span> that the word <span class="hljs-string">&quot;Rabbit&quot;</span> appears
+// grep -o <span class="hljs-string">&quot;Rabbit&quot;</span> to extract only occurences of <span class="hljs-string">&quot;Rabbit&quot;</span>(one per line)
+// <span class="hljs-built_in">wc</span> -l to count the number lines output by grep, <span class="hljs-built_in">which</span> equals the number of <span class="hljs-built_in">times</span> <span class="hljs-string">&quot;Rabbit&quot;</span> appears
+
+</code></pre>
+<ol start="4">
+<li>Use the <code>wget</code> and <code>grep</code> commands to download and search for the character <code>(</code> in the file <code>[https://raw.githubusercontent.com/bminor/glibc/master/stdio-common/vfprintf-internal.c](https://raw.githubusercontent.com/bminor/glibc/master/stdio-common/vfprintf-internal.c)</code>. How many times does the character <code>(</code> occur in this file? Do not save any files to disk!</li>
+</ol>
+<p>Tip: <code>(</code> is a special character in regular expressions. You'll also need to combine <code>grep</code> with another command to count the occurrences.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to search for the character `[` in the file `~/.bashrc` and the output</span>
+wget -qO- https://raw.githubusercontent.com/bminor/glibc/master/stdio-common/vfprintf-internal.c | grep -o <span class="hljs-string">&quot;(&quot;</span> | <span class="hljs-built_in">wc</span> -l
+output: 693
+// =&gt; there are 693 <span class="hljs-built_in">times</span>
+</code></pre>
+<h2 id="apt-package-manager">apt package manager</h2>
+<p>In this exercise, you'll use the <code>apt</code> package manager to search for and install software.</p>
+<ol>
+<li>Use <code>apt</code> to update your package list.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to update the package list</span>
+sudo apt update
+</code></pre>
+<ol start="2">
+<li>Use <code>apt</code> to search for all packages that contain the text <code>clang</code> in their name.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to search for packages that contain the text `clang` (DO NOT PASTE THE OUTPUT)</span>
+apt search clang
+</code></pre>
+<ol start="3">
+<li>Do the same as in the previous step but this time search for packages that contain the text <code>clang</code> in their name followed by <code>-18</code>. There might be some extra characters between <code>clang</code> and <code>-18</code>, also <code>-18</code> might be followed by more text.  For instance, you should find packages like <code>oh-my-clang-18</code>, <code>clang-for-pros-18</code> and <code>big-library-of-clang-18-dev</code>, etc. but not packages like <code>clang-17</code> or <code>clang-11-dev</code>.</li>
+</ol>
+<p>Tip: You can either use <code>grep</code> to filter the output of the <code>apt</code> command or use the <code>apt</code> command with the <em>regex</em> pattern to search for the packages directly.	
+Tip: Passing <code>--names-only</code> to <code>apt</code> will make it search only in the package names, not in the descriptions.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to search for packages that contain the text `clang` followed by `-18` AND ITS OUTPUT</span>
+apt search --names-only <span class="hljs-string">&#x27;^.*clang.*-18.*$&#x27;</span>
+// apt search: Searches <span class="hljs-keyword">for</span> packages.
+// --names-only: Ensures the search is limited to package names only.
+// ^: Matches the start of the string.
+// .*: Matches any number of characters (including none).
+// clang: Matches the literal text clang
+// $: Matches the end of the string.
+</code></pre>
+<ol start="4">
+<li>Use <code>apt</code> to install the packages found in the previous step, <strong>skipping the packages that have <code>-rt-</code> as a part of their name</strong>. You can install multiple packages at once by separating them with a space.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Paste the command that you used to install the packages found in the previous step</span>
+    apt install $(apt search --names-only <span class="hljs-string">&#x27;^.*clang.*-18.*$&#x27;</span> | awk <span class="hljs-string">&#x27;/^clang/ &amp;&amp; !/-rt-/ {print $1}&#x27;</span>)
+</code></pre>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

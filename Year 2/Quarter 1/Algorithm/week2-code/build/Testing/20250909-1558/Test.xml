@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-c++"
+	BuildStamp="20250909-1558-Experimental"
+	Name="SonCao-Acer"
+	Generator="ctest-3.28.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="13.3.0"
+	OSName="Linux"
+	Hostname="SonCao-Acer"
+	OSRelease="6.6.87.2-microsoft-standard-WSL2"
+	OSVersion="#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="104"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="2048"
+	TotalPhysicalMemory="7604"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1796.57"
+	>
+	<Testing>
+		<StartDateTime>Sep 09 22:49 CEST</StartDateTime>
+		<StartTestTime>1757450957</StartTestTime>
+		<TestList>
+			<Test>./list_insertions/list_insertions_test</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>list_insertions_test</Name>
+			<Path>./list_insertions</Path>
+			<FullName>./list_insertions/list_insertions_test</FullName>
+			<FullCommandLine>/usr/bin/python3 "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/scripts/test_target.py" "list_insertions" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/list_insertions/tests/list_insertions_cases"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.943061</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/scripts/test_target.py" "list_insertions" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/list_insertions/tests/list_insertions_cases"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJzVVVFr2zAQfvevOBiUZFvi2LFjR7SBjO2hsK5bymBlDCPL50SLLRtJoel+/U5Ok5R1T10Lqx2MpDt9392n0+Wzbpaa14BbabGAG2lXoBo1+IW6AY12oxWIpkAIoGw0WDQWpGo3lsF33rYVwmAGOVf0upFYoda3PwDyiot17ibgeWf/+hBCEMbp2dmHxeJyweAj8vUVV9JKipNBgRaFC7/GuiHGiszG895LTcvdDJoSohHktxZ7pk8ZUD5N/pPMbsqrqhHcAZS6qZkH9LwawWibjDCdjnmJcZS6TU2LmlvSQeFNb6OMXCraVDVq2Yfh0D/8jBZ+JXOzD9HnNOw+Ge3MCqwo4qFoWzaNd2wBscUiSnGah2EwLh1bzenj18r6wr+afzu//ORfI9cQ+l82XFvUEPjzatloOrTav0FchwN3VkRtbCaVQW1lo4zvgDq2eLJjC/e5hTzkgZg6tiyjiEVmLEFngiTJOn6Xza0psDW+am3l/81puGJxukMe30cOU/4A2flnsm4rhyzMpgMcdLahYOPJaIcT3dMjmIiow+m8oPcYSfKNrIoHwvwxfzPaCuLqQ++dcz8vGMTTUZDEPCpSLCmSqMAwSdI0n6RlOhGYBzgtI5Hwvuedq+KFFlwcloljM3zL2J5yNusZWzBGEmnk9cnbnbmSao1F1imnSNnTzinLxHYbBIzl3Eh31Fqq5alYcU3bnIMbZlZzaU23PLtbv1Oi0btVoPf16/6jql4qUW266j9ESIWZTI8lf7hgZRn+R/mePGW+UXi8iIcLlIrx8zSUIDle1+dpKPETNZTJy2soV18vLuaLawbzotBozL1/vPTYWly3oZ5A6YT7vkLUZBl63m9O0o1C====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Sep 09 22:49 CEST</EndDateTime>
+		<EndTestTime>1757450958</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

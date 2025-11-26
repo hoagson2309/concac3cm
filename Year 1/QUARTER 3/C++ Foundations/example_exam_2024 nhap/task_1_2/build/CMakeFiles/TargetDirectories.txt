@@ -1,0 +1,3 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024 nhap/task_1_2/build/CMakeFiles/task_1_2.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024 nhap/task_1_2/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 3/C++ Foundations/example_exam_2024 nhap/task_1_2/build/CMakeFiles/rebuild_cache.dir

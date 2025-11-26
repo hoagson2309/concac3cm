@@ -1,0 +1,22 @@
+Start testing: Oct 23 01:17 CEST
+----------------------------------------------------------
+5/6 Testing: spanningtree_test
+5/6 Test: spanningtree_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/scripts/test.py" "spanningtree" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/5.spanningtree/tests/spanningtree_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build/5.spanningtree
+"spanningtree_test" start time: Oct 23 01:17 CEST
+Output:
+----------------------------------------------------------
+None
+The answer for the following test input (line 20) is incorrect: [(A, B, 1), (A, C, 4), (A, D, 5), (A, E, 6), (A, F, 10), (A, G, 9), (B, C, 1), (B, E, 9), (B, F, 3), (B, G, 1), (B, H, 1), (C, F, 1), (D, E, 6), (D, H, 2), (E, F, 9), (E, G, 7), (E, H, 4), (F, H, 2), (G, H, 1)] B E 
+ got 6
+ expected 5
+<end of output>
+Test time =   1.36 sec
+----------------------------------------------------------
+Test Failed.
+"spanningtree_test" end time: Oct 23 01:17 CEST
+"spanningtree_test" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Oct 23 01:17 CEST

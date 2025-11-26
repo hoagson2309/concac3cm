@@ -1,0 +1,7 @@
+# ninja log v5
+47	180	1732803186392123300	primes/CMakeFiles/primes.dir/primes.c.o	b5facdf3504c174c
+41	212	1732803186392123300	fibonacci/CMakeFiles/fibonacci.dir/fibonacci.c.o	7613d22eb9cd2406
+44	311	1732803186513559600	fibonacci/CMakeFiles/fibonacci.dir/__/functions/functions.c.o	2a14da0e46ec5221
+50	343	1732803186514639600	primes/CMakeFiles/primes.dir/__/functions/functions.c.o	b0a72679908dec9
+329	553	1732803186744141300	fibonacci/fibonacci	af483c2ddb1a18c0
+353	575	1732803186764337200	primes/primes	7046c1a765fe6e8b

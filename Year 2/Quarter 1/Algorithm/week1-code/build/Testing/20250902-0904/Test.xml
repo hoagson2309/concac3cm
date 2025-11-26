@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-c++"
+	BuildStamp="20250902-0904-Experimental"
+	Name="SonCao-Acer"
+	Generator="ctest-3.28.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="13.3.0"
+	OSName="Linux"
+	Hostname="SonCao-Acer"
+	OSRelease="6.6.87.2-microsoft-standard-WSL2"
+	OSVersion="#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="104"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="2048"
+	TotalPhysicalMemory="7604"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1796.56"
+	>
+	<Testing>
+		<StartDateTime>Sep 03 01:12 CEST</StartDateTime>
+		<StartTestTime>1756854747</StartTestTime>
+		<TestList>
+			<Test>./first_occurrence/first_occurrence_test</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>first_occurrence_test</Name>
+			<Path>./first_occurrence</Path>
+			<FullName>./first_occurrence/first_occurrence_test</FullName>
+			<FullCommandLine>/usr/bin/python3 "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/scripts/test_target.py" "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/build/first_occurrence/first_occurrence" "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/first_occurrence/tests/first_occurrence_cases"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.208822</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/usr/bin/python3 "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/scripts/test_target.py" "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/build/first_occurrence/first_occurrence" "/mnt/c/Users/hoang/Desktop/SAXION/Year 2/Quarter 1/week1-code/first_occurrence/tests/first_occurrence_cases"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>
+The answer for the following test input is incorrect: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] 1 
+ got 5
+ expected 0
+</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Sep 03 01:12 CEST</EndDateTime>
+		<EndTestTime>1756854747</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

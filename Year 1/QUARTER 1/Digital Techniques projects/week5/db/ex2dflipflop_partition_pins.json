@@ -1,0 +1,29 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "OUTA",
+					"strict" : false
+				},
+				{
+					"name" : "OUTB",
+					"strict" : false
+				},
+				{
+					"name" : "OUTC",
+					"strict" : false
+				},
+				{
+					"name" : "DATA",
+					"strict" : false
+				},
+				{
+					"name" : "CLK",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

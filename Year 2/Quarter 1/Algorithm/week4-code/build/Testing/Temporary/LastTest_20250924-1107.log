@@ -1,0 +1,19 @@
+Start testing: Sep 24 14:57 CEST
+----------------------------------------------------------
+3/10 Testing: bst_remove_leaf_test
+3/10 Test: bst_remove_leaf_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/scripts/test.py" "manage_bst" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/manage_bst/tests/bst_remove_leaf_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week4-code/build/manage_bst
+"bst_remove_leaf_test" start time: Sep 24 14:57 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.44 sec
+----------------------------------------------------------
+Test Passed.
+"bst_remove_leaf_test" end time: Sep 24 14:57 CEST
+"bst_remove_leaf_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 24 14:57 CEST

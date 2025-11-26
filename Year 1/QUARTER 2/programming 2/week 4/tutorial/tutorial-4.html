@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 4 - Tutorial&colon; Dynamic memory</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-4---tutorial-dynamic-memory">Week 4 - Tutorial: Dynamic memory</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 06/12/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>When working with C, understanding how memory is managed is crucial.
+In this tutorial, you will learn how to allocate and deallocate memory dynamically, and how to use the address sanitizer to detect memory problems.</p>
+<h3 id="code-organization">Code organization</h3>
+<p>The code for this tutorial is organized as follows: the <code>CMakeLists.txt</code> file in the root of the archive is used to build all the programs in the tutorial.
+It builds a separate executable for each activity, and the source code for each activity is in a separate <code>.c</code> file.</p>
+<p>If you did not install <code>CMake</code> and a working compiler on Windows, then make sure to open VS Code from the WSL terminal by typing <code>code .</code> in the directory that contains the main <code>CMakeLists.txt</code> file.
+Use the CMake tab (listed on the left, along with other tabs for &quot;Explorer&quot;, &quot;Extensions&quot;, etc.) in VS Code to configure, build, run and debug the different targets in the project.</p>
+<h2 id="the-stack">The stack</h2>
+<p>As you have learned from the lecture and the theory of this week, the stack holds the local variables of each function call, stacked on top of each other.
+When a function is called, the memory for its local variables is allocated on the (top of the) stack, and when the function returns, that memory is deallocated again so that it can be used by the next function call.</p>
+<p>The size of the stack is limited, and if you use too much memory, you will get a stack overflow.
+Also, the size of the stack is set to a default value, but you can change it (at least, in Linux) using the <code>ulimit</code> command.
+This allows you to experiment with the stack size and see how it affects your program.
+The <code>ulimit</code> command is used to set user limits, and the <code>-s</code> option is used to set the stack size.</p>
+<p><strong>Important note</strong>: The stack size is set in kilobytes by <code>ulimit</code>, so 5 kilobytes is 5120 bytes.
+Setting the stack size too low will cause many programs (such as <code>gcc</code> or even <code>ls</code> and <code>cd</code>) to crash, so be careful when experimenting with the stack size.</p>
+<h3 id="activity-1---illustrating-the-stack">Activity 1 - Illustrating the stack</h3>
+<p>In the file <code>activity1</code>, you will find a program that stores a birthday calendar in a structure.
+Because the calendar structure is quite large, the program requires quite a bit of stack space.</p>
+<p>Also, because the program passes a copy of the calendar to the <code>print_calendar</code> function, the program uses even more stack space.</p>
+<blockquote>
+<p>Use the <code>ulimit</code> command to lower the stack size to 40 kilobytes by entering <code>ulimit -s 40</code> in the (WSL2) terminal.</p>
+<p>Next, run the program - it should crash with a segmentation fault because it runs out of stack space.</p>
+</blockquote>
+<blockquote>
+<p><strong>TODO - Answer the following question: why does the program crash with a segmentation fault?</strong></p>
+</blockquote>
+<pre><code class="language-c">- The program crashes with a segmentation fault because it exceeds the <span class="hljs-built_in">stack</span> space allocated <span class="hljs-keyword">for</span> the process.
+</code></pre>
+<p>Next, change the program so that the <code>print_calendar</code> function takes a (<code>const</code>) <strong>pointer</strong> to the calendar structure, instead of a copy of the structure.
+Rebuild the program and run it again with the same stack size as before.
+Make sure that it now prints the calendar without crashing.
+When you're done, copy-paste the modified <code>print_calendar</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the modified print_calendar function here</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_calendar</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">calendar_t</span> *calendar)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; calendar-&gt;count; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s was born on %02d-%02d-%d\n&quot;</span>, calendar-&gt;persons[i].name,
+               calendar-&gt;persons[i].birth_date.day,
+               calendar-&gt;persons[i].birth_date.month,
+               calendar-&gt;persons[i].birth_date.year);
+    }
+}
+
+</code></pre>
+<h2 id="activity-2---illustrating-the-stack-part-2">Activity 2 - Illustrating the stack, part 2</h2>
+<p>Whenever a function calls another function, the memory for the local variables of the called function is allocated on the stack, &quot;on top&quot; of the local variables of the calling function.
+But actually, the stack grows in the opposite direction: it grows <em>downwards</em> in memory, towards lower memory addresses.</p>
+<p>The program listed in <code>activity2.c</code> runs a recursive function that calls itself a number of times.
+In the table listed below, write down the memory range used to store the local variable <code>values</code>  of the <code>recursive_function</code> function.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter <code>n</code></th>
+<th>Memory range of <code>values</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0x7fff4c4a1fa0 - 0x7fff4c4a2fa0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0x7fff4c4a0f60 - 0x7fff4c4a1f60</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0x7fff4c49ff20 - 0x7fff4c4a0f20</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0x7fff4c49eee0 - 0x7fff4c49fee0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0x7fff4c49dea0 - 0x7fff4c49eea0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0x7fff4c49ce60 - 0x7fff4c49de60</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0x7fff4c49be20 - 0x7fff4c49ce20</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0x7fff4c49ade0 - 0x7fff4c49bde0</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0x7fff4c499da0 - 0x7fff4c49ada0</td>
+</tr>
+<tr>
+<td>9</td>
+<td>0x7fff4c498d60 - 0x7fff4c499d60</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>TODO - Answer the following question: How many bytes of memory separate two consecutive copies of the <code>values</code> arrays on the stack?</strong></p>
+</blockquote>
+<pre><code class="language-c"><span class="hljs-number">4160</span> bytes separate two consecutive copies of the values arrays on the <span class="hljs-built_in">stack</span>.
+</code></pre>
+<h2 id="the-heap">The heap</h2>
+<p>When storing data on the stack (which is done implicitly when declaring variables), the memory is automatically allocated and deallocated.
+This can be limiting, as sometimes you'd like to store data that is not known at compile time, or that needs to be shared between functions.</p>
+<p>The heap is a memory area that is managed by the operating system, and that can be used to allocate and deallocate memory dynamically - i.e. while the program is running, on request.
+When allocating memory on the heap, you need to keep track of the memory yourself, and you need to deallocate the memory when you're done with it, to prevent memory leaks.
+To allocate memory on the heap, you use the <code>malloc</code> function and specify the number of bytes you want to allocate.
+To deallocate memory, you use the <code>free</code> function.</p>
+<h3 id="activity-3---dynamic-allocation">Activity 3 - Dynamic allocation</h3>
+<p>The program listed in <code>activity3.c</code> has a local variable <code>array</code> that is an array of 64 integers.
+The program prints the memory range used to store the local variable <code>array</code> of the <code>main</code> function.</p>
+<p>There's another variable in the program - <code>ptr</code> - that is a pointer to an array of 64 integers that is allocated on the heap using <code>malloc</code>.</p>
+<p>Update the program so that it also prints the memory range used to store the memory allocated by <code>malloc</code>.
+Put the memory range of the two variables in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Memory range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>array</td>
+<td>0x7fff80020e60 - 0x7fff80020f60</td>
+</tr>
+<tr>
+<td>malloc-ed</td>
+<td>0x62ffa1bd52a0 - 0x62ffa1bd53a0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="address-sanitizers">Address sanitizers</h2>
+<p>An address sanitizer is a tool that can be used to detect memory problems in a program.
+It can detect memory leaks, memory access errors, and memory corruption.
+To use the address sanitizer, you need to compile and link your program with the <code>-fsanitize=address</code> flag, and then run the program.
+If the address sanitizer detects any memory problems, it will print an error message to the console that tells you what the problem is and where it occurred.</p>
+<h3 id="activity-4---using-an-address-sanitizer">Activity 4 - Using an Address Sanitizer</h3>
+<p>In the <code>CMakeLists.txt</code> file, add the <code>-fsanitize=address</code> flag to both the <code>target_compile_options</code> <strong>and</strong> the <code>target_link_options</code>  for the <code>activity4</code> program.
+Then, reconfigure the project and rebuild the program.
+<strong>NOTE</strong>: this will only work on Linux, not on Windows.</p>
+<p>Run the <code>activity4</code> executable, and check that the output includes a message from the address sanitizer.
+Copy the error message that the address sanitizer prints into the code block below:</p>
+<pre><code class="language-verbatim">// TODO: Paste the error message here
+How many bytes of memory should be allocated on the heap? 5
+Memory allocated on the heap in the range 0x502000000010 - 0x502000000014
+
+=================================================================
+==16503==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x7f7761d319c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5648d863f4e1 in main (/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 4/tutorial/build/activity4+0x24e1) (BuildId: d7903c3cb9b51f85551a35b12b6670edd1c56a6f)
+    #2 0x7f7761a4c1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x7f7761a4c28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x5648d863f3c4 in _start (/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 4/tutorial/build/activity4+0x23c4) (BuildId: d7903c3cb9b51f85551a35b12b6670edd1c56a6f)
+
+SUMMARY: AddressSanitizer: 5 byte(s) leaked in 1 allocation(s).
+</code></pre>
+<h3 id="activity-5---fixing-memory-problems">Activity 5 - Fixing memory problems</h3>
+<p>The program listed in <code>activity5.c</code> has <em>two</em> problems related to memory management / memory access.
+Use the address sanitizer to find and fix these problems.
+The first problem is a &quot;heap-buffer-overflow&quot;, which means that the program writes past the end of a memory block that was allocated on the heap.</p>
+<p>When you've fixed the problems and the address sanitizer does not report any problems, copy-paste the fixed program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the fixed program here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;How many integers should be allocated on the heap? &quot;</span>);
+    <span class="hljs-type">int</span> size = read_int();
+    <span class="hljs-keyword">while</span> (size &lt; <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The size must be non-negative. Try again: &quot;</span>);
+        size = read_int();
+    }
+
+    <span class="hljs-type">int</span> *ptr = (<span class="hljs-type">int</span>*) <span class="hljs-built_in">malloc</span>(size * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>)); <span class="hljs-comment">// allocate memory to store integers //size * sizeof(int) to ensure enough memory is allocated for size integers.</span>
+    <span class="hljs-keyword">if</span> (ptr == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation failed\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocated successfully\nFilling array with random integers...\n&quot;</span>);
+    
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+        ptr[i] = random_int(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>);
+    }
+    <span class="hljs-built_in">free</span>(ptr); <span class="hljs-comment">// if missing could lead to memory leak</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="reallocating-memory">Reallocating memory</h2>
+<p>When you allocate memory using <code>malloc</code>, you specify the number of bytes you want to allocate.
+Oftentimes, you don't know how much memory you need in advance, and you need to allocate more memory later on.
+To do this, you can use the <code>realloc</code> function (reallocate), which allows you to change the size of the memory block that was allocated using <code>malloc</code>.</p>
+<p>When you call <code>realloc</code>, you specify the pointer to the memory block that you want to reallocate, and the new size of the memory block.
+The function will then &quot;ask&quot; the operating system for a new memory block of the specified size.
+It is possbible and likely that the current memory block can simply be extended to the new size, but it is also possible that the operating system will allocate a new memory block and copy the data from the old memory block to the new memory block.
+The <code>realloc</code> function will therefore return a new pointer to the memory block, and you should assign this pointer to the original pointer variable, after ensuring that the reallocation was successful (i.e. the pointer is not <code>NULL</code>).</p>
+<h3 id="activity-6---reallocating-memory">Activity 6 - Reallocating memory</h3>
+<p>The program listed in <code>activity6.c</code> allocates memory for an array of only 1 integer, and then asks the user to enter many integers, which it stores in the array.
+Since the program does not use <code>realloc</code> to increase the size of the array, it will crash when the user enters more than one integer.
+Fix the program so that it uses <code>realloc</code> to increment the size of the array each time the memory is full.</p>
+<p>Make sure that the program does not crash when the user enters many characters, and that the address sanitizer does not report any memory leaks.
+When you're done, copy-paste the fixed program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the fixed program here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> *ptr = (<span class="hljs-type">int</span>*) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));  <span class="hljs-comment">// allocate memory to store one integer</span>
+
+    <span class="hljs-keyword">if</span>(ptr == <span class="hljs-literal">NULL</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation failed\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-type">int</span> capacity = <span class="hljs-number">1</span>; <span class="hljs-comment">// current capacity of an array</span>
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;  <span class="hljs-comment">// number of integers stored in memory</span>
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter an integer (0 to stop): &quot;</span>);
+    <span class="hljs-type">int</span> input = read_int();
+    
+    <span class="hljs-keyword">while</span> (input != <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span>  (count == capacity){
+            capacity *= <span class="hljs-number">2</span>; <span class="hljs-comment">//double the capacity of interger</span>
+            <span class="hljs-type">int</span> *update = (<span class="hljs-type">int</span>*) <span class="hljs-built_in">realloc</span>(ptr, capacity * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));
+            <span class="hljs-keyword">if</span>(update == <span class="hljs-literal">NULL</span>){
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Reallocation failed&quot;</span>);
+                <span class="hljs-built_in">free</span>(ptr); <span class="hljs-comment">//free the og memory</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+            }
+            ptr = update; <span class="hljs-comment">// update the pointer </span>
+        }
+        ptr[count] = input;     <span class="hljs-comment">// store the integer</span>
+        count++;                <span class="hljs-comment">// increment the number of integers stored</span>
+
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter an integer (0 to stop): &quot;</span>);
+        input = read_int();
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You&#x27;ve entered %d integers:\n&quot;</span>, count);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, &quot;</span>);  <span class="hljs-comment">// print a comma and a space before all but the first integer</span>
+        }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, ptr[i]);  <span class="hljs-comment">// print the integers</span>
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-built_in">free</span>(ptr);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="strings-revisited">Strings revisited</h2>
+<p>As you should know well enough by now, in C strings are represented as arrays of characters, terminated by a null character (<code>'\0'</code>).
+Also, arrays and pointers are very closely related in C - you can use the name of an array as a pointer, and you can treat pointers as arrays.</p>
+<p>There is one major difference between arrays and pointers, and that is that when declaring an array variable, memory is actually allocated for it (on the stack).
+When declaring a pointer variable, only memory for the pointer itself is allocated (on the stack), not for the data it points to.</p>
+<p>This means that if you're going to let a pointer point to a string, you either need to let it point to a string that is stored in an array, or you need to allocate memory for the string dynamically.</p>
+<h3 id="activity-7---storing-strings-on-the-heap">Activity 7 - Storing strings on the heap</h3>
+<p>The program listed in <code>activity7.c</code> reads a string into an array of characters that is allocated on the stack.
+Change the program so that it does not use any arrays allocated on the stack, but instead uses <code>malloc</code> to allocate memory for the string on the heap and store it there.
+The program must also free the memory allocated for the string before it exits.</p>
+<p>Test that the program works correctly by running it and checking that it does not crash and that it prints the string correctly.
+The program is set up to use the address sanitizer, so also make sure that it does not report any memory problems.</p>
+<p>When you're done, copy-paste the modified program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified program here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> change this program so that it does not use *ANY* arrays, only pointers</span>
+    <span class="hljs-type">int</span> capacity = <span class="hljs-number">100</span>;
+    <span class="hljs-type">char</span> *name = (<span class="hljs-type">char</span>*) <span class="hljs-built_in">malloc</span>(capacity * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));
+    <span class="hljs-keyword">if</span>(name == <span class="hljs-literal">NULL</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation failed\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hi, what&#x27;s your name? &quot;</span>);
+
+    read_string(name, capacity);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, %s!\n&quot;</span>, name);
+    
+    <span class="hljs-built_in">free</span>(name);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="arrays-of-strings-and-double-pointers">Arrays of strings and double pointers</h2>
+<p>A string is basically a pointer to an array of characters, terminated by a null character.
+This means that an array of strings is a double pointer: it points to (the first element of) an array of pointers, each of which points to (the first element of) an array of characters.</p>
+<p>Storing multiple strings in a dynamically allocated array of strings is a bit more complex than storing a single string.
+This is because you need to allocate memory for each string separately, and you need to allocate memory for the array of pointers as well.
+Likewise, when freeing the memory, you need to free the memory for each string separately, and you need to free the memory for the array of pointers as well.</p>
+<h3 id="activity-8---storing-arrays-of-strings">Activity 8 - Storing arrays of strings</h3>
+<p>The program listed in <code>activity8.c</code> reads <em>three</em> strings into an array of strings that is allocated on the stack.
+Change the program so that it allocates <em>all</em> memory <em>dynamically</em> (i.e. using <code>malloc</code>), and frees all memory before it exits.
+The program must have <em>only one</em> pointer variable that points to the array of strings.</p>
+<p>Test that the program works correctly by running it and checking that it does not crash and that it prints the strings correctly.
+Also make sure that the address sanitizer does not report any memory leaks.</p>
+<p>When you're done, copy-paste the modified program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your modified program here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> NUM_STRINGS 3</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> STRING_CAPACITY 200</span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> change this program so that it does not use *ANY* arrays, only pointers</span>
+    <span class="hljs-comment">//single pointer variable that points to array of strings</span>
+    <span class="hljs-type">char</span> **strings = <span class="hljs-built_in">malloc</span>(NUM_STRINGS * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span> *));
+    <span class="hljs-keyword">if</span> (strings == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation failed\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-comment">//allocate memory for each string</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; NUM_STRINGS; i++) {
+        strings[i] = <span class="hljs-built_in">malloc</span>(STRING_CAPACITY * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>));
+        <span class="hljs-keyword">if</span> (strings[i] == <span class="hljs-literal">NULL</span>) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Memory allocation failed\n&quot;</span>);
+            <span class="hljs-comment">// free already allocated memory before exiting</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) {
+                <span class="hljs-built_in">free</span>(strings[j]);
+            }
+            <span class="hljs-built_in">free</span>(strings);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        }
+    }
+
+    <span class="hljs-comment">// Read strings</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hi, what&#x27;s your name? &quot;</span>);
+    read_string(strings[<span class="hljs-number">0</span>], STRING_CAPACITY);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Where are you from? &quot;</span>);
+    read_string(strings[<span class="hljs-number">1</span>], STRING_CAPACITY);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;What&#x27;s your favorite color? &quot;</span>);
+    read_string(strings[<span class="hljs-number">2</span>], STRING_CAPACITY);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello, %s from %s! Your favorite color is %s.\n&quot;</span>, strings[<span class="hljs-number">0</span>], strings[<span class="hljs-number">1</span>], strings[<span class="hljs-number">2</span>]);
+    
+    <span class="hljs-comment">// Free memory</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; NUM_STRINGS; i++) {
+        <span class="hljs-built_in">free</span>(strings[i]);
+    }
+    <span class="hljs-built_in">free</span>(strings);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

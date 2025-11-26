@@ -1,0 +1,151 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "assignment1",
+					"jsonFile" : "directory-assignment1-Debug-81021ca224e12be86d72.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "assignment1",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "assignment2",
+					"jsonFile" : "directory-assignment2-Debug-336d602ad628908db9f8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "assignment2",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "assignment3",
+					"jsonFile" : "directory-assignment3-Debug-a2d24ade56856e1cd1eb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "assignment3",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "assignment4",
+					"jsonFile" : "directory-assignment4-Debug-d4758e4897e4a6aa5c4a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "assignment4",
+					"targetIndexes" : 
+					[
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					],
+					"name" : "sample_exam",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "assignment1::@543bd34b06d2f505cb54",
+					"jsonFile" : "target-assignment1-Debug-f98ddd770cf7d0b76120.json",
+					"name" : "assignment1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "assignment2::@a5756fe1cb02f824597b",
+					"jsonFile" : "target-assignment2-Debug-0cf2c7c4181e468b437b.json",
+					"name" : "assignment2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "assignment3::@b1f83518eaa1f5521cdf",
+					"jsonFile" : "target-assignment3-Debug-bbfe443f9ac21c7d858e.json",
+					"name" : "assignment3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "assignment4::@21304834b9bb2d4afddf",
+					"jsonFile" : "target-assignment4-Debug-df411c493639d50432d5.json",
+					"name" : "assignment4",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code/build",
+		"source" : "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/sample-exam-code"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

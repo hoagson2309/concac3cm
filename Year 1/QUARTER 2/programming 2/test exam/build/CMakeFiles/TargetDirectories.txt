@@ -1,0 +1,8 @@
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/assignment1.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/assignment2.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/assignment3.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/assignment4.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/assignment5.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/grades.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/exam/build/CMakeFiles/rebuild_cache.dir

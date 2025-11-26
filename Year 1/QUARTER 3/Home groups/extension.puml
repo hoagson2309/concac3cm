@@ -1,0 +1,19 @@
+@startgantt
+printscale weekly with calendar date zoom 2
+skinparam dpi 75
+saturday are closed
+sunday are closed
+Project starts the 1st of march 2025
+[Research] requires 20 days
+[Project plan] as [PP] requires 10 days and starts D+7
+[API] starts at [Research]'s end
+[PP] --> [API]
+[API] requires 3 weeks
+[API completed] happens at [API]'s end
+[API Docs] as [AD] requires 1 week and starts 5 days before [API]'s end
+[AD] displays on same row as [PP]
+[AD] is colored in GreenYellow/Green
+[PP] is colored in GreenYellow/Green
+[API] is colored in Orchid
+@endgantt
+

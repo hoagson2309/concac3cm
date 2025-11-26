@@ -1,0 +1,41 @@
+@startuml
+scale 200 height
+
+class Light  {
+    + On()
+    + Off()
+}
+
+class Display {
+    + Write(floornumber)
+}
+
+enum ButtonStates {
+    PRESSED
+    RELEASED
+    HOLD
+} 
+
+class AlarmButton {
+    + ReadButton() : ButtonStates
+}
+
+class KeyPanel {
+    + ReadNumber() : int
+}
+
+class SupervisoryController {
+    + SetFloorNumber(setfloornumber)
+    + SetAlarm()
+}
+
+class CabinController {
+    + SetFloorNumber(floornumber)
+    + LightOn()
+    + LightOff()
+    + BrakeActive()
+    + BrakeDeactive()
+}
+
+ButtonStates -- AlarmButton
+@enduml

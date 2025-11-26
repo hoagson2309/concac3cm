@@ -1,0 +1,19 @@
+Start testing: Oct 01 17:39 CEST
+----------------------------------------------------------
+2/6 Testing: heap_remove_test
+2/6 Test: heap_remove_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/scripts/test.py" "heap_remove" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/heap_remove/tests/heap_remove_test_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week5-code/build/heap_remove
+"heap_remove_test" start time: Oct 01 17:39 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.68 sec
+----------------------------------------------------------
+Test Passed.
+"heap_remove_test" end time: Oct 01 17:39 CEST
+"heap_remove_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 01 17:39 CEST

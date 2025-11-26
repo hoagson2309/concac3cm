@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -fsanitize=address -fsanitize=undefined CMakeFiles/separate_chaining.dir/main.cpp.o -o separate_chaining 

@@ -1,0 +1,21 @@
+	
+@startuml
+
+skinparam nodesep 50
+skinparam dpi 300
+left to right direction
+
+
+[Motor control] as mc
+interface "Motor API" as mcapi
+mcapi -[#green]- mc 
+
+[HAL]
+HAL -[#red]- PWM
+mc -[#green]-( PWM
+mc .[#green].> HAL
+
+
+mc -[#green]-( I2C
+
+@enduml

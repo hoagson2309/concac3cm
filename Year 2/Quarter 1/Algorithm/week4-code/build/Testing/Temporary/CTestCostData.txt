@@ -1,0 +1,11 @@
+bst_remove_tricky_test 3 0.60549
+bst_remove_single_child_test 3 0.582651
+array_to_bst_test 3 0.523047
+bst_remove_leaf_test 3 0.526182
+bst_insert_test 3 1.07208
+tree_slice_test 3 0.836417
+subsets_test 3 0.833868
+tree_isect_test 3 0.804244
+tree_reverse_test 2 0.627484
+tree_height_test 2 0.670814
+---

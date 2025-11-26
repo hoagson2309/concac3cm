@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity2.dir/main.c.o CMakeFiles/activity2.dir/colours.c.o -o activity2  ../functions/libfunctions.a 

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - Tutorial 1&colon; Looping with while and for</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---tutorial-1-looping-with-while-and-for">Week 3 - Tutorial 1: Looping with while and for</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 16/09/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>In this tutorial, you will learn how to repeat code using loops.
+There are two main types of loops in C: the <code>while</code> loop, and the <code>for</code> loop.
+You will learn how to use these loops to repeat code, and how to use them to solve problems.</p>
+<h3 id="activity-0---update-the-system">Activity 0 - Update the system</h3>
+<p>Before you start with this tutorial, make sure your system is up-to-date by running the following commands in the terminal:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt upgrade
+</code></pre>
+<h3 id="activity-1---set-up-a-folder-for-this-tutorial">Activity 1 - Set up a folder for this tutorial</h3>
+<p>Create a folder (directory) for this week's tutorial in your preferred location.
+Open up the folder in VS code by selecting the folder in the File-&gt;Open menu, or by right-clicking on the folder in your file browser and selecting &quot;Open in VS Code&quot; (if this option is available).</p>
+<p>Alternatively, you can open the folder from a WSL terminal by typing the <code>code .</code> command.</p>
+<h2 id="validating-input-with-loops">Validating input with loops</h2>
+<p>When you ask the user for input, you cannot always trust that the user will enter the correct input.
+To ensure that the input is correct, you can use a loop to keep asking the user for input until the input is valid.</p>
+<h3 id="activity-2---validating-input-with-a-while-loop">Activity 2 - Validating input with a while loop</h3>
+<p>The following program asks the user to enter a digit character, and stores it in the <code>character</code> variable.
+Currently, the program does check if the input is a digit character (using the <code>isdigit</code> function), but if the user did not enter a digit character, the program will not ask the user for input again.
+Modify the program so that it keeps asking the user for input until the input is a digit character.
+<strong>Restrictions</strong>: you are not allowed to use the <code>break</code> or <code>continue</code> statement in your program, and the program must use a single variable (i.e. the <code>character</code> variable that already is there).</p>
+<p>Store the modified program in a file called <code>activity2.c</code> in the folder for this tutorial.
+Copy the code you wrote into the markdown file when you're done.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span>      <span class="hljs-comment">// for isdigit</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_char</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a digit: &quot;</span>);
+    <span class="hljs-type">char</span> character = read_char();
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isdigit</span>(character)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the digit %c\n&quot;</span>, character);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">//MY ANSWER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span>      <span class="hljs-comment">// for isdigit</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_char</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> character;
+    <span class="hljs-keyword">do</span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a digit: &quot;</span>);
+        character = read_char();
+    } <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">isdigit</span>(character));
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered the digit %c\n&quot;</span>, character);
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+
+</code></pre>
+<p>Very often, the conditions that you want to check are more complex than just checking if a single variable is equal to a value.
+In these cases, the conditions can be combined using boolean operators, such as <code>&amp;&amp;</code> (and), <code>||</code> (or), and <code>!</code> (not).</p>
+<h3 id="activity-3---complex-conditions">Activity 3 - Complex conditions</h3>
+<p>The program below asks the user to choose between &quot;rock&quot;, &quot;paper&quot;, or &quot;scissors&quot;, by entering the corresponding letter.
+Currently, the program does not check if the input is valid.</p>
+<p>Modify the program so that it keeps asking the user for input until the input is valid.
+<strong>Restrictions</strong>: you are not allowed to use the <code>break</code> or <code>continue</code> statement in your program, and the program must use a single variable (i.e. the <code>choice</code> variable).</p>
+<p>Store the modified program in a file called <code>activity3.c</code> in the folder for this tutorial.
+Copy the code you wrote into the markdown file when you're done.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_char</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter (r)ock, (p)aper or (s)cissors: &quot;</span>);
+    <span class="hljs-type">char</span> choice = read_char();
+
+    <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;r&#x27;</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose rock\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;p&#x27;</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose paper\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;s&#x27;</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose scissors\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> repeat if choice was neither &#x27;r&#x27;, &#x27;p&#x27;, or &#x27;s&#x27;</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid choice, try again!\n&quot;</span>);
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-comment">//MY ANSWER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_char</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> choice;
+    <span class="hljs-keyword">do</span>
+    {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter (r)ock, (p)aper or (s)cissors: &quot;</span>);
+        <span class="hljs-type">char</span> choice = read_char();
+    
+        <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;r&#x27;</span>) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose rock\n&quot;</span>);
+    }   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;p&#x27;</span>) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose paper\n&quot;</span>);
+    }   <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;s&#x27;</span>) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You chose scissors\n&quot;</span>);
+    }   <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid choice, try again!\n&quot;</span>);
+    }
+    
+    }   <span class="hljs-keyword">while</span> (choice != <span class="hljs-string">&#x27;r&#x27;</span> &amp;&amp; choice != <span class="hljs-string">&#x27;p&#x27;</span> &amp;&amp; choice != <span class="hljs-string">&#x27;s&#x27;</span>);
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="loops-and-flowcharts">Loops and flowcharts</h2>
+<p>In the previous week, you've met flowcharts in the context of conditional (<code>if</code>) statements.
+Flowcharts can contain loops as well, which illustrates that a certain part is repeated until a certain condition is met.
+This naturally maps to the <code>while</code> loop in C.</p>
+<h3 id="activity-4---implement-a-program-based-on-a-flowchart">Activity 4 - Implement a program based on a flowchart</h3>
+<p>The flowchart below describes a program that generates a number between 1 and 100, and then lets the user guess the number, informing the user whether the guess was too high, too low, or correct.</p>
+<p>Implement this program in C - a starting point is already provided for you.
+Store the program in a file called <code>activity4.c</code> in the folder for this tutorial.
+Copy the code you wrote into the markdown file when you're done.</p>
+<p><img src="file:///e:\Programming1\week3\tutorial3.1-flowchart.png" alt="Flowchart"></p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int, random_int</span></span>
+
+<span class="hljs-comment">// program to play a number-guessing game, based on the given flowchart</span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> secret = random_int(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I&#x27;m thinking of a number between 1 and 100, can you guess it?\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Guess the number (1-100): &quot;</span>);
+    <span class="hljs-type">int</span> guess = read_int();
+    <span class="hljs-keyword">while</span> (guess != secret){
+        <span class="hljs-keyword">if</span>(guess &gt; secret){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;It&#x27;s too high!\n&quot;</span>);
+        }
+            <span class="hljs-keyword">else</span>{
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;It&#x27;s too low!\n&quot;</span>);
+            }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Guess the number (1-100): &quot;</span>);
+    guess = read_int();    
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Congratulation!&quot;</span>);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="counting-things-with-loops">Counting things with loops</h2>
+<p>Loops can be used to count things, by incrementing a counter variable each time a certain condition is met.
+Similarly, loops can be used to sum things, by adding a value to a sum variable each time a certain condition is met.
+Variables that are used to count or sum things are often called <em>accumulator variables</em>.</p>
+<p>Counting (or summing) is done by updating a variable that is outside the loop, from inside the loop.
+It is important to initialize the counter variable before the loop, otherwise the value of the counter variable will be undefined.</p>
+<p>The program listed below counts the number of times the user enters a non-zero number.
+As soon as the user enters a zero, the program stops counting and prints the total number of non-zero numbers entered.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number: &quot;</span>);
+    <span class="hljs-type">int</span> number = read_int();
+
+    <span class="hljs-keyword">while</span> (number != <span class="hljs-number">0</span>) {
+        count++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number: &quot;</span>);
+        number = read_int();
+    }
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered %d non-zero numbers\n&quot;</span>, count);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-5---print-the-average">Activity 5 - Print the average</h3>
+<p>Modify the program listed above so that it also prints the <em>average</em> of the non-zero numbers entered.
+In case the user enters a zero as the first number, the program should print &quot;No numbers entered&quot;, in order to avoid division by zero.
+Be aware that the average is a floating-point number, so you'll need to use a <code>float</code> (or <code>double</code>) variable to store the sum of the numbers.</p>
+<p>Store the modified program in a file called <code>activity5.c</code> in the folder for this tutorial.
+Copy the code you wrote into the code block listed below when you're done:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include your program by copying and pasting it into this code block.</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-type">float</span> sum = <span class="hljs-number">0.0</span>;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number: &quot;</span>);
+    <span class="hljs-type">int</span> number = read_int();
+
+    <span class="hljs-keyword">while</span> (number != <span class="hljs-number">0</span>) {
+        sum += number;
+        count++;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number: &quot;</span>);
+        number = read_int();
+    }
+
+    <span class="hljs-keyword">if</span> (count == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;No numbers entered\n&quot;</span>);  
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered %d non-zero numbers\n&quot;</span>, count);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Average of the numbers entered: %.2f\n&quot;</span>, sum / count);  
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="activity-6---average-of-at-most-10-numbers">Activity 6 - Average of at most 10 numbers</h3>
+<p>Copy the program of the last activity into a file called <code>activity6.c</code> in the folder for this tutorial.
+Next, modify the program in <code>activity6.c</code> so that it stops counting after the user has entered 10 non-zero numbers: after the user has either entered 10 non-zero numbers, or entered a zero, the program should print the total number of non-zero numbers entered, and the average of the non-zero numbers.</p>
+<p>Copy the code you wrote into the code block listed below when you're done:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Include your program by copying and pasting it into this code block.</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span>      <span class="hljs-comment">// for printf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span>  <span class="hljs-comment">// for read_int</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-type">float</span> sum = <span class="hljs-number">0.0</span>;
+
+   
+    <span class="hljs-keyword">while</span> (count &lt; <span class="hljs-number">10</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number: &quot;</span>);
+        <span class="hljs-type">int</span> number = read_int();
+   
+    <span class="hljs-keyword">if</span> (number == <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">break</span>;
+    }
+
+        sum += number;
+        count++;
+        }
+       
+    <span class="hljs-keyword">if</span> (count == <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;No numbers entered\n&quot;</span>);  
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You entered %d non-zero numbers\n&quot;</span>, count);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Average of the numbers entered: %.2f\n&quot;</span>, sum / count);  
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to demonstrate the following things:</p>
+<ul>
+<li>You can use a <code>while</code> loop to repeat code until a certain condition is met.</li>
+<li>You can use a <code>for</code> loop to repeat code a certain number of times.</li>
+<li>You have tested the programs you've written in this tutorial, and they work as expected.</li>
+<li>You have answered all questions in the markdown file, and have submitted it at the correct submit point in Brightspace</li>
+</ul>
+<p>Once you've successfully demonstrated the items listed above, your lab teacher will mark the tutorial as completed.
+You'll need to sign off this tutorial before you can continue with the next one.</p>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -fsanitize=address -fsanitize=undefined CMakeFiles/spanningtree.dir/main.cpp.o -o spanningtree 

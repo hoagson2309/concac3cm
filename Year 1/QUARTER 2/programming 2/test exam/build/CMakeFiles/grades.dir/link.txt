@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/grades.dir/grades.c.o CMakeFiles/grades.dir/students.c.o -o grades 

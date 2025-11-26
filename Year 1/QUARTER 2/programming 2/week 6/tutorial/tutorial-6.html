@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 6 - Tutorial&colon; Function pointers</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-6---tutorial-function-pointers">Week 6 - Tutorial: Function pointers</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 18/12/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>The <em>programming 2</em> module is all about pointers - you've worked with various types of pointers, such as pointers to variables, structures and arrays.
+This week it's time for another type of pointer which is quite different from the pointers you've seen so far: function pointers.
+Function pointers are exactly that - pointers to functions.
+Like regular pointers allow you to indirectly access a variable, function pointers allow you to indirectly call a function.
+As a result, you can write general functions that delegate certain tasks to other functions that are passed as arguments.
+A common use case for function pointers is to pass a comparison function to a sorting algorithm, so that the algorithm can sort any type of data.</p>
+<h3 id="code-organization">Code organization</h3>
+<p>The code for this tutorial is again organized as follows: the <code>CMakeLists.txt</code> file in the root of the archive is used to build all the programs in the tutorial.
+It builds a separate executable for each activity, and the source code for each activity is in a separate <code>.c</code> file.</p>
+<p>If you did not install <code>CMake</code> and a working compiler on Windows, then make sure to open VS Code from the WSL terminal by typing <code>code .</code> in the directory that contains the main <code>CMakeLists.txt</code> file.
+Use the CMake tab (listed on the left, along with other tabs for &quot;Explorer&quot;, &quot;Extensions&quot;, etc.) in VS Code to configure, build, run and debug the different targets in the project.</p>
+<h2 id="calling-a-function-through-a-function-pointer">Calling a function through a function pointer</h2>
+<p>The declaration of a pointer variable needs some getting used to.
+In C, a function's prototype can be specified by only specifying its return value, name, and parameter types - parameter names are not necessary:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)</span>;
+</code></pre>
+<p>Now, to declare a pointer to a function with the same prototype, you need to put the <code>*</code> next to the function name, and enclose the function name in parentheses (because otherwise we would simply define a prototype for a function that returns a pointer to an <code>int</code>):</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> (*pointer)(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>);
+</code></pre>
+<p>This is in fact declaring a pointer to a function that returns an <code>int</code> and takes two <code>int</code> arguments.
+Because this variable declaration looks so much different from a regular pointer declaration, you may wonder what the name of the variable is that was just declared.
+The name of the variable is <code>pointer</code> - it's &quot;hidden&quot; in the parentheses, and it thus does not appear on the rightmost side of the declaration like &quot;regular&quot; variables do.</p>
+<p>Now that you have declared a function pointer, you can let it store the address of a function that has the same prototype.
+For example, to let it store the address of the <code>add</code> function, you can write:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> (*pointer)(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>) = add;
+</code></pre>
+<p>To call the function through the function pointer, you can use the same syntax as you would use to call the function directly:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> result = pointer(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>); <span class="hljs-comment">// will give the same result as add(3, 4)</span>
+</code></pre>
+<h3 id="activity-1---function-pointers">Activity 1 - Function pointers</h3>
+<p>The program in <code>activity1.c</code> contains several functions that take two floating point numbers as arguments and return another floating point number.
+There is a function <code>read_choice</code> that asks the user which function to call (the user can choose between <code>add</code>, <code>subtract</code>, <code>multiply</code>, and <code>divide</code>).
+The function returns a function pointer, though the return type may not be immediately clear to you.</p>
+<p>The function is not called from the <code>main</code> function yet, so there's some work to do.</p>
+<p>Your task is to create a variable in the <code>main</code> function to hold the result of the <code>read_choice</code> function, check whether its value is not <code>NULL</code>, and call the function through the function pointer that is returned by the <code>read_choice</code> function.
+If the function pointer is not <code>NULL</code>, you should keep on asking the user (without modifying the <code>read_choice</code> function) for a choice until the user makes a valid choice.</p>
+<p>When you're done, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the contents of activity1.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">float</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">float</span> a, <span class="hljs-type">float</span> b)</span> { <span class="hljs-keyword">return</span> a + b; }
+<span class="hljs-type">float</span> <span class="hljs-title function_">multiply</span><span class="hljs-params">(<span class="hljs-type">float</span> a, <span class="hljs-type">float</span> b)</span> { <span class="hljs-keyword">return</span> a * b; }
+<span class="hljs-type">float</span> <span class="hljs-title function_">subtract</span><span class="hljs-params">(<span class="hljs-type">float</span> a, <span class="hljs-type">float</span> b)</span> { <span class="hljs-keyword">return</span> a - b; }
+<span class="hljs-type">float</span> <span class="hljs-title function_">divide</span><span class="hljs-params">(<span class="hljs-type">float</span> a, <span class="hljs-type">float</span> b)</span> { <span class="hljs-keyword">return</span> a / b; }
+
+<span class="hljs-comment">/// @brief Reads a character from the user and returns the matching function through a pointer</span>
+<span class="hljs-comment">/// @return A function pointer that points to the function that corresponds to the user&#x27;s choice, or NULL</span>
+<span class="hljs-type">float</span> (*read_choice(<span class="hljs-type">void</span>))(<span class="hljs-type">float</span>, <span class="hljs-type">float</span>);
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">float</span> a, b;
+    <span class="hljs-type">char</span> trailing;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter two floating-point numbers: &quot;</span>);
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%f %f %c&quot;</span>, &amp;a, &amp;b, &amp;trailing) != <span class="hljs-number">2</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid input. Please try again.\n&quot;</span>);
+        <span class="hljs-keyword">while</span> (getchar() != <span class="hljs-string">&#x27;\n&#x27;</span>);  <span class="hljs-comment">// Process input until the rest of the line</span>
+    }
+    <span class="hljs-keyword">while</span> (getchar() != <span class="hljs-string">&#x27;\n&#x27;</span>);  <span class="hljs-comment">// Process input until the end of the line</span>
+
+    
+    <span class="hljs-type">float</span> (*operation)(<span class="hljs-type">float</span>, <span class="hljs-type">float</span>) = <span class="hljs-literal">NULL</span>;
+    
+    <span class="hljs-keyword">while</span> (operation == <span class="hljs-literal">NULL</span>){
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> store the result of read_choice in a function pointer.</span>
+        operation = read_choice();
+        <span class="hljs-comment">// If the function returns NULL, keep on asking until the user made a valid choice.</span>
+        <span class="hljs-keyword">if</span>(operation == <span class="hljs-literal">NULL</span>){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid choice. Please try again.\n&quot;</span>);
+        }
+    }
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> call the function returned by read_choice, passing a and b as arguments.</span>
+    <span class="hljs-type">float</span> result = operation(a, b);
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> print the result of the operation chosen by the user</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The result is: %f\n&quot;</span>, result);
+}
+
+<span class="hljs-type">float</span> (*read_choice(<span class="hljs-type">void</span>))(<span class="hljs-type">float</span>, <span class="hljs-type">float</span>) {
+    <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> you&#x27;re not allowed to change this function!</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the operation (+, -, *, /): &quot;</span>);
+    <span class="hljs-type">char</span> choice = read_char();
+    <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;+&#x27;</span>) <span class="hljs-keyword">return</span> add;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;-&#x27;</span>) <span class="hljs-keyword">return</span> subtract;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;*&#x27;</span>) <span class="hljs-keyword">return</span> multiply;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (choice == <span class="hljs-string">&#x27;/&#x27;</span>) <span class="hljs-keyword">return</span> divide;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+}
+
+</code></pre>
+<h2 id="using-typedef-to-simplify-function-pointer-declarations">Using <code>typedef</code> to simplify function pointer declarations</h2>
+<p>The syntax for declaring a function pointer can be quite confusing, and indeed, it is not very readable.
+Fortunately, you can use <code>typedef</code> to simplify the declaration of function pointers.
+Looking back at the example above where we declared a function pointer <code>pointer</code> that points to a function that returns an <code>int</code> and takes two <code>int</code> arguments, you can simplify the declaration as follows:</p>
+<pre><code class="language-c"><span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> <span class="hljs-title function_">function_pointer</span><span class="hljs-params">(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>)</span>;
+</code></pre>
+<p>Now, this may look like a function prototype, except for the fact that the <code>typedef</code> keyword is used.
+Because of this <code>typedef</code>, you are actually creating an alias for a function pointer type that can &quot;point to&quot; functions that return an <code>int</code> and take two <code>int</code> arguments:</p>
+<pre><code class="language-c">function_pointer *pointer = add;
+</code></pre>
+<h3 id="activity-2---simplifying-function-pointer-declarations">Activity 2 - Simplifying function pointer declarations</h3>
+<p>The program in <code>activity2.c</code> contains a few functions that take functions as arguments, plus a <code>main</code> function that calls these functions.
+Rewrite every function pointer declaration in the program to a more readable form by introducing a <code>typedef</code>.</p>
+<p>When you're done, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the contents of activity2.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+
+<span class="hljs-comment">/// @brief Applies a function to (the address of) each element of an array.</span>
+<span class="hljs-comment">/// @param array The array to apply the function to.</span>
+<span class="hljs-comment">/// @param size The size of the array</span>
+<span class="hljs-comment">/// @param function The function to apply to each element of the array.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(<span class="hljs-type">int</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">size_t</span> size, <span class="hljs-type">void</span> (*function)(<span class="hljs-type">int</span> *))</span>;
+
+<span class="hljs-comment">/// @brief Checks if a string contains only characters that satisfy a condition.</span>
+<span class="hljs-comment">/// @param string The string to check.</span>
+<span class="hljs-comment">/// @param function The function that checks if a character satisfies a condition.</span>
+<span class="hljs-comment">/// @return true if all characters in the string satisfy the condition, and false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">all</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>, <span class="hljs-type">bool</span> (*function)(<span class="hljs-type">char</span>))</span>;
+
+<span class="hljs-comment">// some functions that could be passed to the &quot;apply&quot; function</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">times_two</span><span class="hljs-params">(<span class="hljs-type">int</span> *number)</span> { *number *= <span class="hljs-number">2</span>; }
+<span class="hljs-type">void</span> <span class="hljs-title function_">plus_one</span><span class="hljs-params">(<span class="hljs-type">int</span> *number)</span> { *number += <span class="hljs-number">1</span>; }
+
+<span class="hljs-comment">// some functions that could be passed to the &quot;all&quot; function</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_digit</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">isdigit</span>(c); }
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_vowel</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">strchr</span>(<span class="hljs-string">&quot;aeiouAEIOU&quot;</span>, c) != <span class="hljs-literal">NULL</span>; }
+
+<span class="hljs-comment">//typedef for function pointers</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-title function_">void</span> <span class="hljs-params">(*int_function)</span><span class="hljs-params">(<span class="hljs-type">int</span> *)</span>; <span class="hljs-comment">//if typedef void int_function(int *); =&gt; int_function *pointer = some_function;</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-title function_">bool</span> <span class="hljs-params">(*char_function)</span><span class="hljs-params">(<span class="hljs-type">char</span>)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> introduce two `typedef`s to simplify the function pointers</span>
+    
+    <span class="hljs-comment">// function pointers that can be passed to the &quot;all&quot; function</span>
+    char_function vowel_checker = is_vowel;
+    char_function digit_checker = is_digit;
+
+    <span class="hljs-comment">// function pointers that can be passed to the &quot;apply&quot; function</span>
+    int_function multiplier = times_two;
+    int_function adder = plus_one;
+
+    <span class="hljs-comment">// array of integers</span>
+    <span class="hljs-type">int</span> numbers[] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+
+    <span class="hljs-comment">// array of strings</span>
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *strings[] = {<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>, <span class="hljs-string">&quot;123&quot;</span>, <span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;AEIOU&quot;</span>};
+
+    <span class="hljs-comment">// apply the multiplier function to each element of the &quot;numbers&quot; array</span>
+    apply(numbers, <span class="hljs-keyword">sizeof</span>(numbers) / <span class="hljs-keyword">sizeof</span>(numbers[<span class="hljs-number">0</span>]), multiplier);
+
+    <span class="hljs-comment">// apply the adder function to each element of the &quot;numbers&quot; array</span>
+    apply(numbers, <span class="hljs-keyword">sizeof</span>(numbers) / <span class="hljs-keyword">sizeof</span>(numbers[<span class="hljs-number">0</span>]), adder);
+
+    <span class="hljs-comment">// go over the strings and run the &quot;all&quot; function on each of them</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">sizeof</span>(strings) / <span class="hljs-keyword">sizeof</span>(strings[<span class="hljs-number">0</span>]); i++) {
+        <span class="hljs-keyword">if</span> (all(strings[i], vowel_checker)) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;All characters in \&quot;%s\&quot; are vowels.\n&quot;</span>, strings[i]);
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (all(strings[i], digit_checker)) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;All characters in \&quot;%s\&quot; are digits.\n&quot;</span>, strings[i]);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The characters in \&quot;%s\&quot; are neither all vowels nor all digits.\n&quot;</span>, strings[i]);
+        }
+    }
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(<span class="hljs-type">int</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">size_t</span> size, <span class="hljs-type">void</span> (*function)(<span class="hljs-type">int</span> *))</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+        function(&amp;<span class="hljs-built_in">array</span>[i]);
+    }
+}   
+
+<span class="hljs-comment">/// @brief Checks if a string contains only characters that satisfy a condition.</span>
+<span class="hljs-comment">/// @param string The string to check.</span>
+<span class="hljs-comment">/// @param function The function that checks if a character satisfies a condition.</span>
+<span class="hljs-comment">/// @return true if all characters in the string satisfy the condition, and false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">all</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>, <span class="hljs-type">bool</span> (*function)(<span class="hljs-type">char</span>))</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; <span class="hljs-built_in">string</span>[i] != <span class="hljs-string">&#x27;\0&#x27;</span>; i++) {
+        <span class="hljs-keyword">if</span> (!function(<span class="hljs-built_in">string</span>[i])) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// if the function returns false, return false</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;    <span class="hljs-comment">// if the function never returns false, return true</span>
+}
+
+</code></pre>
+<h2 id="passing-functions-to-other-functions">Passing functions to other functions</h2>
+<p>Function pointers are often used to pass functions to other functions.
+This allows functions to do their work in a general way, and delegate certain tasks to other functions that are passed as arguments.
+For example, suppose we have a function <code>search</code> that searches an array for a certain value and returns its position if it was found, or <code>-1</code> if it was not found.:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">search</span><span class="hljs-params">(<span class="hljs-type">int</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">int</span> size, <span class="hljs-type">int</span> value)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">array</span>[i] == value) <span class="hljs-keyword">return</span> i;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+</code></pre>
+<p>This function is specialized to search for an exact match.
+However, we could make this function more general by letting it accept a function that &quot;tells&quot; whether the target value was found:</p>
+<pre><code class="language-c"><span class="hljs-keyword">typedef</span> <span class="hljs-type">bool</span> <span class="hljs-title function_">found_function</span><span class="hljs-params">(<span class="hljs-type">int</span>)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">search</span><span class="hljs-params">(<span class="hljs-type">int</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">int</span> size, found_function *found)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+        <span class="hljs-keyword">if</span> (found(<span class="hljs-built_in">array</span>[i])) <span class="hljs-keyword">return</span> i;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+</code></pre>
+<p>We could call this function with either a function that checks for an exact match, or a function that checks for a match within a certain range, etc.</p>
+<h3 id="activity-3---using-a-generic-character-counting-function">Activity 3 - Using a generic character counting function</h3>
+<p>In <code>activity3.c</code>, you will find a program that reads a line of text from the console (standard input).
+The file contains a function <code>count_characters</code> that counts the number of characters in a string that satisfy a certain condition.
+The function takes a string and a function pointer as arguments, and returns the number of characters that satisfy the condition.</p>
+<p>The program uses the <code>count_characters</code> function to count the number of lowercase characters in the string, but of course it could do more!</p>
+<p>Write <strong>two</strong> functions that can be passed to <code>count_characters</code>:</p>
+<ul>
+<li>A function that causes <code>count_characters</code> to count the number of (lowercase or uppercase) vowels in a string</li>
+<li>A function that causes <code>count_characters</code> to count the number of consonants in a string.</li>
+</ul>
+<p>Call the <code>count_characters</code> function two more times, passing the two functions that you wrote as arguments, so that the program prints the number of vowels in the string, as well as the number of consonants.</p>
+<p>If everything works as expected, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the contents of activity3.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctype.h&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-title function_">bool</span> <span class="hljs-params">(*character_checker_fun)</span><span class="hljs-params">(<span class="hljs-type">char</span>)</span>;
+
+<span class="hljs-comment">/// @brief Counts the number of characters in a string that satisfy a condition.</span>
+<span class="hljs-comment">/// @param string The string to count the characters in.</span>
+<span class="hljs-comment">/// @param checker Function that checks if a character satisfies a condition.</span>
+<span class="hljs-comment">/// @return The number of characters in the string that satisfy the condition.</span>
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">count_characters</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>, character_checker_fun checker)</span>;
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_lower</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">islower</span>(c);
+}
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_vowel</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span>{
+    <span class="hljs-type">char</span> lower = <span class="hljs-built_in">tolower</span>(c);
+    <span class="hljs-keyword">return</span> lower == <span class="hljs-string">&#x27;a&#x27;</span> || lower == <span class="hljs-string">&#x27;e&#x27;</span> || lower == <span class="hljs-string">&#x27;i&#x27;</span> || lower == <span class="hljs-string">&#x27;o&#x27;</span> || lower == <span class="hljs-string">&#x27;u&#x27;</span>;
+}
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">is_consonant</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span>{
+    <span class="hljs-type">char</span> lower = <span class="hljs-built_in">tolower</span>(c);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">isalpha</span>(lower) &amp;&amp; !is_vowel(lower);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> line[<span class="hljs-number">100</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a string: &quot;</span>);
+    read_string(line, <span class="hljs-keyword">sizeof</span>(line));
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Number of lowercase characters: %zu\n&quot;</span>, count_characters(line, is_lower));
+
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> use the count_characters function to count the number of vowels in the string</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Number of vowels: %zu\n&quot;</span>, count_characters(line, is_vowel));
+
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> use the count_characters function to count the number of consonants in the string</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Number of consonants: %zu\n&quot;</span>, count_characters(line, is_consonant));
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">count_characters</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-built_in">string</span>, character_checker_fun checker)</span> {
+    <span class="hljs-type">size_t</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *c = <span class="hljs-built_in">string</span>; *c != <span class="hljs-string">&#x27;\0&#x27;</span>; c++) {
+        <span class="hljs-keyword">if</span> (checker(*c)) count++;
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+
+</code></pre>
+<h2 id="working-with-any-kind-of-data">Working with any kind of data</h2>
+<p>Although the function pointers you've used in the previous activities are quite powerful, they are limited to only work with specific <em>typees</em> of data.
+For example, the <code>search</code> function in the previous activity only works with integers.
+But the concept of <em>searching</em> goes beyond integers - you could search for a certain string in an array of strings, or search for a certain structure in an array of structures.</p>
+<p>To make a function that works with (for example) arrays more generic, we need to abstract from the type of data that is stored in the array.
+If we want the function to work with any kind of data, then it basically needs to work with the plain bytes stored in memory.
+This is achieved by using <code>void</code> pointers: pointers that can point to any kind of data.
+In fact, a <code>void</code> pointer is nothing more than just a memory address - we can't dereference it directly, because the compiler doesn't know what kind of data it points to.</p>
+<p>For example, the following function checks if two values are equal, regardless of their type:</p>
+<pre><code class="language-c"><span class="hljs-type">bool</span> <span class="hljs-title function_">equal</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b, <span class="hljs-type">size_t</span> size)</span> {
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *pa = (<span class="hljs-type">const</span> <span class="hljs-type">char</span>*) a;
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *pb = (<span class="hljs-type">const</span> <span class="hljs-type">char</span>*) b;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+        <span class="hljs-keyword">if</span> (a[i] != b[i]) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</code></pre>
+<p>The function takes two <code>void</code> pointers and a size as arguments.
+It assumes that the two pointers point to two blocks of memory that are each <code>size</code> bytes long.
+This makes sense, because if the function is used to compare two values of the same type, then the size of the two blocks of memory should be the same.
+The function then proceeds to compare the two blocks of memory byte by byte - it casts the pointers to a specific (char) pointer type, so that it can access the individual bytes.</p>
+<h3 id="activity-4---using-generic-functions">Activity 4 - Using generic functions</h3>
+<p>The program partially given in <code>activity4.c</code> declares several variables of various types.
+It then calls the <code>swap</code> function to swap the values of the two integers.
+The swap function can't be used to swap the values of the other variables, because it only works with integers.</p>
+<p>Change the <code>swap</code> function so that it works with any kind of data.
+To do this, it will have to accept two <code>void</code> pointers, plus a size as arguments - just like the <code>equal</code> function above.
+Next, the function should swap the contents of the two blocks of memory that the pointers point to, byte by byte.</p>
+<p>After you've changed the <code>swap</code> function, call it for the other variables in the program so that all variables of the same type are swapped.
+If everything works as expected, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the contents of activity4.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> make this function more generic so that it works with any type</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">void</span> *a, <span class="hljs-type">void</span> *b, <span class="hljs-type">size_t</span> size)</span> {
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement this function</span>
+    <span class="hljs-type">char</span> temp;
+    <span class="hljs-type">char</span> *pa = (<span class="hljs-type">char</span> *)a;
+    <span class="hljs-type">char</span> *pb = (<span class="hljs-type">char</span> *)b;
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){
+        temp = pa[i];
+        pa[i]= pb[i];
+        pb[i] = temp;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> int1 = <span class="hljs-number">5</span>, int2 = <span class="hljs-number">10</span>;
+    <span class="hljs-type">double</span> double1 = <span class="hljs-number">3.14</span>, double2 = <span class="hljs-number">6.28</span>;
+    <span class="hljs-type">char</span> char1 = <span class="hljs-string">&#x27;a&#x27;</span>, char2 = <span class="hljs-string">&#x27;b&#x27;</span>;
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *string1 = <span class="hljs-string">&quot;hello&quot;</span>, *string2 = <span class="hljs-string">&quot;world&quot;</span>;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Before swap:\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  int1 = %d, int2 = %d\n&quot;</span>, int1, int2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  double1 = %f, double2 = %f\n&quot;</span>, double1, double2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  char1 = %c, char2 = %c\n&quot;</span>, char1, char2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  string1 = \&quot;%s\&quot;, string2 = \&quot;%s\&quot;\n&quot;</span>, string1, string2);
+
+    swap(&amp;int1, &amp;int2, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>));
+    swap(&amp;double1, &amp;double2, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">double</span>));
+    swap(&amp;char1, &amp;char2, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span>)); <span class="hljs-comment">//sizeof(char) is for swapping single characters(1 byte). </span>
+    swap(&amp;string1, &amp;string2, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span> *)); <span class="hljs-comment">//sizeof(char *) is for swapping pointers to characters (or strings in this case)(4 bytes, 8 bytes). </span>
+
+    
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;After swap:\n&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  int1 = %d, int2 = %d\n&quot;</span>, int1, int2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  double1 = %f, double2 = %f\n&quot;</span>, double1, double2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  char1 = %c, char2 = %c\n&quot;</span>, char1, char2);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;  string1 = \&quot;%s\&quot;, string2 = \&quot;%s\&quot;\n&quot;</span>, string1, string2);
+}
+
+</code></pre>
+<h2 id="combining-function-pointers-with-void-pointers">Combining function pointers with void pointers</h2>
+<p>If you think we've reached the limits of what we can do with function pointers and <code>void</code> pointers, then think again!
+We can take things one step further by combining the two.
+This means we can write functions that work with any kind of data, and that can be customized by passing a function pointer as an argument.
+For example, we could write a function that sorts an array of any kind of data, and that uses a comparison function to determine the order of the elements.</p>
+<p>But this function already exists in the C standard library: <code>qsort</code>.
+The <code>qsort</code> function is a generic sorting function that can sort arrays of any kind of data.
+To do so, it needs a comparison function that tells it how to compare two elements.
+The comparison function should return a negative value if the first element is smaller than the second, a positive value if the first element is larger than the second, and zero if the two elements are equal.</p>
+<p>The prototype of the comparison function is as follows:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span>;
+</code></pre>
+<p>And the <code>qsort</code> function is declared as follows:</p>
+<pre><code class="language-c"><span class="hljs-keyword">typedef</span> <span class="hljs-title function_">compare_function</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *)</span>;
+<span class="hljs-type">void</span> <span class="hljs-title function_">qsort</span><span class="hljs-params">(<span class="hljs-type">void</span> *base, <span class="hljs-type">size_t</span> nmemb, <span class="hljs-type">size_t</span> size, compare_function *compare)</span>;
+</code></pre>
+<p>The last parameter is the comparison function that is needed to compare two elements and find out which of the two should come first.
+The <code>base</code> parameter is a pointer to the first element of the array, <code>nmemb</code> is the number of elements in the array, and <code>size</code> is the size of each element in the array.
+So if you would like to sort an array of 10 integers, then <code>base</code> should point to the first integer, <code>nmemb</code> should be 10, and <code>size</code> should be <code>sizeof(int)</code>.</p>
+<p>The comparison function that you pass to <code>qsort</code> is called multiple times by <code>qsort</code> to compare different pairs of elements.
+Two elements are passed by (<code>const</code>) <em>pointer</em> to the comparison function, so that the comparison function can access the elements.
+This means that in the case where you sort an array of integers, the comparison function will receive two <code>int</code> pointers.
+Through typecasting, the comparison function can access the actual values of the elements.</p>
+<h3 id="activity-5---sorting-an-array-of-doubles">Activity 5 - Sorting an array of doubles</h3>
+<p>The program in <code>activity5.c</code> asks the user how many random floating point numbers to generate, which it then generates, stores into an array, and prints to the console.</p>
+<p>Use the <code>qsort</code> function to <em>sort</em> the numbers from small to large (i.e. in ascending order).
+This means that you will have to write a comparison function that can be passed to <code>qsort</code> as the last argument, and compares any two <code>double</code> values.
+The function will receive two addresses of <code>double</code> values, but passed as <code>void</code> pointers, so you will have to typecast these pointers to the correct type of pointer.</p>
+<p>When you're done - check that the numbers are indeed sorted in ascending order - paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the contents of activity5.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span> <span class="hljs-comment">// for qsort</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief A typedef for the comparison function used in qsort.</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare_function</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *)</span>;
+
+<span class="hljs-comment">/// @brief Prints an array of floats, comma-separated and on a single line.</span>
+<span class="hljs-comment">/// @param array Pointer to the array of floats.</span>
+<span class="hljs-comment">/// @param size The size of the array.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_floats</span><span class="hljs-params">(<span class="hljs-type">float</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">size_t</span> size)</span>;
+
+<span class="hljs-comment">/// @brief Comparison function for qsort to sort floats in ascending order.</span>
+<span class="hljs-comment">/// @param a Pointer to the first element.</span>
+<span class="hljs-comment">/// @param b Pointer to the second element.</span>
+<span class="hljs-comment">/// @return A negative value if a &lt; b, positive value if a &gt; b, 0 if a == b.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">compare_floats</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;How many numbers to generate? &quot;</span> );
+    <span class="hljs-type">int</span> howmany = read_int();
+    <span class="hljs-keyword">while</span> (howmany &lt; <span class="hljs-number">1</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid input. Please enter a positive number: &quot;</span>);
+        howmany = read_int();
+    }
+
+    <span class="hljs-comment">// allocate memory for the numbers</span>
+    <span class="hljs-type">float</span> *numbers = (<span class="hljs-type">float</span>*) <span class="hljs-built_in">malloc</span>(howmany * <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>));
+    <span class="hljs-keyword">if</span> (numbers == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Memory allocation failed.\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-comment">// generate random numbers</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; howmany; i++) numbers[i] = random_float(<span class="hljs-number">0.0f</span>, <span class="hljs-number">100.0f</span>);
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> sort the numbers using qsort</span>
+    qsort(numbers, howmany, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">float</span>), (compare_function *)compare_floats);
+
+    <span class="hljs-comment">// print the sorted numbers</span>
+    print_floats(numbers, howmany);
+
+    <span class="hljs-built_in">free</span>(numbers);  <span class="hljs-comment">// deallocate</span>
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_floats</span><span class="hljs-params">(<span class="hljs-type">float</span> *<span class="hljs-built_in">array</span>, <span class="hljs-type">size_t</span> size)</span> {
+    <span class="hljs-keyword">if</span> (size &gt; <span class="hljs-number">0</span>) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.2f&quot;</span>, <span class="hljs-built_in">array</span>[<span class="hljs-number">0</span>]);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">1</span>; i &lt; size; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, %.2f&quot;</span>, <span class="hljs-built_in">array</span>[i]);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">compare_floats</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span>{
+    <span class="hljs-comment">//cast void pointers to float pointers </span>
+    <span class="hljs-type">const</span> <span class="hljs-type">float</span> *fa = (<span class="hljs-type">const</span> <span class="hljs-type">float</span> *)a;
+    <span class="hljs-type">const</span> <span class="hljs-type">float</span> *fb = (<span class="hljs-type">const</span> <span class="hljs-type">float</span> *)b;
+
+    <span class="hljs-comment">//return comparison result</span>
+    <span class="hljs-keyword">if</span>(*fa &lt; *fb){
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(*fa &gt; *fb){
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    } <span class="hljs-keyword">else</span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+}
+
+</code></pre>
+<h3 id="activity-6---sorting-an-array-of-strings">Activity 6 - Sorting an array of strings</h3>
+<p>Because <code>qsort</code> can sort arrays of any kind of data, it never hurts to practice a little more.
+This time, you will sort an array of strings by their length.</p>
+<p>The program in <code>activity6.c</code> declares an array of (at most 100) strings, and reads strings from a file into the array.
+It then prints all strings to the console.</p>
+<p>Use the <code>qsort</code> function to sort the strings by their length so that the shortest string comes first.
+This again means that you will have to write another comparison function that receives two <code>void</code> pointers - the addresses of the two strings.
+Be aware that when you typecast these pointers, you cast them to the correct type of pointer!</p>
+<p>Sort the strings before they are printed to the console, and make sure that the strings are indeed sorted by length.</p>
+<p>When you're done, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste the contents of activity6.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-comment">/// @brief Reads strings from a file into an array of strings.</span>
+<span class="hljs-comment">/// @param file The file to read from (must be open for reading).</span>
+<span class="hljs-comment">/// @param strings The array of strings to read into.</span>
+<span class="hljs-comment">/// @param maxsize The maximum number of strings to read.</span>
+<span class="hljs-comment">/// @return The number of strings actually read.</span>
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">read_words</span><span class="hljs-params">(FILE *file, <span class="hljs-type">char</span> *strings[], <span class="hljs-type">size_t</span> maxsize)</span>;
+
+<span class="hljs-comment">/// @b  rief Prints an array of strings, breaking lines to keep the line length below a given limit.</span>
+<span class="hljs-comment">/// @param strings The array of strings to print.</span>
+<span class="hljs-comment">/// @param count The number of strings in the array.</span>
+<span class="hljs-comment">/// @param linelength The maximum line length.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_strings</span><span class="hljs-params">(<span class="hljs-type">char</span> *strings[], <span class="hljs-type">size_t</span> count, <span class="hljs-type">size_t</span> linelength)</span>;
+
+<span class="hljs-comment">/// @brief Comparison function for qsort to sort strings by length.</span>
+<span class="hljs-comment">/// @param a Pointer to the first string.</span>
+<span class="hljs-comment">/// @param b Pointer to the second string.</span>
+<span class="hljs-comment">/// @return A negative value if the first string is shorter, a positive value if it is longer, or 0 if they are equal in length.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">compare_string_lengths</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span>;
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> *strings[<span class="hljs-number">100</span>] = {<span class="hljs-literal">NULL</span>}; <span class="hljs-comment">// array of strings, all initialized to NULL</span>
+    FILE *file = fopen(<span class="hljs-string">&quot;words.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Could not open file.\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-type">size_t</span> count = read_words(file, strings, <span class="hljs-keyword">sizeof</span>(strings) / <span class="hljs-keyword">sizeof</span>(strings[<span class="hljs-number">0</span>]));
+    fclose(file);
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> sort the strings using qsort, so that the shortest strings come first</span>
+    qsort(strings, count, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">char</span> *), compare_string_lengths);
+    
+    print_strings(strings, count, <span class="hljs-number">80</span>);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        <span class="hljs-built_in">free</span>(strings[i]);
+    }
+}
+
+<span class="hljs-type">size_t</span> <span class="hljs-title function_">read_words</span><span class="hljs-params">(FILE *file, <span class="hljs-type">char</span> *strings[], <span class="hljs-type">size_t</span> maxsize)</span> {
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">200</span>];   <span class="hljs-comment">// buffer for reading strings</span>
+    <span class="hljs-type">size_t</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">fscanf</span>(file, <span class="hljs-string">&quot;%99s&quot;</span>, buffer) == <span class="hljs-number">1</span> &amp;&amp; count &lt; maxsize) {
+        strings[count] = (<span class="hljs-type">char</span>*) <span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">strlen</span>(buffer) + <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">if</span> (strings[count] == <span class="hljs-literal">NULL</span>) {
+            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Memory allocation failed.\n&quot;</span>);
+            <span class="hljs-keyword">return</span> count;
+        }
+        <span class="hljs-built_in">strcpy</span>(strings[count], buffer); <span class="hljs-comment">// copy the string to the allocated memory</span>
+        count++;
+    }
+    <span class="hljs-keyword">return</span> count;
+}
+
+<span class="hljs-comment">/// @brief Prints an array of strings, breaking lines to keep the line length below a given limit.</span>
+<span class="hljs-comment">/// @param strings The array of strings to print.</span>
+<span class="hljs-comment">/// @param count The number of strings in the array.</span>
+<span class="hljs-comment">/// @param linelength The maximum line length.</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_strings</span><span class="hljs-params">(<span class="hljs-type">char</span> *strings[], <span class="hljs-type">size_t</span> count, <span class="hljs-type">size_t</span> linelength)</span> {
+    <span class="hljs-type">size_t</span> end = <span class="hljs-number">0</span>;
+    <span class="hljs-type">bool</span> first = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) {
+        end += <span class="hljs-built_in">strlen</span>(strings[i]) + <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span> (end &gt; linelength) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+            end = <span class="hljs-built_in">strlen</span>(strings[i]) + <span class="hljs-number">2</span>;
+            first = <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (!first) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;, &quot;</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, strings[i]);
+        first = <span class="hljs-literal">false</span>;
+    }
+}
+
+
+<span class="hljs-comment">/// @brief Comparison function for qsort to sort strings by length.</span>
+<span class="hljs-comment">/// @param a Pointer to the first string.</span>
+<span class="hljs-comment">/// @param b Pointer to the second string.</span>
+<span class="hljs-comment">/// @return A negative value if the first string is shorter, a positive value if it is longer, or 0 if they are equal in length.</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">compare_string_lengths</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *a, <span class="hljs-type">const</span> <span class="hljs-type">void</span> *b)</span> {
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-type">const</span> *str_a = (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-type">const</span> *)a;
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-type">const</span> *str_b = (<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-type">const</span> *)b;
+
+    <span class="hljs-type">size_t</span> len_a = <span class="hljs-built_in">strlen</span>(*str_a);
+    <span class="hljs-type">size_t</span> len_b = <span class="hljs-built_in">strlen</span>(*str_b);
+
+    <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)(len_a - len_b);
+}
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

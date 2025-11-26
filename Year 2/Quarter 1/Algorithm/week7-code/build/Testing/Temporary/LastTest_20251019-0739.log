@@ -1,0 +1,19 @@
+Start testing: Oct 19 10:00 CEST
+----------------------------------------------------------
+2/6 Testing: firedepartment_test
+2/6 Test: firedepartment_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/scripts/test.py" "firedepartment" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/2.firedepartment/tests/firedepartment_cases_new"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build/2.firedepartment
+"firedepartment_test" start time: Oct 19 10:00 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.89 sec
+----------------------------------------------------------
+Test Passed.
+"firedepartment_test" end time: Oct 19 10:00 CEST
+"firedepartment_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 19 10:00 CEST

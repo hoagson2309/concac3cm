@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - C&plus;&plus;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---c">Week 3 - C++</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 12/3/2025</p>
+<h1 id="labs">LABS</h1>
+<pre><code class="language-cpp"><span class="hljs-comment">//NUMBERS.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> INCLUDED_NUMBERS_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> INCLUDED_NUMBERS_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstddef&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+
+<span class="hljs-keyword">namespace</span> numeric
+{
+    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Numbers</span>
+    {
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-built_in">Numbers</span>();
+        ~<span class="hljs-built_in">Numbers</span>();
+
+        <span class="hljs-comment">// Only function prototypes go here. The implementations should be in numbers.cpp</span>
+
+        <span class="hljs-comment">// TODO 1: Implement swap member function</span>
+        <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(Numbers&amp; other)</span> <span class="hljs-keyword">noexcept</span></span>;
+
+        <span class="hljs-comment">// TODO 2: Implement the copy constructor:</span>
+        <span class="hljs-built_in">Numbers</span>(<span class="hljs-type">const</span> Numbers&amp; other);
+
+        <span class="hljs-comment">// TODO 3: Implement the copy assignment operator</span>
+        Numbers&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Numbers&amp; other);
+
+        <span class="hljs-comment">// TODO 4: Implement a clone function that makes a full copy of the object (yes it works like the copy constructor)</span>
+        <span class="hljs-function">Numbers <span class="hljs-title">clone</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+
+        <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+
+        <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push_back</span><span class="hljs-params">(<span class="hljs-type">double</span> value)</span></span>;
+        <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">pop_back</span><span class="hljs-params">()</span></span>;
+
+        <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">front</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+        <span class="hljs-function"><span class="hljs-type">double</span>&amp; <span class="hljs-title">front</span><span class="hljs-params">()</span></span>;
+
+        <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">back</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+        <span class="hljs-function"><span class="hljs-type">double</span>&amp; <span class="hljs-title">back</span><span class="hljs-params">()</span></span>;
+
+
+        <span class="hljs-function"><span class="hljs-type">double</span> * <span class="hljs-title">begin</span><span class="hljs-params">()</span></span>;
+        <span class="hljs-function"><span class="hljs-type">double</span> * <span class="hljs-title">end</span><span class="hljs-params">()</span></span>;
+
+        <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">double</span> * <span class="hljs-title">begin</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+        <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">double</span> * <span class="hljs-title">end</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+        
+        <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> index)</span> <span class="hljs-type">const</span></span>;
+        <span class="hljs-function"><span class="hljs-type">double</span>&amp; <span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> index)</span></span>;
+
+        <span class="hljs-type">double</span> <span class="hljs-keyword">operator</span>[](std::<span class="hljs-type">size_t</span> index) <span class="hljs-type">const</span>;
+        <span class="hljs-type">double</span>&amp; <span class="hljs-keyword">operator</span>[](std::<span class="hljs-type">size_t</span> index);
+
+        <span class="hljs-keyword">friend</span> std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; os, <span class="hljs-type">const</span> Numbers&amp; numbers);
+
+    <span class="hljs-keyword">private</span>:
+
+        <span class="hljs-type">double</span> * array_;
+        std::<span class="hljs-type">size_t</span> size_;
+        std::<span class="hljs-type">size_t</span> capacity_;
+    };
+
+    std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; os, <span class="hljs-type">const</span> Numbers&amp; numbers);
+}
+
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// INCLUDED_NUMBERS_H</span></span>
+
+<span class="hljs-comment">//NUMBERS.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;numbers.h&quot;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">namespace</span> numeric
+{
+    <span class="hljs-type">static</span> <span class="hljs-keyword">constexpr</span> std::<span class="hljs-type">size_t</span> INITIAL_CAPACITY = <span class="hljs-number">16</span>;
+
+    Numbers::<span class="hljs-built_in">Numbers</span>() : 
+        <span class="hljs-built_in">array_</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">double</span>[INITIAL_CAPACITY]{}), 
+        <span class="hljs-built_in">size_</span>(<span class="hljs-number">0</span>), 
+        <span class="hljs-built_in">capacity_</span>(INITIAL_CAPACITY)
+    {
+    }
+
+    Numbers::~<span class="hljs-built_in">Numbers</span>()
+    {
+        <span class="hljs-keyword">delete</span>[] array_;
+    }
+
+    <span class="hljs-comment">//copy constructor</span>
+    Numbers::<span class="hljs-built_in">Numbers</span>(<span class="hljs-type">const</span> Numbers&amp; other) : 
+        <span class="hljs-built_in">array_</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">double</span>[other.capacity_]), <span class="hljs-comment">//Allocate new memory for the array</span>
+        <span class="hljs-built_in">size_</span>(other.size_),                  <span class="hljs-comment">//Copy the size from the other object</span>
+        <span class="hljs-built_in">capacity_</span>(other.capacity_) {         <span class="hljs-comment">//Copy the capacity from the other object</span>
+            std::<span class="hljs-built_in">copy</span>(other.<span class="hljs-built_in">begin</span>(), other.<span class="hljs-built_in">end</span>(), array_);  <span class="hljs-comment">//Deep copy: Copy all elements from &#x27;other&#x27; to the new array</span>
+        }
+
+    <span class="hljs-comment">//copy assignment operator</span>
+    Numbers&amp; Numbers::<span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Numbers&amp; other){
+        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span> != &amp;other){         <span class="hljs-comment">//Check for self-assignment (e.g., numbers1 = numbers1) (Check if the object is being assigned to itself. This avoids unnecessary work and potential bugs.)</span>
+            Numbers <span class="hljs-built_in">temp</span>(other);    <span class="hljs-comment">//Create a temporary copy of &#x27;other&#x27; (uses the copy constructor)</span>
+            <span class="hljs-built_in">swap</span>(temp);             <span class="hljs-comment">//Swap the current object&#x27;s data with the temporary object</span>
+        }
+        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;               <span class="hljs-comment">//Return the current object to allow chaining (e.g., numbers1 = numbers2 = numbers3)</span>
+    }
+
+    <span class="hljs-comment">//swap function</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Numbers::swap</span><span class="hljs-params">(Numbers&amp; other)</span> <span class="hljs-keyword">noexcept</span></span>{ <span class="hljs-comment">//noexcept: Indicates that this function does not throw exceptions, making it safe to use in critical operations.</span>
+        std::<span class="hljs-built_in">swap</span>(array_, other.array_);    <span class="hljs-comment">//Swap the pointers to the dynamic arrays</span>
+        std::<span class="hljs-built_in">swap</span>(size_, other.size_);      <span class="hljs-comment">//swap sizes</span>
+        std::<span class="hljs-built_in">swap</span>(capacity_, other.capacity_);   <span class="hljs-comment">//swap capacities</span>
+    }
+
+    <span class="hljs-comment">//clone function</span>
+    <span class="hljs-function">Numbers <span class="hljs-title">Numbers::clone</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Numbers</span>(*<span class="hljs-keyword">this</span>); <span class="hljs-comment">// Use the copy constructor to create a new object that is a copy of the current object.</span>
+    }
+
+    <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">Numbers::size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> size_;
+    }
+
+<span class="hljs-comment">// Copy Constructor: Ensures a deep copy when a new object is created from an existing one.</span>
+<span class="hljs-comment">// Copy Assignment Operator: Ensures a deep copy when assigning one object to another.</span>
+<span class="hljs-comment">// Swap Function: Efficiently swaps the contents of two objects, used in the copy assignment operator for strong exception safety.</span>
+<span class="hljs-comment">// Clone Function: Provides an explicit way to create a copy of an object.</span>
+    
+
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Numbers::push_back</span><span class="hljs-params">(<span class="hljs-type">double</span> value)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (size_ == capacity_)
+        {
+            capacity_ *= <span class="hljs-number">2</span>;
+            <span class="hljs-type">double</span> * temp = <span class="hljs-keyword">new</span> <span class="hljs-type">double</span>[capacity_];
+            std::<span class="hljs-built_in">copy</span>(<span class="hljs-built_in">begin</span>(), <span class="hljs-built_in">end</span>(), temp);
+            <span class="hljs-keyword">delete</span>[] array_;
+            array_ = temp;
+        }
+        array_[size_++] = value;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Numbers::pop_back</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (size_ == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">out_of_range</span>(<span class="hljs-string">&quot;pop_back() called on empty Numbers object&quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> array_[--size_];
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Numbers::front</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (size_ == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">out_of_range</span>(<span class="hljs-string">&quot;front() called on empty Numbers object&quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> array_[<span class="hljs-number">0</span>];
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span>&amp; <span class="hljs-title">Numbers::front</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (size_ == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">out_of_range</span>(<span class="hljs-string">&quot;front() called on empty Numbers object&quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> array_[<span class="hljs-number">0</span>];
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Numbers::back</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (size_ == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">out_of_range</span>(<span class="hljs-string">&quot;back() called on empty Numbers object&quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> array_[size_ - <span class="hljs-number">1</span>];
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span>&amp; <span class="hljs-title">Numbers::back</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (size_ == <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">out_of_range</span>(<span class="hljs-string">&quot;back() called on empty Numbers object&quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> array_[size_ - <span class="hljs-number">1</span>];
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> * <span class="hljs-title">Numbers::begin</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> array_;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> * <span class="hljs-title">Numbers::end</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> array_ + size_;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">double</span> * <span class="hljs-title">Numbers::begin</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> array_;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">double</span> * <span class="hljs-title">Numbers::end</span><span class="hljs-params">()</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">return</span> array_ + size_;
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">Numbers::at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> index)</span> <span class="hljs-type">const</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (index &gt;= size_)
+        {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">out_of_range</span>(<span class="hljs-string">&quot;at() called with index out of range&quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> array_[index];
+    }
+
+    <span class="hljs-function"><span class="hljs-type">double</span>&amp; <span class="hljs-title">Numbers::at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> index)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (index &gt;= size_)
+        {
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">out_of_range</span>(<span class="hljs-string">&quot;at() called with index out of range&quot;</span>);
+        }
+        <span class="hljs-keyword">return</span> array_[index];
+    }
+
+    <span class="hljs-type">double</span> Numbers::<span class="hljs-keyword">operator</span>[](std::<span class="hljs-type">size_t</span> index) <span class="hljs-type">const</span>
+    {
+        <span class="hljs-keyword">return</span> array_[index];
+    }
+
+    <span class="hljs-type">double</span>&amp; Numbers::<span class="hljs-keyword">operator</span>[](std::<span class="hljs-type">size_t</span> index)
+    {
+        <span class="hljs-keyword">return</span> array_[index];
+    }
+
+    std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; os, <span class="hljs-type">const</span> Numbers&amp; numbers)
+    {
+        os &lt;&lt; <span class="hljs-string">&quot;Numbers {capacity: &quot;</span> &lt;&lt; numbers.capacity_ &lt;&lt; <span class="hljs-string">&quot;, size: &quot;</span> &lt;&lt; numbers.size_ &lt;&lt; <span class="hljs-string">&quot;}: &quot;</span>;
+        os &lt;&lt; <span class="hljs-string">&quot;[&quot;</span>;
+        <span class="hljs-keyword">if</span> (numbers.<span class="hljs-built_in">size</span>() &gt; <span class="hljs-number">0</span>)
+        {
+            os &lt;&lt; numbers[<span class="hljs-number">0</span>];
+            <span class="hljs-comment">// if size is greater than 20 only print the first 10 and last 10</span>
+            <span class="hljs-keyword">if</span> (numbers.<span class="hljs-built_in">size</span>() &gt; <span class="hljs-number">20</span>)
+            {
+                <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; ++i)
+                {
+                    os &lt;&lt; <span class="hljs-string">&quot;, &quot;</span> &lt;&lt; numbers[i];
+                }
+                os &lt;&lt; <span class="hljs-string">&quot;, ...&quot;</span>;
+                <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = numbers.<span class="hljs-built_in">size</span>() - <span class="hljs-number">10</span>; i &lt; numbers.<span class="hljs-built_in">size</span>(); ++i)
+                {
+                    os &lt;&lt; <span class="hljs-string">&quot;, &quot;</span> &lt;&lt; numbers[i];
+                }
+            }
+            <span class="hljs-keyword">else</span>{
+                <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">1</span>; i &lt; numbers.<span class="hljs-built_in">size</span>(); ++i)
+                {
+                    os &lt;&lt; <span class="hljs-string">&quot;, &quot;</span> &lt;&lt; numbers[i];
+                }
+            }
+        }
+        os &lt;&lt; <span class="hljs-string">&quot;]&quot;</span>;
+        <span class="hljs-keyword">return</span> os;
+    }
+
+}
+
+<span class="hljs-comment">//MAIN.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;numbers.h&quot;</span></span>
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> numeric;
+    
+    Numbers numbers1{};
+    numbers1.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">3.14</span>);
+    numbers1.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">2.71</span>);
+    numbers1.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1.61</span>);
+
+    Numbers numbers2{numbers1}; <span class="hljs-comment">// copy constructor</span>
+
+    Numbers numbers3{};
+    numbers3 = numbers1; <span class="hljs-comment">// copy assignment operator</span>
+
+    numbers2.<span class="hljs-built_in">pop_back</span>();
+    numbers2.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1.41</span>);
+
+    std::cout &lt;&lt; numbers1 &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// prints Numbers {capacity: 16, size: 3}: [3.14, 2.71, 1.41]</span>
+    std::cout &lt;&lt; numbers2 &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// prints Numbers {capacity: 16, size: 3}: [3.14, 2.71, 1.41] (yes!)</span>
+    std::cout &lt;&lt; numbers3 &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>; <span class="hljs-comment">// prints Numbers {capacity: 16, size: 3}: [3.14, 2.71, 1.41] (yes! again)</span>
+}
+
+</code></pre>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/build",
+  "command": "/usr/bin/gcc -I\"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/lib/.\" -g -Wall -Wextra -pedantic -Werror -o lib/CMakeFiles/mylib.dir/numberfun.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/lib/numberfun.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/lib/numberfun.c",
+  "output": "lib/CMakeFiles/mylib.dir/numberfun.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/build",
+  "command": "/usr/bin/gcc -I\"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/lib/.\" -g -Wall -Wextra -pedantic -Werror -o lib/CMakeFiles/mylib.dir/functions.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/lib/functions.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/lib/functions.c",
+  "output": "lib/CMakeFiles/mylib.dir/functions.c.o"
+},
+{
+  "directory": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/build",
+  "command": "/usr/bin/gcc -I\"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/lib/.\" -g -Wall -Wextra -pedantic -Werror -o main/CMakeFiles/main.dir/main.c.o -c \"/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/main/main.c\"",
+  "file": "/mnt/c/Users/hoang/Desktop/SAXION/QUARTER 2/programming 2/week 2/tutorial2/activity5/main/main.c",
+  "output": "main/CMakeFiles/main.dir/main.c.o"
+}
+]

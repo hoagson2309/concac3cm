@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 5 - Tutorial 2&colon; Using functions with arrays</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-5---tutorial-2-using-functions-with-arrays">Week 5 - Tutorial 2: Using functions with arrays</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 02/10/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>Before writing a program, it is important to think about how to structure it.
+A good way to structure a program is to divide it into smaller parts, each of which performs a specific task.
+Each of these smaller parts can then be implemented as a function that has clear input (i.e., parameters) and output (i.e., return value).</p>
+<p>In this tutorial, you will write several functions that perform specific tasks, and then combine these functions to create a larger program.</p>
+<h3 id="activity-0---open-the-workspace-of-this-week">Activity 0 - Open the workspace of this week</h3>
+<p>Open the workspace of this weeek by opening the <code>week5.code-workspace</code> file in VS Code.
+In this tutorial, you'll be working in the <code>tutorial2</code> folder.</p>
+<p>Alternatively, you can open the workspace from a WSL terminal by typing the <code>code week5.code-workspace</code> command from the root folder of the workspace.</p>
+<p>The <code>tutorial2</code> folder contains the three following files:</p>
+<ul>
+<li><code>main.c</code> for the main program</li>
+<li><code>game.h</code> for the function prototypes</li>
+<li><code>game.c</code> for the function definitions</li>
+</ul>
+<h2 id="memory-game">Memory game</h2>
+<p>The program that you will create in this tutorial allows the user to play a simple memory game, where the user has to find pairs of matching numbers.
+You will compose this program step by step by writing functions that perform specific tasks.
+These tasks are the following:</p>
+<ul>
+<li>Shuffling the cards</li>
+<li>Counting how many cards are face down</li>
+<li>Printing the cards, using asterisks to indicate which cards are face down</li>
+<li>Asking the user to select two cards that are currently face down</li>
+</ul>
+<p>Each function will be tested separately before combining them into the final program.
+The flow of the final program will be as follows:</p>
+<ol>
+<li>Shuffle the cards</li>
+<li>While there are still cards faced down:
+<ol>
+<li>Print the cards</li>
+<li>Ask the user to select two cards</li>
+<li>If the selected cards are a pair, turn them face up</li>
+</ol>
+</li>
+</ol>
+<h3 id="shuffling-the-cards">Shuffling the cards</h3>
+<p>To keep things simple, we'll play the game with eight &quot;cards&quot;, each of which has a number from 1 to 4.
+The goal of the game is to find pairs of matching numbers by selecting two cards at a time.
+We can keep track of which card is at which position by using an array of integers, like this:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> cards[<span class="hljs-number">8</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>};
+</code></pre>
+<p>Of course, the cards should be shuffled before the game starts, so that the pairs are not next to each other.
+To do so, we can swap the cards at two random positions in the array multiple times.
+Suppose that we have a function <code>swap</code> that takes an array and two indices, then the shuffling can be done like this:</p>
+<pre><code class="language-c"><span class="hljs-comment">/// @brief shuffles an array of integers by swapping two random elements multiple times</span>
+<span class="hljs-comment">/// @param values the array of integers to shuffle</span>
+<span class="hljs-comment">/// @param size the number of elements in the array</span>
+<span class="hljs-comment">/// @param how_many_times the number of times to swap two random elements</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">shuffle</span><span class="hljs-params">(<span class="hljs-type">int</span> values[], <span class="hljs-type">int</span> size, <span class="hljs-type">int</span> how_many_times)</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; how_many_times; i++) {
+        <span class="hljs-type">int</span> index1 = random_int(<span class="hljs-number">0</span>, size - <span class="hljs-number">1</span>);
+        <span class="hljs-type">int</span> index2 = random_int(<span class="hljs-number">0</span>, size - <span class="hljs-number">1</span>);
+        swap_elements(values, index1, index2);
+    }
+}
+</code></pre>
+<h4 id="activity-1---function-for-shuffling-the-cards">Activity 1 - Function for shuffling the cards</h4>
+<p>Copy the prototype of the shuffle function into the <code>game.h</code> file, and its definition into the <code>game.c</code> file (don't forget to include <code>functions.h</code> in <code>game.c</code>).
+Add the following prototype to the <code>game.h</code> file:</p>
+<pre><code class="language-c"><span class="hljs-comment">/// @brief swaps two elements in an array</span>
+<span class="hljs-comment">/// @param values the array of integers</span>
+<span class="hljs-comment">/// @param index1 the index of the first element to swap</span>
+<span class="hljs-comment">/// @param index2 the index of the second element to swap</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">swap_elements</span><span class="hljs-params">(<span class="hljs-type">int</span> values[], <span class="hljs-type">int</span> index1, <span class="hljs-type">int</span> index2)</span>;
+</code></pre>
+<p>Add the definition of the <code>swap_elements</code> function to the <code>game.c</code> file.</p>
+<p>Use the following code (for the <code>main.c</code> file) that tests the <code>shuffle</code> function by shuffling the <code>cards</code> array and printing the shuffled cards:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;gameh.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> cards[<span class="hljs-number">8</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>};
+    shuffle(cards, <span class="hljs-number">8</span>, <span class="hljs-number">100</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, cards[i]);
+}
+</code></pre>
+<p>Verify that the card shuffling works correctly by running the program and checking the output.
+Finally, include your definition of the <code>swap_elements</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your definition of the swap_elements function here</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">swap_elements</span><span class="hljs-params">(<span class="hljs-type">int</span> values[], <span class="hljs-type">int</span> index1, <span class="hljs-type">int</span> index2)</span>{
+    <span class="hljs-type">int</span> temp;
+    temp = values[index1];
+    values[index1] = values[index2];
+    values[index2] = temp;
+}
+</code></pre>
+<h3 id="tracking-which-cards-are-face-up">Tracking which cards are face up</h3>
+<p>When playing the game, we'll start with all cards face down, and then turn them face up when the user finds a pair of matching cards.
+To keep track of which cards are face up, we can use an array of booleans, where <code>true</code> indicates that the card is face up and <code>false</code> indicates that the card is face down:</p>
+<pre><code class="language-c"><span class="hljs-type">bool</span> face_up[<span class="hljs-number">8</span>] = {<span class="hljs-literal">false</span>};
+</code></pre>
+<p>Since <code>false</code> is the <em>default</em> value for a boolean array, all non-specified elements will be <code>false</code>, so we don't need to initialize the array explicitly.</p>
+<p>Next, we'll need to be able to count how many cards are face down - if none are face down, the game is over.</p>
+<h4 id="activity-2---function-for-counting-face-down-cards">Activity 2 - Function for counting face-down cards</h4>
+<p>Write a function <code>count_false</code> that takes an array (marked <code>const</code>, since the function doesn't change it) of booleans and its size as parameters, and returns the number of elements in the array that are <code>false</code>.
+Put the function prototype in the <code>game.h</code> file, and the function definition in the <code>game.c</code> file.</p>
+<p>In the <code>main.c</code> file, test the function by creating an array of booleans and counting how many of them are <code>false</code>:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;game.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">bool</span> face_up[<span class="hljs-number">8</span>] = {<span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>};
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d cards face down (should be 5)\n&quot;</span>, count_false(face_up, <span class="hljs-number">8</span>));
+
+    <span class="hljs-type">bool</span> face_up2[<span class="hljs-number">8</span>] = {<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>};
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d cards face down (should be 0)\n&quot;</span>, count_false(face_up, <span class="hljs-number">8</span>));
+}
+</code></pre>
+<p>Verify that the function works correctly by running the program and checking the output.
+Finally, include your definition of the <code>count_false</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your definition of the count_face_down function here, including description</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">count_false</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">bool</span> values[], <span class="hljs-type">int</span> size)</span>{
+    <span class="hljs-type">int</span> falsenum = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++){
+        <span class="hljs-keyword">if</span>(!values[i]) falsenum++;
+    }
+    <span class="hljs-keyword">return</span> falsenum;
+}
+</code></pre>
+<h3 id="asking-the-user-to-select-a-card">Asking the user to select a card</h3>
+<p>The final step is to write a function that asks the user to select a card, and then returns the index of the selected cards.
+The user can only select a card that is face down, so the function should keep asking the user for input until the user selects a valid card.
+Of course, the function should also check if the user entered a valid index (between 0 and the size of the array minus one).</p>
+<h4 id="activity-3---function-for-selecting-a-card">Activity 3 - Function for selecting a card</h4>
+<p>Write a function <code>select_face_down_card</code> that takes an array of booleans and its size as parameters, and returns the index of the selected card.
+The function should keep asking the user for input until the user selects a valid index (0..size - 1), which refers to a card that is face down.</p>
+<p>Put the function prototype in the <code>game.h</code> file, and the function definition in the <code>game.c</code> file.</p>
+<p>Test the function with the following program:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;game.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">bool</span> face_up[<span class="hljs-number">8</span>] = {<span class="hljs-literal">false</span>};
+    <span class="hljs-type">int</span> down = count_false(face_up, <span class="hljs-number">8</span>);
+    <span class="hljs-keyword">while</span> (down &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;There are %d cards face down\n&quot;</span>, down);
+        <span class="hljs-type">int</span> index = select_face_down_card(face_up, <span class="hljs-number">8</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The user selected card %d, turning it face up\n&quot;</span>, index);
+        face_up[index] = <span class="hljs-literal">true</span>;
+    }
+}
+</code></pre>
+<p>Verify that the function works correctly by running the program, and testing it with different inputs, including invalid indices (smaller than 0, or greater than 7) and indices of cards that are already face up.
+If your function works correctly, then include your definition of the <code>select_face_down_card</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your definition of the select_face_down_card function here, including description</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">select_face_down_card</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">bool</span> values[], <span class="hljs-type">int</span> size)</span>{
+    <span class="hljs-type">int</span> a;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Choose face down cards: &quot;</span>);
+    a = read_int();
+    <span class="hljs-keyword">while</span> (a &lt; <span class="hljs-number">0</span> || a &gt; size - <span class="hljs-number">1</span> || values[a] == <span class="hljs-literal">true</span>){
+        <span class="hljs-keyword">if</span> (a &lt; <span class="hljs-number">0</span> || a &gt; size - <span class="hljs-number">1</span>){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;TRY AGAIN!&quot;</span>);
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (values[a]){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You&#x27;ve chosen a face up card! Try again&quot;</span>)
+        }
+        <span class="hljs-keyword">else</span>{
+            <span class="hljs-keyword">return</span> a;
+        }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Choose face down cards: &quot;</span>);
+        a = read_int();
+    }
+    <span class="hljs-keyword">return</span> a;
+}
+</code></pre>
+<h3 id="printing-the-cards">Printing the cards</h3>
+<p>The building blocks of the game are almost complete - the final step is to write a function that prints the cards, using asterisks to indicate which cards are face down.
+This means that the function must know which cards are located at which position, and whether they are face up or face down.
+Also, the function must print indices for the cards, so that the user can select a card by entering its index, like this (the user has already found the pairs of 3s and 4s):</p>
+<pre><code class="language-bash"> 0  1  2  3  4  5  6  7
+** **  3 ** **  3  4  4
+</code></pre>
+<h4 id="activity-4---function-for-printing-the-cards">Activity 4 - Function for printing the cards</h4>
+<p>Write a function <code>print_cards</code> that takes an array of integers (the cards), an array of booleans (face up or face down), and the size of the arrays (use only a single parameter for the size, assuming that both arrays have the same size) as parameters.
+The function must print the indices of the cards, printing each index, right-aligned in a column of width two (use the <code>%2d</code> format specifier for this), followed by a space.
+Each card should be printed as two asterisks if it is face down, or as the card number (right-aligned in a column of width two) if it is face up.</p>
+<p>Put the function prototype in the <code>game.h</code> file, and the function definition in the <code>game.c</code> file.</p>
+<p>In the main program, test the function by creating an array of integers and an array of booleans, and printing the cards:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;game.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">int</span> cards[<span class="hljs-number">8</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>};
+    <span class="hljs-type">bool</span> face_up[<span class="hljs-number">8</span>] = {<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>};
+    print_cards(cards, face_up, <span class="hljs-number">8</span>);
+}
+</code></pre>
+<p>Verify that the program prints the cards as shown in the example above.
+Finally, include your definition of the <code>print_cards</code> function in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your definition of the print_cards function here, including description</span>
+<span class="hljs-type">void</span> <span class="hljs-title function_">print_cards</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span> cards[], <span class="hljs-type">const</span> <span class="hljs-type">bool</span> face_up[], <span class="hljs-type">int</span> size)</span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;size; i++){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2d: &quot;</span>,i);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;size; i++){
+        <span class="hljs-keyword">if</span>(faceup[i]){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%2d: &quot;</span>, cards[i]);
+        } <span class="hljs-keyword">else</span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;**&quot;</span>);
+        }
+    }
+}
+</code></pre>
+<h3 id="putting-it-all-together">Putting it all together</h3>
+<p>Now that you have written all the functions, you can combine them into a single program that allows the user to play the memory game.
+For this, a few more things are needed.</p>
+<p>First, we'll need to let the user select <em>two</em> cards, not just one.
+To do this, we can follow these steps:</p>
+<ol>
+<li>Ask the user to select a card using the <code>select_face_down_card</code> function, and store the index of the selected card.</li>
+<li>To make sure that the user can't select the card again, turn the selected card face up by setting the corresponding element in the <code>face_up</code> array to <code>true</code>.</li>
+<li>Ask the user to select another card, and store the index of the selected card.</li>
+</ol>
+<p>Next, we'll need to check if the selected cards are a pair.
+This can be done simply by comparing the values of the cards at the selected indices.
+If the cards do not form a pair, we should turn them face down again by setting the corresponding elements in the <code>face_up</code> array to <code>false</code>.</p>
+<p>Finally, we'd like to keep track of the number of moves that user has made, and print this at the end of the game.</p>
+<h4 id="activity-5---final-program">Activity 5 - Final program</h4>
+<p>Write a program in <code>main.c</code> that allows the user to play the memory game, using the functions that you have written in the previous activities.
+Follow the steps outlined above to implement the game.</p>
+<p>You can use the following code as a starting point for the <code>main</code> function:</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;game.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Welcome to the memory game!\n&quot;</span>);
+    <span class="hljs-type">int</span> cards[<span class="hljs-number">8</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>};
+    <span class="hljs-type">bool</span> face_up[<span class="hljs-keyword">sizeof</span>(cards) / <span class="hljs-keyword">sizeof</span>(cards[<span class="hljs-number">0</span>])] = {<span class="hljs-literal">false</span>};
+    <span class="hljs-type">const</span> <span class="hljs-type">int</span> nr_of_cards = <span class="hljs-keyword">sizeof</span>(cards) / <span class="hljs-keyword">sizeof</span>(cards[<span class="hljs-number">0</span>]);
+    <span class="hljs-type">int</span> rounds = <span class="hljs-number">0</span>;     <span class="hljs-comment">// the number of rounds played</span>
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> shuffle the cards</span>
+    <span class="hljs-keyword">while</span> (count_false(face_up, nr_of_cards) &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print the cards</span>
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> ask the user to select two cards</span>
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> check if the selected cards are a pair. If not, turn them face down again. If they are, tell the user he found a match</span>
+        rounds++;
+    }
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print the cards (they&#x27;re all turned face up now)</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Congratulations, you found all pairs in %d rounds!\n&quot;</span>, rounds);
+}
+</code></pre>
+<p>List the contents of your <code>main.c</code> file in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include the contents of main.c here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;game.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Welcome to the memory game!\n&quot;</span>);
+    <span class="hljs-type">int</span> cards[<span class="hljs-number">8</span>] = {<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>};
+    <span class="hljs-type">bool</span> face_up[<span class="hljs-keyword">sizeof</span>(cards) / <span class="hljs-keyword">sizeof</span>(cards[<span class="hljs-number">0</span>])] = {<span class="hljs-literal">false</span>};
+    <span class="hljs-type">const</span> <span class="hljs-type">int</span> nr_of_cards = <span class="hljs-keyword">sizeof</span>(cards) / <span class="hljs-keyword">sizeof</span>(cards[<span class="hljs-number">0</span>]);
+    <span class="hljs-type">int</span> rounds = <span class="hljs-number">0</span>;     <span class="hljs-comment">// the number of rounds played</span>
+
+    
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> shuffle the cards</span>
+    shuffle(face_up, nr_of_cards, random_int(<span class="hljs-number">1</span>,<span class="hljs-number">20</span>));
+
+    <span class="hljs-keyword">while</span> (count_false(face_up, nr_of_cards) &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print the cards</span>
+        print_cards(cards, face_up, nr_of_cards);
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> ask the user to select two cards</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Please select face down cards&quot;</span>)
+        <span class="hljs-type">int</span> a = select_face_down_card(face_up, nr_of_cards);
+        face_up[a] == <span class="hljs-literal">true</span>;
+        print_cards(cards, face_up, nr_of_cards);
+
+        <span class="hljs-type">int</span> b = select_face_down_card(face_up, nr_of_cards);
+        face_up[b] == <span class="hljs-literal">true</span>;
+        print_cards(cards, face_up, nr_of_cards);
+
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> check if the selected cards are a pair. If not, turn them face down again. If they are, tell the user he found a match</span>
+        <span class="hljs-keyword">if</span> (cards[a] == cards[b]){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You found a match! \n&quot;</span>);
+        }<span class="hljs-keyword">else</span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;This wasn&#x27;t a pair! \n&quot;</span>);
+            cards[a] = cards[b] = <span class="hljs-literal">false</span>;
+        }
+
+        rounds++;
+    }
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> print the cards (they&#x27;re all turned face up now)</span>
+    print_cards(cards, face_up, nr_of_cards);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Congratulations, you found all pairs in %d rounds!\n&quot;</span>, rounds);
+}
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

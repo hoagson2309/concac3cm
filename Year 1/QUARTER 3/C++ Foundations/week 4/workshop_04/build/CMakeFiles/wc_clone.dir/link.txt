@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/wc_clone.dir/main.cpp.o CMakeFiles/wc_clone.dir/options.cpp.o CMakeFiles/wc_clone.dir/file_counts.cpp.o CMakeFiles/wc_clone.dir/counter.cpp.o -o wc_clone 

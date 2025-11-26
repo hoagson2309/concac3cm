@@ -1,0 +1,19 @@
+Start testing: Oct 18 20:58 CEST
+----------------------------------------------------------
+1/6 Testing: topsort_test
+1/6 Test: topsort_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/scripts/test.py" "topsort" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/1.topsort/tests/topsort_cases_new"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week7-code/build/1.topsort
+"topsort_test" start time: Oct 18 20:58 CEST
+Output:
+----------------------------------------------------------
+All test cases passed
+<end of output>
+Test time =   0.94 sec
+----------------------------------------------------------
+Test Passed.
+"topsort_test" end time: Oct 18 20:58 CEST
+"topsort_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 18 20:58 CEST

@@ -1,0 +1,41 @@
+Start testing: Sep 09 22:49 CEST
+----------------------------------------------------------
+2/7 Testing: list_insertions_test
+2/7 Test: list_insertions_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/scripts/test_target.py" "list_insertions" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/list_insertions/tests/list_insertions_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/build/list_insertions
+"list_insertions_test" start time: Sep 09 22:49 CEST
+Output:
+----------------------------------------------------------
+Program exited with non-zero return code 1 for test input: [apple -> banana -> cherry]  blackberry 
+
+=================================================================
+==1258==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x70e893afe548 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:95
+    #1 0x5c48e9b2213f in main /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/list_insertions/main.cpp:56
+    #2 0x70e892a2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x70e892a2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x5c48e9b216c4 in _start (/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/build/list_insertions/list_insertions+0xc6c4) (BuildId: 590175a4d8efb214de27788b68f86ceb1e9f4c7a)
+
+Indirect leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x70e893afe548 in operator new(unsigned long) ../../../../src/libsanitizer/asan/asan_new_delete.cpp:95
+    #1 0x5c48e9b252f7 in sax::operator>>(std::istream&, sax::linked_list_node<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >**) /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/include/linked_list.h:79
+    #2 0x5c48e9b22ff2 in sax::operator>>(std::istream&, sax::linked_list_node<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >*&) /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/include/linked_list.h:42
+    #3 0x5c48e9b218c3 in main /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/list_insertions/main.cpp:17
+    #4 0x70e892a2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #5 0x70e892a2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #6 0x5c48e9b216c4 in _start (/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/build/list_insertions/list_insertions+0xc6c4) (BuildId: 590175a4d8efb214de27788b68f86ceb1e9f4c7a)
+
+SUMMARY: AddressSanitizer: 80 byte(s) leaked in 2 allocation(s).
+
+<end of output>
+Test time =   0.94 sec
+----------------------------------------------------------
+Test Failed.
+"list_insertions_test" end time: Sep 09 22:49 CEST
+"list_insertions_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 09 22:49 CEST

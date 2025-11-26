@@ -1,0 +1,20 @@
+@startuml
+' Define the styles for the System Context diagram.
+skinparam defaultTextAlignment center
+scale 250 height
+' Define the system context.
+storage "\nCabin\nController\n" as Core #white;line.dashed;line:darkgrey;
+' Add the terminals
+Rectangle "Key Panel" as Panel
+Rectangle "Display" as Display
+Rectangle "AlarmButton" as AlarmButton
+Rectangle "Light" as Light
+Rectangle "Supervisory Controller" as Subsystem
+' Add the relationships between the terminals and the system.
+Panel -down-> Core : number
+Core -down-> Display : floornumber
+AlarmButton -down-> Core : PRESSED,\nRELEASED,\nHOLD
+Core -down-> Light : ON, OFF
+Subsystem -right-> Core : floornumber,\nLightOn, LightOff,\nBrakeActive, BrakeDeactive
+Core -left-> Subsystem : setfloornumber,\nALARM
+@enduml

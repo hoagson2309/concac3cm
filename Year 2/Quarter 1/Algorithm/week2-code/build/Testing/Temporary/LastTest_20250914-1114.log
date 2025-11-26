@@ -1,0 +1,18 @@
+Start testing: Sep 14 22:39 CEST
+----------------------------------------------------------
+7/7 Testing: subarray_sum_test
+7/7 Test: subarray_sum_test
+Command: "/usr/bin/python3" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/scripts/test_target.py" "subarray_sum" "/mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/subarray_sum/tests/subarray_sum_cases"
+Directory: /mnt/c/SAXION/Year 2/Quarter 1/Algorithm/week2-code/build/subarray_sum
+"subarray_sum_test" start time: Sep 14 22:39 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   1.11 sec
+----------------------------------------------------------
+Test Passed.
+"subarray_sum_test" end time: Sep 14 22:39 CEST
+"subarray_sum_test" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Sep 14 22:39 CEST

@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/assignment5.dir/assignment5.c.o CMakeFiles/assignment5.dir/students.c.o -o assignment5 

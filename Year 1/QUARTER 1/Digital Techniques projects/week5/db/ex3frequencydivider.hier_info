@@ -1,0 +1,7 @@
+|ex3frequencydivider
+led0 <= pin43.DB_MAX_OUTPUT_PORT_TYPE
+pin43 => led0.DATAIN
+pin43 => inst.CLK
+led1 <= inst.DB_MAX_OUTPUT_PORT_TYPE
+
+

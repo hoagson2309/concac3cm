@@ -1,0 +1,6 @@
+# ninja log v5
+43	280	1732803430332703300	lib/CMakeFiles/mylib.dir/numberfun.c.o	1596ff9d6f63b865
+45	299	1732803430341182700	lib/CMakeFiles/mylib.dir/functions.c.o	d1416b9966f06ef7
+48	334	1732803430332703300	main/CMakeFiles/main.dir/main.c.o	b7f99d1d8eb77273
+323	432	1732803430470062300	lib/libmylib.a	e7ab9e67ca2b885b
+434	632	1732803430658265200	main/main	b38242b863b7d06

@@ -1,0 +1,62 @@
+	
+@startuml
+
+skinparam nodesep 50
+skinparam dpi 300
+skinparam componentStyle uml2
+
+package "RPi Pico SDK"
+    
+[HardwareAbstractionLayer] as HAL
+
+note top of HAL: Low-level functions to control\ni/o & I2C protocol
+
+' Interfaces exposed by HAL:
+() "I2CDriver" as i2c
+() "GPIODriver" as gpio
+() "PWMDriver" as pwm
+
+HAL -- i2c
+HAL -- gpio
+HAL -- pwm
+
+' HAL depends on (needs) the Pico SDK
+HAL ..> "RPi Pico SDK" : uses 
+
+[MotorControl] as mc
+interface "MotorAPI" as mcapi
+mcapi -[#green]- mc 
+mc -[#green]-( pwm
+
+package "SensorControl" as sens {
+  [USRangingControl]
+  [IMUControl] as IMU
+}
+
+note bottom of sens: Package with sensor control functions\nfor US ranging & IMU
+note bottom of IMU : Inertial Measurement Unit
+
+interface "SensorAPI" as sensapi
+sensapi -[#blue]- sens
+
+sens -[#blue]-( i2c
+sens -[#blue]-( gpio
+
+' Components can have nested items
+component "PathPlanningMapping" as pp {
+    database "MazeMap"
+    file Path
+}
+
+interface "PathPlanningMappingAPI" as ppapi
+ppapi -[#red]- pp
+
+
+component "MainControlLoop" as main
+
+main --( sensapi
+main --( ppapi
+main --( mcapi
+
+
+@enduml

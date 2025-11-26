@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 5 - Tutorial&colon; Streams and File I&sol;O</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-5---tutorial-streams-and-file-io">Week 5 - Tutorial: Streams and File I/O</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 11/12/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>Up till now, you've written programs that took their input from the user through the console, and that printed their output to the console.
+This is fine for many programs, but sometimes you want to read input from a file, or write output to a file.
+This week, you will learn how to do this in C, using the standard I/O library.</p>
+<h3 id="code-organization">Code organization</h3>
+<p>The code for this tutorial is organized as follows: the <code>CMakeLists.txt</code> file in the root of the archive is used to build all the programs in the tutorial.
+It builds a separate executable for each activity, and the source code for each activity is in a separate <code>.c</code> file.</p>
+<p>If you did not install <code>CMake</code> and a working compiler on Windows, then make sure to open VS Code from the WSL terminal by typing <code>code .</code> in the directory that contains the main <code>CMakeLists.txt</code> file.
+Use the CMake tab (listed on the left, along with other tabs for &quot;Explorer&quot;, &quot;Extensions&quot;, etc.) in VS Code to configure, build, run and debug the different targets in the project.</p>
+<h2 id="opening-and-closing-files">Opening and closing files</h2>
+<p>To open a file in C, you use the <code>fopen</code> function.
+This function takes two arguments: the name of the file you want to open, and the <strong>mode</strong> in which you want to open the file.
+The mode is a string that specifies whether you want to read from the file, write to the file, or both.
+The most common modes are:</p>
+<ul>
+<li><code>&quot;r&quot;</code>: open the file for reading.</li>
+<li><code>&quot;w&quot;</code>: open the file for writing. If the file already exists, it is truncated to zero length. If the file does not exist, it is created.</li>
+<li><code>&quot;a&quot;</code>: open the file for writing. If the file already exists, the file pointer is set to the end of the file. If the file does not exist, it is created.</li>
+</ul>
+<p>Note that the file must be in the same directory as the program, or you must specify the full path to the file.
+For example, to open a file called <code>example.txt</code> for reading, you would write:</p>
+<pre><code class="language-c">FILE *file = fopen(<span class="hljs-string">&quot;example.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
+</code></pre>
+<p>If the file could not be opened, <code>fopen</code> returns <code>NULL</code>.
+You should always check the return value of <code>fopen</code> to make sure the file was opened successfully.</p>
+<h3 id="activity-1---opening-a-file">Activity 1 - Opening a file</h3>
+<p>The program listed in <code>activity1.c</code> asks the user for a filename, but does not actually open the file.
+Complete the program by letting it open the file for <em>reading</em>.
+If the file was opened successfully, print a message to the console to indicate this.
+If the file could not be opened, print an error message.</p>
+<p>Test whether the program works by letting it open the file <code>example.txt</code> that is included in the archive.
+<strong>NOTE</strong> when using CMake, you're probably running the program from the <code>build</code> directory, so you need to specify the path to the file relative to the <code>build</code> directory.</p>
+<p>When your program can open the file <code>example.txt</code> (or any other file) successfully, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> filename[<span class="hljs-number">100</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the name of the file: &quot;</span>);
+    read_string(filename, <span class="hljs-keyword">sizeof</span>(filename));
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> try opening the filename for reading</span>
+    FILE *file = fopen(filename, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-comment">//       print &quot;File opened successfully.&quot; if the file was opened</span>
+        <span class="hljs-keyword">if</span>(file != <span class="hljs-literal">NULL</span>){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;File %s opened successfully.\n&quot;</span>, filename);
+            
+            fclose(file);
+        }
+    <span class="hljs-comment">//       print &quot;Failed to open file.&quot; if the file was not opened</span>
+        <span class="hljs-keyword">else</span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Failed to open file.\n&quot;</span>);
+        }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;  
+}
+
+
+</code></pre>
+<h2 id="writing-to-files-using-fprintf">Writing to files using <code>fprintf</code></h2>
+<h3 id="activity-2---writing-to-a-file">Activity 2 - Writing to a file</h3>
+<p>The program listed in <code>activity2.c</code> asks the user for a filename, but does not actually do anything with the file.
+The program then repeatedly asks the user to enter a string, and stops when the user enters an empty string.
+Change the program so that it writes each string entered by the user to a separate line of the file that was specified by the user.
+The program must close the file before it exits.</p>
+<p>Test whether the program works by letting it write to a file called <code>output.txt</code>.
+Verify that the file indeed contains the strings that you entered.</p>
+<p>When your program writes the strings to the file correctly, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the name of the file: &quot;</span>);
+    read_string(buffer, <span class="hljs-keyword">sizeof</span>(buffer));
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> open the filename for writing</span>
+    FILE *file = fopen(buffer, <span class="hljs-string">&quot;w&quot;</span>);
+    <span class="hljs-comment">//       print &quot;Failed to open file.&quot; if the file could not be opened</span>
+    <span class="hljs-keyword">if</span>(file == <span class="hljs-literal">NULL</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Failed to open file.\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+    
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a string: &quot;</span>);
+        read_string(buffer, <span class="hljs-keyword">sizeof</span>(buffer));
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strlen</span>(buffer) &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> write the string to the file using fprintf</span>
+            <span class="hljs-built_in">fprintf</span>(file, <span class="hljs-string">&quot;%s\n&quot;</span>, buffer);
+        }
+    }
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">strlen</span>(buffer) != <span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> close the file</span>
+    fclose(file);
+}
+
+
+</code></pre>
+<h2 id="reading-files-using-fscanf">Reading files using <code>fscanf</code></h2>
+<p>To read from a file, there are multiple functions you can use.
+The <code>fgetc</code> function reads one character at a time from a file, including whitespace (spaces, tabs, newlines, etc.) characters.
+The <code>fgets</code> function reads an entire line from a file, including the newline character at the end of the line.</p>
+<p>The <code>fscanf</code> function reads <em>formatted input</em> from a file, which means that you can specify the format of the data you want to read.
+For example, if you would like to read an integer from a file, you can use the following code:</p>
+<pre><code class="language-c"><span class="hljs-type">int</span> number;
+<span class="hljs-type">int</span> result = <span class="hljs-built_in">fscanf</span>(file, <span class="hljs-string">&quot;%d&quot;</span>, &amp;number);
+</code></pre>
+<p>This code will try to interpret the next characters in the file as an integer, and store the result in the variable <code>number</code>.
+It may fail if the next characters in the file are not an integer, or if the file is at the end.
+To see whether it actually succeeded, you should check the return value of <code>fscanf</code>: the <code>result</code> variable will be equal to <code>1</code> if the integer was read successfully.</p>
+<h3 id="activity-3---reading-integers-from-a-file">Activity 3 - Reading integers from a file</h3>
+<p>Write a program in <code>activity3.c</code> that reads all integers from the file <code>numbers.txt</code>, and prints their sum to the console.</p>
+<p>When you're done and your program successfully prints the sum of the integers in <code>numbers.txt</code>, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename = <span class="hljs-string">&quot;../numbers.txt&quot;</span>;
+    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Reading numbers from %s...\n&quot;</span>, filename);
+
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> open the file numbers.txt for reading</span>
+    FILE *file = fopen(filename, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span>(file == <span class="hljs-literal">NULL</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Failed to open file\n&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+    <span class="hljs-comment">//       sum all the numbers in the file</span>
+    <span class="hljs-type">int</span> number;
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">fscanf</span>(file, <span class="hljs-string">&quot;%d&quot;</span>, &amp;number) == <span class="hljs-number">1</span>){
+        sum += number;
+    }
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> close the file</span>
+    fclose(file);
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The sum of the numbers is %d.\n&quot;</span>, sum);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="standard-input-and-output">Standard input and output</h2>
+<p>In C, there are three standard &quot;files&quot; that are automatically opened when your program starts: <code>stdin</code>, <code>stdout</code>, and <code>stderr</code>.
+These files are used for standard input, standard output, and standard error output, respectively.
+You do not need to open these files, they are already open when your program starts.
+For example, to write a string to the console, you can use the <code>fprintf</code> function instead of <code>printf</code>.
+Likewise, to read from the console, you can use the <code>fscanf</code> function, instead of <code>scanf</code>, which does the same thing but reads from <code>stdin</code> implicitly.</p>
+<pre><code class="language-c"><span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stdout</span>, <span class="hljs-string">&quot;Enter an integer: &quot;</span>);
+<span class="hljs-type">int</span> number;
+<span class="hljs-type">int</span> result = <span class="hljs-built_in">fscanf</span>(<span class="hljs-built_in">stdin</span>, <span class="hljs-string">&quot;%d&quot;</span>, &amp;number);
+</code></pre>
+<h2 id="end-of-file">End of file</h2>
+<p>When you read from a file, you need to know when you've reached the end of the file.
+The <code>feof</code> function can be used to check if the end of the file has been reached.
+If you do not check for the end of the file, your program may end up in an infinite loop, because <code>fscanf</code> will keep trying to read from the file even when there is no more data.</p>
+<p>Even the standard input &quot;file&quot; has an end: when you press <code>Ctrl+D</code> on Linux or macOS, or <code>Ctrl+Z</code> on Windows, the end of the file is reached.</p>
+<h3 id="activity-4---reading-from-standard-input">Activity 4 - Reading from standard input</h3>
+<p>The program in <code>activity4.c</code> repeatedly asks the user to enter a single word, then prints its reverse and checks if the word is a palindrome (a paldindrome is a word that is the same when reversed, such as &quot;racecar&quot; or &quot;level&quot;).
+The program never stops asking the user for input, so you need to add a way to stop the program.
+Do this by changing all occurrences of <code>scanf</code> to <code>fscanf</code>, and check for the end of the file using <code>feof</code> after each input.
+When the end of the file is reached, the program should print a message and exit.</p>
+<p>When you're done and your program works as expected, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stringfun.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+        <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> this program never stops.</span>
+        <span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename = <span class="hljs-string">&quot;../palindromes.txt&quot;</span>;
+
+        FILE *file = fopen(filename, <span class="hljs-string">&quot;w&quot;</span>);
+        <span class="hljs-keyword">if</span>(file == <span class="hljs-literal">NULL</span>){
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Failed to open file\n&quot;</span>);
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        }
+    <span class="hljs-comment">//       Fix the program so that it stops when the end-of-file is reached on stdin</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a word: &quot;</span>);
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fscanf</span>(<span class="hljs-built_in">stdin</span>, <span class="hljs-string">&quot;%99s&quot;</span>, buffer) != <span class="hljs-number">1</span>){ <span class="hljs-comment">//no need to close &#x27;cause only stdin is used</span>
+            <span class="hljs-keyword">if</span>(feof(<span class="hljs-built_in">stdin</span>)){
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;End of file detected. Exiting program\n&quot;</span>);
+                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error reading input. Exiting program\n&quot;</span>);
+                <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+            }   
+        } 
+        reverse(buffer);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Reversed: %s (palindrome: &quot;</span>, buffer);
+        <span class="hljs-keyword">if</span> (is_palindrome(buffer)) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;yes)\n&quot;</span>);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;no)\n&quot;</span>);
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="reading-until-the-next-newline">Reading until the next newline</h2>
+<p>Text files are typically processed line by line.
+Lines are separated by newline characters (<code>'\n'</code>), and you can read an entire line from a file using the <code>fgets</code> function.
+This will read characters from the file into a character-array buffer until a newline character is encountered, or until the buffer is full.
+Note that the function stores the newline character as well, so you may need to remove it if you don't want it.
+This can be done by searching for the newline character in the buffer, and replacing it with a null character (<code>'\0'</code>).
+Instead of writing a loop to do this, you can use the <code>strrchr</code> function from the <code>string.h</code> library to find the last occurrence of a character in a string.</p>
+<p>The <code>fgets</code> function is kind of similar to the <code>read_string</code> function from <code>functions.h</code> that you've used in the previous weeks.
+It takes three arguments: the buffer to store the characters in, the size of the buffer, and the file to read from.
+It returns <code>NULL</code> when no characters could be read (for example because the end of the file was reached).</p>
+<p>For example, to read an entire line from the console (standard input), you can use the following code:</p>
+<pre><code class="language-c"><span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+<span class="hljs-type">char</span> *result = fgets(buffer, <span class="hljs-keyword">sizeof</span>(buffer), <span class="hljs-built_in">stdin</span>);
+</code></pre>
+<h3 id="activity-5---reading-entire-lines">Activity 5 - Reading entire lines</h3>
+<p>The program in <code>activity5.c</code> is similar to the program of activity 4, but it reads its input from a file that the user specifies.</p>
+<p>Change the program so that it reads <strong>entire lines</strong> from the file instead of individual words.
+Make sure that the program works correctly - it should correctly print the reverse of each line, and correctly determine if the line is a palindrome.</p>
+<p>Test your program by letting it read the palindromes from &quot;palindromes.txt&quot;.
+When you're done and your program works as expected, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;functions.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stringfun.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the name of the file: &quot;</span>);
+    read_string(buffer, <span class="hljs-keyword">sizeof</span>(buffer));
+
+    FILE *file = fopen(buffer, <span class="hljs-string">&quot;r&quot;</span>);
+    <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Failed to open file %s.\n&quot;</span>, buffer);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    }
+
+    <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> this program reads one word at a time, but it should read one line at a time</span>
+    <span class="hljs-comment">//        Fix the program so that it reads one line at a time, using fgets</span>
+    <span class="hljs-keyword">while</span> (fgets(buffer, <span class="hljs-keyword">sizeof</span>(buffer), <span class="hljs-built_in">stdin</span>) != <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-type">char</span> *ptr = <span class="hljs-built_in">strchr</span>(buffer, <span class="hljs-string">&#x27;\n&#x27;</span>);
+        <span class="hljs-keyword">if</span>(ptr != <span class="hljs-literal">NULL</span>) *ptr = <span class="hljs-string">&#x27;\0&#x27;</span>;
+        
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s -&gt; &quot;</span>, buffer);
+        reverse(buffer);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s (palindrome: &quot;</span>, buffer);
+        <span class="hljs-keyword">if</span> (is_palindrome(buffer)) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;yes)\n&quot;</span>);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;no)\n&quot;</span>);
+        }
+    }
+    fclose(file);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="specifying-scansets-in-fscanf">Specifying scansets in <code>fscanf</code></h2>
+<p>As you've seen before, the <code>%s</code> format specifier in <code>fscanf</code> reads a string of characters until it encounters whitespace.
+Sometimes, you want to read a string that only consists of certain characters.
+To do this, you can specify a <em>scanset</em> in the format string.
+This is done by enclosing the characters you want to read in square brackets (<code>[]</code>).</p>
+<p>For example, to read a string that only consists of vowels, you can use the following code:</p>
+<pre><code class="language-c"><span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+<span class="hljs-type">int</span> result = <span class="hljs-built_in">fscanf</span>(file, <span class="hljs-string">&quot;%99[aeoiuAEOIU]&quot;</span>, buffer);
+</code></pre>
+<p>This code will read the next (up to 99) characters from the file and copy them to the buffer, but only if they are vowels.
+In other words, it will stop as soon as it encounters a character that is not a vowel.</p>
+<p>Should you want to read a string that consists of all characters <em>except</em> vowels, you can use the following code:</p>
+<pre><code class="language-c"><span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+<span class="hljs-type">int</span> result = <span class="hljs-built_in">fscanf</span>(file, <span class="hljs-string">&quot;%99[^aeoiuAEOIU]&quot;</span>, buffer);
+</code></pre>
+<p>Here, the <code>^</code> character is used to <strong>negate</strong> the scanset, meaning that the string will be read until a vowel is encountered.</p>
+<h3 id="activity-6---reading-comma-separated-values">Activity 6 - Reading comma-separated values</h3>
+<p>The program in <code>activity6.c</code> reads a line of text that contains comma-separated values, and prints each value on a separate line.
+However, since the program does not treat the commas as delimiters, it will read the entire line as one string.</p>
+<p>For example, suppose that the line of text that is entered looks like this: <code>hello,world,how,are,you,?</code>.
+The program should then print:</p>
+<pre><code>hello
+world
+how
+are
+you
+?
+</code></pre>
+<p>Change the program so that it reads each value separately, and prints them on separate lines.
+Although you can solve this in multiple ways, try using the scanset feature of <code>fscanf</code> to read the values.</p>
+<p>When you're done and your program works as expected, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stringfun.h&quot;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a line of text: &quot;</span>);
+    
+    <span class="hljs-comment">// read a string until the next newline or space</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">fscanf</span>(<span class="hljs-built_in">stdin</span>, <span class="hljs-string">&quot; %99[^,]&quot;</span>, buffer) == <span class="hljs-number">1</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, buffer);
+            
+        <span class="hljs-type">int</span> ch = getchar();<span class="hljs-comment">// to consume all of the &#x27;,&#x27; to ch</span>
+        <span class="hljs-keyword">if</span>(ch != <span class="hljs-string">&#x27;,&#x27;</span>){
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+  
+</code></pre>
+<h2 id="the-sscanf-function">The <code>sscanf</code> function</h2>
+<p>The <code>sscanf</code> function is similar to <code>fscanf</code>, but it reads from a string instead of a file.
+It has the same number of parameters as <code>fscanf</code>, but the first parameter is a string instead of a file.</p>
+<p>This can be useful if you have read an entire line of text from a file, and you want to extract values from that line.
+For example, to check if a line contains only a single integer, you can use the following code, which checks if there is a trailing character after the integer:</p>
+<pre><code class="language-c"><span class="hljs-type">const</span> <span class="hljs-type">char</span> *line = <span class="hljs-string">&quot;123abc&quot;</span>;
+<span class="hljs-type">int</span> number;
+<span class="hljs-type">char</span> trailing;
+<span class="hljs-type">int</span> result = <span class="hljs-built_in">sscanf</span>(line, <span class="hljs-string">&quot;%d %c&quot;</span>, &amp;number, &amp;trailing);
+<span class="hljs-keyword">if</span> (result == <span class="hljs-number">1</span>) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The line contains an integer: %d\n&quot;</span>, number);
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;The line does not contain an integer\n&quot;</span>);
+}
+</code></pre>
+<h3 id="activity-7---scanning-strings">Activity 7 - Scanning strings</h3>
+<p>The program in <code>activity7.c</code> reads lines of text from the console (standard input), and checks if the line contains a computation in the form of <code>number operator number</code> (accepted operators are <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code>).
+If that is the case, the program computes the answer and prints it.</p>
+<p>It then calls the <code>parse_computation</code> function, which checks if the line contains a computation in the form of <code>number operator number</code> (for example, <code>5.1 + 3.2</code>).
+The function does not do anything useful yet, so you need to change it so that it stores the two numbers and the operator at the memory addresses that are passed to the function.
+It must return <code>true</code> if the line contains a computation, and <code>false</code> otherwise.</p>
+<p>When you're done and your program works as expected, paste the contents of your program in the code block below:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Paste your code here</span>
+ <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdbool.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stringfun.h&quot;</span></span>
+
+<span class="hljs-comment">/// @brief Parses a computation (i.e. 3.5 * -2.7) from a string.</span>
+<span class="hljs-comment">/// @param line the string to parse.</span>
+<span class="hljs-comment">/// @param left address to store the left operand</span>
+<span class="hljs-comment">/// @param right address to store the right operand</span>
+<span class="hljs-comment">/// @param op address to store the operator</span>
+<span class="hljs-comment">/// @return true if the computation was parsed successfully, and false otherwise.</span>
+<span class="hljs-type">bool</span> <span class="hljs-title function_">parse_computation</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span>* line, <span class="hljs-type">float</span> *left, <span class="hljs-type">float</span> *right, <span class="hljs-type">char</span> *op)</span> {
+    <span class="hljs-keyword">if</span> (line == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    *left = *right = <span class="hljs-number">0.0f</span>;
+
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">sscanf</span>(line, <span class="hljs-string">&quot; %f %c %f&quot;</span>, left, op, right) == <span class="hljs-number">3</span>){
+        <span class="hljs-keyword">if</span> (*op != <span class="hljs-string">&#x27;+&#x27;</span> &amp;&amp; *op != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; *op != <span class="hljs-string">&#x27;*&#x27;</span> &amp;&amp; *op != <span class="hljs-string">&#x27;/&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// check if operator is valid</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+
+<span class="hljs-comment">/// @brief Calculates the result of a computation.</span>
+<span class="hljs-comment">/// @param left left operand</span>
+<span class="hljs-comment">/// @param right right operand</span>
+<span class="hljs-comment">/// @param op operation to perform</span>
+<span class="hljs-comment">/// @return the result</span>
+<span class="hljs-type">float</span> <span class="hljs-title function_">calculate</span><span class="hljs-params">(<span class="hljs-type">float</span> left, <span class="hljs-type">float</span> right, <span class="hljs-type">char</span> op)</span>{
+    <span class="hljs-keyword">if</span> (op == <span class="hljs-string">&#x27;+&#x27;</span>) <span class="hljs-keyword">return</span> left + right;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (op == <span class="hljs-string">&#x27;-&#x27;</span>) <span class="hljs-keyword">return</span> left - right;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (op == <span class="hljs-string">&#x27;*&#x27;</span>) <span class="hljs-keyword">return</span> left * right;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (op == <span class="hljs-string">&#x27;/&#x27;</span>) <span class="hljs-keyword">return</span> left / right;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0.0f</span>;
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> {
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>];
+    <span class="hljs-type">float</span> left, right;
+    <span class="hljs-type">char</span> op;
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a computation: &quot;</span>);
+    <span class="hljs-keyword">while</span> (fgets(buffer, <span class="hljs-keyword">sizeof</span>(buffer), <span class="hljs-built_in">stdin</span>) != <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">if</span> (parse_computation(buffer, &amp;left, &amp;right, &amp;op)) {
+            <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stdout</span>, <span class="hljs-string">&quot;%.2f %c %.2f = %.2f\n&quot;</span>, left, op, right, calculate(left, right, op));
+        }
+        <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Invalid computation. Try again: &quot;</span>);
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will get in touch with you.</p>
+
+            
+            
+        </body>
+        </html>

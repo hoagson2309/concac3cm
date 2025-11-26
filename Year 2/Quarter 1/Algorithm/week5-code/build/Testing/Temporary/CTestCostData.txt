@@ -1,0 +1,7 @@
+heap_remove_test 2 0.834206
+heapify_test 2 1.28942
+median_test 2 0.492978
+coordinates_test 2 0.7732
+linear_probing_test 2 0.585184
+separate_chaining_test 2 0.941948
+---

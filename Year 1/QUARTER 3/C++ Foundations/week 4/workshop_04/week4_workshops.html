@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - C&plus;&plus;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---c">Week 3 - C++</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 4/3/2025</p>
+<h1 id="labs">LABS</h1>
+<pre><code class="language-cpp"><span class="hljs-comment">//OPTIONS.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> OPTIONS_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> OPTIONS_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span> <span class="hljs-comment">//std::vector</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span> <span class="hljs-comment">//std::string</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span> <span class="hljs-comment">// std::ostream</span></span>
+
+<span class="hljs-comment">//Options class</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Options</span>{
+<span class="hljs-keyword">public</span>:
+<span class="hljs-comment">//Constructors</span>
+    <span class="hljs-built_in">Options</span>(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[]); <span class="hljs-comment">//constructor takes command-line arguments</span>
+    <span class="hljs-built_in">Options</span>(); <span class="hljs-comment">// default constructor</span>
+
+<span class="hljs-comment">//Accessors function to check if specific options are enabled</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">lines</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">words</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">characters</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">bytes</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">longest_line</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">help</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">version</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+
+<span class="hljs-comment">// Accessors function to get the list of file names. Contains a vector with file names to process</span>
+    <span class="hljs-function"><span class="hljs-type">const</span> std::vector&lt;std::string&gt;&amp; <span class="hljs-title">file_names</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+
+<span class="hljs-comment">//Modifiers</span>
+<span class="hljs-comment">//Parses command-line arguments and replaces the the current values of file names with new, parsed values</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">parse</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span></span>;
+
+<span class="hljs-comment">//Debug/ helper functions</span>
+    <span class="hljs-comment">//check if verbose mode is enabled</span>
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">verbose</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-comment">//print the parsed options to the output stream</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(std::ostream&amp; out)</span> <span class="hljs-type">const</span></span>;
+
+<span class="hljs-keyword">private</span>:
+<span class="hljs-comment">//private data members to store the state of options</span>
+    <span class="hljs-type">bool</span> lines_;
+    <span class="hljs-type">bool</span> words_;
+    <span class="hljs-type">bool</span> characters_;
+    <span class="hljs-type">bool</span> bytes_;
+    <span class="hljs-type">bool</span> longest_line_;
+    <span class="hljs-type">bool</span> help_;
+    <span class="hljs-type">bool</span> version_;
+    <span class="hljs-type">bool</span> verbose_;
+    std::vector&lt;std::string&gt; file_names_;
+
+    <span class="hljs-comment">//reset function to reset all options to default values</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">reset</span><span class="hljs-params">()</span></span>;
+
+};
+
+std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; out, <span class="hljs-type">const</span> Options&amp; opt);
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">// OPTIONS_H</span></span>
+
+<span class="hljs-comment">//OPTIONS.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;options.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span> <span class="hljs-comment">//std::invalid_argument</span></span>
+
+Options::<span class="hljs-built_in">Options</span>(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[]){
+    <span class="hljs-built_in">parse</span>(argc, argv); <span class="hljs-comment">//call parse function to initialize options</span>
+}
+
+Options::<span class="hljs-built_in">Options</span>(){
+    <span class="hljs-built_in">reset</span>(); <span class="hljs-comment">//initialize all options to default values</span>
+}
+
+<span class="hljs-comment">//function to reset all options to default value</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Options::reset</span><span class="hljs-params">()</span> </span>{
+    lines_ = <span class="hljs-literal">false</span>;
+    words_ = <span class="hljs-literal">false</span>;
+    characters_ = <span class="hljs-literal">false</span>;
+    bytes_ = <span class="hljs-literal">false</span>;
+    longest_line_ = <span class="hljs-literal">false</span>;
+    help_ = <span class="hljs-literal">false</span>;
+    version_ = <span class="hljs-literal">false</span>;
+    verbose_ = <span class="hljs-literal">false</span>;
+    file_names_.<span class="hljs-built_in">clear</span>(); <span class="hljs-comment">//clear the list of file names</span>
+}
+
+<span class="hljs-comment">//function to parse command-line arguments</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Options::parse</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span></span>{
+    <span class="hljs-built_in">reset</span>();<span class="hljs-comment">// reset b4 parsing new arguments  </span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; argc; ++i){
+        std::string arg = argv[i];  <span class="hljs-comment">//same  std::string arg { argv[i] };</span>
+        <span class="hljs-keyword">if</span>(arg[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;-&#x27;</span>){
+            <span class="hljs-keyword">if</span>(arg == <span class="hljs-string">&quot;--help&quot;</span>){
+                help_ = <span class="hljs-literal">true</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(arg == <span class="hljs-string">&quot;--version&quot;</span>){
+                version_ = <span class="hljs-literal">true</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (arg == <span class="hljs-string">&quot;--verbose&quot;</span>) {
+                verbose_ = <span class="hljs-literal">true</span>;
+            } <span class="hljs-keyword">else</span>{
+                <span class="hljs-comment">//handle short options</span>
+                <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> j = <span class="hljs-number">1</span>; j &lt; arg.<span class="hljs-built_in">size</span>(); ++j) {
+                    <span class="hljs-keyword">switch</span> (arg[j]) {
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;l&#x27;</span>: lines_ = <span class="hljs-literal">true</span>; <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;w&#x27;</span>: words_ = <span class="hljs-literal">true</span>; <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;m&#x27;</span>: characters_ = <span class="hljs-literal">true</span>; <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;c&#x27;</span>: bytes_ = <span class="hljs-literal">true</span>; <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;L&#x27;</span>: longest_line_ = <span class="hljs-literal">true</span>; <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">default</span>:
+                        <span class="hljs-comment">//throw an exception for invalid options</span>
+                            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;invalid option passed: &quot;</span> + arg);
+                    }
+                }
+            } 
+        }   <span class="hljs-keyword">else</span>{
+                <span class="hljs-comment">//if the argument is not an option treat it as a file name</span>
+                file_names_.<span class="hljs-built_in">push_back</span>(arg); <span class="hljs-comment">// this is a member function of std::vector that appends the value of arg to the end of the vector, increasing its size by one. file_names_.push_back(arg); is a simple and effective way to collect and store file names from command-line arguments in a std::vector.</span>
+            }
+    }
+}
+
+<span class="hljs-comment">//accessors functions to check if specific options are enabled</span>
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::lines</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> lines_; }
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::words</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> words_; }
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::characters</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> characters_; }
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::bytes</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> bytes_; }
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::longest_line</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> longest_line_; }
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::help</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> help_; }
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::version</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> version_; }
+<span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">Options::verbose</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> verbose_; }
+
+<span class="hljs-comment">//accessor function to get the list of file names</span>
+<span class="hljs-function"><span class="hljs-type">const</span> std::vector&lt;std::string&gt;&amp; <span class="hljs-title">Options::file_names</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> file_names_;
+}   
+
+<span class="hljs-comment">//function to print the parsed options to the output stream   </span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Options::print</span><span class="hljs-params">(std::ostream&amp; out)</span> <span class="hljs-type">const</span></span>{
+    out &lt;&lt; <span class="hljs-string">&quot;Options:&quot;</span>   
+        &lt;&lt; <span class="hljs-string">&quot;\n\tlines: &quot;</span>        &lt;&lt; std::boolalpha &lt;&lt; lines_
+        &lt;&lt; <span class="hljs-string">&quot;\n\twords: &quot;</span>        &lt;&lt; std::boolalpha &lt;&lt; words_
+        &lt;&lt; <span class="hljs-string">&quot;\n\tcharacters: &quot;</span>   &lt;&lt; std::boolalpha &lt;&lt; characters_
+        &lt;&lt; <span class="hljs-string">&quot;\n\tbytes: &quot;</span>        &lt;&lt; std::boolalpha &lt;&lt; bytes_
+        &lt;&lt; <span class="hljs-string">&quot;\n\tlongest_line: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; longest_line_
+        &lt;&lt; <span class="hljs-string">&quot;\n\thelp: &quot;</span>         &lt;&lt; std::boolalpha &lt;&lt; help_
+        &lt;&lt; <span class="hljs-string">&quot;\n\tversion: &quot;</span>      &lt;&lt; std::boolalpha &lt;&lt; version_
+        &lt;&lt; <span class="hljs-string">&quot;\n\tfiles: &quot;</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; fn : file_names_){
+        out &lt;&lt; <span class="hljs-string">&quot;\n\t * &quot;</span> &lt;&lt; fn;
+    }
+}
+
+std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; out, <span class="hljs-type">const</span> Options&amp; opt){
+    opt.<span class="hljs-built_in">print</span>(out); <span class="hljs-comment">//call print function</span>
+    <span class="hljs-keyword">return</span> out;
+}
+
+<span class="hljs-comment">//FILE_COUNTS.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> FILE_COUNTS_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> FILE_COUNTS_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span> <span class="hljs-comment">//std::string</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ostream&gt;</span> <span class="hljs-comment">//std::ostream</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;options.h&quot;</span> </span>
+
+<span class="hljs-comment">// define the `FileCounts` struct to store counts for a file</span>
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">FileCounts</span> {
+    std::<span class="hljs-type">size_t</span> lines{};               <span class="hljs-comment">//number of lines</span>
+    std::<span class="hljs-type">size_t</span> words{};
+    std::<span class="hljs-type">size_t</span> charaters{};
+    std::<span class="hljs-type">size_t</span> bytes{};
+    std::<span class="hljs-type">size_t</span> maximum_line_length{}; <span class="hljs-comment">//length of the longest line</span>
+    std::string file_name{};           <span class="hljs-comment">//name of the file  </span>
+
+    <span class="hljs-comment">//function to print count to the output stream</span>
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(std::ostream&amp; out, <span class="hljs-type">const</span> Options&amp; opt)</span> <span class="hljs-type">const</span></span>;
+
+};
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">//FILE_COUNTS_H</span></span>
+
+<span class="hljs-comment">//FILE_COUNTS.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;file_counts.h&quot;</span></span>
+
+<span class="hljs-comment">//function to print the counts to the output stream</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FileCounts::print</span><span class="hljs-params">(std::ostream&amp; out, <span class="hljs-type">const</span> Options&amp; opt)</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-keyword">if</span>(opt.<span class="hljs-built_in">lines</span>()) out &lt;&lt; lines &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+    <span class="hljs-keyword">if</span>(opt.<span class="hljs-built_in">words</span>()) out &lt;&lt; words &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+    <span class="hljs-keyword">if</span>(opt.<span class="hljs-built_in">characters</span>()) out &lt;&lt; charaters &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+    <span class="hljs-keyword">if</span>(opt.<span class="hljs-built_in">bytes</span>()) out &lt;&lt; bytes &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+    <span class="hljs-keyword">if</span>(opt.<span class="hljs-built_in">longest_line</span>()) out &lt;&lt; maximum_line_length &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+    out &lt;&lt; file_name &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>; <span class="hljs-comment">//print the file name</span>
+}
+
+<span class="hljs-comment">//COUNTER.H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> COUNTER_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> COUNTER_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;file_counts.h&quot;</span> <span class="hljs-comment">//for FileCounts struct</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;options.h&quot;</span>     <span class="hljs-comment">//for Options class</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span>        <span class="hljs-comment">//for std::string</span></span>
+
+<span class="hljs-comment">//Counter class to process files and count lines, words...</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Counter</span> {
+<span class="hljs-keyword">public</span>: 
+<span class="hljs-comment">// Constructor that takes an Options object to configure counting behavior</span>
+    <span class="hljs-built_in">Counter</span>(<span class="hljs-type">const</span> Options&amp; opts);
+ <span class="hljs-comment">// Function to process a file and return its counts</span>
+    <span class="hljs-function">FileCounts <span class="hljs-title">process</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; file_name)</span></span>;
+
+<span class="hljs-keyword">private</span>:
+    Options opts_; <span class="hljs-comment">// Store the options passed to the constructor</span>
+    <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">count_words</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span></span>;
+    <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">count_characters</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span></span>;
+};
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span> <span class="hljs-comment">//COUNTER_H</span></span>
+
+<span class="hljs-comment">//COUNTER.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;counter.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fstream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sstream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span>
+
+<span class="hljs-comment">//constructor implementation</span>
+Counter::<span class="hljs-built_in">Counter</span>(<span class="hljs-type">const</span> Options&amp; opts) : <span class="hljs-built_in">opts_</span>(opts) {}
+
+<span class="hljs-comment">// Function to process a file and return its counts</span>
+<span class="hljs-function">FileCounts <span class="hljs-title">Counter::process</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; file_name)</span> </span>{
+    <span class="hljs-function">std::ifstream <span class="hljs-title">file</span><span class="hljs-params">(file_name)</span></span>; <span class="hljs-comment">//open file for reading</span>
+    <span class="hljs-keyword">if</span> (!file) {
+        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">runtime_error</span>(<span class="hljs-string">&quot;Cannot open file: &quot;</span> + file_name); <span class="hljs-comment">//Use std::runtime_error when the error is caused by an external, runtime condition. Use std::invalid_argument when the error is due to incorrect function input.</span>
+    }
+
+    <span class="hljs-comment">//create a FileCounts object to store the counts for this file</span>
+    FileCounts counts;
+    counts.file_name = file_name; <span class="hljs-comment">//set the file name</span>
+
+    std::string line;
+    <span class="hljs-keyword">while</span> (std::<span class="hljs-built_in">getline</span>(file, line)) {
+        counts.lines++;
+        counts.words += <span class="hljs-built_in">count_words</span>(line);
+        counts.charaters += <span class="hljs-built_in">count_characters</span>(line);
+        counts.bytes += line.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>; <span class="hljs-comment">// +1 for newline character</span>
+        counts.maximum_line_length = std::<span class="hljs-built_in">max</span>(counts.maximum_line_length, line.<span class="hljs-built_in">size</span>()); <span class="hljs-comment">//update the longest line length</span>
+    }
+
+    <span class="hljs-keyword">return</span> counts;
+}
+
+<span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">Counter::count_words</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span></span>{
+    <span class="hljs-function">std::istringstream <span class="hljs-title">stream</span><span class="hljs-params">(text)</span></span>;  <span class="hljs-comment">//create string stream for the text</span>
+    std::<span class="hljs-type">size_t</span> word_count = <span class="hljs-number">0</span>;
+    std::string word;
+    <span class="hljs-keyword">while</span>(stream &gt;&gt; word){ <span class="hljs-comment">//extract word from stream</span>
+        word_count++;
+    }
+    <span class="hljs-keyword">return</span> word_count;
+}
+
+<span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">Counter::count_characters</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> text.<span class="hljs-built_in">size</span>();   <span class="hljs-comment">//return the size of the string (number of characters)                                                                           </span>
+}
+
+<span class="hljs-comment">//MAIN.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;options.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;counter.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;file_counts.h&quot;</span></span>
+
+<span class="hljs-comment">//define a multi-line string for the help text</span>
+<span class="hljs-keyword">auto</span> help_text = <span class="hljs-string">R&quot;(
+    Usage: wc [OPTION]... [FILE]...
+    Print newline, word, and byte counts for each FILE, and a total line if more than one FILE is specified.
+    With no FILE, or when FILE is -, read standard input.
+    
+    The options below may be used to select which counts are printed, always in the following order:
+    lines, words, characters, bytes, maximum line length.
+    
+      -c, --bytes            print the byte counts
+      -m, --chars            print the character counts
+      -l, --lines            print the newline counts
+      -w, --words            print the word counts
+      -L, --max-line-length  print the length of the longest line
+          --help             display this help and exit
+          --version          output version information and exit
+    )&quot;</span>;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> *argv[])</span></span>{
+    <span class="hljs-keyword">try</span>{
+    <span class="hljs-comment">//parse command-line arguments using the Options class</span>
+        Options opts{argc, argv};
+
+    <span class="hljs-comment">//if verbose mode enable print the parsed options</span>
+        <span class="hljs-keyword">if</span>(opts.<span class="hljs-built_in">verbose</span>()){
+            opts.<span class="hljs-built_in">print</span>(std::cout);
+        }
+
+        <span class="hljs-keyword">if</span>(opts.<span class="hljs-built_in">help</span>()){
+            std::cout &lt;&lt; help_text;
+            <span class="hljs-keyword">return</span> EXIT_SUCCESS;
+        }
+
+        <span class="hljs-keyword">if</span>(opts.<span class="hljs-built_in">version</span>()){
+            std::cout &lt;&lt; <span class="hljs-string">&quot;wc (my implementation) 1.0\n&quot;</span>;
+            <span class="hljs-keyword">return</span> EXIT_SUCCESS;
+        }
+
+        <span class="hljs-keyword">if</span>(opts.<span class="hljs-built_in">file_names</span>().<span class="hljs-built_in">empty</span>()){
+            std::cout &lt;&lt; <span class="hljs-string">&quot;No file name passed.\n&quot;</span>;
+            std::cout &lt;&lt; <span class="hljs-string">&quot;Try &#x27;wc --help&#x27; for more information.\n&quot;</span>;
+            <span class="hljs-keyword">return</span> EXIT_FAILURE;
+        }
+        <span class="hljs-comment">// Create a Counter object with the parsed options</span>
+        Counter counter{opts};
+        FileCounts totals; <span class="hljs-comment">//create a FileCounts object to store totals (if multiple files are processed)</span>
+
+        <span class="hljs-comment">// Process each file and print its counts</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; file_name : opts.<span class="hljs-built_in">file_names</span>()){
+            <span class="hljs-keyword">auto</span> counts = counter.<span class="hljs-built_in">process</span>(file_name);
+            counts.<span class="hljs-built_in">print</span>(std::cout, opts);
+        }
+        <span class="hljs-keyword">return</span> EXIT_SUCCESS;
+    } <span class="hljs-built_in">catch</span> (std::invalid_argument&amp; exc){ <span class="hljs-comment">//catch to handle throw exception in process function</span>
+        std::cout &lt;&lt; exc.<span class="hljs-built_in">what</span>() &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+        std::cout &lt;&lt; <span class="hljs-string">&quot;Try &#x27;wc --help&#x27; for more informantion.\n&quot;</span>;
+        <span class="hljs-keyword">return</span> EXIT_FAILURE;
+    } <span class="hljs-built_in">catch</span> (<span class="hljs-type">const</span> std::runtime_error&amp; exc){
+        std::cout &lt;&lt; exc.<span class="hljs-built_in">what</span>() &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+        <span class="hljs-keyword">return</span> EXIT_FAILURE;
+    }
+}
+</code></pre>
+
+            
+            
+        </body>
+        </html>

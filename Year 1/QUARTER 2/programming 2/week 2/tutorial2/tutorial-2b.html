@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 2 - Tutorial 2&colon; CMake and Debugging</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-2---tutorial-2-cmake-and-debugging">Week 2 - Tutorial 2: CMake and Debugging</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 23/11/2024</p>
+<h2 id="introduction">Introduction</h2>
+<p>As your programs grow in size and complexity, it ebecomes increasingly difficult to manage the build process manually. In this tutorial, you will learn how to use Make and CMake to automate the build process for your programs.
+Make is a build automation tool that uses a Makefile to specify how to build a program. CMake is a more modern build automation tool that generates Makefiles or project files for other build tools. Both tools are widely used in industry and are essential for managing large software projects.</p>
+<h3 id="activity-1---installing-cmake">Activity 1 - Installing CMake</h3>
+<p>In a WSL terminal, type <code>cmake --version</code> to check if CMake is installed. If it is not installed, you can install it using the following command:</p>
+<pre><code class="language-bash">sudo apt install cmake
+</code></pre>
+<p>Check to see if CMake is installed by running <code>cmake --version</code> again. Make sure you have at least version 3.20 installed.</p>
+<h2 id="the-cmakeliststxt-file">The CMakeLists.txt file</h2>
+<p>A <code>CMakeLists.txt</code> file describes how to build a project using CMake. It contains a series of commands to specify the source files, libraries, and build targets for the project.
+At a minimum, a <code>CMakeLists.txt</code> file should contain the following:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+
+<span class="hljs-keyword">project</span>(Tutorial)
+</code></pre>
+<p>Here, <code>cmake_minimum_required</code> specifies the minimum version (in this case 3.20) of CMake required to build the project, and <code>project</code> specifies the name of the project.
+The project is named &quot;Tutorial&quot; in this example.</p>
+<p>If you have the C/C++ extension pack installed in Visual Studio Code, you can create a new CMake project by opening the command palette (Ctrl+Shift+P or F1) and running the <code>CMake: Quick Start</code> command.
+This will ask you a series of questions to generate a <code>CMakeLists.txt</code> file and create a build directory for your project.</p>
+<h3 id="activity-2---creating-a-cmakeliststxt-file">Activity 2 - Creating a CMakeLists.txt file</h3>
+<p>The folder <code>acitivity2</code> contains a simple C program.
+The folder does not contain a <code>CMakeLists.txt</code> file yet - you will need to create one.</p>
+<p>Open the folder in VS Code and create a new file named <code>CMakeLists.txt</code> in the folder.
+The file must contain one line that uses the <code>add_executable</code> command to specify which executable must be built in the project, and what source files the executable is built from.</p>
+<p>When you have created the <code>CMakeLists.txt</code> file, build the project using the CMake extension in VS Code.
+You can use the keyboard shortcut <code>Ctrl+Shift+P</code> to open the command palette, and then run the <code>CMake: Build</code> command, or use the <code>F7</code> key (this is the default keybinding for building the project).
+You can then run the program by pressing <code>F5</code> or using the <code>Run</code> button in the top right corner of the window.</p>
+<p>Verify that the program is built and run successfully.
+When you're done, paste the contents of the <code>CMakeLists.txt</code> file into the markdown file.</p>
+<pre><code class="language-cmake"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> insert the contents of your CMakeLists.txt file here</span>
+<span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+
+<span class="hljs-keyword">project</span>(numberfun)
+
+<span class="hljs-keyword">add_executable</span>(numberfun numberfun.c main.c functions.c)
+<span class="hljs-keyword">target_compile_options</span>(numberfun PRIVATE -Wall) 
+</code></pre>
+<h2 id="generating-multiple-executables-with-cmake">Generating multiple executables with CMake</h2>
+<p>You can generate multiple executables in a single CMake project by using the <code>add_executable</code> command multiple times.
+For example, the following <code>CMakeLists.txt</code> file generates two executables, <code>tutorial1</code> and <code>tutorial2</code>, from the source files <code>tutorial1.c</code> and <code>tutorial2.c</code>, which both rely on the functions defined in <code>functions.c</code>.:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+
+<span class="hljs-keyword">project</span>(Tutorial)
+
+<span class="hljs-keyword">add_executable</span>(Tutorial1 tutorial1.c functions.c)
+<span class="hljs-keyword">add_executable</span>(Tutorial2 tutorial2.c functions.c)
+</code></pre>
+<p>When you build the project, CMake will generate two executables, <code>tutorial1</code> and <code>tutorial2</code>.
+These executables will be placed in a separate subdirectory within the build directory.</p>
+<h3 id="activity-3---generating-multiple-executables-with-cmake">Activity 3 - Generating multiple executables with CMake</h3>
+<p>The folder <code>activity3</code> contains two programs: <code>primes.c</code> and <code>fibonacci.c</code>.
+Create a <code>CMakeLists.txt</code> file that generates two executables, <code>primes</code> and <code>fibonacci</code>, from the source files in the folder.</p>
+<p>When you have created the <code>CMakeLists.txt</code> file, build the project using the CMake extension in VS Code.</p>
+<p>Next, run <strong>both</strong> programs and verify that they work correctly.
+When you're done, paste the contents of the <code>CMakeLists.txt</code> file into the markdown file.</p>
+<pre><code class="language-cmake"><span class="hljs-comment"># TODO insert the contents of your CMakeLists.txt file here</span>
+<span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+
+<span class="hljs-keyword">project</span>(Activity3)
+
+<span class="hljs-keyword">add_executable</span>(fibonacci fibonacci.c functions.c)
+<span class="hljs-keyword">add_executable</span>(primes primes.c functions.c)
+</code></pre>
+<h2 id="splitting-the-cmakeliststxt-file-into-multiple-files">Splitting the CMakeLists.txt file into multiple files</h2>
+<p>When working with projects that contain multiple &quot;parts&quot; (e.g. multiple executables or libraries), it can be helpful to split the <code>CMakeLists.txt</code> file into multiple files, and distribute these files across the project directory structure.</p>
+<p>For example, for the previous activity you could setup the following directory structure:</p>
+<pre><code class="language-plaintext">activity3/
+    CMakeLists.txt
+    primes/
+        CMakeLists.txt
+        primes.c
+    fibonacci/
+        CMakeLists.txt
+        fibonacci.c
+    functions/
+        functions.c
+        functions.h
+</code></pre>
+<p>The &quot;main&quot; <code>CMakeLists.txt</code> file is the one in the root of the project directory, and it should <strong>include</strong> the <code>CMakeLists.txt</code> files in the <code>primes</code> and <code>fibonacci</code> directories using <code>add_subdirectory</code>.
+The two <code>CMakeLists.txt</code> files in the <code>primes</code> and <code>fibonacci</code> directories can be kept very simple.
+The former could for example contain the following:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">add_executable</span>(primes primes.c ../functions/functions.c)
+<span class="hljs-keyword">target_include_directories</span>(primes PRIVATE ../functions)
+</code></pre>
+<p>Here, the <code>target_include_directories</code> command is used to specify that the <code>primes</code> executable should include the <code>functions</code> directory when looking for header files.
+If we would not do this, the <code>#include &quot;functions.h&quot;</code> statement in <code>primes.c</code> would not work because the compiler would not know where to find the <code>functions.h</code> file.</p>
+<p>The main <code>CMakeLists.txt</code> file simply includes the <code>CMakeLists.txt</code> files in the <code>primes</code> and <code>fibonacci</code> directories:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+<span class="hljs-keyword">project</span>(Tutorial)
+
+<span class="hljs-keyword">add_subdirectory</span>(primes)
+<span class="hljs-keyword">add_subdirectory</span>(fibonacci)
+</code></pre>
+<h3 id="activity-4---splitting-the-cmakeliststxt-file-into-multiple-files">Activity 4 - Splitting the CMakeLists.txt file into multiple files</h3>
+<p>The folder <code>acitivity4</code> contains the same programs as the previous activity, but now they are split into separate directories: <code>primes</code>,  <code>fibonacci</code>, and <code>functions</code>.
+Create three <code>CMakeLists.txt</code> files: one in the root of the project directory, and one in each of the <code>primes</code> and <code>fibonacci</code> directories.
+The <code>CMakeLists.txt</code> file in the root of the project should include the <code>CMakeLists.txt</code> files in the <code>primes</code> and <code>fibonacci</code> directories using <code>add_subdirectory</code>.
+The ones in the <code>primes</code> and <code>fibonacci</code> directories should contain the <code>add_executable</code> command to build the executables, and use <code>target_include_directories</code> to make sure that the <code>functions</code> directory is included when looking for header files.</p>
+<p>You are not allowed to copy the <code>functions.c</code> and <code>functions.h</code> files to the <code>primes</code> and <code>fibonacci</code> directories.</p>
+<p>When you have created the <code>CMakeLists.txt</code> files, build the project using the CMake extension in VS Code.
+Make sure that you can run both programs and that they work correctly.
+When you're done, paste the contents of the <code>CMakeLists.txt</code> files into the markdown file.</p>
+<pre><code class="language-cmake"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> insert the contents of the CMakeLists.txt file in the root of the project here</span>
+<span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+
+<span class="hljs-keyword">project</span>(Activity4)
+
+<span class="hljs-keyword">add_subdirectory</span>(fibonacci)
+<span class="hljs-keyword">add_subdirectory</span>(primes)
+
+
+</code></pre>
+<pre><code class="language-cmake"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> insert the contents of the CMakeLists.txt file in the primes directory here</span>
+<span class="hljs-keyword">add_executable</span>(primes primes.c ../functions/functions.c)
+
+<span class="hljs-keyword">target_include_directories</span>(primes PRIVATE ../functions)
+</code></pre>
+<pre><code class="language-cmake"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> insert the contents of the CMakeLists.txt file in the fibonacci directory here</span>
+<span class="hljs-keyword">add_executable</span>(fibonacci fibonacci.c ../functions/functions.c)
+
+<span class="hljs-keyword">target_include_directories</span>(fibonacci PRIVATE ../functions)
+</code></pre>
+<h2 id="creating-libraries-with-cmake">Creating libraries with CMake</h2>
+<p>You've exclusively built executables (i.e. programs that can be run) so far, but it's also possible to build libraries.
+A library is a collection of functions and data that can be used by other programs.
+It does not have a <code>main</code> function, as it is not a standalone program.</p>
+<p>To create a library with CMake, you use the <code>add_library</code> command instead of the <code>add_executable</code> command.
+The <code>add_library</code> command specifies the source files that make up the library, similar to how <code>add_executable</code> specifies the source files that make up an executable.</p>
+<p>Typically, when creating a library, you also develop a program that uses the library.
+This could be a simple program that tests the functions in the library, or a more complex program that uses the library to perform some task.
+Suppose for example that you're creating a library that contains a function to calculate the square root of a number (of course, this is just the start of this library, and it will contain more functions later).
+Your project directory structure could then look like this:</p>
+<pre><code class="language-plaintext">activity5/
+    CMakeLists.txt
+    lib/
+        CMakeLists.txt
+        mysqrt.c
+        mysqrt.h
+    main/
+        CMakeLists.txt
+        main.c
+</code></pre>
+<p>Here, the <code>lib</code> directory contains the source files for the library, and the <code>main</code> directory contains the source files for the program that uses the library.
+The <code>CMakeLists.txt</code> file in the <code>lib</code> directory should have an <code>add_library</code> line that specifies the source files for the library:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">add_library</span>(mathlib mysqrt.c)
+</code></pre>
+<p>Likewise, the <code>CMakeLists.txt</code> file in the <code>main</code> directory should have an <code>add_executable</code> line that specifies the source files for the program.
+However, the only source file in this case is <code>main.c</code> - the <code>mysqrt.c</code> file is not part of the program, but part of the library.
+To make its functions available to the program, the program must be <em>linked</em> to the library.
+To do this, you use the <code>target_link_libraries</code> command:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">target_link_libraries</span>(main mathlib)
+</code></pre>
+<p>Again, the <code>CMakeLists.txt</code> file in the root of the project should include the <code>CMakeLists.txt</code> files in the <code>lib</code> and <code>main</code> directories using <code>add_subdirectory</code>.</p>
+<p>One thing that is missing in the story so far is the fact that the executable built from <code>main.c</code> will not know where to find the header file <code>mysqrt.h</code>.
+To fix this, you can include the <code>target_include_directories</code> command in the <code>CMakeLists.txt</code> file in the <code>lib</code> directory, and using the <code>PUBLIC</code> keyword to make sure that the header files in the <code>lib</code> directory are included automatically by any executable that uses the library:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">target_include_directories</span>(mathlib PUBLIC .)
+</code></pre>
+<h3 id="activity-5---building-libraries-with-cmake">Activity 5 - Building libraries with CMake</h3>
+<p>The folder <code>activity5</code> contains two folders - <code>lib</code> and <code>main</code>.
+The <code>lib</code> folder contains some source and header files (<code>functions.c</code> and <code>functions.h</code>, among other things) that you can use to create a library.
+This library must then be used by the program in the <code>main</code> folder.</p>
+<p>The <code>CMakeLists.txt</code> file for the program (in the <code>main</code> directory) is already given and must not be modified.
+You'll need to create two <code>CMakeLists.txt</code> files: one in the root of the project directory, and one in the <code>lib</code> directory.
+Like you did in a previous activity, the <code>CMakeLists.txt</code> file in the root of the project should include the <code>CMakeLists.txt</code> files in the <code>lib</code> and <code>main</code> directories using <code>add_subdirectory</code>.
+Make sure that the header files in the <code>lib</code> directory are included automatically by any executable that uses the library.</p>
+<p>When you have created the <code>CMakeLists.txt</code> files, build the project using the CMake extension in VS Code and verify that the program works correctly.
+When you're done, paste the contents of the two <code>CMakeLists.txt</code> files you created into the markdown file, below.</p>
+<pre><code class="language-cmake"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> insert the contents of the CMakeLists.txt file in the root of the project here</span>
+<span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+
+<span class="hljs-keyword">project</span>(Activity5)
+
+<span class="hljs-keyword">add_subdirectory</span>(lib)
+<span class="hljs-keyword">add_subdirectory</span>(main)
+
+</code></pre>
+<pre><code class="language-cmake"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> insert the contents of the CMakeLists.txt file in the lib directory here</span>
+<span class="hljs-keyword">add_library</span>(mylib numberfun.c functions.c)
+<span class="hljs-keyword">target_compile_options</span>(mylib PRIVATE -Wall -Wextra -pedantic -Werror)
+<span class="hljs-keyword">target_include_directories</span>(mylib PUBLIC .)
+</code></pre>
+<h2 id="cmake-modules">CMake Modules</h2>
+<p>In CMake, modules are pre-defined scripts that provide additional functionality, simplify common tasks, or help find and configure third-party libraries. They are essentially .cmake files that you can include and execute in your CMakeLists.txt.</p>
+<p>The purpose of many CMake modules is to find and configure third-party libraries.
+As part of the CMake distribution, there are a number of modules that can be used to find and configure libraries such as <code>ncurses</code>, <code>OpenGL</code>, <code>OpenMP</code>, and many others.
+A list can be found in the <a href="https://cmake.org/cmake/help/latest/manual/cmake-modules.7.html">CMake documentation</a>.</p>
+<p>To use a module, you can use the <code>find_package</code> command in your <code>CMakeLists.txt</code> file.
+For example, to find and configure the <code>ncurses</code> library, you can use the following command:</p>
+<pre><code class="language-cmake"><span class="hljs-keyword">find_package</span>(Curses REQUIRED)
+</code></pre>
+<p>Depending on the library, this command may set a number of variables that you can next use in your <code>CMakeLists.txt</code> file.
+For example, the <code>Curses</code> module sets the <code>CURSES_INCLUDE_DIRS</code> and <code>CURSES_LIBRARIES</code> variables, which you can use to include the necessary directories and libraries in your project (these can then be used in the <code>target_include_directories</code> and <code>target_link_libraries</code> commands).
+For a full list, consult the documentation of the CMakes module you are using.</p>
+<h3 id="activity-6---using-the-curses-library-with-cmake">Activity 6 - Using the Curses library with CMake</h3>
+<p>The folder <code>activity6</code> contains a source file that relies on the <code>ncurses</code> library to print &quot;Hello, World!&quot; in the center of a window.
+To build the program, you need to link it to the <code>ncurses</code> library.</p>
+<p>Write a <code>CMakeLists.txt</code> file that builds the program and links it to the <code>ncurses</code> library.
+Use the <code>find_package</code> command to find and configure the <code>ncurses</code> library, and use the <code>target_include_directories</code> and <code>target_link_libraries</code> commands to include the necessary directories and libraries in your project.</p>
+<p>When you have created the <code>CMakeLists.txt</code> file, build the project using the CMake extension in VS Code.
+Make sure that the program builds and runs correctly by running it in the (external, so not within VS Code) terminal.</p>
+<p>If the program can be built and run successfully, paste the contents of the <code>CMakeLists.txt</code> file into the markdown file.</p>
+<pre><code class="language-cmake"><span class="hljs-comment"># <span class="hljs-doctag">TODO:</span> insert the contents of your CMakeLists.txt file here</span>
+<span class="hljs-keyword">cmake_minimum_required</span>(VERSION <span class="hljs-number">3.20</span>)
+
+<span class="hljs-comment"># Set the project name</span>
+<span class="hljs-keyword">project</span>(Activity6)
+
+<span class="hljs-comment"># Find the ncurses library</span>
+<span class="hljs-keyword">find_package</span>(Curses REQUIRED)
+
+<span class="hljs-comment"># Include the ncurses directories</span>
+<span class="hljs-keyword">target_include_directories</span>(<span class="hljs-variable">${CURSES_INCLUDE_DIR}</span>)
+
+<span class="hljs-comment"># Add the source file to the project</span>
+<span class="hljs-keyword">add_executable</span>(activity6 main.c functions.c)
+
+<span class="hljs-comment"># options passed to compiler per target</span>
+<span class="hljs-keyword">target_compile_options</span>(activity6 PRIVATE -Wall -Wextra -pedantic -Werror)
+
+<span class="hljs-comment"># Link the ncurses library to the executable</span>
+<span class="hljs-keyword">target_link_libraries</span>(activity6 <span class="hljs-variable">${CURSES_LIBRARIES}</span>)
+</code></pre>
+<h3 id="activity-7---debugging-with-gdb-in-vs-code">Activity 7 - Debugging with GDB in VS Code</h3>
+<p>The folder <code>activity7</code> contains a program that contains a bug.
+The program allows a user to enter a valid arithmetic expression (including parentheses, addition, subtraction, multiplication, and division operators) and then evaluates the expression, but it does not work correctly - it returns 0.0 for any expression entered.
+This is due to one particular line of code, in <code>parser.c</code>, that contains a bug.</p>
+<p>To be able to debug the program, create a <code>CMakeLists.txt</code> file for the project.
+You can do this manually, of by using the &quot;Quick Start&quot; command (from the CMake extension in the command palette).</p>
+<p>Open the folder in VS Code and set a breakpoint at the beginning of the <code>main</code> function so that the debugger will stop at that point.
+Next, start the debugger by pressing <code>Shift+F5</code>, or use the command palette and select the command <code>CMake: Debug</code>.
+Use the &quot;step into&quot; button to step through the program and find the bug.</p>
+<p>The program makes a lot of use of pointers, so you may need to use the &quot;watch&quot; feature in the debugger to see the values of the pointers.</p>
+<p>When you have found the bug, fix it and verify that the program works correctly.
+If you have indeed fixed the problem, include the code you changed, plus a description of the bug and how you fixed it, in the code block below.</p>
+<p><strong>NOTE</strong>: If you're using a Mac, you may need to install the <code>gdb</code> debugger using <code>brew install gdb</code> before you can use it in VS Code.
+If you can't get it to work, contact your lab teacher for help.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> describe what the bug was and how you fixed it</span>
+&gt; Bug: The result of strtod was not stored in the *result pointer, which meant the number parsed from the <span class="hljs-built_in">string</span> was ignored, leading to <span class="hljs-number">0.0</span> being returned <span class="hljs-keyword">for</span> all expressions.
+&gt; If the result is not stored in *result pointer, the program has no way of knowing what the parsed number is. This causes calculations like <span class="hljs-number">2</span> + <span class="hljs-number">3</span> to fail because the functions don<span class="hljs-number">&#x27;</span>t have the intermediate values to <span class="hljs-keyword">continue</span>.
+&gt; Fix: Assign the <span class="hljs-keyword">return</span> value of strtod to *result pointer.
+</code></pre>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include the full code of the function you changed here as well</span>
+<span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-title function_">parse_number_or_pexpression</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *calculation, <span class="hljs-type">double</span> *result, <span class="hljs-type">bool</span> *error)</span> {
+    <span class="hljs-comment">// skip whitespace</span>
+    calculation = skip_whitespace(calculation);
+
+    <span class="hljs-comment">// check if this is a parenthesized expression or a number</span>
+    <span class="hljs-keyword">if</span> (*calculation == <span class="hljs-string">&#x27;(&#x27;</span>) {
+        <span class="hljs-comment">// if it&#x27;s a parenthesized expression, calculate the sum inside the parentheses</span>
+        calculation = calculate_sum(calculation + <span class="hljs-number">1</span>, result, error);
+
+        <span class="hljs-comment">// next, skip any whitespace</span>
+        calculation = skip_whitespace(calculation);
+
+        <span class="hljs-comment">// there should now be a closing parenthesis. If it&#x27;s missing, set the error flag and return the calculation pointer</span>
+        <span class="hljs-keyword">if</span> (*calculation != <span class="hljs-string">&#x27;)&#x27;</span>) {
+            *error = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">return</span> calculation;
+        }
+
+        <span class="hljs-comment">// move the calculation pointer past the closing parenthesis, skipping any trailing whitespace</span>
+        <span class="hljs-keyword">return</span> skip_whitespace(calculation + <span class="hljs-number">1</span>);
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// if it&#x27;s not a parenthesized expression, it should be a number</span>
+        <span class="hljs-comment">// use the strtod() function to parse the number</span>
+        <span class="hljs-comment">// this function modifies a pointer to the first character that couldn&#x27;t be parsed as a number</span>
+        <span class="hljs-type">char</span> *end;  <span class="hljs-comment">// will point to the first character that couldn&#x27;t be parsed as a number</span>
+        *result = strtod(calculation, &amp;end);    <span class="hljs-comment">// parse the number</span>
+
+        <span class="hljs-comment">// if end is pointing to the beginning of the string, then no number was found, so it&#x27;s an error</span>
+        <span class="hljs-keyword">if</span> (end == calculation) *error = <span class="hljs-literal">true</span>; 
+
+        <span class="hljs-comment">// return the calculation pointer, skipping any trailing whitespace</span>
+        <span class="hljs-keyword">return</span> skip_whitespace(end);
+    }
+}
+
+</code></pre>
+<h2 id="sign-off">Sign off</h2>
+<p>To sign off this tutorial, you will need to have done the following:</p>
+<ul>
+<li>You have answered all questions in the markdown file, and all programs you've created compile and run without errors.</li>
+<li>You converted the markdown file to HTML, and submitted it at the correct submit point in Brightspace.</li>
+</ul>
+<p>Your lab teacher will mark the tutorial as completed in Brightspace.
+In case there are issues with your programs or answers, your lab teacher will mark it with 0 points in Brightspace.
+If you receive 0 points, make sure to check the feedback, make the necessary changes, and resubmit the tutorial.
+Do this before the end of week 2.9, as this is the deadline for having submitted all tutorials and assignments.</p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

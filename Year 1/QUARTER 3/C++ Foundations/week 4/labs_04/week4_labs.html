@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - C&plus;&plus;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---c">Week 3 - C++</h1>
+<p>Name: SON CAO</p>
+<p>Group: ETI1V.IA</p>
+<p>Date: 4/3/2025</p>
+<h1 id="labs">LABS</h1>
+<pre><code class="language-cpp"><span class="hljs-comment">//OPTIONS.CPP</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;options.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdexcept&gt;</span></span>
+
+<span class="hljs-keyword">namespace</span> repeat
+{
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> implement this function and return the actual, parsed options</span>
+<span class="hljs-function">Options <span class="hljs-title">parse</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span> * argv[])</span>
+</span>{
+    Options result;
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; argc; ++i){
+        <span class="hljs-comment">// convert argv[i] to string</span>
+        std::string arg{ argv[i] };
+
+        <span class="hljs-comment">//handle flags</span>
+        <span class="hljs-keyword">if</span>( arg == <span class="hljs-string">&quot;-h&quot;</span> || arg == <span class="hljs-string">&quot;--help&quot;</span>){
+            result.help = <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( arg == <span class="hljs-string">&quot;-C&quot;</span> || arg == <span class="hljs-string">&quot;--capitalize&quot;</span>){
+            result.capitalize = <span class="hljs-literal">true</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( arg == <span class="hljs-string">&quot;-n&quot;</span> || arg == <span class="hljs-string">&quot;--newline&quot;</span>){
+            result.append_newline = <span class="hljs-literal">true</span>;
+        }
+
+
+        <span class="hljs-comment">//handle combined short flags (e.g., -Cn) and short options (-cred, -cblue)</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( arg[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; arg[<span class="hljs-number">1</span>] != <span class="hljs-string">&#x27;-&#x27;</span> &amp;&amp; arg.<span class="hljs-built_in">length</span>() &gt; <span class="hljs-number">1</span>){
+            <span class="hljs-keyword">for</span>(<span class="hljs-type">size_t</span> j = <span class="hljs-number">1</span>; j &lt; arg.<span class="hljs-built_in">length</span>(); ++j){
+                <span class="hljs-keyword">switch</span>( arg[j] ){
+                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;h&#x27;</span>:
+                        result.help = <span class="hljs-literal">true</span>;
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;C&#x27;</span>:
+                        result.capitalize = <span class="hljs-literal">true</span>;
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;n&#x27;</span>:
+                        result.append_newline = <span class="hljs-literal">true</span>;
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;r&#x27;</span>:
+                        <span class="hljs-comment">// Handle -r flag (repeat)</span>
+                        <span class="hljs-keyword">if</span> (j + <span class="hljs-number">1</span> &lt; arg.<span class="hljs-built_in">length</span>()) {
+                            std::string repeatValue = arg.<span class="hljs-built_in">substr</span>(j + <span class="hljs-number">1</span>);
+                            <span class="hljs-keyword">try</span> {
+                                result.repeat = std::<span class="hljs-built_in">stoi</span>(repeatValue);
+                                <span class="hljs-keyword">if</span> (result.repeat &lt; <span class="hljs-number">-1</span>) {
+                                    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Repeat value must be -1 or greater.&quot;</span>);
+                                }
+                            } <span class="hljs-built_in">catch</span> (<span class="hljs-type">const</span> std::invalid_argument&amp;) {
+                                <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Invalid repeat value: &quot;</span> + repeatValue);
+                            }
+                            j = arg.<span class="hljs-built_in">length</span>(); <span class="hljs-comment">// Skip the rest of the flags</span>
+                        } <span class="hljs-keyword">else</span> {
+                            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Missing repeat value for -r flag.&quot;</span>);
+                        }
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;c&#x27;</span>:
+                        <span class="hljs-comment">// Handle -c flag (color)</span>
+                        <span class="hljs-keyword">if</span> (j + <span class="hljs-number">1</span> &lt; arg.<span class="hljs-built_in">length</span>()) {
+                            std::string colorValue = arg.<span class="hljs-built_in">substr</span>(j + <span class="hljs-number">1</span>);
+                            <span class="hljs-keyword">try</span> {
+                                result.color = <span class="hljs-built_in">from_string</span>(colorValue);
+                            } <span class="hljs-built_in">catch</span> (<span class="hljs-type">const</span> std::invalid_argument&amp;) {
+                                <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Invalid color value: &quot;</span> + colorValue);
+                            }
+                            j = arg.<span class="hljs-built_in">length</span>(); <span class="hljs-comment">// Skip the rest of the flags</span>
+                        } <span class="hljs-keyword">else</span> {
+                            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Missing color value for -c flag.&quot;</span>);
+                        }
+                        <span class="hljs-keyword">break</span>;
+                    <span class="hljs-keyword">default</span>:
+                        <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Unknown short flag: -&quot;</span> + std::<span class="hljs-built_in">string</span>(<span class="hljs-number">1</span>, arg[j]));
+                }
+            }
+        }
+
+
+        <span class="hljs-comment">//handle long options</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (arg.<span class="hljs-built_in">substr</span> (<span class="hljs-number">0</span>, <span class="hljs-number">9</span>) == <span class="hljs-string">&quot;--repeat=&quot;</span>){
+            std::string repeatValue = arg.<span class="hljs-built_in">substr</span>(<span class="hljs-number">9</span>);
+            <span class="hljs-keyword">try</span>{  <span class="hljs-comment">//try: Used to wrap a block of code that might throw an exception.If an exception is thrown inside the try block, the program jumps to the corresponding catch block.</span>
+                result.repeat = std::<span class="hljs-built_in">stoi</span>(repeatValue);
+                <span class="hljs-keyword">if</span>(result.repeat &lt; <span class="hljs-number">-1</span>){  <span class="hljs-comment">//if error</span>
+                    <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Repeat value must be -1 or greater.&quot;</span>);
+                }
+            }               
+            <span class="hljs-built_in">catch</span> (<span class="hljs-type">const</span> std::invalid_argument&amp;){         <span class="hljs-comment">//Used to handle the exception thrown by the try block. You can specify the type of exception you want to catch (e.g., std::exception, std::invalid_argument, etc.).</span>
+                <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Invalid repeat value: &quot;</span> + repeatValue);
+            }
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( arg.<span class="hljs-built_in">substr</span>(<span class="hljs-number">0</span>, <span class="hljs-number">8</span>) == <span class="hljs-string">&quot;--color=&quot;</span>){
+            std::string colorValue = arg.<span class="hljs-built_in">substr</span>(<span class="hljs-number">8</span>);
+            <span class="hljs-keyword">try</span>{
+                result.color = <span class="hljs-built_in">from_string</span>(colorValue);
+            }
+            <span class="hljs-built_in">catch</span> (<span class="hljs-type">const</span> std::invalid_argument&amp;){
+                <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;Invalid color value: &quot;</span> + colorValue);
+            }
+        }
+
+        <span class="hljs-comment">//handle positional argument</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( arg[<span class="hljs-number">0</span>] != <span class="hljs-string">&#x27;-&#x27;</span>) {
+            result.text = arg;
+        } <span class="hljs-keyword">else</span>{
+            <span class="hljs-keyword">throw</span> std::<span class="hljs-built_in">invalid_argument</span>(<span class="hljs-string">&quot;unknown argument: &quot;</span> + arg);
+        }
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+
+<span class="hljs-function">Color <span class="hljs-title">from_string</span><span class="hljs-params">(<span class="hljs-type">const</span> std::string&amp; text)</span>
+</span>{
+    <span class="hljs-keyword">if</span> (text == <span class="hljs-string">&quot;red&quot;</span>)
+    {
+        <span class="hljs-keyword">return</span> Color::red;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (text == <span class="hljs-string">&quot;green&quot;</span>)
+    {
+        <span class="hljs-keyword">return</span> Color::green;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (text == <span class="hljs-string">&quot;blue&quot;</span>)
+    {
+        <span class="hljs-keyword">return</span> Color::blue;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (text == <span class="hljs-string">&quot;none&quot;</span>)
+    {
+        <span class="hljs-keyword">return</span> Color::none;
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-keyword">throw</span> std::invalid_argument{<span class="hljs-string">&quot;Invalid color&quot;</span>};
+    }
+}
+
+std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; out, Color color)
+{
+    <span class="hljs-keyword">switch</span>(color)
+    {
+        <span class="hljs-keyword">case</span> Color::red:
+            <span class="hljs-keyword">return</span> out &lt;&lt; <span class="hljs-string">&quot;red&quot;</span>;
+        <span class="hljs-keyword">case</span> Color::green:
+            <span class="hljs-keyword">return</span> out &lt;&lt; <span class="hljs-string">&quot;green&quot;</span>;
+        <span class="hljs-keyword">case</span> Color::blue:
+            <span class="hljs-keyword">return</span> out &lt;&lt; <span class="hljs-string">&quot;blue&quot;</span>;
+        <span class="hljs-keyword">case</span> Color::none:
+            <span class="hljs-keyword">return</span> out &lt;&lt; <span class="hljs-string">&quot;none&quot;</span>;
+        <span class="hljs-keyword">default</span>:
+            <span class="hljs-keyword">return</span> out &lt;&lt; <span class="hljs-string">&quot;unknown&quot;</span>;
+    }
+}
+
+std::ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(std::ostream&amp; out, Options <span class="hljs-type">const</span>&amp; options)
+{
+    out &lt;&lt; <span class="hljs-string">&quot;Options:\n&quot;</span>;
+    out &lt;&lt; <span class="hljs-string">&quot;  help: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; options.help &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+    out &lt;&lt; <span class="hljs-string">&quot;  capitalize: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; options.capitalize &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+    out &lt;&lt; <span class="hljs-string">&quot;  append_newline: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; options.append_newline &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+    out &lt;&lt; <span class="hljs-string">&quot;  color: &quot;</span> &lt;&lt; options.color &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+    out &lt;&lt; <span class="hljs-string">&quot;  repeat: &quot;</span> &lt;&lt; options.repeat &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+    out &lt;&lt; <span class="hljs-string">&quot;  text: &quot;</span> &lt;&lt; options.text &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+    <span class="hljs-keyword">return</span> out;
+}
+    
+} <span class="hljs-comment">// namespace repeat</span>
+</code></pre>
+
+            
+            
+        </body>
+        </html>

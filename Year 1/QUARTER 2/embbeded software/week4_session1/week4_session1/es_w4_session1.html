@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 4 - Session 1&colon; State Machines</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-4---session-1-state-machines">Week 4 - Session 1: State Machines</h1>
+<blockquote>
+<p><strong>Name:</strong> SON CAO</p>
+<p><strong>Group:</strong> ETI1V.IA</p>
+<p><strong>Date:</strong> 5/12/2024</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>In this final week of the course, we will take a look at one of the most important architectural concepts in embedded software: State Machines.</p>
+<p>This is the list of needed equipment for this tutorial (everything is included in your kit):</p>
+<ul>
+<li>Raspberry Pi Pico board (with USB cable, headers soldered)</li>
+<li>Breadboard</li>
+<li>Jumper wires</li>
+<li>5 LED</li>
+<li>2 Buttons</li>
+</ul>
+<h2 id="activity-1-introduction-to-state-machines">Activity 1: Introduction to State Machines</h2>
+<p><strong>Description: Trimodal LED</strong></p>
+<p>A finite state machine (FSM) is a mathematical model of computation. It is an abstract machine that can be in one of a finite number of states at any given time. The FSM can change from one state to another in response to some inputs. The change from one state to another is called a transition. An FSM is defined by a list of its states, its initial state, and the conditions for each transition. But you should know that already from the Digital course! It is a useful tool to model digital systems, but it is also great for programming embedded systems.</p>
+<p>In this activity, we will implement a simple state machine that controls the behavior of an LED. The activity is based on the final session (Assignment 6) of the Digital course. The LED can be in one of three states: off, continuous on, or blinking. The transitions between the states are controlled by one button that cycles through the states when pressed. First, if you still have it take the state diagram you created for the Digital course. If you don't have it, you can quickly draw it now.</p>
+<p>To help you get started here are the main parts of the code you will need to implement the state machine:</p>
+<h3 id="state-definitions">State definitions</h3>
+<p>We will use the enumeration type you have learned about in Programming course to define the states of the LED. The states are <code>OFF</code>, <code>CONTINUOUS</code>, and <code>BLINKING</code>. This way when you read the code, you can easily see what state the system is in.</p>
+<pre><code class="language-c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> {</span>
+    OFF,
+    CONTINUOUS,
+    BLINKING
+} <span class="hljs-type">state_t</span>;
+
+<span class="hljs-type">state_t</span> state = OFF;
+</code></pre>
+<h3 id="next-state-function--input-decoder">Next state function / Input decoder</h3>
+<p>To implement the state machine, you will need a function that determines the next state based on the current state and the input. This function will be called in the main loop of your program. For best readability, you can use a switch-case statement to handle the different states and transitions.</p>
+<pre><code class="language-c"><span class="hljs-type">void</span> <span class="hljs-title function_">next_state</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">switch</span> (state) {
+        <span class="hljs-keyword">case</span> OFF:
+            <span class="hljs-keyword">if</span> (button_pressed()) {
+                state = CONTINUOUS;
+            }
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> CONTINUOUS:
+            <span class="hljs-keyword">if</span> (button_pressed()) {
+                state = BLINKING;
+            }
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> BLINKING:
+            <span class="hljs-keyword">if</span> (button_pressed()) {
+                state = OFF;
+            }
+            <span class="hljs-keyword">break</span>;
+    }
+}
+</code></pre>
+<h3 id="state-action-function--output-decoder">State action function / Output decoder</h3>
+<p>Finally, you will need a function that performs the actions associated with each state. In this case, you will turn the LED on or off based on the state.</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> {</span>
+    OFF,
+    CONTINUOUS,
+    BLINKING
+} <span class="hljs-type">state_t</span>;
+
+<span class="hljs-type">state_t</span> state = OFF; 
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">button_pressed</span><span class="hljs-params">(uint PIN_BUTTON)</span>{
+    <span class="hljs-type">bool</span> status = <span class="hljs-literal">false</span>;
+    <span class="hljs-type">static</span> <span class="hljs-type">bool</span> previous_state = <span class="hljs-literal">false</span>;
+    <span class="hljs-comment">// Read the button state and light the LED</span>
+    <span class="hljs-type">bool</span> button_state = gpio_get(PIN_BUTTON);
+    
+    <span class="hljs-keyword">if</span> (button_state &amp;&amp; !previous_state){
+            status = button_state;
+    }
+    previous_state = button_state; <span class="hljs-comment">//This ensures the toggle happens only once per press (and release)</span>
+    <span class="hljs-keyword">return</span> status;
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">led_blink</span><span class="hljs-params">(uint LED_PIN)</span>{
+    <span class="hljs-type">static</span> <span class="hljs-type">bool</span> led_state = <span class="hljs-literal">false</span>;  
+
+    <span class="hljs-type">static</span> <span class="hljs-type">uint32_t</span> last_toggle_time = <span class="hljs-number">0</span>;
+
+    <span class="hljs-type">uint32_t</span> current_time = to_ms_since_boot(get_absolute_time());
+    <span class="hljs-keyword">if</span>(current_time - last_toggle_time &gt;= <span class="hljs-number">500</span>){ <span class="hljs-comment">//check whether  500 milliseconds have passed since the last toggle</span>
+        led_state = !led_state; <span class="hljs-comment">//change</span>
+        gpio_put(LED_PIN, led_state); <span class="hljs-comment">//update LED</span>
+        last_toggle_time = current_time; <span class="hljs-comment">//set last toggle time to the current time</span>
+        }
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">next_state</span><span class="hljs-params">(uint PIN_BUTTON)</span> {
+    <span class="hljs-keyword">switch</span> (state) {
+        <span class="hljs-keyword">case</span> OFF:
+            <span class="hljs-keyword">if</span> (button_pressed(PIN_BUTTON)) {
+                state = CONTINUOUS;
+            }
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> CONTINUOUS:
+            <span class="hljs-keyword">if</span> (button_pressed(PIN_BUTTON)) {
+                state = BLINKING;
+            }
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> BLINKING:
+            <span class="hljs-keyword">if</span> (button_pressed(PIN_BUTTON)) {
+                state = OFF;
+            }
+            <span class="hljs-keyword">break</span>;
+    }
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">output</span><span class="hljs-params">(uint LED_PIN)</span> {
+    <span class="hljs-keyword">switch</span> (state) {
+        <span class="hljs-keyword">case</span> OFF:
+            gpio_put(LED_PIN, <span class="hljs-number">0</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> CONTINUOUS:
+            gpio_put(LED_PIN, <span class="hljs-number">1</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> BLINKING:
+            led_blink(LED_PIN);
+            <span class="hljs-keyword">break</span>;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all();
+    <span class="hljs-comment">// Set up the LED pin 15 / physical pin 20</span>
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">15</span>;
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    <span class="hljs-type">const</span> uint PIN_BUTTON = <span class="hljs-number">14</span>;
+    gpio_init(PIN_BUTTON);
+    gpio_set_dir(PIN_BUTTON, GPIO_IN);
+    gpio_pull_down(PIN_BUTTON);
+
+    <span class="hljs-comment">// Never-ending superloop</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        next_state(PIN_BUTTON);
+        output(LED_PIN);
+        sleep_ms(<span class="hljs-number">500</span>);
+    }
+}
+</code></pre>
+<h2 id="activity-2-traffic-light-state-machine">Activity 2: Traffic Light State Machine</h2>
+<p><strong>Description: Traffic Light</strong></p>
+<p>Next we will implement a more complex state machine that controls a traffic light. The system should behave like the pedestrian traffic light in front of the Saxion building. Here's a description of the system:</p>
+<ol>
+<li>The cars will have green light until a pedestrian button is pressed</li>
+<li>Switch to yellow light for cars, after a short time to a red light</li>
+<li>The pedestrian light will turn green for around 10 seconds</li>
+<li>After that the pedestrian light will blink for 3 seconds and then turn red again</li>
+<li>Now the car light will turn green again</li>
+</ol>
+<p>This is a great example of a system that can be modeled as a state machine, as safety-critical systems often are implemented this way.</p>
+<blockquote>
+<p>Question: How many states does the traffic light system have?</p>
+</blockquote>
+<pre><code class="language-c">- <span class="hljs-number">3</span>: green, yellow, red
+</code></pre>
+<blockquote>
+<p>Question: Why is a state machine a good model for safety-critical systems?</p>
+</blockquote>
+<pre><code class="language-c">State machines ensure predictable, verifiable behavior by clearly defining states, transitions, and responses, enhancing safety.
+</code></pre>
+<p>Your goal is to implement this traffic light controller on your pico. Start by defining the state diagram for the system. Then implement the state machine in code. You can add an image to markdown like this:
+<img src="file:///c:\Users\hoang\Desktop\SAXION\QUARTER 2\embbeded software\week4_session1\week4_session1\act2.png" alt="Alternative Text" title="Image Title"></p>
+<p><em>Note: If you did the optional activity last session, you can modify that code to use the state machine model (if not yet done this way).</em></p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> {</span>
+    CAR_GREEN,
+    CAR_YELLOW,
+    CAR_RED_PED_GREEN,
+    CAR_RED_PED_BLINKING,
+    CAR_GREEN_REST
+} <span class="hljs-type">traffic_state_t</span>;
+
+<span class="hljs-type">traffic_state_t</span> state = CAR_GREEN;
+
+<span class="hljs-type">uint32_t</span> state_start_time = <span class="hljs-number">0</span>;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_led_pin</span><span class="hljs-params">(uint led_pin)</span>{
+    gpio_init(led_pin);
+    gpio_set_dir(led_pin, GPIO_OUT);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">set_car_light</span><span class="hljs-params">(<span class="hljs-type">bool</span> green, <span class="hljs-type">bool</span> yellow, <span class="hljs-type">bool</span> red, uint green_pin, uint yellow_pin, uint red_pin)</span>{
+    gpio_put(green_pin, green);
+    gpio_put(yellow_pin, yellow);
+    gpio_put(red_pin, red);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">set_pedestrian_light</span><span class="hljs-params">(<span class="hljs-type">bool</span> green, <span class="hljs-type">bool</span> red, uint green_pin, uint red_pin)</span>{
+    gpio_put(green_pin, green);
+    gpio_put(red_pin, red);
+}
+
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">next_state</span><span class="hljs-params">(uint button_pin, <span class="hljs-type">uint32_t</span> current_time, uint car_green, uint car_yellow, uint car_red, uint ped_green, uint ped_red)</span>{
+    <span class="hljs-keyword">switch</span> (state){
+        <span class="hljs-keyword">case</span> CAR_GREEN:
+        <span class="hljs-keyword">if</span>(gpio_get(button_pin)){
+            state = CAR_YELLOW;
+            state_start_time = current_time;
+            set_car_light(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>, car_green, car_yellow, car_red);
+        }
+        <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">case</span> CAR_YELLOW:
+            <span class="hljs-keyword">if</span>(current_time - state_start_time == <span class="hljs-number">2000</span>){ <span class="hljs-comment">// 2 secs</span>
+            state = CAR_RED_PED_GREEN;
+            state_start_time = current_time;
+            set_car_light(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, car_green, car_yellow, car_red);
+            set_pedestrian_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, ped_green, ped_red);
+        }
+        <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">case</span> CAR_RED_PED_GREEN:
+            <span class="hljs-keyword">if</span>(current_time - state_start_time &gt;= <span class="hljs-number">10000</span>){ <span class="hljs-comment">// 10 secs</span>
+                state = CAR_RED_PED_BLINKING;
+                state_start_time = current_time;
+            }
+        <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">case</span> CAR_RED_PED_BLINKING:
+            <span class="hljs-keyword">if</span>((current_time / <span class="hljs-number">500</span>) % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>){ <span class="hljs-comment">//blink every 500ms</span>
+                set_pedestrian_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, ped_green, ped_red);
+            } <span class="hljs-keyword">else</span> {
+                set_pedestrian_light(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ped_green, ped_red);
+            }
+            <span class="hljs-keyword">if</span>(current_time - state_start_time &gt;= <span class="hljs-number">3000</span>){ <span class="hljs-comment">//3 secs</span>
+                state = CAR_GREEN_REST;
+                state_start_time = current_time;
+                set_pedestrian_light(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ped_green, ped_red);
+            }
+            <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">case</span> CAR_GREEN_REST:
+            <span class="hljs-keyword">if</span>(current_time - state_start_time &gt;= <span class="hljs-number">1000</span>){ <span class="hljs-comment">// 1 secs</span>
+                state = CAR_GREEN;
+                set_car_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, car_green, car_yellow, car_red);
+                set_pedestrian_light(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, ped_green, ped_red);   
+            }
+            <span class="hljs-keyword">break</span>;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    stdio_init_all();
+
+    <span class="hljs-comment">//set pins for cars&#x27; lights</span>
+    <span class="hljs-type">const</span> uint CAR_GREEN_PIN = <span class="hljs-number">2</span>;
+    setup_led_pin(CAR_GREEN_PIN);
+    <span class="hljs-type">const</span> uint CAR_YELLOW_PIN = <span class="hljs-number">3</span>;
+    setup_led_pin(CAR_YELLOW_PIN);
+    <span class="hljs-type">const</span> uint CAR_RED_PIN = <span class="hljs-number">4</span>;
+    setup_led_pin(CAR_RED_PIN);
+
+    <span class="hljs-comment">//set pins pedestrians&#x27; lights</span>
+    <span class="hljs-type">const</span> uint PED_GREEN_PIN = <span class="hljs-number">6</span>;
+    setup_led_pin(PED_GREEN_PIN);
+    <span class="hljs-type">const</span> uint PED_RED_PIN = <span class="hljs-number">7</span>;
+    setup_led_pin(PED_RED_PIN);
+
+    <span class="hljs-comment">//set pin for button</span>
+    <span class="hljs-type">const</span> uint BUTTON_PIN = <span class="hljs-number">9</span>;
+    gpio_init(BUTTON_PIN);
+    gpio_set_dir(BUTTON_PIN, GPIO_IN);
+    gpio_pull_down(BUTTON_PIN);
+
+    <span class="hljs-comment">//initialize the first stage car green , ped red</span>
+    set_car_light(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, CAR_GREEN_PIN, CAR_YELLOW_PIN, CAR_RED_PIN);
+    set_pedestrian_light(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, PED_GREEN_PIN, PED_RED_PIN);
+    
+    state_start_time = to_ms_since_boot(get_absolute_time());
+
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){
+        <span class="hljs-type">uint32_t</span> current_time = to_ms_since_boot(get_absolute_time());
+        next_state(BUTTON_PIN, current_time, CAR_GREEN_PIN, CAR_YELLOW_PIN, CAR_RED_PIN, PED_GREEN_PIN, PED_RED_PIN);
+        sleep_ms(<span class="hljs-number">500</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-3-vending-machine-state-machine-sign-off">Activity 3: Vending Machine State Machine (sign-off)</h2>
+<p><strong>Description: Two coin - one product vending machine</strong></p>
+<p>Now time for another example of a state machine. This time we will implement a simple vending machine. The vending machine accepts two types of coins: 1 euro and 2 euro (represented by buttons). As output the machine has two LEDs, one representing dispensing a product and the other returning a 1 euro coin. One product costs exactly 3 euros. Therefore the machine should behave as follows:</p>
+<ol>
+<li>If the user inserts a coin the machine will count it and wait until 3 euros are reached.</li>
+<li>If 3 euros are reached the product LED will light up for 10 seconds.</li>
+<li>If the user inserts more than 3 euros the machine will return the change in 1 euro coins, signaling this with the return LED (3 seconds)</li>
+</ol>
+<p>First draw the state diagram for the vending machine. You can add an image to markdown like this:
+<img src="file:///c:\Users\hoang\Desktop\SAXION\QUARTER 2\embbeded software\week4_session1\week4_session1\act3.png" alt="Alternative Text" title="Image Title"></p>
+<p>Then implent the state machine in code:</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span> <span class="hljs-comment">// Standard library for Pico</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> {</span>
+    WAITING_FOR_COIN,
+    DISPENSING_PRODUCT,
+    RETURNING_CHANGE,
+} <span class="hljs-type">vending_state_t</span>;
+
+<span class="hljs-type">vending_state_t</span> state = WAITING_FOR_COIN;
+<span class="hljs-type">uint32_t</span> state_start_time = <span class="hljs-number">0</span>;
+<span class="hljs-type">int</span> coin_total = <span class="hljs-number">0</span>;
+
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_led_pin</span><span class="hljs-params">(uint led_pin)</span>{
+    gpio_init(led_pin);
+    gpio_set_dir(led_pin, GPIO_OUT);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_button_pin</span><span class="hljs-params">(uint button_pin)</span>{
+    gpio_init(button_pin);
+    gpio_set_dir(button_pin, GPIO_IN);
+    gpio_pull_down(button_pin);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">set_led</span><span class="hljs-params">(uint led_pin, <span class="hljs-type">bool</span> state)</span>{
+    gpio_put(led_pin, state);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">next_state</span><span class="hljs-params">(uint coin_1_button, uint coin_2_button, <span class="hljs-type">uint32_t</span> current_time, uint product_led, uint return_led)</span>{
+    <span class="hljs-keyword">switch</span> (state){
+        <span class="hljs-keyword">case</span> WAITING_FOR_COIN:
+        <span class="hljs-keyword">if</span>(gpio_get(coin_1_button)){
+            coin_total += <span class="hljs-number">1</span>;
+        }
+        <span class="hljs-keyword">if</span>(gpio_get(coin_2_button)){
+            coin_total += <span class="hljs-number">2</span>;
+        }
+
+        <span class="hljs-keyword">if</span>(coin_total == <span class="hljs-number">3</span>){ <span class="hljs-comment">// if total coin = 3</span>
+            state = DISPENSING_PRODUCT; <span class="hljs-comment">// switch to dispensing state</span>
+            state_start_time = current_time;
+            set_led(product_led, <span class="hljs-literal">true</span>); <span class="hljs-comment">//product led on</span>
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(coin_total &gt; <span class="hljs-number">3</span>){ <span class="hljs-comment">// if total coin &gt; 3</span>
+            state = RETURNING_CHANGE; <span class="hljs-comment">// switch to returning state</span>
+            state_start_time = current_time;
+            set_led(return_led, <span class="hljs-literal">true</span>); <span class="hljs-comment">//return led on</span>
+        }
+        <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">case</span> DISPENSING_PRODUCT:
+            <span class="hljs-keyword">if</span>(current_time - state_start_time &gt;= <span class="hljs-number">10000</span>){ <span class="hljs-comment">// 10 sec</span>
+                state = WAITING_FOR_COIN; <span class="hljs-comment">//switch back to waiting state</span>
+                set_led(product_led, <span class="hljs-literal">false</span>); <span class="hljs-comment">//product led off</span>
+                coin_total = <span class="hljs-number">0</span>; <span class="hljs-comment">//reset total coin</span>
+            }
+            <span class="hljs-keyword">break</span>;
+
+        <span class="hljs-keyword">case</span> RETURNING_CHANGE:
+            <span class="hljs-keyword">if</span>(current_time - state_start_time &gt;= <span class="hljs-number">3000</span>){ <span class="hljs-comment">// 3sec</span>
+                state = WAITING_FOR_COIN; <span class="hljs-comment">//switch back to waiting state</span>
+                set_led(return_led, <span class="hljs-literal">false</span>); <span class="hljs-comment">//return led off</span>
+                coin_total = <span class="hljs-number">0</span>; <span class="hljs-comment">//reset total coin</span>
+            }
+            <span class="hljs-keyword">break</span>;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    stdio_init_all();
+
+    <span class="hljs-comment">//set pins for product led and return led</span>
+    <span class="hljs-type">const</span> uint PRODUCT_LED_PIN = <span class="hljs-number">2</span>;
+    setup_led_pin(PRODUCT_LED_PIN);
+    <span class="hljs-type">const</span> uint RETURN_LED_PIN = <span class="hljs-number">3</span>;
+    setup_led_pin(RETURN_LED_PIN);
+
+    <span class="hljs-comment">//set pin for buttons</span>
+    <span class="hljs-type">const</span> uint COIN_1_BUTTON_PIN = <span class="hljs-number">9</span>;
+    setup_button_pin(COIN_1_BUTTON_PIN);
+    <span class="hljs-type">const</span> uint COIN_2_BUTTON_PIN = <span class="hljs-number">10</span>;
+    setup_button_pin(COIN_2_BUTTON_PIN);
+    
+    state_start_time = to_ms_since_boot(get_absolute_time());
+
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){
+        <span class="hljs-type">uint32_t</span> current_time = to_ms_since_boot(get_absolute_time());
+        next_state(COIN_1_BUTTON_PIN, COIN_2_BUTTON_PIN, current_time, PRODUCT_LED_PIN, RETURN_LED_PIN);
+        sleep_ms(<span class="hljs-number">500</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="activity-4-layered-state-machines-optional">Activity 4: Layered State Machines (optional)</h2>
+<p><strong>Description: Parking garage controller</strong></p>
+<p>A system can include multiple state machines and therefore can have muliple states at the same time. This is usually called a layered or hierarchical state machine. In this activity (for 10 points), you will implement a parking garage controller that manages 3 layers of state machines:</p>
+<ol>
+<li>The <strong>main controller</strong> that manages the entrance and exit of cars: It should keep track of the number of cars to decide if the garage is <code>FULL</code> (10 cars) or <code>NOT_FULL</code> (&lt;10 cars).</li>
+<li><strong>Slot management</strong>: Each slot has a state <code>OCCUPIED</code> or <code>FREE</code>. (Hint: use an array of states). Use 10 GPIO pins to represent the slots, if a slot is connected to VCC it is <code>OCCUPIED</code>, if it is connected to GND it is <code>FREE</code>.</li>
+<li><strong>Gate control</strong>: The two gates (represented by 2 LEDs) need to be controlled as well. The gates can be <code>OPEN</code> or <code>CLOSED</code>. When a car is arriving/leaving (button press) the gate should open for 3 seconds.</li>
+</ol>
+<p><em>Hint: Use typedef enums to define states for each layer.</em></p>
+<p>Print the state of the system to the serial monitor, also when a car arrives suggest a free slot to the driver (either through serial monitor or 7-segment display).</p>
+<p><img src="file:///c:\Users\hoang\Desktop\SAXION\QUARTER 2\embbeded software\week4_session1\week4_session1\act4.png" alt="Alternative Text" title="Image Title"></p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span>{</span>
+    FULL,
+    NOT_FULL
+}<span class="hljs-type">gargage_state_t</span>;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span>{</span>
+    FREE,
+    OCCUPIED
+}<span class="hljs-type">slot_state_t</span>;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">enum</span>{</span>
+    OPEN, 
+    CLOSED
+}<span class="hljs-type">gate_state_t</span>;
+
+<span class="hljs-type">gargage_state_t</span> gargage_state = NOT_FULL;
+<span class="hljs-type">slot_state_t</span> slots[<span class="hljs-number">10</span>];
+<span class="hljs-type">gate_state_t</span> entrance_gate = CLOSED;
+<span class="hljs-type">gate_state_t</span> exit_gate = CLOSED;
+
+<span class="hljs-type">int</span> car_count = <span class="hljs-number">0</span>;
+<span class="hljs-type">uint32_t</span> gate_timer = <span class="hljs-number">0</span>;
+
+<span class="hljs-type">const</span> uint SLOT_PINS[<span class="hljs-number">10</span>] = {<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>}; <span class="hljs-comment">//set SLOT_PINS same as slots[10](0-&gt;9) for accurate light pin</span>
+<span class="hljs-type">const</span> uint ENTRANCE_BUTTON_PIN = <span class="hljs-number">12</span>;
+<span class="hljs-type">const</span> uint EXIT_BUTTON_PIN = <span class="hljs-number">13</span>;
+<span class="hljs-type">const</span> uint ENTRANCE_GATE_LED_PIN = <span class="hljs-number">14</span>;
+<span class="hljs-type">const</span> uint EXIT_GATE_LED_PIN = <span class="hljs-number">15</span>;
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_led_pin</span><span class="hljs-params">(uint led_pin)</span>{
+    gpio_init(led_pin);
+    gpio_set_dir(led_pin, GPIO_OUT);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">setup_button_pin</span><span class="hljs-params">(uint button_pin)</span>{
+    gpio_init(button_pin);
+    gpio_set_dir(button_pin, GPIO_IN);
+    gpio_pull_down(button_pin);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">open_gate</span><span class="hljs-params">(<span class="hljs-type">gate_state_t</span> *gate, uint gate_led_pin)</span>{
+    *gate = OPEN;
+    gpio_put(gate_led_pin, <span class="hljs-literal">true</span>);
+    gate_timer = to_ms_since_boot(get_absolute_time());
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">close_gate</span><span class="hljs-params">(<span class="hljs-type">gate_state_t</span> *gate, uint gate_led_pin)</span>{
+    *gate = CLOSED;
+    gpio_put(gate_led_pin, <span class="hljs-literal">false</span>);
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">update_gargage_state</span><span class="hljs-params">()</span>{
+    <span class="hljs-keyword">if</span>(car_count &gt;= <span class="hljs-number">10</span>){
+        gargage_state = FULL;
+    } <span class="hljs-keyword">else</span> {
+        gargage_state = NOT_FULL;
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">find_free_slot</span><span class="hljs-params">()</span>{
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
+        <span class="hljs-keyword">if</span>(slots[i] == FREE){
+            <span class="hljs-keyword">return</span> i;
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+
+<span class="hljs-type">void</span> <span class="hljs-title function_">parking_gargage_controller</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> current_time)</span>{
+    <span class="hljs-comment">//check entrance button</span>
+    <span class="hljs-keyword">if</span>(gpio_get(ENTRANCE_BUTTON_PIN) &amp;&amp; gargage_state == NOT_FULL){ <span class="hljs-comment">//when clicking entrance button and gargage not full</span>
+        <span class="hljs-type">int</span> free_slot = find_free_slot(); <span class="hljs-comment">//find free slot</span>
+        <span class="hljs-keyword">if</span>(free_slot != <span class="hljs-number">-1</span>){ <span class="hljs-comment">//if not full</span>
+            <span class="hljs-comment">//assign the car to the free slot</span>
+            slots[free_slot] = OCCUPIED; <span class="hljs-comment">// if not full occupy that slot -&gt; car + 1 -&gt; update state of gargage (full or not) -&gt; open entrance gate</span>
+            gpio_put(SLOT_PINS[free_slot], <span class="hljs-literal">true</span>); <span class="hljs-comment">//turn on slot led</span>
+            car_count++;
+            update_gargage_state();
+            open_gate(&amp;entrance_gate, ENTRANCE_GATE_LED_PIN);
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Car entering. Assigned slot: %d\n&quot;</span>, free_slot + <span class="hljs-number">1</span>);
+        } <span class="hljs-keyword">else</span>{
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;No free slots available.\n&quot;</span>);
+        }
+    }
+
+    <span class="hljs-comment">//check exit button</span>
+    <span class="hljs-keyword">if</span>(gpio_get(EXIT_BUTTON_PIN) &amp;&amp; car_count &gt; <span class="hljs-number">0</span>){ <span class="hljs-comment">//when click exit button and still have cars</span>
+        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
+            <span class="hljs-keyword">if</span>(slots[i] == OCCUPIED){ <span class="hljs-comment">//slot occupied -&gt; free -&gt; car count - 1 -&gt; update state(full or not) -&gt; open gate exit gate</span>
+                slots[i] = FREE;
+                gpio_put(SLOT_PINS[i], <span class="hljs-literal">false</span>);<span class="hljs-comment">//turn off slot led </span>
+                car_count--;
+                update_gargage_state();
+                open_gate(&amp;exit_gate, EXIT_GATE_LED_PIN);
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Car exiting. Free slot: %d\n&quot;</span>, i + <span class="hljs-number">1</span>);
+            }
+        }
+    }
+
+    <span class="hljs-comment">//close gates after 3 secs</span>
+    <span class="hljs-keyword">if</span>(entrance_gate == OPEN &amp;&amp; (current_time - gate_timer &gt;= <span class="hljs-number">3000</span>)){
+        close_gate(&amp;entrance_gate, ENTRANCE_GATE_LED_PIN);
+    }
+    <span class="hljs-keyword">if</span>(exit_gate == OPEN &amp;&amp; (current_time - gate_timer &gt;= <span class="hljs-number">3000</span>)){
+        close_gate(&amp;exit_gate, EXIT_GATE_LED_PIN);
+    }
+}
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>{
+    stdio_init_all();
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++){
+        setup_led_pin(SLOT_PINS[i]);
+        slots[i] = FREE; <span class="hljs-comment">// set all slot free</span>
+    }
+
+    setup_button_pin(ENTRANCE_BUTTON_PIN);
+    setup_button_pin(EXIT_BUTTON_PIN);
+    setup_led_pin(ENTRANCE_GATE_LED_PIN);
+    setup_led_pin(EXIT_GATE_LED_PIN);
+
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){
+        <span class="hljs-type">uint32_t</span> current_time = to_ms_since_boot(get_absolute_time());
+        parking_gargage_controller(current_time);
+        sleep_ms(<span class="hljs-number">500</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Also add a photo of your setup to the markdown file!</p>
+<h2 id="questions-to-answer">Questions to answer:</h2>
+<p>Please answer these reflection questions:</p>
+<ol>
+<li>How long did this tutorial take you?</li>
+</ol>
+<ul>
+<li>4 days</li>
+</ul>
+<ol start="2">
+<li>Did you face difficulties?</li>
+</ol>
+<ul>
+<li>sometimes</li>
+</ul>
+<ol start="3">
+<li>What would you like to see improved?</li>
+</ol>
+<ul>
+<li>nothing</li>
+</ul>
+<h2 id="sign-off">Sign-off</h2>
+<p>Please show your code of activity 3 to your lab teacher or teaching assistant.</p>
+
+            
+            
+        </body>
+        </html>

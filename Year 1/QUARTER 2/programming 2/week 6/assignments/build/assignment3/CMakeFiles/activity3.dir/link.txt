@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/activity3.dir/main.c.o CMakeFiles/activity3.dir/morefuns.c.o -o activity3  ../functions/libfunctions.a 

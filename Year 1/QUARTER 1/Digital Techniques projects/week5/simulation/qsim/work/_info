@@ -1,0 +1,220 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/SAXION/Digital Techniques projects/week5/simulation/qsim
+v\ex4-2bit_counter 
+!s110 1728398138
+!i10b 1
+!s100 8AzDV>R@Mh2aRIkXW1<E=0
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IPL;6WT>Tj4B_Gi74[edBi3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 dC:/Users/hoang/Desktop/SAXION/Digital Techniques projects/week5/simulation/qsim
+w1728398136
+8ex4-2bit_counter.vo
+Fex4-2bit_counter.vo
+!i122 9
+Z4 L0 32 248
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+!s108 1728398138.000000
+!s107 ex4-2bit_counter.vo|
+!s90 -work|work|ex4-2bit_counter.vo|
+!i113 1
+Z6 o-work work
+Z7 tCvgOpt 0
+n@134ex4-2bit_counter@040
+v\ex4-2bitcounter 
+Z8 !s110 1728398744
+!i10b 1
+!s100 hkfEf^1k34j4L5Z1^bE0F2
+R1
+I:0m1iLj3XGl8]7jeKcYz<1
+R2
+R3
+Z9 w1728398742
+Z10 8ex4-2bitcounter.vo
+Z11 Fex4-2bitcounter.vo
+!i122 11
+R4
+R5
+r1
+!s85 0
+31
+Z12 !s108 1728398744.000000
+!s107 ex4-2bitcounter.vo|
+Z13 !s90 -work|work|ex4-2bitcounter.vo|
+!i113 1
+R6
+R7
+n@134ex4-2bitcounter@040
+vex1latch
+Z14 !s110 1728212170
+!i10b 1
+!s100 QQPW>iBlecJz^Hb4MMXhE3
+R1
+I59N1l]IkSfLBSP7:O@8Jd0
+R2
+R0
+w1728212169
+8ex1latch.vo
+Fex1latch.vo
+!i122 0
+L0 32 261
+R5
+r1
+!s85 0
+31
+Z15 !s108 1728212170.000000
+!s107 ex1latch.vo|
+!s90 -work|work|ex1latch.vo|
+!i113 1
+R6
+R7
+vex1latch_vlg_vec_tst
+R14
+!i10b 1
+!s100 a3:8SAX6nRNzDjL5a7KE>3
+R1
+IThRYDfjT>f8FmkLh:38OJ2
+R2
+R0
+w1728212168
+8Waveform.vwf.vt
+FWaveform.vwf.vt
+!i122 1
+Z16 L0 30 40
+R5
+r1
+!s85 0
+31
+R15
+!s107 Waveform.vwf.vt|
+!s90 -work|work|Waveform.vwf.vt|
+!i113 1
+R6
+R7
+vex2dflipflop
+Z17 !s110 1728392801
+!i10b 1
+!s100 J2AmNodP;C@Z6DYTnoZBW2
+R1
+IK9jGLE^cjK7@EN_V9hW=O0
+R2
+R3
+w1728392799
+8ex2dflipflop.vo
+Fex2dflipflop.vo
+!i122 6
+L0 32 321
+R5
+r1
+!s85 0
+31
+!s108 1728392800.000000
+!s107 ex2dflipflop.vo|
+!s90 -work|work|ex2dflipflop.vo|
+!i113 1
+R6
+R7
+vex2dflipflop_vlg_vec_tst
+R17
+!i10b 1
+!s100 O?d:e[KnQnWYA9Rj1jOZg2
+R1
+Iknl>NeVY1fUE6?En_]EU`3
+R2
+R3
+w1728392797
+8Waveform3.vwf.vt
+FWaveform3.vwf.vt
+!i122 7
+R16
+R5
+r1
+!s85 0
+31
+!s108 1728392801.000000
+!s107 Waveform3.vwf.vt|
+!s90 -work|work|Waveform3.vwf.vt|
+!i113 1
+R6
+R7
+vex3frequencydivider
+Z18 !s110 1728390746
+!i10b 1
+!s100 9N;aVgGSN]V5J2eo]8VeK1
+R1
+I3[YmiNC`iNVK:oP9CCoVo3
+R2
+R3
+w1728390741
+8ex3frequencydivider.vo
+Fex3frequencydivider.vo
+!i122 4
+L0 32 196
+R5
+r1
+!s85 0
+31
+Z19 !s108 1728390746.000000
+!s107 ex3frequencydivider.vo|
+!s90 -work|work|ex3frequencydivider.vo|
+!i113 1
+R6
+R7
+vex3frequencydivider_vlg_vec_tst
+R18
+!i10b 1
+!s100 HB3>M2IYWM2cSoR^`a6721
+R1
+IdeJ2T9iaPQUnh_mjQ]WDY1
+R2
+R3
+w1728390740
+8Waveform2.vwf.vt
+FWaveform2.vwf.vt
+!i122 5
+L0 30 28
+R5
+r1
+!s85 0
+31
+R19
+!s107 Waveform2.vwf.vt|
+!s90 -work|work|Waveform2.vwf.vt|
+!i113 1
+R6
+R7
+vhard_block
+R8
+!i10b 1
+!s100 n<>k:TkcY<OFbmlGiB:Jl0
+R1
+IV3JzO=OmWhlAE_5V;BH2k3
+R2
+R3
+R9
+R10
+R11
+!i122 11
+L0 281 45
+R5
+r1
+!s85 0
+31
+R12
+Z20 !s107 ex4-2bitcounter.vo|
+R13
+!i113 1
+R6
+R7

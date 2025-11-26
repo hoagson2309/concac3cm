@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Week 3 - Session 1&colon; Serial Communication</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="week-3---session-1-serial-communication">Week 3 - Session 1: Serial Communication</h1>
+<blockquote>
+<p><strong>Name:</strong> SON CAO</p>
+<p><strong>Group:</strong> ETI1V.IA</p>
+<p><strong>Date:</strong> 27/11/2024</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p>During this session, you will learn how to communicate from the Raspberry Pi Pico to your computer using the serial communication protocol. This is a simple way to send data from the Pico to your computer, and vice versa.</p>
+<p>This is the list of needed equipment for this tutorial (everything is included in your kit):</p>
+<ul>
+<li>Raspberry Pi Pico board (with USB cable, headers soldered)</li>
+<li>Breadboard</li>
+<li>Jumper wires</li>
+<li>Potentiometer</li>
+<li>1 LED</li>
+</ul>
+<p>Until now we were only able to see the output of our programs on LEDs or other peripherals. With serial communication, we can send data to our computer and see it on the terminal. This is useful for debugging, logging data, or even controlling the Pico from your computer. We will use the already familiar <code>printf()</code> function to send data to the computer and the <code>getchar()</code> function to read data character by character.</p>
+<h2 id="activity-0-hello-world">Activity 0: Hello World*</h2>
+<p><strong>Description: Print a &quot;Hello World!&quot;0 message to the computer terminal</strong></p>
+<p>First, we will set up the serial communication. We will use the USB port of the Pico to communicate with the computer. The USB port is connected to the UART peripheral of the Pico. We will use the functions <code>stdio_init_all()</code> to initialize the serial communication and <code>printf()</code> to send data to the computer. On the computer side we will use PuTTY to see the data sent by the Pico (if you are using Windows).</p>
+<pre><code class="language-c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span> <span class="hljs-comment">// Remember this: it is also needed for embedded printf and scanf</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all(); <span class="hljs-comment">// Initialize the serial communication</span>
+
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello World!\n&quot;</span>); <span class="hljs-comment">// Print a message to the computer terminal</span>
+        sleep_ms(<span class="hljs-number">1000</span>); <span class="hljs-comment">// Sleep for 1 second</span>
+    }
+}
+</code></pre>
+<p>Compile and run the code on the Pico.</p>
+<p>Now let us install and configure PuTTY to see the data sent by the Pico:</p>
+<ol>
+<li>Download and install PuTTY from <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">here</a></li>
+<li>Look for the COM port of the Pico in the Windows device manager, under <code>Ports</code>, it will show up as USB Serial Device. (<em>Note: Try to always use the same USB port when to avoid changing the COM port</em>).</li>
+<li>Open PuTTY and select the Serial connection type, fill the following fields:
+<ul>
+<li>Serial line: COMX (where X is the number of the COM port)</li>
+<li>Speed: 115200</li>
+</ul>
+</li>
+<li>Click on <code>Open</code> to open the connection.</li>
+</ol>
+<p>You should now see the message &quot;Hello World!&quot; on the PuTTY terminal.</p>
+<h3 id="notes-for-mac-and-linux-users">Notes for Mac and Linux users</h3>
+<p><strong>Not officially supported: Teachers might not be able to help you with this.</strong></p>
+<p>If you are using Mac or Linux, you can use the terminal to see the data sent by the Pico. The Pico will show up as a serial device in <code>/dev/</code> with the name <code>ttyACM0</code> or <code>/dev/tty.usbmodemxxxxx</code> (if needed check by running the command <code>ls /dev/tty*</code> to see all devices). You can use the <code>screen</code> command to see the data sent by the Pico. Open a terminal and type the following command:</p>
+<pre><code class="language-bash">screen /dev/ttyACM0 115200
+</code></pre>
+<h2 id="activity-1-voltage-reading-to-serial">Activity 1: Voltage reading to Serial</h2>
+<p><strong>Description: Read the value of a potentiometer and send it to the computer</strong></p>
+<p>Now we will read the value of a potentiometer and send it to the computer. We will use the <code>printf()</code> function to send the value to the computer. Reuse the code from the previous session to read the value of the potentiometer, afterwards calculate the voltage (0-3.3V, remember last session) and send it to the computer with an accuracy of 2 digits after the comma. Update the value every 500ms.</p>
+<p>Example output:</p>
+<pre><code>...
+Current reading is: 1.53 Volt
+Current reading is: 1.58 Volt
+...
+</code></pre>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span> <span class="hljs-comment">// Remember this: it is also needed for embedded printf and scanf</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all(); <span class="hljs-comment">// Initialize the serial communication</span>
+    adc_init(); <span class="hljs-comment">// Initialize ADC for the potentiometer</span>
+    adc_gpio_init(<span class="hljs-number">26</span>); <span class="hljs-comment">// Initialize the GPIO pin for the ADC</span>
+    adc_select_input(<span class="hljs-number">0</span>); <span class="hljs-comment">// Select the ADC input, channel 0 = pin 26</span>
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-type">uint16_t</span> adc_value = adc_read();
+        <span class="hljs-type">float</span> voltage = adc_value * <span class="hljs-number">3.3f</span> / <span class="hljs-number">4095.0f</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Current reading is: %.2f\n&quot;</span>, voltage); <span class="hljs-comment">// Print a message to the computer terminal</span>
+        sleep_ms(<span class="hljs-number">500</span>); <span class="hljs-comment">// Sleep for 1 second</span>
+    }
+}   
+</code></pre>
+<blockquote>
+<p>Question: Why does the potentiometer not read 0V when it is at the minimum value (and 3.3V at it's maximum)?</p>
+</blockquote>
+<ul>
+<li>The potentiometer may not read 0V or 3.3V due to wiring, ADC resolution, internal resistance, or circuit noise.</li>
+</ul>
+<h2 id="activity-2-mirror-mirror-on-the-wall">Activity 2: Mirror mirror on the wall..</h2>
+<p><strong>Description: Read a string from the computer and send it back</strong></p>
+<p>Next, we will start receiving data from the computer. We will use the <code>scanf()</code> function to read the data sent by the computer. You will learn more about input functions in programming 2. For now it is enough to know that <code>scanf()</code> reads data from the standard input and stores it in a variable. The function has the following syntax for reading a string (a sequence of characters until a whitespace is found):</p>
+<pre><code class="language-c"><span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>]; <span class="hljs-comment">// Create a buffer to store the string</span>
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, buffer); <span class="hljs-comment">// Read a string from the computer</span>
+</code></pre>
+<p><em>Note: For now we will not handle errors, so be careful with the input you send to the Pico.</em></p>
+<p>Implement a program that reads a string from the computer and sends it back. The program should read the string and print it back to the computer with the length in parenthesis added to it. The program should run indefinitely. To solve this problem, remember the string functions you used in Programming 1.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span> <span class="hljs-comment">// Needed for printf and scanf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all(); <span class="hljs-comment">// Initialize the serial communication</span>
+    <span class="hljs-type">char</span> buffer[<span class="hljs-number">100</span>]; <span class="hljs-comment">// Create a buffer to store the string</span>
+    
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) { <span class="hljs-comment">// Infinite loop to keep the program running</span>
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, buffer); <span class="hljs-comment">// Read a string from the computer</span>
+        <span class="hljs-type">int</span> length = <span class="hljs-built_in">strlen</span>(buffer); <span class="hljs-comment">// Calculate the length of the string</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s (%d)\n&quot;</span>, buffer, length); <span class="hljs-comment">// Print the string and its length</span>
+        sleep_ms(<span class="hljs-number">500</span>); <span class="hljs-comment">// Sleep for 500 ms</span>
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</code></pre>
+<p>Example input:</p>
+<pre><code>Hello
+thisisalongstring
+...
+</code></pre>
+<p>Example output:</p>
+<pre><code>Hello (5)
+thisisalongstring (17)
+...
+</code></pre>
+<h2 id="activity-3-serial-commands-to-control-an-led">Activity 3: Serial commands to control an LED</h2>
+<p><strong>Description: Control the brightness of an LED using serial commands</strong></p>
+<p>In this activity, we will control the brightness of a LED using serial commands. We will read the serial input from the computer and change the brightness of the LED accordingly. The input will be a number between 0 and 9.</p>
+<p>You can again use the <code>scanf()</code> function to read the input from the computer. Alternatively, you can use the <code>getchar()</code> function to read the input character by character. The function <code>getchar()</code> reads a single character from the computer. You can use it to read the input character by character and convert it to a number (or something else for more complex inputs). Watch out, special characters like the newline character (<code>\n</code>) are also read by <code>getchar()</code>. Also remember that the input is interpreted as a character, so you need to convert it to a number.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span> <span class="hljs-comment">// Needed for printf and scanf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all(); <span class="hljs-comment">// Initialize the serial communication</span>
+
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">0</span>;
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+     <span class="hljs-comment">// Tell GPIO_PIN it is allocated to the PWM</span>
+    gpio_set_function(LED_PIN, GPIO_FUNC_PWM);
+    <span class="hljs-comment">// Get the slice number for the GPIO_PIN</span>
+    uint slice_num = pwm_gpio_to_slice_num(LED_PIN);
+    
+    <span class="hljs-comment">// Set PWM wrap value for 8-bit resolution (0-255)</span>
+    pwm_set_wrap(slice_num, <span class="hljs-number">8</span>);
+    <span class="hljs-comment">// Set the PWM running     </span>
+    pwm_set_enabled(slice_num, <span class="hljs-literal">true</span>);
+    
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) { <span class="hljs-comment">// Infinite loop to keep the program running</span>
+        <span class="hljs-type">int</span> number;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number from 0 - 9: &quot;</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;number);
+        <span class="hljs-keyword">if</span>(number &gt;=<span class="hljs-number">0</span> &amp;&amp; number &lt;=<span class="hljs-number">9</span>){   
+            pwm_set_gpio_level(LED_PIN, number);
+        }
+    sleep_ms(<span class="hljs-number">500</span>); <span class="hljs-comment">// Sleep for 500 ms</span>
+    }
+}
+
+</code></pre>
+<h2 id="activity-4-two-way-communication-sign-off">Activity 4: Two-way communication (sign-off)</h2>
+<p><strong>Description: Send and receive data from the computer (simultaneously)</strong></p>
+<p>Finally combine the previous activities to send and receive data from the computer. You should still be able to change the brightness of the LED (activity 4) while sending the voltage reading from the potentiometer every 500ms (activity 1) to the computer.</p>
+<p>To reach this goal you will need to use the non-blocking version of <code>getchar()</code> defined in the SDK: <code>getchar_timeout_us(uint32_t timeout_us)</code>. This function waits for a character for a certain amount of time and returns <code>PICO_ERROR_TIMEOUT</code> if no character is received. If this is the case, just keep the brightness of the LED the same.</p>
+<p>For a non-blocking reading of the adc you can take a look at the non-blocking blink of last week, that might help you.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span> <span class="hljs-comment">// Needed for printf and scanf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all(); <span class="hljs-comment">// Initialize the serial communication</span>
+
+    adc_init();
+    adc_gpio_init(<span class="hljs-number">26</span>); <span class="hljs-comment">// Initialize the GPIO for ADC input</span>
+    adc_select_input(<span class="hljs-number">0</span>); 
+
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">0</span>;
+
+     <span class="hljs-comment">// Tell GPIO_PIN it is allocated to the PWM</span>
+    gpio_set_function(LED_PIN, GPIO_FUNC_PWM);
+    <span class="hljs-comment">// Get the slice number for the GPIO_PIN</span>
+    uint slice_num = pwm_gpio_to_slice_num(LED_PIN);
+
+    pwm_set_wrap(slice_num, <span class="hljs-number">9</span>);
+    <span class="hljs-comment">// Set the PWM running     </span>
+    pwm_set_enabled(slice_num, <span class="hljs-literal">true</span>);
+    
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) { <span class="hljs-comment">// Infinite loop to keep the program running</span>
+        <span class="hljs-type">int</span> number = getchar_timeout_us(<span class="hljs-number">0</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter a number from 0 - 9: \n&quot;</span>);
+        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;number);
+        <span class="hljs-keyword">if</span>(number &gt;=<span class="hljs-number">0</span> &amp;&amp; number &lt;=<span class="hljs-number">9</span>){   
+            pwm_set_gpio_level(LED_PIN, number);
+        }
+        <span class="hljs-type">uint16_t</span> value = adc_read();
+        <span class="hljs-type">float</span> voltage = value * <span class="hljs-number">3.3f</span> / <span class="hljs-number">4095.0f</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Potentiometer Voltage: %.2f V\n&quot;</span>, voltage);
+    
+    sleep_ms(<span class="hljs-number">500</span>); <span class="hljs-comment">// Sleep for 500 ms</span>
+    }
+}
+
+</code></pre>
+<h2 id="activity-5-non-blocking-scanf-optional-mandatory-for-10-points">Activity 5: Non-Blocking scanf (optional, mandatory for 10 points)</h2>
+<p><strong>Description: Implement a non-blocking scanf with stdio_getchar_timeout_us</strong></p>
+<p>A note ahead: This activity tests your understanding of arrays and strings. If you are not comfortable with these topics, you might have a hard time solving this activity. You will also need to use static variables.</p>
+<p>In the previous activities, we used the blocking function <code>scanf()</code> to read the input from the computer. This function waits for the input to be received before continuing. This is not always the best solution, especially if you want to do other things in the meantime. You used the non-blocking function <code>getchar_timeout_us()</code> to read the input character by character. Now we will implement a non-blocking function similar to <code>scanf()</code> using this <code>getchar_timeout_us()</code>. Your new function <code>bool scanf_non_blocking(char* destination)</code> should keep reading characters int the destination until a space is found (you do not have to deal with buffer overflow, assume that it is big enough). If a space is found, the function should return TRUE, otherwise FALSE. Don't forget terminating the string at the end.</p>
+<p>To prove that it works, change activity 4 in a way that the LED brightness can be changed in the range of 0-999. Also output the received number to the computer.</p>
+<pre><code class="language-c"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> include your code here</span>
+pico_enable_stdio_usb(main <span class="hljs-number">1</span>)
+pico_enable_stdio_uart(main <span class="hljs-number">0</span>)
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;pico/stdlib.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/adc.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;hardware/pwm.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span> <span class="hljs-comment">// Needed for printf and scanf</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-type">bool</span> <span class="hljs-title function_">scanf_non_blocking</span><span class="hljs-params">(<span class="hljs-type">char</span>* destination)</span>{
+    <span class="hljs-type">static</span> <span class="hljs-type">int</span> index = <span class="hljs-number">0</span>;
+    <span class="hljs-type">int</span> value = getchar_timeout_us(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">if</span>(!<span class="hljs-built_in">isspace</span>(value)){
+        destination[index] = value;
+        index++;
+        destination[index] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    } <span class="hljs-keyword">else</span>{
+        destination[index] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+        index = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+}
+<span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> {
+    stdio_init_all(); <span class="hljs-comment">// Initialize the serial communication</span>
+
+    adc_init();
+    adc_gpio_init(<span class="hljs-number">26</span>); <span class="hljs-comment">// Initialize the GPIO for ADC input</span>
+    adc_select_input(<span class="hljs-number">0</span>); 
+
+    <span class="hljs-type">const</span> uint LED_PIN = <span class="hljs-number">0</span>;
+
+     <span class="hljs-comment">// Tell GPIO_PIN it is allocated to the PWM</span>
+    gpio_set_function(LED_PIN, GPIO_FUNC_PWM);
+    <span class="hljs-comment">// Get the slice number for the GPIO_PIN</span>
+    uint slice_num = pwm_gpio_to_slice_num(LED_PIN);
+
+    pwm_set_wrap(slice_num, <span class="hljs-number">999</span>);
+    <span class="hljs-comment">// Set the PWM running     </span>
+    pwm_set_enabled(slice_num, <span class="hljs-literal">true</span>);
+
+    <span class="hljs-type">char</span> input_buffer[<span class="hljs-number">10</span>];  <span class="hljs-comment">// Buffer to hold the input string</span>
+    <span class="hljs-type">int</span> brightness = <span class="hljs-number">0</span>;
+    
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) { <span class="hljs-comment">// Infinite loop to keep the program running</span>
+        <span class="hljs-keyword">if</span>(scanf_non_blocking(input_buffer)){ <span class="hljs-comment">//if input is complete</span>
+            brightness = atoi(input_buffer); <span class="hljs-comment">//The input string is converted to an integer</span>
+        }
+        <span class="hljs-keyword">if</span>(brightness &gt;= <span class="hljs-number">0</span> &amp;&amp; brightness &lt;= <span class="hljs-number">999</span>){   
+            pwm_set_gpio_level(LED_PIN, brightness);
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Brightness: %d\n&quot;</span>, brightness);  <span class="hljs-comment">// print output brightness value to the console</span>
+        }
+        <span class="hljs-type">uint16_t</span> value = adc_read();
+        <span class="hljs-type">float</span> voltage = value * <span class="hljs-number">3.3f</span> / <span class="hljs-number">4095.0f</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Potentiometer Voltage: %.2f V\n&quot;</span>, voltage);
+    
+    sleep_ms(<span class="hljs-number">500</span>); <span class="hljs-comment">// small delay to prevent excessive cpu usage</span>
+    }
+}
+</code></pre>
+<h2 id="questions-to-answer">Questions to answer:</h2>
+<p>Please answer these reflection questions:</p>
+<ol>
+<li>How long did this tutorial take you?</li>
+<li>Did you face difficulties?</li>
+<li>What would you like to see improved?</li>
+</ol>
+<h2 id="sign-off">Sign-off</h2>
+<p>Please show your code of activity 4 to your lab teacher or teaching assistant.</p>
+
+            
+            
+        </body>
+        </html>

@@ -1,0 +1,4 @@
+alice:pa s s word!123
+bob:q w e r t y
+charlie:1 2345 6
+invalid username:password
