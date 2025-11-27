@@ -2,7 +2,6 @@
 #include "include/rpn/parser.hpp"
 #include "include/rpn/operations.hpp"
 
-
 #include <iostream>
 #include <memory>
 #include <string>
@@ -23,16 +22,71 @@ int main()
     std::unique_ptr<ICalculator> calculator = std::make_unique<RPNCalculator>(std::move(parser));
    
     // TODO: Add operations to the calculator
-    calculator->add_operation(std::make_unique<Addition>());
-    calculator->add_operation(std::make_unique<Subtraction>());
-    calculator->add_operation(std::make_unique<Multiplication>());
-    calculator->add_operation(std::make_unique<Division>());
-    calculator->add_operation(std::make_unique<Power>());
-    calculator->add_operation(std::make_unique<SqrtOp>());
-    calculator->add_operation(std::make_unique<ExpOp>());
-    calculator->add_operation(std::make_unique<LnOp>());
-    calculator->add_operation(std::make_unique<Pi>());
-    calculator->add_operation(std::make_unique<EConst>());
+
+    calculator->add_operation(std::make_unique<BinaryOperation>(
+        "+",
+        "+: Addition - adds two numbers.",
+        [](double a, double b) { return a + b; }
+    ));
+
+    calculator->add_operation(std::make_unique<BinaryOperation>(
+        "-",
+        "-: Subtraction - subtracts two numbers.",
+        [](double a, double b) { return a - b; }
+    ));
+
+    calculator->add_operation(std::make_unique<BinaryOperation>(
+        "*",
+        "*: Multiplication - multiplies two numbers.",
+        [](double a, double b) { return a * b; }
+    ));
+
+    calculator->add_operation(std::make_unique<BinaryOperation>(
+        "/",
+        "/: Division - divides two numbers.",
+        [](double a, double b) { return a / b; }
+    ));
+
+    calculator->add_operation(std::make_unique<UnaryOperation>(
+        "sqrt",
+        "sqrt: Square root - calculates sqrt(operand)",
+        [](double operand) { return std::sqrt(operand); }
+    ));
+
+    calculator->add_operation(std::make_unique<UnaryOperation>(
+        "exp",
+        "exp: Exponentiation - calculates the exponent with the natural base e.",
+        [](double operand) { return std::exp(operand); }
+    ));
+
+    calculator->add_operation(std::make_unique<UnaryOperation>(
+        "ln",
+        "ln: Logarithm - calculates the natural logarithm of a number.",
+        [](double operand) { return std::log(operand); }
+    ));
+
+    calculator->add_operation(std::make_unique<NullaryOperation>(
+        "pi",
+        "pi: Returns the value of π.",
+        []() { return std::numbers::pi_v<double>; }
+    ));
+
+    calculator->add_operation(std::make_unique<NullaryOperation>(
+        "e_constant",
+        "e_constant: Returns the value of constant e.",
+        []() { return std::numbers::e_v<double>; }
+    ));
+
+    // calculator->add_operation(std::make_unique<Addition>());
+    // calculator->add_operation(std::make_unique<Subtraction>());
+    // calculator->add_operation(std::make_unique<Multiplication>());
+    // calculator->add_operation(std::make_unique<Division>());
+    // calculator->add_operation(std::make_unique<Power>());
+    // calculator->add_operation(std::make_unique<SqrtOp>());
+    // calculator->add_operation(std::make_unique<ExpOp>());
+    // calculator->add_operation(std::make_unique<LnOp>());
+    // calculator->add_operation(std::make_unique<Pi>());
+    // calculator->add_operation(std::make_unique<EConst>());
 
     std::cout << "RPN Calculator\n";
     std::cout << "Enter an RPN expression to evaluate.\n";
