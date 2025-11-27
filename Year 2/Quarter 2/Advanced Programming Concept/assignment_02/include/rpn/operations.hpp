@@ -54,14 +54,46 @@ namespace sax
             std::string help_;
             std::function<double()> func_;
     };
+
+
+    template<typename>
+    inline constexpr bool always_false = false;
+
+    template<typename Callable>
+        std::unique_ptr<IOperation> make_operation(std::string_view symbol, std::string_view help, Callable func) {
+            //if constexpr lets the compiler decide at compile time which branch to use, based on the callable’s type.
+            if constexpr (std::is_invocable_r_v<double, Callable>) {            //check if it's nullary lamda
+                return std::make_unique<NullaryOperation>(symbol, help, func); 
+            } else if constexpr (std::is_invocable_r_v<double, Callable, double>) {     //check if it's unary lamda
+                return std::make_unique<UnaryOperation>(symbol, help, func);
+            } else if constexpr (std::is_invocable_r_v<double, Callable, double, double>) { //check if it's binary lamda
+                return std::make_unique<BinaryOperation>(symbol, help, func);
+            } else {
+                static_assert(always_false<Callable>, "Unsupported callable type");
+            }
+        }
 }
+
+//Because static_assert(false, "...") inside a template always fails, even if that branch is never taken.
+//false is not dependent on the template type => the compiler sees it immediately => compile-time error.
+//always_false<Callable> is dependent on the template parameter, so the compiler only evaluates it if that branch is chosen by if constexpr.
+//This avoids errors unless the callable type is truly unsupported.
+
+//static_assert(false, ...) => always triggers => unusable in templates.
+//static_assert(always_false<Callable>, ...) => only triggers when needed.
+
+// 1. Callable
+// It’s a template parameter representing any function-like object: a lambda, function pointer, or std::function.
+// Using Callable lets us write one make_operation function that works for nullary, unary, or binary operations without writing separate functions.
+
+// 2. constexpr
+// In if constexpr, it allows the compiler to evaluate the condition at compile time.
+// Only the branch that is true gets compiled; other branches are ignored.
+// This is important so that static_assert(always_false<Callable>, ...) does not trigger unless we actually reach the unsupported branch.
 
 #endif /* INCLUDED_OPERATIONS_OPERATIONS_HPP */
 
     
-
-
-
 
     // //~~~BINARY OPERATION~~~
     // struct Addition : public IBinaryOperation{

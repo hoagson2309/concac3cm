@@ -23,55 +23,55 @@ int main()
    
     // TODO: Add operations to the calculator
 
-    calculator->add_operation(std::make_unique<BinaryOperation>(
+    calculator->add_operation(make_operation(
         "+",
         "+: Addition - adds two numbers.",
         [](double a, double b) { return a + b; }
     ));
 
-    calculator->add_operation(std::make_unique<BinaryOperation>(
+    calculator->add_operation(make_operation(
         "-",
         "-: Subtraction - subtracts two numbers.",
         [](double a, double b) { return a - b; }
     ));
 
-    calculator->add_operation(std::make_unique<BinaryOperation>(
+    calculator->add_operation(make_operation(
         "*",
         "*: Multiplication - multiplies two numbers.",
         [](double a, double b) { return a * b; }
     ));
 
-    calculator->add_operation(std::make_unique<BinaryOperation>(
+    calculator->add_operation(make_operation(
         "/",
         "/: Division - divides two numbers.",
         [](double a, double b) { return a / b; }
     ));
 
-    calculator->add_operation(std::make_unique<UnaryOperation>(
+    calculator->add_operation(make_operation(
         "sqrt",
         "sqrt: Square root - calculates sqrt(operand)",
         [](double operand) { return std::sqrt(operand); }
     ));
 
-    calculator->add_operation(std::make_unique<UnaryOperation>(
+    calculator->add_operation(make_operation(
         "exp",
         "exp: Exponentiation - calculates the exponent with the natural base e.",
         [](double operand) { return std::exp(operand); }
     ));
 
-    calculator->add_operation(std::make_unique<UnaryOperation>(
+    calculator->add_operation(make_operation(
         "ln",
         "ln: Logarithm - calculates the natural logarithm of a number.",
         [](double operand) { return std::log(operand); }
     ));
 
-    calculator->add_operation(std::make_unique<NullaryOperation>(
+    calculator->add_operation(make_operation(
         "pi",
         "pi: Returns the value of π.",
         []() { return std::numbers::pi_v<double>; }
     ));
 
-    calculator->add_operation(std::make_unique<NullaryOperation>(
+    calculator->add_operation(make_operation(
         "e_constant",
         "e_constant: Returns the value of constant e.",
         []() { return std::numbers::e_v<double>; }
